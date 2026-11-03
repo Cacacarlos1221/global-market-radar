@@ -3,7 +3,7 @@ import json
 from datetime import datetime, timezone, time
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from .tools.io import data_path, load_snapshot, load_reviewed_sources, public_sources
+from .tools.io import data_path, load_snapshot, load_reviewed_sources, parse_utc, public_sources
 from .validators import validate_generated
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -83,10 +83,11 @@ def publish_reviewed(root, report_date, evidence_path=None, reviewed=False, rend
     if not reviewed:
         raise PermissionError("Explicit --reviewed required; automated publishing is not enabled")
     from scripts.pipeline import render_all
-    now = datetime.now(timezone.utc)
-    _, sha, sources = inputs(root, report_date, evidence_path, now)
     preview = Path(root) / "agent/output" / (report_date + ".analysis.json")
     doc = json.loads(preview.read_text(encoding="utf-8"))
+    # Evidence must have existed before the original analysis, not merely at publish time.
+    run_at = parse_utc(doc["agent_meta"]["run_at_utc"])
+    _, sha, sources = inputs(root, report_date, evidence_path, run_at)
     validate_generated(doc, report_date, sources, sha)
     target = data_path(root, "analysis", report_date)
     if target.exists():
