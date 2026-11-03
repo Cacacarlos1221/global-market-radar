@@ -1,4 +1,4 @@
-"""CLI: plan, public-source research, offline/LLM flow, review and publish."""
+"""CLI for experimental market-research / LLM-analysis pipeline."""
 import argparse
 import json
 import sys
@@ -18,6 +18,8 @@ def main():
     parser.add_argument("--date", default=datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat())
     parser.add_argument("--evidence", type=Path, help="Human-reviewed evidence JSON, never raw RSS")
     parser.add_argument("--offline", action="store_true", help="Flow: render without an LLM key")
+    parser.add_argument("--research-model", action="store_true", help="Research: LLM corroboration of GDELT candidates")
+    parser.add_argument("--max-articles", type=int, default=8, help="Research --web article budget")
     parser.add_argument("--reviewed", action="store_true", help="Publish: human confirms approval")
     parser.add_argument("--render", action="store_true", help="Publish: regenerate HTML locally")
     args = parser.parse_args()
@@ -27,12 +29,16 @@ def main():
         parser.error("--reviewed and --render are only for publish")
     if args.offline and args.action != "flow":
         parser.error("--offline is only for flow")
+    if (args.research_model or args.max_articles != 8) and args.action != "research":
+        parser.error("--research-model and --max-articles are only for research")
     if args.action == "doctor":
         out = {"python": sys.version.split()[0], "project_root": str(ROOT),
                "model": model_configuration(),
-               "key_needed_for": "smoke-model and LLM flow; not for research/offline flow"}
+               "key_needed_for": "smoke-model, LLM flow and --research-model; not for keyless research/offline flow"}
     elif args.action == "research":
-        out = run_research(ROOT, args.date)
+        out = run_research(ROOT, args.date, provider="web",
+                           client=ChatCompletionsClient() if args.research_model else None,
+                           max_articles=args.max_articles)
     elif args.action == "research-official":
         out = run_official_research(ROOT, args.date)
     elif args.action == "smoke-model":
