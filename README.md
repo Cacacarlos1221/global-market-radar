@@ -1,14 +1,14 @@
-# Global Market Radar · 全球市场雷达
+# Global Market Radar · GMR
 
 > A reproducible, evidence-aware daily research log for AUD exchange rates, US equities, global macro news and the next A-share session.
 
-[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · [历史归档](reports/archive.html) · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
+[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · [历史归档](reports/archive.html) · **[HTML 晨报规范](docs/REPORT_SPEC.md)** · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
 
 ## 项目目标
 
 将“每天 08:30 阅读全球市场晨报”扩展为可追溯、可分析、可复用的金融数据研究仓库：
 
-- **行情事实层**：AUD/CNY、AUD/USD、纳指、标普500、道指、美元、原油、黄金、美债及A股指数；保留数据观察时间和前一可比交易日参考值。
+- **行情事实层**：USD/CNY、AUD/CNY、纳指、标普500、道指、AUD/USD、美元、原油、黄金、美债及A股指数；保留数据观察时间和前一可比交易日参考值。
 - **事件证据层**：保留重要新闻标题、来源、发布时间、链接和核验状态；不能把新闻同时发生误写成因果关系。
 - **分析判断层**：每天可以追加结构化的国际市场解读、A股行业影响假设、风险与证据引用；不制造无法核实的结论。
 - **研究资产层**：HTML 日报、JSON 原始快照、CSV 历史台账及可复用 Python 脚本，后续可直接开展相关性、事件研究、判断复盘。
@@ -90,3 +90,11 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 - **06 新闻来源与参考资料**：引用来源集中列出并与04的每项事件双向关联；未选中的 RSS 线索折叠留存。
 - 原来的**06 数据质量**缩到页脚，详细信息仍在 data/daily 的每日快照。旧版 analysis JSON 可正常渲染，缺少新闻综述时会显示待补充，不会自动从原始标题编造综述。
 - 结构化字段 `news_digest` / `news_sources` 见 [数据字典](docs/DATA_DICTIONARY.md)。
+
+## 2026-11 关键指标排序调整
+
+顶部大指标现在固定为 **USD/CNY → AUD/CNY → NASDAQ → S&P 500 → Dow Jones → AUD/USD**。USD/CNY 采用 Yahoo Finance `CNY=X`，表示 **1 美元兑换多少人民币**；早于该字段上线的历史数据不进行伪造性补齐，完整布局规则详见 [REPORT_SPEC.md](docs/REPORT_SPEC.md)。
+
+## 单指标缺失补采
+
+可单独执行 `python -m scripts.backfill_quote --asset USD_CNY`，只获取当天缺失的美元兑人民币汇率，保存于 data/supplements 并合并到 HTML 与历史 CSV，不修改原始 JSON 快照。详见 [OPERATIONS.md](docs/OPERATIONS.md)。
