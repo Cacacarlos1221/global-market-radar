@@ -94,3 +94,7 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 ## 2026-11 关键指标排序调整
 
 顶部大指标现在固定为 **USD/CNY → AUD/CNY → NASDAQ → S&P 500 → Dow Jones → AUD/USD**。USD/CNY 采用 Yahoo Finance `CNY=X`，表示 **1 美元兑换多少人民币**；早于该字段上线的历史数据不进行伪造性补齐，完整布局规则详见 [REPORT_SPEC.md](docs/REPORT_SPEC.md)。
+
+## 单指标缺失补采
+
+可单独执行 `python -m scripts.backfill_quote --asset USD_CNY`，只获取当天缺失的美元兑人民币汇率，保存于 data/supplements 并合并到 HTML 与历史 CSV，不修改原始 JSON 快照。详见 [OPERATIONS.md](docs/OPERATIONS.md)。

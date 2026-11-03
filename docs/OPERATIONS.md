@@ -48,3 +48,11 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 - 新闻原始素材仍在 data/daily 和 data/history/events.csv 中，网页06默认收起原始 RSS 新闻列表；只要报告需要引用，可在 news_sources 中单独添加。
 - 原06数据质量已移到页脚简要状态，错误仍按数据快照保留。历史分析缺少 news_digest 不会失败，只显示缺失提示。
 - 只要更新 analysis JSON，现有 GitHub Actions 会 `--render-only` 更新 HTML；新格式的无效 source_ids 会使构建报错，需修正而不是删除引用。
+
+## 缺失指标单独补采（2026-11）
+
+- 日期已有原始快照时，普通日报采集不再修改它，新增指标会显示缺失。
+- 仅针对当天运行 `python -m scripts.backfill_quote --asset USD_CNY`，GitHub Actions 可用 Backfill one missing quote 手动触发。脚本只访问 USD/CNY，不重新采集新闻或美股。
+- 保存独立补采文件到 data/supplements/YYYY/MM/YYYY-MM-DD/USD_CNY.json，包含上游行情观测时间、实际采集时间、对照原始快照时间和来源。
+- 渲染 HTML 时叠加补采记录，卡片标明补采 UTC 时间，并写入历史 quotes.csv。原始 data/daily JSON 保持不变。
+- 补采时间晚于早晨正式快照，不能冒充 08:15 的盘前价格；无法抓到可靠报价时应失败，而不是估算或造数。

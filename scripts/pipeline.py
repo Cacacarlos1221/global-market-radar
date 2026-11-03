@@ -62,12 +62,42 @@ def collect(report_date):
     append_unique(ROOT / "data/history/events.csv", EVENT_COLS, event_rows, ["report_date", "event_id"])
     return daily
 
+def with_supplements(snapshot, root=ROOT):
+    """Overlay supplemental quotes without mutating the original snapshot."""
+    data = dict(snapshot)
+    data["quotes"] = [dict(x) for x in snapshot.get("quotes", [])]
+    data["supplements"] = []
+    date = data["report_date"]
+    folder = root / "data/supplements" / date[:4] / date[5:7] / date
+    if not folder.exists():
+        return data
+    for path in sorted(folder.glob("*.json")):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        quote = record.get("quote") or {}
+        if record.get("report_date") != date or quote.get("key") != path.stem or quote.get("status") != "ok":
+            raise ValueError(f"Malformed quote supplement: {path}")
+        if not record.get("collected_at_utc") or quote.get("value") is None:
+            raise ValueError(f"Missing supplement provenance: {path}")
+        value = dict(quote)
+        value["supplement_collected_at_utc"] = record["collected_at_utc"]
+        existing = {x["key"]: i for i, x in enumerate(data["quotes"])}
+        if value["key"] in existing:
+            if data["quotes"][existing[value["key"]]].get("status") == "ok":
+                raise ValueError(f"Supplement would overwrite a valid quote: {path}")
+            data["quotes"][existing[value["key"]]] = value
+        elif value["key"] == "USD_CNY":
+            data["quotes"].insert(0, value)
+        else:
+            data["quotes"].append(value)
+        data["supplements"].append({"key": value["key"], "collected_at_utc": record["collected_at_utc"]})
+    return data
+
 def render_all():
     snapshots = sorted((ROOT / "data/daily").glob("*/*/*.json"))
     dates = []
     for path in snapshots:
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
+            data = with_supplements(json.loads(path.read_text(encoding="utf-8")))
             date = data["report_date"]
             if date != path.stem:
                 raise ValueError("report_date must match snapshot filename")
@@ -91,7 +121,7 @@ def render_all():
         a_path = ROOT / "data/analysis" / latest[:4] / latest[5:7] / (latest + ".json")
         analysis = json.loads(a_path.read_text(encoding="utf-8")) if a_path.exists() else None
         (ROOT / "index.html").write_text(
-            render_report(json.loads(index.read_text(encoding="utf-8")), analysis, "reports/archive.html"),
+            render_report(with_supplements(json.loads(index.read_text(encoding="utf-8"))), analysis, "reports/archive.html"),
             encoding="utf-8")
     else:
         (ROOT / "index.html").write_text(pending_home(), encoding="utf-8")

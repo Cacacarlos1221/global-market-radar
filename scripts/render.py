@@ -49,9 +49,10 @@ def metric(quote):
     cls = "up" if pct is not None and pct > 0 else "down" if pct is not None and pct < 0 else "muted"
     sign = "+" if pct is not None and pct > 0 else ""
     delta = f'{sign}{pct:.2f}%' if pct is not None else "无可比值"
+    provenance = (" · 补采UTC: " + safe(quote["supplement_collected_at_utc"])) if quote.get("supplement_collected_at_utc") else ""
     return (f'<article class="metric"><div class="label">{safe(quote["label"])}</div>'
             f'<div class="value">{quote["value"]:,.4f}</div><div class="{cls}">{delta}</div>'
-            f'<div class="small">{safe(quote["market_date"])} · {safe(quote["value_kind"])}</div></article>')
+            f'<div class="small">{safe(quote["market_date"])} · {safe(quote["value_kind"])}{provenance}</div></article>')
 
 def valid_url(value):
     """Only explicit HTTPS URLs can become clickable links."""
@@ -178,7 +179,8 @@ def render_report(data, analysis=None, home="index.html"):
     for q in data.get("quotes", []):
         val = f'{q["value"]:,.4f}' if q["value"] is not None else "—"
         change = f'{q["change_pct"]:+.2f}%' if q.get("change_pct") is not None else "—"
-        rows.append(f'<tr><td>{safe(q["label"])}</td><td>{val}</td><td>{change}</td>'
+        label = safe(q["label"]) + ("（补采）" if q.get("supplement_collected_at_utc") else "")
+        rows.append(f'<tr><td>{label}</td><td>{val}</td><td>{change}</td>'
                     f'<td>{safe(q["market_date"])}</td><td>{safe(q["observed_at_utc"])}</td>'
                     f'<td>{safe(q["status"])}</td></tr>')
     table = ('<div class="card table-wrap"><table><thead><tr><th>资产</th><th>最新值</th><th>相对前日</th>'
@@ -202,11 +204,13 @@ def render_report(data, analysis=None, home="index.html"):
     else:
         summary = '<div class="notice">市场解读尚未更新。行情事实不能自动推导出涨跌原因。</div>'
         outlook = '<div class="card"><p>等待核实后的盘前研判；无可靠证据时不作方向判断。</p></div>'
+    supplement_note = (" · 补采： " + ", ".join(safe(x["key"]) + "@" + safe(x["collected_at_utc"])
+                                          for x in data.get("supplements", []))) if data.get("supplements") else ""
     quality = ('<div class="quality">数据状态：' +
                str(sum(q["status"] == "ok" for q in data.get("quotes", []))) + '/' +
                str(len(data.get("quotes", []))) + ' 项行情可用 · ' +
                str(len(data.get("news", []))) + ' 条原始 RSS 线索 · 采集时刻（UTC）：' +
-               safe(data.get("collected_at_utc")) + ' · 缺失与异常详情见当日 JSON。</div>')
+               safe(data.get("collected_at_utc")) + supplement_note + ' · 缺失与异常详情见当日 JSON。</div>')
     body = ('<p class="sub">报告日期（北京时间）：' + safe(date) + ' · 数据采集时间（UTC）：' +
             safe(data.get("collected_at_utc")) + '</p><h2>01 / 关键市场数据</h2>' + cards +
             '<h2>02 / 全量监测指标</h2>' + table + '<h2>03 / 昨夜市场走势与原因</h2>' + summary +

@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - 'data/analysis/**'
+      - 'data/supplements/**'
       - 'scripts/render.py'
       - 'config/instruments.json'
       - 'docs/REPORT_SPEC.md'
