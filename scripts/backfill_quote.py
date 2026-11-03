@@ -1,4 +1,7 @@
-"""Capture one missing quote for today's report, preserving the sealed snapshot."""
+"""Capture one missing quote for today's report, preserving the sealed snapshot.
+
+This quote is collected at execution time, not retroactively as an 08:15 price.
+"""
 import argparse
 import json
 from datetime import datetime, timezone

@@ -11,7 +11,10 @@ class SupplementTests(unittest.TestCase):
             root = Path(tmp)
             day = "2026-11-03"
             original = {"report_date": day, "collected_at_utc": "2026-11-03T00:15:00Z",
-                        "quotes": [{"key": "AUD_CNY", "status": "ok", "value": 4.5}], "news": []}
+                        "quotes": [{"key": "AUD_CNY", "label": "澳元/人民币",
+                                    "status": "ok", "value": 4.5, "change_pct": 0.0,
+                                    "market_date": day, "value_kind": "intraday_observation",
+                                    "observed_at_utc": "2026-11-03T00:14:00Z"}], "news": []}
             folder = root / "data/supplements/2026/11/2026-11-03"
             folder.mkdir(parents=True)
             quote = {"key": "USD_CNY", "label": "美元/人民币", "status": "ok",
