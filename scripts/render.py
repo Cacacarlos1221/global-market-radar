@@ -31,7 +31,7 @@ def shell(title, content, home):
             f'<title>{safe(title)} · Global Market Radar</title><style>{STYLE}</style></head><body>'
             '<main><header><div><div class="brand">GLOBAL MARKET RADAR</div>'
             f'<h1>{safe(title)}</h1><div class="sub">全球市场数据 · 重要新闻 · A股盘前研究</div></div>'
-            f'<a class="pill" href="{safe(home)}">返回最新晨报</a></header>{content}'
+            f'<a class="pill" href="{safe(home)}">{"查看历史晨报" if home.endswith("archive.html") else "返回最新晨报"}</a></header>{content}'
             '<footer>仅供研究和信息整理，不构成投资建议。行情可能延迟；请核对来源与时间戳。</footer>'
             '</main></body></html>')
 
