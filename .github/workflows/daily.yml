@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - 'data/analysis/**'
+      - '.github/workflows/daily.yml'
 permissions:
   contents: write
 concurrency:
@@ -24,7 +25,7 @@ jobs:
           python-version: '3.12'
       - name: Collect or rerender
         run: |
-          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+          if [ "$GITHUB_EVENT_NAME" = "push" ] && ! git diff --name-only HEAD^ HEAD | grep -qx ".github/workflows/daily.yml"; then
             python -m scripts.pipeline --render-only
           else
             python -m scripts.pipeline
