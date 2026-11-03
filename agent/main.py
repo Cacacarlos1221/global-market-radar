@@ -9,10 +9,11 @@ from .flow import run_flow
 from .model_client import ChatCompletionsClient, model_configuration
 from .orchestrator import ROOT, build_analysis, plan, publish_reviewed, write_preview
 from .research_runner import run_research
+from .official_runner import run_official_research
 
 def main():
     parser = argparse.ArgumentParser(description="Experimental Agent; does not deploy to main")
-    parser.add_argument("action", choices=("doctor", "research", "smoke-model", "plan",
+    parser.add_argument("action", choices=("doctor", "research", "research-official", "smoke-model", "plan",
                                           "flow", "generate", "publish"))
     parser.add_argument("--date", default=datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat())
     parser.add_argument("--evidence", type=Path, help="Human-reviewed evidence JSON, never raw RSS")
@@ -32,6 +33,8 @@ def main():
                "key_needed_for": "smoke-model and LLM flow; not for research/offline flow"}
     elif args.action == "research":
         out = run_research(ROOT, args.date)
+    elif args.action == "research-official":
+        out = run_official_research(ROOT, args.date)
     elif args.action == "smoke-model":
         result = ChatCompletionsClient().generate_json(
             'Return exactly one JSON object {"ok":true}. No prose or Markdown.',

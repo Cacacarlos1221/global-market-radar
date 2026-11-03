@@ -1,4 +1,4 @@
-# Global Market Radar / Research Agent Flow v0.2（独立实验）
+# Global Market Radar / Research Agent Flow v0.3（独立实验）
 
 **Git branch:** experiment/market-analysis-agent-v0（基于 2026-11-03 最新 main 原型更新）。这个目录承载可执行的 Stage-2 Agent 编排，不是定时生产任务。现有事实采集、正式日报与 Pages 继续由 main 管理。
 
@@ -44,12 +44,15 @@
 - agent/flow.py：串行执行 / 审计 / 离线 HTML 预览 / 错误隔离。
 - agent/orchestrator.py：行情及补采数据拼装、分析 Prompt、人工发布门禁。
 - agent/research.py：新闻候选去重、去未来时间、未核验列表。
+- agent/web_research.py + agent/research_runner.py：GDELT 网络检索与原始文章抓取（候选证据）。
+- agent/research_agent.py：在模型 Key 可用时，基于不同来源的逐字引用进行候选观点交叉核对，不宣称事实已核验。
+- agent/live_research.py + agent/official_runner.py：无需 Key 的央行/统计部门 RSS 与原始文章检索（待人工核实）。
 - agent/tools/io.py：只读快照、SHA-256、严格 UTC 来源核验时间、补采 as-of。
 - agent/model_client.py：兼容 Chat Completions 的模型 API（无需第三方依赖）。
 - agent/critic.py / prompts/critic.md：第二轮 LLM 审核。
 - agent/validators.py：字段和引用完整性验证，复用 scripts.render.validate_analysis。
 - agent/output/：预览稿、证据队列和审计日志，gitignore，不会自动进入正式网页。
-- tests/test_agent_flow.py、tests/test_agent_framework.py：无外网端到端模拟。
+- tests/test_agent_flow.py、tests/test_agent_framework.py、tests/test_agent_research.py：无外网端到端模拟。
 
 ## 3. 最小可运行示例
 
@@ -109,8 +112,47 @@
 ## 5. 自动化边界与待办
 
 - **已实现并测试**：全量行情补采 as-of 筛选、RSS 去重与核验清单、模型适配、两轮 LLM 节点、可失败封闭的字段/引用检查、时点校验、预览 HTML、审计、人工批准发布、离线 GitHub Actions 演示。
-- **尚未实现**：真实的自动检索原始新闻正文、跨媒体交叉核验、工具驱动的新闻研究循环、模型 token/费用统计、自动重试与故障通知、质量基线与长期预测复盘，以及可信的 08:30 自动生产端到端任务。
+- **尚未实现**：可作为事实依据的自主交叉核验、可靠的工具驱动新闻研究循环、模型 token/费用统计、自动重试与故障通知、质量基线与长期预测复盘，以及可信的 08:30 自动生产端到端任务。
 - **非保证**：Critic 通过不等于所有财经事实都正确；人工审稿仍必需，不能用生成式模型的二次回答取代独立证据。
 - **安全**：Agent 工作流只在实验分支启动；正式 data/analysis 的 push 触发和补采工作流按 main 分支受限；原始快照不可覆盖、实验输出不入库、API Key 不提交。若以后打算让 Agent 自动发布，必须先独立审计并得到明确授权。
 
 先用离线 preview 检查现在的 HTML / 数据口径，再拿真实 API 做小批量双模型审查测试。模型与自动新闻研究框架成熟后，才考虑将 Stage-2 接管每日晨报，不要提前覆盖 main。
+
+
+## 6. Windows 桌面「学习」目录部署与真实连接测试
+
+需要 Windows 10/11、Python 3.11+、Git for Windows。请下载本分支的 agent/setup_windows.ps1 到 Windows 下载目录后执行：
+
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$HOME\Downloads\setup_windows.ps1"
+
+脚本自动定位 Windows 桌面（包括 OneDrive 重定向），在桌面/学习/global-market-radar-agent 下克隆实验分支，创建独立 .venv，复制 agent/.env 模板，跑离线单元测试并预览 2026-11-03 快照。不会删除已有目录、修改主分支或覆盖 API Key。
+
+模型配置仅在本机：
+
+    [Windows Desktop 的实际目录]\学习\global-market-radar-agent\agent\.env
+
+填写实际兼容 Chat Completions 的服务商参数，切勿上传此文件：
+
+    MARKET_AGENT_BASE_URL=https://api.openai.com/v1
+    MARKET_AGENT_MODEL=your-valid-model-name
+    MARKET_AGENT_API_KEY=your-real-provider-key
+
+OpenAI 的 API Key 在独立的 API 平台创建，ChatGPT Plus 订阅不包含 API 计费额度；其他兼容服务商需使用对应 URL、模型名与 Key。agent/.env 会自动读取。可以运行以下命令（PowerShell，先进入仓库根目录）：
+
+    .\.venv\Scripts\python.exe -m agent.main doctor
+    .\.venv\Scripts\python.exe -m agent.main smoke-model
+    .\.venv\Scripts\python.exe -m agent.main research-official
+    .\.venv\Scripts\python.exe -m agent.main research
+    .\.venv\Scripts\python.exe -m agent.main flow --date 2026-11-03 --offline
+
+- doctor：无成本检查 Python 和当前 Key 是否配置，永不打印密钥。
+- smoke-model：向你选择的模型 API 发出一次真实最小 JSON 请求，确认 API Key、地址、模型和网络可用，会产生少量 token 消耗。
+- research-official：无需 Key，读取官方来源 RSS 与网页，保存 agent/output/research/YYYY-MM-DD/official_sources.json 和 review_template.json。仅支持当前北京时间日期。
+- research：无需 Key，调用 GDELT 新闻索引、尝试读取新闻网站原文，保存 agent/research_output/YYYY-MM-DD/publisher_candidates.json 与 audit.json。该模式依赖现有当日 data/daily 快照，不能用旧数据生成伪盘前事实。
+- flow --offline：无需 Key，使用已存在原始快照生成安全行情 HTML 和未核验新闻候选。日期当天分析 JSON 已存在时绝不覆盖。
+
+所有研究输入均为不可信候选。人工需逐条打开原文核验，把可用来源的 fact_notes 与 reviewed_at_utc 填完整、状态改为 reported 后另存为 reviewed_sources.json，删除不符合要求的条目；不要直接批量将模板从 needs_human_review 改成 reported。再用：
+
+    .\.venv\Scripts\python.exe -m agent.main flow --date YYYY-MM-DD --evidence ".\agent\output\research\YYYY-MM-DD\reviewed_sources.json"
+
+做两轮 LLM 生成与审查。注意每个日期的 agent/output/YYYY-MM-DD 只能生成一次，重跑前先备份清理实验输出目录，不要动 data/daily。2026-11-03 原仓库已经有正式分析，不能用此日验证发布覆盖。除 Key 之外，真实网络来源也可能返回 403/限流，错误会保留；真实机器上的完整结果应以本机日志为准。

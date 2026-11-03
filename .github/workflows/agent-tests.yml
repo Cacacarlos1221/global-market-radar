@@ -31,3 +31,12 @@ jobs:
           name: market-agent-offline-preview
           path: agent/output/2026-11-03/
           retention-days: 7
+      - name: Public official-source network smoke (no API key)
+        run: python -m agent.main research-official
+      - name: Save fetched source candidates and errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-agent-official-research
+          path: agent/output/research/
+          retention-days: 7

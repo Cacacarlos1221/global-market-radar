@@ -9,7 +9,7 @@ from unittest.mock import patch
 from agent.live_research import (allowed_url, collect_official_research,
                                  extract_article_text, parse_feed, review_template)
 from agent.model_client import load_local_env
-from agent.research_runner import run_research
+from agent.official_runner import run_official_research as run_research
 from agent.tools.io import load_reviewed_sources
 
 NOW = datetime(2026, 11, 3, 10, 0, tzinfo=timezone.utc)
