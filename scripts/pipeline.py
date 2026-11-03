@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from .sources import collect_news, collect_quotes
-from .render import render_archive, render_report, pending_home
+from .render import render_archive, render_report, pending_home, validate_analysis
 
 ROOT = Path(__file__).resolve().parents[1]
 QUOTE_COLS = ["report_date", "asset_key", "symbol", "category", "unit", "market_date",
@@ -75,6 +75,8 @@ def render_all():
             analysis = json.loads(a_path.read_text(encoding="utf-8")) if a_path.exists() else None
             if analysis is not None and analysis.get("report_date") != date:
                 raise ValueError(f"analysis report_date mismatch: {a_path}")
+            if analysis is not None:
+                validate_analysis(analysis)
             report_path = ROOT / "reports" / date[:4] / date[5:7] / (date + ".html")
             report_path.parent.mkdir(parents=True, exist_ok=True)
             report_path.write_text(render_report(data, analysis, "../../../index.html"), encoding="utf-8")

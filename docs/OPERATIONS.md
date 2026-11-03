@@ -40,3 +40,11 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 - 免费公开接口可能有非商业用途或速率限制；确认服务条款再扩大调用量。
 - 重要财经新闻应核验原始报道；自动 RSS 只是检索线索。
 - 后续新增 backtesting 时需要冻结“盘前预测时间戳”，防止用盘后数据修正预测。
+
+## 2026-11 新版06引用与04新闻综述
+
+- 维护任务应在 `data/analysis/YYYY/MM/YYYY-MM-DD.json` 写入 `news_digest` 和 `news_sources`，每条摘要均附可追溯 source_ids。
+- 不要将 RSS 标题自动总结成已核实事实；先阅读可信来源，确实核实后再给出事件摘要、市场影响和证据链接。若无法核实，保持04待补充。
+- 新闻原始素材仍在 data/daily 和 data/history/events.csv 中，网页06默认收起原始 RSS 新闻列表；只要报告需要引用，可在 news_sources 中单独添加。
+- 原06数据质量已移到页脚简要状态，错误仍按数据快照保留。历史分析缺少 news_digest 不会失败，只显示缺失提示。
+- 只要更新 analysis JSON，现有 GitHub Actions 会 `--render-only` 更新 HTML；新格式的无效 source_ids 会使构建报错，需修正而不是删除引用。

@@ -1,7 +1,7 @@
 {
   "report_date": "2026-11-03",
   "generated_at_utc": "2026-11-03T06:49:13.624Z",
-  "market_summary": "【首次运行验收版，生成时已是北京时间11月3日14:45之后，不应称为当日盘前】美国11月2日收盘：纳斯达克综合指数约25164.31点、跌1.07%；标普500约7541.40点、跌0.51%；道指约51983.98点、涨0.41%。主要压力集中在AI/大型科技股：市场担心巨额算力投入回报兑现速度；同期油价波动与美国中期选举不确定性也影响风险偏好。澳洲联储11月3日上调25个基点至4.85%，但加息已大致被市场计入、投票分歧提示后续或暂停，澳元仍偏弱。行情具体数值、比较基准及时间以当日JSON快照为准，新闻与行情并存不等于确认的因果关系。",
+  "market_summary": "【11月3日14:45后验收版，不是当日盘前预测】11月2日美股表现分化：纳指约25164.31点（-1.07%）、标普500约7541.40点（-0.51%）、道指约51983.98点（+0.41%）。科技权重板块承压，但并非所有行业同步下跌；11月3日测试时澳元兑美元、人民币较前一可用参考日均走弱。这里仅解释已观察到的价格与市场结构，不以新闻标题推断确定因果。",
   "a_share_bias": "mixed",
   "a_share_outlook": "本分析生成时2026年11月3日A股已处于交易时段，不能充当当日08:30的前瞻预测，也不将已发生的盘中走势冒充盘前判断。供下一个A股交易日11月4日观察：若美股科技股继续承压，A股半导体/算力等高估值板块可能继续遭遇风险偏好冲击；中国政策与市场稳定举措可能提供一定缓冲。需结合11月3日完整收盘数据和11月3日美股后续交易再做真正的次日盘前评估。",
   "a_share_sectors": [
@@ -34,5 +34,73 @@
     "https://www.reuters.com/world/asia-pacific/australias-central-bank-lifts-rates-18-year-high-split-vote-points-pause-ahead-2026-11-03/",
     "https://www.abc.net.au/news/2026-11-03/rba-lifts-interest-rates-november-2026-highest-rate-in-18-years/107340050",
     "https://apnews.com/article/0d235af127a92c68da0cc2c45c028cef"
+  ],
+  "news_digest": {
+    "overview": "美国股市呈现科技股弱于传统蓝筹的分化；澳洲联储升息与澳元短线偏弱同时出现；美国中期选举临近增加了政策预期的不确定性。关注AI投入回报、货币政策预期与风险偏好的交互作用，不将同日新闻和行情直接认定为因果。",
+    "items": [
+      {
+        "title": "澳洲联储将政策利率提高至4.85%",
+        "summary": "11月3日澳洲联储加息25个基点，将现金利率目标上调至4.85%。相关报道提及委员会投票存在分歧。",
+        "market_impact": "加息通常支持本币，但如果市场已充分预期或认为后续可能暂停，澳元未必上涨。本次采集的澳元汇率走弱，只能确认同时发生，不能仅凭时间先后确定原因。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "title": "美国科技股压力与三大股指分化",
+        "summary": "11月2日纳斯达克与标普500下跌，而道琼斯上涨。市场报道重点关注AI相关投入的资金需求、估值和盈利兑现压力。",
+        "market_impact": "若高估值科技股继续调整，全球成长股及A股科技板块可能受到情绪影响；但国内行情还取决于独立政策、资金流与估值。",
+        "importance": "high",
+        "source_ids": [
+          "S3",
+          "S4"
+        ]
+      },
+      {
+        "title": "美国中期选举临近，政策路径受到关注",
+        "summary": "美国11月3日举行中期选举。市场关注国会权力格局及此后贸易、财政与监管政策的不确定性。",
+        "market_impact": "选举前仓位调整可能加大市场短期波动，但不能把所有下跌归于选举；应结合实际风险资产表现和事件进展判断。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "澳洲联储加息至18年高点，投票分歧提示可能暂停",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-03T04:14:00Z",
+      "url": "https://www.reuters.com/world/asia-pacific/australias-central-bank-lifts-rates-18-year-high-split-vote-points-pause-ahead-2026-11-03/",
+      "verification": "reported"
+    },
+    {
+      "id": "S2",
+      "title": "澳大利亚央行11月利率决定",
+      "publisher": "ABC News Australia",
+      "published_at_utc": null,
+      "url": "https://www.abc.net.au/news/2026-11-03/rba-lifts-interest-rates-november-2026-highest-rate-in-18-years/107340050",
+      "verification": "reported"
+    },
+    {
+      "id": "S3",
+      "title": "美股期货及中期选举临近的市场反应",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/media-telecom/wall-street-futures-rise-ai-stocks-catch-their-breath-midterms-focus-2026-11-02/",
+      "verification": "reported"
+    },
+    {
+      "id": "S4",
+      "title": "美股市场与科技股行情报道",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/475bb37b4d95dd99e26c94e708c99f8f",
+      "verification": "reported"
+    }
   ]
 }
