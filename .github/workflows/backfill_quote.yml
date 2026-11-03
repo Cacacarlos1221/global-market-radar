@@ -1,6 +1,7 @@
 name: Backfill one missing quote
 on:
   push:
+    branches: [main]
     paths:
       - 'scripts/backfill_quote.py'
       - '.github/workflows/backfill_quote.yml'

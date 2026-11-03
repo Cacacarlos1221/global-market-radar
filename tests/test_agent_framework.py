@@ -5,6 +5,7 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 from agent.orchestrator import build_analysis, plan, publish_reviewed, write_preview
+from agent.flow import run_flow
 
 DATE = "2026-11-04"
 NOW = datetime(2026, 11, 4, 1, 0, tzinfo=timezone.utc)
@@ -13,6 +14,8 @@ class StubClient:
     def __init__(self, source_ids=None):
         self.source_ids = source_ids or []
     def generate_json(self, system_prompt, user_prompt):
+        if "AGENT_CRITIC_V1" in system_prompt:
+            return {"approved": True, "findings": []}
         return {
             "market_summary": "报价仅来自冻结测试快照；未证明新闻对价格有因果作用。",
             "a_share_bias": "watch", "a_share_outlook": "仅作条件性观察。",
@@ -54,8 +57,8 @@ class AgentFrameworkTests(unittest.TestCase):
         self.assertEqual(doc["news_sources"], [])
     def test_valid_manual_evidence_and_explicit_publish(self):
         evidence = self.evidence()
-        doc = build_analysis(self.root, DATE, StubClient(["S1"]), evidence, now_utc=NOW)
-        write_preview(self.root, DATE, doc)
+        result = run_flow(self.root, DATE, StubClient(["S1"]), evidence, now_utc=NOW)
+        self.assertEqual(result["status"], "passed_pending_human_approval")
         with self.assertRaises(PermissionError):
             publish_reviewed(self.root, DATE, evidence)
         target = publish_reviewed(self.root, DATE, evidence, reviewed=True)

@@ -57,6 +57,7 @@ def run_flow(root, report_date, client=None, evidence_path=None, now_utc=None):
         (run_dir / "report.preview.html").write_text(html, encoding="utf-8")
         preview = write_preview(root, report_date, analysis)
         step("render_preview", {"analysis_preview": str(preview),
+                                "preview_sha256": hashlib.sha256(preview.read_bytes()).hexdigest(),
                                 "html_sha256": hashlib.sha256(html.encode("utf-8")).hexdigest()})
         audit["status"] = "passed_pending_human_approval"
         return {"status": audit["status"], "run_dir": str(run_dir),

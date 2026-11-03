@@ -86,10 +86,20 @@ def write_preview(root, report_date, analysis):
 def publish_reviewed(root, report_date, evidence_path=None, reviewed=False, render=False):
     if not reviewed:
         raise PermissionError("Explicit --reviewed required; automated publishing is disabled")
+    import hashlib
     from scripts.pipeline import render_all
     preview = Path(root) / "agent/output" / (report_date + ".analysis.json")
     doc = json.loads(preview.read_text(encoding="utf-8"))
+    audit_path = Path(root) / "agent/output" / report_date / "audit.json"
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    preview_records = [x for x in audit.get("steps", []) if x.get("node") == "render_preview"]
+    if (audit.get("status") != "passed_pending_human_approval" or
+        audit.get("model_mode") != "two_pass_llm" or not preview_records or
+        preview_records[-1].get("preview_sha256") != hashlib.sha256(preview.read_bytes()).hexdigest()):
+        raise PermissionError("Publishing requires the exact two-pass reviewed preview and matching audit")
     run_at = parse_utc(doc["agent_meta"]["run_at_utc"])
+    if audit.get("run_at_utc") != doc["agent_meta"]["run_at_utc"]:
+        raise ValueError("Audit timestamp does not match preview")
     _, sha, sources, supplements, excluded = inputs(root, report_date, evidence_path, run_at)
     if doc["agent_meta"].get("supplements") != supplements:
         raise ValueError("Supplement provenance changed since the model generated this analysis")
