@@ -1,1 +1,12 @@
 report_date,asset_key,symbol,category,unit,market_date,observed_at_utc,value_kind,value,reference_close,reference_date,change_pct,status,source
+2026-11-03,AUD_CNY,AUDCNY=X,fx,CNY/AUD,2026-11-03,2026-11-03T06:44:46+00:00,intraday_observation,4.64419985,4.6816802,2026-11-02,-0.8006,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,AUD_USD,AUDUSD=X,fx,USD/AUD,2026-11-03,2026-11-03T06:43:29+00:00,intraday_observation,0.69847035,0.70287997,2026-11-02,-0.6274,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,NASDAQ,^IXIC,us_index,points,2026-11-02,2026-11-02T14:30:00+00:00,daily_close,25164.31054688,25437.0,2026-10-30,-1.072,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,SP500,^GSPC,us_index,points,2026-11-02,2026-11-02T14:30:00+00:00,daily_close,7541.39990234,7580.06982422,2026-10-30,-0.5102,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,DOW,^DJI,us_index,points,2026-11-02,2026-11-02T14:30:00+00:00,daily_close,51983.98046875,51770.30859375,2026-10-30,0.4127,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,DXY,DX-Y.NYB,macro,points,2026-11-03,2026-11-03T05:00:00+00:00,daily_close,101.72599792,101.75,2026-11-02,-0.0236,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,BRENT,BZ=F,macro,USD/barrel,2026-11-03,2026-11-03T05:00:00+00:00,daily_close,105.80999756,104.76999664,2026-11-02,0.9927,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,GOLD,GC=F,macro,USD/oz,2026-11-03,2026-11-03T05:00:00+00:00,daily_close,3934.5,3969.60009766,2026-11-02,-0.8842,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,US10Y,^TNX,macro,index (yield ×10),2026-11-02,2026-11-02T13:20:00+00:00,daily_close,4.89400005,4.9289999,2026-10-30,-0.7101,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,SSE,000001.SS,cn_index,points,2026-11-03,2026-11-03T01:30:00+00:00,daily_close,3595.87231445,3638.03100586,2026-11-02,-1.1588,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,CSI300,000300.SS,cn_index,points,2026-11-03,2026-11-03T06:29:50+00:00,daily_close,3994.91577148,,,,ok,Yahoo Finance chart API (unofficial)
