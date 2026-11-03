@@ -1,0 +1,83 @@
+{
+  "timezone": "Asia/Shanghai",
+  "quote_provider": "Yahoo Finance chart API (unofficial, best effort)",
+  "assets": [
+    {
+      "key": "AUD_CNY",
+      "symbol": "AUDCNY=X",
+      "label": "澳元/人民币",
+      "unit": "CNY/AUD",
+      "category": "fx"
+    },
+    {
+      "key": "AUD_USD",
+      "symbol": "AUDUSD=X",
+      "label": "澳元/美元",
+      "unit": "USD/AUD",
+      "category": "fx"
+    },
+    {
+      "key": "NASDAQ",
+      "symbol": "^IXIC",
+      "label": "纳斯达克综合指数",
+      "unit": "points",
+      "category": "us_index"
+    },
+    {
+      "key": "SP500",
+      "symbol": "^GSPC",
+      "label": "标普500",
+      "unit": "points",
+      "category": "us_index"
+    },
+    {
+      "key": "DOW",
+      "symbol": "^DJI",
+      "label": "道琼斯工业平均指数",
+      "unit": "points",
+      "category": "us_index"
+    },
+    {
+      "key": "DXY",
+      "symbol": "DX-Y.NYB",
+      "label": "美元指数",
+      "unit": "points",
+      "category": "macro"
+    },
+    {
+      "key": "BRENT",
+      "symbol": "BZ=F",
+      "label": "布伦特原油近月期货",
+      "unit": "USD/barrel",
+      "category": "macro"
+    },
+    {
+      "key": "GOLD",
+      "symbol": "GC=F",
+      "label": "COMEX黄金近月期货",
+      "unit": "USD/oz",
+      "category": "macro"
+    },
+    {
+      "key": "US10Y",
+      "symbol": "^TNX",
+      "label": "美国10年期国债收益率指数",
+      "unit": "index (yield ×10)",
+      "category": "macro"
+    },
+    {
+      "key": "SSE",
+      "symbol": "000001.SS",
+      "label": "上证综指",
+      "unit": "points",
+      "category": "cn_index"
+    },
+    {
+      "key": "CSI300",
+      "symbol": "000300.SS",
+      "label": "沪深300",
+      "unit": "points",
+      "category": "cn_index"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+name: Daily market data and HTML
+on:
+  schedule:
+    - cron: '15 0 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/analysis/**'
+permissions:
+  contents: write
+concurrency:
+  group: market-radar-writer
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect or rerender
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            python -m scripts.pipeline --render-only
+          else
+            python -m scripts.pipeline
+          fi
+      - name: Validate regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Commit generated artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html reports data/daily data/history
+          if ! git diff --cached --quiet; then
+            git commit -m "data: refresh market radar artifacts"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
