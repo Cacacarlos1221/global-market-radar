@@ -35,7 +35,9 @@ class AgentFlowTests(unittest.TestCase):
         target.parent.mkdir(parents=True)
         target.write_text(json.dumps({"report_date": DAY,
             "collected_at_utc": "2026-11-04T00:15:00Z",
-            "quotes": [{"key": "AUD_CNY", "status": "unavailable", "label": "AUD/CNY"}],
+            "quotes": [{"key": "AUD_CNY", "status": "unavailable", "label": "AUD/CNY",
+                        "value": None, "market_date": None, "observed_at_utc": None,
+                        "change_pct": None, "error": "No quote"}],
             "news": [
                 {"event_id": "A", "headline": "Candidate A", "published_at_utc": "2026-11-04T00:20:00Z"},
                 {"event_id": "A2", "headline": "Candidate A", "published_at_utc": "2026-11-04T00:21:00Z"},
