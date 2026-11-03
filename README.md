@@ -1,4 +1,4 @@
-# Global Market Radar · 全球市场雷达
+# Global Market Radar · GMR
 
 > A reproducible, evidence-aware daily research log for AUD exchange rates, US equities, global macro news and the next A-share session.
 
