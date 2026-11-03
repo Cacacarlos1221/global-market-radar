@@ -47,6 +47,15 @@ jobs:
           PY
       - name: Public official-source network smoke (no API key)
         run: python -m agent.main research-official
+      - name: Keyless GDELT discovery smoke (errors are audited)
+        run: python -m agent.main research
+      - name: Save GDELT article candidates and errors
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-agent-gdelt-research
+          path: agent/research_output/
+          retention-days: 7
       - name: Save fetched source candidates and errors
         if: always()
         uses: actions/upload-artifact@v4

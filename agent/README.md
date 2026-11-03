@@ -156,3 +156,57 @@ OpenAI 的 API Key 在独立的 API 平台创建，ChatGPT Plus 订阅不包含 
     .\.venv\Scripts\python.exe -m agent.main flow --date YYYY-MM-DD --evidence ".\agent\output\research\YYYY-MM-DD\reviewed_sources.json"
 
 做两轮 LLM 生成与审查。注意每个日期的 agent/output/YYYY-MM-DD 只能生成一次，重跑前先备份清理实验输出目录，不要动 data/daily。2026-11-03 原仓库已经有正式分析，不能用此日验证发布覆盖。除 Key 之外，真实网络来源也可能返回 403/限流，错误会保留；真实机器上的完整结果应以本机日志为准。
+
+
+## 7. macOS 桌面「学习」目录：本地环境和运行
+
+适用于 Apple Silicon/Intel Mac，要求已安装 Git 与 Python 3.11+。**云端 Agent 无法代替你操作 Mac 的本地桌面；以下命令需要在 Mac 终端执行。**
+
+复制执行以下命令。脚本会自动克隆当前实验分支到 \`~/Desktop/学习/global-market-radar-agent\`，创建隔离的 \`.venv\`，复制 \`agent/.env.example\` 到本地不受 Git 管理的 \`agent/.env\`，运行 40 项左右离线测试与 2026-11-03 快照 HTML 预览。不会在已有仓库上自动 git pull、reset 或覆盖本地密钥。
+
+\`\`\`bash
+curl -fsSL "https://raw.githubusercontent.com/Cacacarlos1221/global-market-radar/experiment/market-analysis-agent-v0/scripts/setup_agent_mac.sh" -o /tmp/setup_agent_mac.sh
+bash /tmp/setup_agent_mac.sh
+\`\`\`
+
+如果要先检查脚本再执行，\`cat /tmp/setup_agent_mac.sh\`。安装后，进入项目：
+
+\`\`\`bash
+cd "$HOME/Desktop/学习/global-market-radar-agent"
+.venv/bin/python -m agent.main doctor
+.venv/bin/python -m agent.main research-official
+.venv/bin/python -m agent.main research
+\`\`\`
+
+- \`research-official\`：免费官方 RSS + 官网原文，输出 \`agent/output/research/当日日期/\`，不需要模型 Key。
+- \`research\`：GDELT 新闻索引 + 媒体正文，输出 \`agent/research_output/当日日期/web/\`，不需要模型 Key。
+- \`research --research-model\`：在 GDELT 候选上额外运行一次 LLM 对照来源引文，**需要 Key 并产生模型费用**。结论仍标记待人工核验。
+- 两种研究都是**当前北京时间日期**的联网快照，拒绝回填历史盘前时点，防止前视偏差。公开网站可能出现 403、限制或缺少可读正文；检查各自 \`audit.json\` 的错误记录。每种研究同一天不允许静默覆盖输出，重跑应人工归档旧结果。
+
+### 仅在本机添加模型密钥
+
+\`\`\`bash
+nano "$HOME/Desktop/学习/global-market-radar-agent/agent/.env"
+\`\`\`
+
+\`\`\`dotenv
+MARKET_AGENT_BASE_URL=https://api.openai.com/v1
+MARKET_AGENT_MODEL=实际可调用的模型 ID
+MARKET_AGENT_API_KEY=实际服务商的 API Key
+\`\`\`
+
+OpenAI 可到 https://platform.openai.com/api-keys 创建 API Key；其他 OpenAI Chat Completions 兼容服务商使用其对应的 URL、模型 ID 和 Key。**不要把 Key 粘贴到聊天、提交到 GitHub 或写进 README。** \`doctor\` 只报告是否配置，不会打印 Key。ChatGPT Plus 订阅与 API 额度分别计费。
+
+配置好以后测试真实接口：
+
+\`\`\`bash
+cd "$HOME/Desktop/学习/global-market-radar-agent"
+.venv/bin/python -m agent.main doctor
+.venv/bin/python -m agent.main smoke-model
+\`\`\`
+
+两轮市场分析（Analyst + Critic）用 \`flow --date YYYY-MM-DD --evidence /绝对路径/reviewed_sources.json\`。**必须先打开真正来源并人工填好核验事实及时间**；research 生成的模板不能直接输入。运行产物在 \`agent/output/\` 内，只生成本地预览并保留审计；不部署到 main。2026-11-03 已有分析产物，不用它测试发布覆盖。
+
+### 测试边界（2026-11-03）
+
+GitHub Actions（Linux/Python 3.12）已通过全部单元测试、离线 HTML 预览和官方来源联网冒烟。官方来源抓到 1 条候选材料并记录 1 个请求错误。这证明了远端执行能力，**不等于已经在你的 Mac 上创建目录，也不等于真实模型 API 已经联通**。本机完整执行结果以终端显示为准。
