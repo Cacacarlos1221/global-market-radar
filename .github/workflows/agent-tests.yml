@@ -31,6 +31,20 @@ jobs:
           name: market-agent-offline-preview
           path: agent/output/2026-11-03/
           retention-days: 7
+      - name: External GDELT network smoke without API key
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timezone
+          from agent.web_research import research_web
+          result = research_web(datetime.now(timezone.utc), max_articles=3)
+          print("Actual publisher pages retrieved:", len(result["articles"]))
+          print("Discovery / fetch errors:", len(result["errors"]))
+          for item in result["articles"]:
+              print("PUBLIC ARTICLE:", item["publisher"], item["url"])
+          for error in result["errors"][:5]:
+              print("SOURCE ERROR:", error)
+          PY
       - name: Public official-source network smoke (no API key)
         run: python -m agent.main research-official
       - name: Save fetched source candidates and errors
