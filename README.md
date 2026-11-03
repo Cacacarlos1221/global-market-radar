@@ -2,7 +2,7 @@
 
 > A reproducible, evidence-aware daily research log for AUD exchange rates, US equities, global macro news and the next A-share session.
 
-[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · [历史归档](reports/archive.html) · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
+[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · [历史归档](reports/archive.html) · **[HTML 晨报规范](docs/REPORT_SPEC.md)** · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
 
 ## 项目目标
 
