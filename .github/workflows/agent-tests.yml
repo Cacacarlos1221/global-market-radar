@@ -1,0 +1,25 @@
+name: Experimental agent checks
+on:
+  push:
+    branches:
+      - experiment/market-analysis-agent-v0
+    paths:
+      - 'agent/**'
+      - 'tests/test_agent_framework.py'
+      - '.github/workflows/agent-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  agent-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Read-only agent plan
+        run: python -m agent.main plan --date 2026-11-03
