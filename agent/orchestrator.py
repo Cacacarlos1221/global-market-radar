@@ -1,9 +1,10 @@
-"""Stage-2 analysis harness: deterministic I/O; LLM only drafts analysis text."""
+"""Agent analysis node: deterministic inputs, LLM draft, strict reference validation."""
 import json
 from datetime import datetime, timezone, time
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from .tools.io import data_path, load_snapshot, load_reviewed_sources, parse_utc, public_sources
+from .research import build_research_queue, summarize_sources
+from .tools.io import data_path, load_effective_snapshot, load_reviewed_sources, parse_utc, public_sources
 from .validators import validate_generated
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,39 +15,40 @@ def report_mode(report_date, now_utc):
     return ("preopen" if local.date().isoformat() == report_date and
             local.time() < time(9, 30) else "late_or_replay")
 
-def inputs(root, report_date, evidence_path, now_utc):
-    snapshot, snapshot_sha = load_snapshot(root, report_date)
-    reviewed = load_reviewed_sources(evidence_path, report_date, now_utc)
-    return snapshot, snapshot_sha, reviewed
+def inputs(root, report_date, evidence_path, cutoff_utc):
+    snapshot, sha, supplements, excluded = load_effective_snapshot(root, report_date, cutoff_utc)
+    reviewed = load_reviewed_sources(evidence_path, report_date, cutoff_utc)
+    return snapshot, sha, reviewed, supplements, excluded
 
 def plan(root, report_date, evidence_path=None, now_utc=None):
     now = now_utc or datetime.now(timezone.utc)
-    snapshot, sha, sources = inputs(root, report_date, evidence_path, now)
+    snapshot, sha, sources, supplements, excluded = inputs(root, report_date, evidence_path, now)
+    queue = build_research_queue(snapshot, now)
     return {"report_date": report_date, "mode": report_mode(report_date, now),
             "snapshot_sha256": sha, "quote_count": len(snapshot["quotes"]),
-            "unverified_rss_leads": len(snapshot.get("news", [])),
-            "reviewed_sources": len(sources),
+            "unverified_rss_leads": len(queue),
+            "reviewed_sources": len(sources), "included_supplements": len(supplements),
+            "excluded_future_supplements": len(excluded),
             "preview_path": str(Path(root) / "agent/output" / (report_date + ".analysis.json")),
             "production_unchanged": True}
 
 def build_analysis(root, report_date, client, evidence_path=None, now_utc=None):
     now = now_utc or datetime.now(timezone.utc)
-    snapshot, sha, reviewed = inputs(root, report_date, evidence_path, now)
+    snapshot, sha, reviewed, supplements, excluded = inputs(root, report_date, evidence_path, now)
     mode = report_mode(report_date, now)
     context = {
         "report_date": report_date, "run_mode": mode, "run_at_utc": now.isoformat(),
         "fact_snapshot_collected_at_utc": snapshot.get("collected_at_utc"),
         "quotes": snapshot["quotes"],
+        "excluded_future_supplements": excluded,
         "rss_leads_unverified": [
-            {k: item.get(k) for k in ("event_id", "headline", "source", "published_at_utc")}
-            for item in snapshot.get("news", [])[:25]],
-        "reviewed_evidence": [
-            {k: s.get(k) for k in ("id", "title", "publisher", "published_at_utc", "fact_notes")}
-            for s in reviewed],
+            {k: item.get(k) for k in ("headline", "publisher_hint", "published_at_utc")}
+            for item in build_research_queue(snapshot, now)[:25]],
+        "reviewed_evidence": summarize_sources(reviewed),
         "source_ids_allowed": [s["id"] for s in reviewed],
     }
-    system = PROMPT.read_text(encoding="utf-8")
-    generated = client.generate_json(system, json.dumps(context, ensure_ascii=False))
+    generated = client.generate_json(PROMPT.read_text(encoding="utf-8"),
+                                     json.dumps(context, ensure_ascii=False))
     if any(key in generated for key in ("report_date", "news_sources", "evidence_urls", "agent_meta")):
         raise ValueError("Model must not produce trusted metadata or source catalog")
     result = {
@@ -59,10 +61,12 @@ def build_analysis(root, report_date, client, evidence_path=None, now_utc=None):
         "news_digest": generated.get("news_digest"),
         "news_sources": public_sources(reviewed),
         "evidence_urls": [s["url"] for s in reviewed],
-        "agent_meta": {"harness_version": "v0.1-experimental",
+        "agent_meta": {"harness_version": "v0.2-flow",
                        "run_mode": mode, "run_at_utc": now.isoformat(),
                        "snapshot_collected_at_utc": snapshot.get("collected_at_utc"),
-                       "snapshot_sha256": sha, "evidence_mode": "manual_reviewed_only"},
+                       "snapshot_sha256": sha, "supplements": supplements,
+                       "excluded_future_supplements": excluded,
+                       "evidence_mode": "manual_reviewed_only"},
     }
     if mode != "preopen":
         result["a_share_outlook"] = ("【非盘前生成/回放，不能作为当日开盘前预测】" +
@@ -72,7 +76,7 @@ def build_analysis(root, report_date, client, evidence_path=None, now_utc=None):
 def write_preview(root, report_date, analysis):
     target = Path(root) / "agent/output" / (report_date + ".analysis.json")
     if target.exists():
-        raise FileExistsError(f"Preview exists; review/remove manually before rerunning: {target}")
+        raise FileExistsError(f"Preview exists, explicitly remove it before rerunning: {target}")
     target.parent.mkdir(parents=True, exist_ok=True)
     with target.open("x", encoding="utf-8") as fh:
         json.dump(analysis, fh, ensure_ascii=False, indent=2)
@@ -81,17 +85,20 @@ def write_preview(root, report_date, analysis):
 
 def publish_reviewed(root, report_date, evidence_path=None, reviewed=False, render=False):
     if not reviewed:
-        raise PermissionError("Explicit --reviewed required; automated publishing is not enabled")
+        raise PermissionError("Explicit --reviewed required; automated publishing is disabled")
     from scripts.pipeline import render_all
     preview = Path(root) / "agent/output" / (report_date + ".analysis.json")
     doc = json.loads(preview.read_text(encoding="utf-8"))
-    # Evidence must have existed before the original analysis, not merely at publish time.
     run_at = parse_utc(doc["agent_meta"]["run_at_utc"])
-    _, sha, sources = inputs(root, report_date, evidence_path, run_at)
+    _, sha, sources, supplements, excluded = inputs(root, report_date, evidence_path, run_at)
+    if doc["agent_meta"].get("supplements") != supplements:
+        raise ValueError("Supplement provenance changed since the model generated this analysis")
+    if doc["agent_meta"].get("excluded_future_supplements") != excluded:
+        raise ValueError("Late supplement inventory changed; rerun review before publishing")
     validate_generated(doc, report_date, sources, sha)
     target = data_path(root, "analysis", report_date)
     if target.exists():
-        raise FileExistsError(f"Existing published analysis must not be overwritten: {target}")
+        raise FileExistsError(f"Existing published analysis will not be overwritten: {target}")
     target.parent.mkdir(parents=True, exist_ok=True)
     with target.open("x", encoding="utf-8") as fh:
         json.dump(doc, fh, ensure_ascii=False, indent=2)
