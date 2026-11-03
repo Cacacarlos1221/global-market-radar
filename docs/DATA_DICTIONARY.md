@@ -22,8 +22,8 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 | category | fx / us_index / cn_index / macro |
 | unit | 比价单位、指数点数或数据提供方原生单位 |
 | market_date | 上游报价所在市场的日期（不等于 report_date） |
-| observed_at_utc | 上游最新 K 线时间戳，UTC ISO 8601 |
-| value_kind | daily_close 或 intraday_observation |
+| observed_at_utc | 上游返回的 K 线时间戳，UTC ISO 8601，**日线通常对应K线起始时间而不是收盘成交时间** |
+| value_kind | daily_close（交易时段已结束）、daily_bar_live（当前交易时段可能未结束）、daily_bar（仅为最近日线不保证已结算）、intraday_observation（最新盘中观测） |
 | value | 当前最新有效观测值；缺失为 null / CSV空值 |
 | reference_close | 上一个可用日线基准值 |
 | reference_date | 上一个可用日线基准对应的市场日期 |
@@ -71,3 +71,7 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 - 盘后验证必须选对应的 `target_trade_date`，不允许以报告日简单 join 美股日线。
 - 高质量分析需保存预测产生时间、可用信息截止点、行业/指数标的及真实后验，用于防止未来信息泄漏。
 - 原始数据与版本应长期保留；研究导出不要修改作为审计证据的日快照。
+
+## 已知的 2026-11-03 测试数据口径说明
+
+当天首次快照于北京时间14:44生成，来源数据曾使用 daily_close 标注当时尚在交易的A股日线。原始快照遵循不可覆盖原则保留；此后生成的快照已在代码层区分 daily_bar_live。US10Y 的 ^TNX=4.894 是雅虎显示的 10年期美债收益率 4.894%，不是 48.94%，早期配置的“×10”描述已修正。该资产的 change_pct 为收益率数值的相对百分比变化，并非基点变化；分析利率时更应该比较绝对百分比差（乘100得到bps）。

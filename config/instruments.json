@@ -62,7 +62,7 @@
       "key": "US10Y",
       "symbol": "^TNX",
       "label": "美国10年期国债收益率指数",
-      "unit": "index (yield ×10)",
+      "unit": "% annual yield (Yahoo quote)",
       "category": "macro"
     },
     {

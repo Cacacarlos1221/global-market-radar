@@ -59,9 +59,9 @@ def render_report(data, analysis=None, home="index.html"):
                     f'<td>{safe(q["market_date"])}</td><td>{safe(q["observed_at_utc"])}</td>'
                     f'<td>{safe(q["status"])}</td></tr>')
     table = ('<div class="card table-wrap"><table><thead><tr><th>资产</th><th>最新值</th><th>相对前日</th>'
-             '<th>行情日期</th><th>UTC数据时间</th><th>状态</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
+             '<th>行情日期</th><th>UTC K线时间</th><th>状态</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
              '<p class="small">汇率日内观测值与前一交易日参考价比较；美国指数使用最近一个已结束交易日收盘价。'
-             '假期可能显示上一交易日行情，不代表当日开盘。价格源：Yahoo Finance 非官方行情接口。</p></div>')
+             '日线 UTC 时间可能是 K 线开盘时间，而非收盘时间；daily_bar_live 表示未确认收盘。假期可能显示上一交易日行情。价格源：Yahoo Finance 非官方行情接口。</p></div>')
     events = []
     for e in data.get("news", []):
         events.append('<article class="news"><a target="_blank" rel="noopener noreferrer" href="' +

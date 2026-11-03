@@ -21,6 +21,13 @@ class SourceTests(unittest.TestCase):
         result = normalize_quote(asset, daily, intraday)
         self.assertEqual(result["reference_close"], 4.6)
         self.assertEqual(result["value_kind"], "intraday_observation")
+    def test_ashare_live_bar_not_labeled_close(self):
+        asset = {"key": "SSE", "symbol": "000001.SS", "label": "SSE", "unit": "points", "category": "cn_index"}
+        daily = [{"value": 3500, "market_date": "2026-11-03", "observed_at_utc": "2026-11-03T01:30:00+00:00"}]
+        live = normalize_quote(asset, daily, now=datetime(2026, 11, 3, 6, 45, tzinfo=timezone.utc))
+        closed = normalize_quote(asset, daily, now=datetime(2026, 11, 3, 7, 30, tzinfo=timezone.utc))
+        self.assertEqual(live["value_kind"], "daily_bar_live")
+        self.assertEqual(closed["value_kind"], "daily_close")
     def test_rss_filter_and_id(self):
         xml = b"<rss><channel><item><title>Test market event</title><link>https://example.com/x</link><pubDate>Tue, 03 Nov 2026 02:00:00 GMT</pubDate><source>Example</source></item></channel></rss>"
         result = parse_rss(xml, "macro", datetime(2026, 11, 3, 3, tzinfo=timezone.utc))

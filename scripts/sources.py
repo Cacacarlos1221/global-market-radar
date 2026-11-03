@@ -55,14 +55,20 @@ def parse_bars(chart):
                          "market_date": observed.astimezone(local_tz).date().isoformat()})
     return bars
 
-def normalize_quote(asset, daily_bars, intraday_bars=None):
+def normalize_quote(asset, daily_bars, intraday_bars=None, now=None):
     """FX latest observed hourly value vs previous DAILY observation; indices close vs preceding close."""
     if not daily_bars:
         raise ValueError("No valid daily bars")
     latest = daily_bars[-1]
     current = latest
     previous = daily_bars[-2] if len(daily_bars) > 1 else None
-    kind = "daily_close"
+    kind = "daily_bar"
+    if asset["category"] in ("us_index", "cn_index"):
+        target_tz = ZoneInfo("America/New_York" if asset["category"] == "us_index" else "Asia/Shanghai")
+        local_now = (now or datetime.now(timezone.utc)).astimezone(target_tz)
+        exchange_date = datetime.fromisoformat(latest["market_date"]).date()
+        close_hour = 16 if asset["category"] == "us_index" else 15
+        kind = "daily_close" if exchange_date < local_now.date() or (exchange_date == local_now.date() and local_now.hour >= close_hour) else "daily_bar_live"
     if asset["category"] == "fx" and intraday_bars:
         hourly = intraday_bars[-1]
         if hourly["observed_at_utc"] > latest["observed_at_utc"]:
