@@ -1,29 +1,43 @@
-"""CLI: plan -> flow (offline/LLM) -> human review -> explicit publish."""
+"""CLI: plan, public-source research, offline/LLM flow, review and publish."""
 import argparse
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from .flow import run_flow
-from .model_client import ChatCompletionsClient
+from .model_client import ChatCompletionsClient, model_configuration
 from .orchestrator import ROOT, build_analysis, plan, publish_reviewed, write_preview
+from .research_runner import run_research
 
 def main():
-    parser = argparse.ArgumentParser(description="Experimental Stage-2 Agent, never scheduled on main")
-    parser.add_argument("action", choices=("plan", "flow", "generate", "publish"))
+    parser = argparse.ArgumentParser(description="Experimental Agent; does not deploy to main")
+    parser.add_argument("action", choices=("doctor", "research", "smoke-model", "plan",
+                                          "flow", "generate", "publish"))
     parser.add_argument("--date", default=datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat())
-    parser.add_argument("--evidence", type=Path, help="Explicitly reviewed original reporting / filings")
-    parser.add_argument("--offline", action="store_true", help="For flow: no LLM, research queue and HTML only")
-    parser.add_argument("--reviewed", action="store_true", help="For publish: confirm reviewed draft")
-    parser.add_argument("--render", action="store_true", help="On publish: regenerate existing site locally")
+    parser.add_argument("--evidence", type=Path, help="Human-reviewed evidence JSON, never raw RSS")
+    parser.add_argument("--offline", action="store_true", help="Flow: render without an LLM key")
+    parser.add_argument("--reviewed", action="store_true", help="Publish: human confirms approval")
+    parser.add_argument("--render", action="store_true", help="Publish: regenerate HTML locally")
     args = parser.parse_args()
     if datetime.strptime(args.date, "%Y-%m-%d").date().isoformat() != args.date:
-        parser.error("Use an ISO YYYY-MM-DD date")
+        parser.error("Use YYYY-MM-DD")
     if (args.reviewed or args.render) and args.action != "publish":
         parser.error("--reviewed and --render are only for publish")
     if args.offline and args.action != "flow":
         parser.error("--offline is only for flow")
-    if args.action == "plan":
+    if args.action == "doctor":
+        out = {"python": sys.version.split()[0], "project_root": str(ROOT),
+               "model": model_configuration(),
+               "key_needed_for": "smoke-model and LLM flow; not for research/offline flow"}
+    elif args.action == "research":
+        out = run_research(ROOT, args.date)
+    elif args.action == "smoke-model":
+        result = ChatCompletionsClient().generate_json(
+            'Return exactly one JSON object {"ok":true}. No prose or Markdown.',
+            'Reply with {"ok":true} only.')
+        out = {"model_api_reachable": result.get("ok") is True, "response": result}
+    elif args.action == "plan":
         out = plan(ROOT, args.date, args.evidence)
     elif args.action == "flow":
         out = run_flow(ROOT, args.date,
@@ -32,7 +46,7 @@ def main():
         doc = build_analysis(ROOT, args.date, ChatCompletionsClient(), args.evidence)
         out = {"preview": str(write_preview(ROOT, args.date, doc)),
                "news_count": len(doc["news_digest"]["items"]),
-               "warning": "generate is a legacy single-pass draft; prefer flow with critic"}
+               "warning": "Legacy single-pass: prefer flow with critic"}
     else:
         out = {"published": str(publish_reviewed(ROOT, args.date, args.evidence,
                                                 reviewed=args.reviewed, render=args.render))}
