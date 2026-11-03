@@ -10,3 +10,4 @@ report_date,asset_key,symbol,category,unit,market_date,observed_at_utc,value_kin
 2026-11-03,US10Y,^TNX,macro,index (yield ×10),2026-11-02,2026-11-02T13:20:00+00:00,daily_close,4.89400005,4.9289999,2026-10-30,-0.7101,ok,Yahoo Finance chart API (unofficial)
 2026-11-03,SSE,000001.SS,cn_index,points,2026-11-03,2026-11-03T01:30:00+00:00,daily_close,3595.87231445,3638.03100586,2026-11-02,-1.1588,ok,Yahoo Finance chart API (unofficial)
 2026-11-03,CSI300,000300.SS,cn_index,points,2026-11-03,2026-11-03T06:29:50+00:00,daily_close,3994.91577148,,,,ok,Yahoo Finance chart API (unofficial)
+2026-11-03,USD_CNY,CNY=X,fx,CNY/USD,2026-11-03,2026-11-03T09:00:12+00:00,intraday_observation,6.67070007,6.66099977,2026-11-02,0.1456,ok,Yahoo Finance chart API (unofficial)

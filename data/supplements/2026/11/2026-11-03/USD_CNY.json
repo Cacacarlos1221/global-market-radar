@@ -1,0 +1,25 @@
+{
+  "asset_key": "USD_CNY",
+  "base_snapshot_collected_at_utc": "2026-11-03T06:44:56.022003+00:00",
+  "collected_at_utc": "2026-11-03T09:00:14.108931+00:00",
+  "note": "Supplement captured after original snapshot, not a historical as-of quote",
+  "quote": {
+    "category": "fx",
+    "change_pct": 0.1456,
+    "error": null,
+    "key": "USD_CNY",
+    "label": "美元/人民币",
+    "market_date": "2026-11-03",
+    "observed_at_utc": "2026-11-03T09:00:12+00:00",
+    "reference_close": 6.66099977,
+    "reference_date": "2026-11-02",
+    "source": "Yahoo Finance chart API (unofficial)",
+    "status": "ok",
+    "symbol": "CNY=X",
+    "unit": "CNY/USD",
+    "value": 6.67070007,
+    "value_kind": "intraday_observation"
+  },
+  "report_date": "2026-11-03",
+  "schema_version": "1.0"
+}
