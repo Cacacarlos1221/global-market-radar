@@ -23,3 +23,11 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Read-only agent plan
         run: python -m agent.main plan --date 2026-11-03
+      - name: Render offline candidate report from real sealed snapshot
+        run: python -m agent.main flow --date 2026-11-03 --offline
+      - name: Save isolated HTML preview and evidence queue
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-agent-offline-preview
+          path: agent/output/2026-11-03/
+          retention-days: 7

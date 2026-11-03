@@ -1,68 +1,116 @@
-# Market Analysis Agent · 独立实验（v0.1）
+# Global Market Radar / Research Agent Flow v0.2（独立实验）
 
-> 分支：`experiment/market-analysis-agent-v0`。本目录是 2026-11-03 讨论的固定 harness agent **概念验证框架**，不是已部署的无人值守晨报。**main 的自动采集、HTML、定时任务均不修改，也不新增定时触发。**
+**Git branch:** experiment/market-analysis-agent-v0（基于 2026-11-03 最新 main 原型更新）。这个目录承载可执行的 Stage-2 Agent 编排，不是定时生产任务。现有事实采集、正式日报与 Pages 继续由 main 管理。
 
-## 我们讨论的目标流水线
+报告产品规范以 [docs/REPORT_SPEC.md](../docs/REPORT_SPEC.md) 为准：01 美元/人民币优先的核心行情、02 全资产行情、03 市场走势及可能驱动、04 核验新闻综述、05 A 股条件性盘前推演、06 来源引用和原始 RSS 折叠，最后是数据质量简述。**LLM 不直接改 HTML，不得覆盖原始事实快照。**
 
-```text
-Stage 1 [现有 main] scripts/sources.py + scripts/pipeline.py
-        │  行情/RSS采集、保留原始快照、quotes.csv/events.csv
-        ▼
-  data/daily/YYYY/MM/YYYY-MM-DD.json (immutable)
-        │
-Stage 2 [本实验 agent] 读取快照 + 收集候选新闻
-        ├─ 新闻核验与去重（目前人工审核清单；自动核验待实现）
-        ├─ 主 Agent + 可替换 LLM API（OpenAI-compatible chat completions）
-        ├─ 03 行情归因 / 04 重要新闻综述 / 05 A股条件性研判
-        ├─ schema + 来源ID + 价格时间 + 快照SHA校验
-        └─ agent/output/YYYY-MM-DD.analysis.json（预览，不入库）
-        │  人工审阅；显式 --reviewed 发布；不覆盖既有分析
-        ▼
-  data/analysis/YYYY/MM/YYYY-MM-DD.json
-        │
-Stage 3 [复用 main] python -m scripts.pipeline --render-only
-        ├─ index.html / reports/YYYY/MM/YYYY-MM-DD.html / archive.html
-        └─ 审核后单独 git commit + push；GitHub Pages 只展示 main
-```
+## 1. 可执行 Agent 图
 
-**04 / 国际重要新闻综述** 是经过核验的 3–5 条重要事件及市场影响（少于3条也可以，最多6条）。**06 / 新闻来源与参考资料** 由 `news_sources` + 原始 RSS 折叠列表组成；新闻来源不能被误当成结论。数据质量保留在页脚和 JSON。原定的“07”未引入新章节，延续 main 已实施的 04/06 结构。
+    main scripts.pipeline → data/daily (append-only)
+                  │
+    [0 / Preflight] 原始快照哈希 + 补采数据 as-of 截点合并
+                  │
+    [1 / Research] 过滤未来 RSS + 规范化去重 → 人工事实核验队列
+                  │                                  │
+                  │                 news_sources reviewed evidence JSON
+                  │                 （实际阅读来源后填 fact_notes）
+                  └─────────────────────────┬────────┘
+                                            │
+    [2 / Analyst] 可替换 OpenAI-compatible LLM
+                 → 03 market_summary
+                 → 04 news_digest / news_sources
+                 → 05 a_share_outlook / sectors / risks
+                                            │
+    [3 / Deterministic QA] JSON字段、source_ids、来源白名单、
+                快照SHA、证据时间、补采时间、盘前/盘后标记
+                                            │
+    [4 / Critic] 第二次 LLM 作为审稿员查数值、证据、归因和时间逻辑
+                ├── reject → blocked audit，不生成可发布稿
+                └── approve → 再次通过确定性校验
+                                            │
+    [5 / Preview] agent/output/ 本地 JSON、HTML、research_queue、audit
+                                            │
+    [6 / Human Gate] 人工审核后单独 publish（禁止已有分析覆盖）
+                                            │
+    data/analysis/YYYY/MM/YYYY-MM-DD.json（只在本地）
+                                            │
+    [7 / Renderer] scripts.pipeline --render-only
+                 → HTML（GitHub Pages 实际发布仍仅 main）
 
-## 目录
+**这是一条有固定节点的 Agent Workflow（harness），不是自由规划、自带浏览器或能自主核实新闻的全自动新闻 Agent。** 其运行入口是 agent/main.py 的 flow；Python 负责工具和规则，LLM 负责推理与二次审查。没有新闻核验材料时 04 必须为空，不能把 RSS 标题视为证据。
 
-- `main.py`：手动运行入口，plan / generate / publish 三步分离。
-- `orchestrator.py`：分层流程、预览与发布、非盘前回放标记。
-- `model_client.py`：不依赖第三方包的 OpenAI-compatible API 适配器。
-- `tools/io.py`：快照读取、来源白名单与人工证据输入。
-- `prompts/system.md`：固定约束和输出格式。
-- `validators.py`、`schemas/`：本地验证与可追溯契约。
-- `examples/reviewed_sources.example.json`：核验来源文件格式。
-- `output/`：本地预览，已忽略，不应自动提交到公开仓库。
+## 2. 文件定位
 
-## 如何尝试（Python 3.11+）
+- agent/flow.py：串行执行 / 审计 / 离线 HTML 预览 / 错误隔离。
+- agent/orchestrator.py：行情及补采数据拼装、分析 Prompt、人工发布门禁。
+- agent/research.py：新闻候选去重、去未来时间、未核验列表。
+- agent/tools/io.py：只读快照、SHA-256、严格 UTC 来源核验时间、补采 as-of。
+- agent/model_client.py：兼容 Chat Completions 的模型 API（无需第三方依赖）。
+- agent/critic.py / prompts/critic.md：第二轮 LLM 审核。
+- agent/validators.py：字段和引用完整性验证，复用 scripts.render.validate_analysis。
+- agent/output/：预览稿、证据队列和审计日志，gitignore，不会自动进入正式网页。
+- tests/test_agent_flow.py、tests/test_agent_framework.py：无外网端到端模拟。
 
-在仓库根目录运行；必须已有对应报告日的 `data/daily` 快照。
+## 3. 最小可运行示例
 
-```bash
-python -m agent.main plan --date 2026-11-03
-# 有独立人工核验材料后：复制 agent/examples/reviewed_sources.example.json，填写日期和 news_sources
-# 每条已核验新闻需 id/title/publisher/url/verification=reported/fact_notes/reviewed_at_utc
-# 可选 published_at_utc，UTC 时间必须是 ISO-8601；记录真实阅读核验时间
-export MARKET_AGENT_BASE_URL="https://api.openai.com/v1"
-export MARKET_AGENT_MODEL="your-model-id"
-export MARKET_AGENT_API_KEY="your-secret-key"
-python -m agent.main generate --date 2026-11-03 --evidence path/to/reviewed_sources.json
-# 审核预览后，仅在目标 analysis 尚不存在时允许显式发布
-python -m agent.main publish --date 2026-11-03 --evidence path/to/reviewed_sources.json --reviewed --render
-python -m unittest discover -s tests -v
-```
+从仓库根目录执行（Python 3.11+）。**不需要任何模型 Key 就能离线跑通第一阶段**：
 
-**注意：**仓库 main 已有 2026-11-03 的正式 `data/analysis`，所以当天不能用 publish 覆写。可仅运行 plan；试生成请在合适新日期的已冻结快照上进行。未提供人工核验来源时，新闻综述必须为空，不能把 RSS 标题升级为已核实新闻。模型 API 本身**不能**自动联网核验新闻。
+    python -m unittest discover -s tests -v
+    python -m agent.main plan --date 2026-11-03
+    python -m agent.main flow --date 2026-11-03 --offline
 
-## 当前边界与下一步
+此时产生：
 
-1. 已搭建：输入快照、人工证据清单、模型可替换适配器、模型草稿、来源白名单、静态结构校验、独立预览、人工批准发布接口。
-2. 待实现：新闻全文检索/二次来源核验、事件去重、事实与推断逐句证据校验、行情异源交叉核对、重试/成本限额、日志与失败告警、沙箱回放评测、CI 与可恢复运行。
-3. 待成熟后：以固定时间触发 Stage 1 → Stage 2 → Stage 3；先平行运行数日并比较质量，再考虑替换人工分析任务；不能直接让测试分支发布到正式 Pages。
-4. 凭据只放本地环境变量或 GitHub Actions Secrets，绝不提交 Key、用户资料、付费新闻原文。正式自动发布前还需实现可审计的新闻核验闭环与更严格的故障隔离。
+    agent/output/2026-11-03/research_queue.json
+    agent/output/2026-11-03/report.preview.html
+    agent/output/2026-11-03/audit.json
 
-这套框架采用**一个主 Agent + 常规 Python 工具**，不预设复杂多 Agent，避免把联网采集、内容真伪、数值计算都交给 LLM。其范围刻意小，方便后续分步讨论与迭代。
+该 HTML 是「行情 + 待分析提示」的安全预览，不是 AI 市场分析结果。CI 同样运行此命令，并上传可下载的 HTML / JSON Artifact。
+
+**实际两轮模型流程**需要模型 API。设置以下三个环境变量（值仅在本地/仓库 Secret 中）：
+
+    export MARKET_AGENT_BASE_URL="https://api.openai.com/v1"
+    export MARKET_AGENT_MODEL="your-model-id"
+    export MARKET_AGENT_API_KEY="your-secret"
+    python -m agent.main flow --date YYYY-MM-DD --evidence /path/to/reviewed_sources.json
+
+模型必须是兼容 OpenAI Chat Completions、并能严格输出纯 JSON 的模型。程序会发起两次模型请求（分析、审查），费用和时延取决于提供商。**未配置模型时不能声称已经完成真实 LLM 分析。**
+
+审核证据示例参见 agent/examples/reviewed_sources.example.json。每条实际已阅读的来源须填写：
+
+    {
+      "id": "S1", "title": "确实阅读过的报道标题", "publisher": "发布机构",
+      "url": "https://真实报道地址", "verification": "reported",
+      "fact_notes": "实际核验的事实与发生时间（不可凭标题推断）",
+      "published_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+      "reviewed_at_utc": "YYYY-MM-DDTHH:MM:SSZ"
+    }
+
+上面仅是字段说明，不能把示例作为真实证据文件。模型输出的来源 ID、网页引用 URL 都不具有信任权：只有审阅输入中存在的来源才会写入 final JSON。
+
+**重跑规则**：每个日期的 agent/output 运行目录默认不覆盖。离线完成后，如需用同一日期正式模型跑，请先备份/检查并显式清理该日期 output 目录和旧预览 JSON，然后再次运行。这个操作只处理 gitignore 的实验产物，不要删除 data/daily。
+
+## 4. 手动发布（仅在实验分支工作区执行）
+
+通过第二轮 Critic 和结构化 QA 后，仔细查看：
+
+    agent/output/YYYY-MM-DD.analysis.json
+    agent/output/YYYY-MM-DD/report.preview.html
+    agent/output/YYYY-MM-DD/audit.json
+
+人工确认后，才可以运行：
+
+    python -m agent.main publish --date YYYY-MM-DD --evidence /path/to/reviewed_sources.json --reviewed --render
+
+必须是**同一次分析的原始预览哈希 + passed 审计记录**；任何手工篡改、改变源文件、迟到补采导致来源清单变化都会拒绝。目标 data/analysis 当天文件存在时也会拒绝覆盖。此命令仅修改当前本地 checkout，**不会自动 Git push、不会自动部署 Pages**。
+
+2026-11-03 的 main 已存在正式分析 JSON，这一天请只做 plan / flow 预览，不要尝试覆盖发布。晚于 A 股开盘才运行的同日分析，会标记为 late_or_replay，不能用于无前视偏差的盘前命中率评估。
+
+## 5. 自动化边界与待办
+
+- **已实现并测试**：全量行情补采 as-of 筛选、RSS 去重与核验清单、模型适配、两轮 LLM 节点、可失败封闭的字段/引用检查、时点校验、预览 HTML、审计、人工批准发布、离线 GitHub Actions 演示。
+- **尚未实现**：真实的自动检索原始新闻正文、跨媒体交叉核验、工具驱动的新闻研究循环、模型 token/费用统计、自动重试与故障通知、质量基线与长期预测复盘，以及可信的 08:30 自动生产端到端任务。
+- **非保证**：Critic 通过不等于所有财经事实都正确；人工审稿仍必需，不能用生成式模型的二次回答取代独立证据。
+- **安全**：Agent 工作流只在实验分支启动；正式 data/analysis 的 push 触发和补采工作流按 main 分支受限；原始快照不可覆盖、实验输出不入库、API Key 不提交。若以后打算让 Agent 自动发布，必须先独立审计并得到明确授权。
+
+先用离线 preview 检查现在的 HTML / 数据口径，再拿真实 API 做小批量双模型审查测试。模型与自动新闻研究框架成熟后，才考虑将 Stage-2 接管每日晨报，不要提前覆盖 main。
