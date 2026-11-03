@@ -3,17 +3,17 @@
   "quote_provider": "Yahoo Finance chart API (unofficial, best effort)",
   "assets": [
     {
+      "key": "USD_CNY",
+      "symbol": "CNY=X",
+      "label": "美元/人民币",
+      "unit": "CNY/USD",
+      "category": "fx"
+    },
+    {
       "key": "AUD_CNY",
       "symbol": "AUDCNY=X",
       "label": "澳元/人民币",
       "unit": "CNY/AUD",
-      "category": "fx"
-    },
-    {
-      "key": "AUD_USD",
-      "symbol": "AUDUSD=X",
-      "label": "澳元/美元",
-      "unit": "USD/AUD",
       "category": "fx"
     },
     {
@@ -78,6 +78,13 @@
       "label": "沪深300",
       "unit": "points",
       "category": "cn_index"
+    },
+    {
+      "key": "AUD_USD",
+      "symbol": "AUDUSD=X",
+      "label": "澳元/美元",
+      "unit": "USD/AUD",
+      "category": "fx"
     }
   ]
 }

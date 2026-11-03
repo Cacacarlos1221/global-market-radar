@@ -168,7 +168,11 @@ def render_sources(analysis, data, sources):
 def render_report(data, analysis=None, home="index.html"):
     date = data["report_date"]
     by_key = {x["key"]: x for x in data.get("quotes", [])}
-    important = [by_key[k] for k in ("AUD_CNY", "AUD_USD", "NASDAQ", "SP500", "DOW") if k in by_key]
+    core = (("USD_CNY", "美元/人民币"), ("AUD_CNY", "澳元/人民币"),
+            ("NASDAQ", "纳斯达克综合指数"), ("SP500", "标普500"),
+            ("DOW", "道琼斯工业平均指数"), ("AUD_USD", "澳元/美元"))
+    important = [by_key.get(k, {"label": label, "status": "unavailable",
+                               "error": "历史快照尚未采集该指标"}) for k, label in core]
     cards = '<div class="grid">' + "".join(metric(x) for x in important) + "</div>"
     rows = []
     for q in data.get("quotes", []):
