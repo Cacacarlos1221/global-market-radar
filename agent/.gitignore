@@ -2,4 +2,5 @@
 .env.*
 !.env.example
 output/
+research_output/
 __pycache__/
