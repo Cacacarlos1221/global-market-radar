@@ -31,29 +31,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Collect facts or build fully analyzed report
+      - name: Collect, repair missing quotes, freeze, and publish verified analysis
+        shell: bash
         run: |
+          set -euo pipefail
           REPORT_DATE=$(TZ=Asia/Shanghai date +%Y-%m-%d)
           REPORT_PATH="data/daily/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
           ANALYSIS_PATH="data/analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
+          # The forecast is immutable: freeze early if a timestamped pre-open analysis exists.
           if [ -f "$ANALYSIS_PATH" ]; then
             python -m scripts.close_review --freeze-only --date "$REPORT_DATE"
           fi
+          if [ ! -f "$REPORT_PATH" ]; then
+            echo "No today's snapshot: collect fact layer without incomplete HTML"
+            python -m scripts.pipeline --collect-only --date "$REPORT_DATE"
+          fi
+          # Original daily snapshot remains sealed. Recover missing core quotes in
+          # separate versioned supplements. Do not render until analysis exists.
+          python -m scripts.backfill_missing --date "$REPORT_DATE"
           if [ -f "$REPORT_PATH" ] && [ -f "$ANALYSIS_PATH" ]; then
             python -m scripts.pipeline --render-only
             python -m scripts.release_check --date "$REPORT_DATE"
             python -m scripts.morning_audit --date "$REPORT_DATE" --require-published
-          elif [ -f "$REPORT_PATH" ]; then
-            echo "Facts collected; waiting for verified AI analysis before publishing today's HTML"
           else
-            echo "Collecting fact snapshot only: no incomplete public HTML is generated"
-            python -m scripts.pipeline --collect-only
-            if [ -f "$ANALYSIS_PATH" ]; then
-              python -m scripts.close_review --freeze-only --date "$REPORT_DATE"
-              python -m scripts.pipeline --render-only
-              python -m scripts.release_check --date "$REPORT_DATE"
-              python -m scripts.morning_audit --date "$REPORT_DATE" --require-published
-            fi
+            echo "PENDING: collecting or awaiting verified AI analysis; no partial HTML published."
           fi
       - name: Validate regression tests
         run: python -m unittest discover -s tests -v
