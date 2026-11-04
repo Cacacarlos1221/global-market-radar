@@ -72,3 +72,18 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 - ChatGPT 总控任务应再检查 GitHub Actions 成功提交、Pages deployment 成功，并尽可能验证公开页面日期和摘要与仓库内容一致。所有这些环节完成才汇报 `COMPLETE`；否则给 `DEGRADED` 或 `FAILED` 和对应链接。
 - 自动任务不能保证无限期等待。执行期间可依次重试、有界恢复；遇到 GitHub权限限制、源数据不可用或超过执行窗口时必须明确汇报失败，保留当次诊断记录，不得说“已完成”。
 - 如未来自部署 V2 Agent Harness，可以承接上述同一契约，将AI分析和重试放进持久化 worker，做到真正可恢复的工作流。
+
+## 15:30 盘后复盘工作流
+
+盘后复盘独立于实验 Agent。北京时间09:30前，晨报 Github workflow 在分析存在时运行 freeze-only，冻结预测方向、组合研判、板块映射、预选代表股到 data/forecasts；09:30后不可补冻或假装历史预测。下午工作日15:30/15:50，close.yml 执行采集和兜底，同样使用 market-radar-writer 并发组。
+
+日常命令：
+
+    python -m scripts.close_review --freeze-only
+    python -m scripts.close_review --collect-only
+    python -m scripts.close_review --render-only
+    python -m scripts.close_review --check --date YYYY-MM-DD
+
+代码中的 --date 绝非历史行情回填开关；collect-only/freeze-only 同时验证当前北京时间和日期。单日真实数据写入 data/close，分析数据写入 data/close_analysis；推送后自动渲染 reports/close。若自动采集失败，可推送 data/close_requests/YYYY/MM/YYYY-MM-DD.json 请求当天再采集。源站异常、无当日沪深300收盘K线时不冒充已结算，也不擅自宣布休市；保留原始错误。
+
+盘后 GPT 总控需要检查晨报冻结、事实快照、新闻原始发布时间、来源引用、发布校验、GitHub Actions 及 Pages 实际上线状态；仅全部成功才报告 COMPLETE，否则明确 DEGRADED/FAILED。自动化无法无限期阻塞等待，运行时可作有限重试，最终必须反馈真实状态。
