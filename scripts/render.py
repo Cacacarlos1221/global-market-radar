@@ -36,6 +36,7 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:600;color:var(--blue)
 .bias-unknown{background:#f1f5f9;color:#64748b;border-color:#cbd5e1}
 .bias-summary{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:2px 0 16px}
 .sector-list{padding-left:21px}.sector-list li{margin:8px 0}.sector-list .bias-tag{margin:0 3px}
+.site-nav{display:flex;flex-wrap:wrap;gap:10px 20px;padding:9px 0 19px;border-bottom:1px solid var(--line);font-weight:650;font-size:14px}
 footer{margin-top:40px;color:var(--muted);font-size:12px}ul{padding-left:20px}
 @media(max-width:600px){header{align-items:flex-start;flex-direction:column}main{padding:14px 14px 50px}th,td{padding:8px}}
 """
@@ -44,13 +45,18 @@ def safe(value):
     return escape(str(value)) if value is not None else "—"
 
 def shell(title, content, home):
+    prefix = "" if home == "reports/archive.html" else (home[:-len("index.html")] if home.endswith("index.html") else "")
+    navigation = ('<nav class="site-nav"><a href="' + prefix + 'index.html">最新晨报</a>'
+                  '<a href="' + prefix + 'reports/close/index.html">盘后复盘</a>'
+                  '<a href="' + prefix + 'reports/archive.html">晨报历史</a>'
+                  '<a href="' + prefix + 'reports/close/archive.html">盘后历史</a></nav>')
     return ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<meta name="description" content="全球市场雷达：汇率、美股、国际事件与A股盘前研究">'
             f'<title>{safe(title)} · Global Market Radar</title><style>{STYLE}</style></head><body>'
             '<main><header><div><div class="brand">GLOBAL MARKET RADAR</div>'
             f'<h1>{safe(title)}</h1><div class="sub">全球市场数据 · 重要新闻 · A股盘前研究</div></div>'
-            f'<a class="pill" href="{safe(home)}">{"查看历史晨报" if home.endswith("archive.html") else "返回最新晨报"}</a></header>{content}'
+            f'<a class="pill" href="{safe(home)}">{"查看历史晨报" if home.endswith("archive.html") else "返回最新晨报"}</a></header>{navigation}{content}'
             '<footer>仅供研究和信息整理，不构成投资建议。行情可能延迟；请核对来源与时间戳。</footer>'
             '</main></body></html>')
 
