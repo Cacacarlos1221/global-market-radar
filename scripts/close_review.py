@@ -65,7 +65,8 @@ def freeze_forecast(day, root=ROOT, now=None):
     return "frozen"
 
 def json_api(endpoint, params):
-    url = BASE + endpoint + "?" + urllib.parse.urlencode(params)
+    host = "https://push2his.eastmoney.com/api/qt/" if endpoint.startswith("stock/kline/") else BASE
+    url = host + endpoint + "?" + urllib.parse.urlencode(params)
     raw = read_url(url, timeout=18)
     payload = json.loads(raw.decode("utf-8-sig"))
     if not isinstance(payload, dict) or not isinstance(payload.get("data"), dict):
