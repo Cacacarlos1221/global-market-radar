@@ -15,7 +15,7 @@
 
 ## 定时编排
 
-1. 08:15/08:35 GitHub Actions 负责盘前行情和报告；当 verified analysis 已存在且北京时间尚未到 09:30，执行 scripts.close_review --freeze-only，冻结报告日、原始预测、分析生成时间、分析文件 SHA256，以及当时的板块/代表股跟踪池。
+1. 08:05/08:15/08:35/09:05 GitHub Actions 分别负责提前采集、盘前重试与最后冻结/报告兜底；当 verified analysis 已存在且北京时间尚未到 09:30，执行 scripts.close_review --freeze-only，冻结报告日、原始预测、分析生成时间、分析文件 SHA256，以及当时的板块/代表股跟踪池。
 2. 15:30（UTC 07:30）GitHub Actions close.yml 定时采集；15:50 同样执行幂等兜底。只有本地北京时间达到 15:30、日期等于报告日期且沪深300同日收盘 K 线有效时才保存原始事实。
 3. ChatGPT 15:30 总控检查采集与冻结状态，必要时向 data/close_requests/YYYY/MM/YYYY-MM-DD.json 提交请求触发工作流；读取收盘原始 JSON 及真实新闻来源，对原始预测逐条核验，生成 data/close_analysis/YYYY/MM/YYYY-MM-DD.json。
 4. 分析文件 push 自动 render-only、单日发布检查及 GitHub Pages 部署；报告 COMPLETE 必须核实网页真实可访问且为对应交易日。来源缺失、冻结缺失或可评分标的缺失只能标记 DEGRADED；采集/部署失败标记 FAILED。
