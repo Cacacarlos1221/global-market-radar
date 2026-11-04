@@ -2,7 +2,7 @@
 
 > A reproducible, evidence-aware daily research log for AUD exchange rates, US equities, global macro news and the next A-share session.
 
-[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · [历史归档](reports/archive.html) · **[HTML 晨报规范](docs/REPORT_SPEC.md)** · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
+[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · **[盘后复盘](https://Cacacarlos1221.github.io/global-market-radar/reports/close/index.html)** · [晨报历史](reports/archive.html) · [盘后历史](reports/close/archive.html) · **[HTML 晨报规范](docs/REPORT_SPEC.md)** · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
 
 ## 项目目标
 
@@ -143,3 +143,13 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 ## 单次总控、完整晨报发布机制（2026-11）
 
 定时仓库维护任务以北京时间08:15为目标触发，负责检查 GitHub 数据采集、必要时通过 `data/requests/` 请求主动采集、输出经过核验的分析JSON并验收网页发布。GitHub仍保留定时兜底；数据采集不再主动发布分析尚未齐备的HTML。完整发布门禁为 `python -m scripts.release_check --date YYYY-MM-DD`，参考 [运维手册](docs/OPERATIONS.md)。不能保证定时任务无限期等待，失败必须报告。
+
+## A股盘后复盘（2026-11）
+
+新增北京时间 **15:30** 的盘后验证闭环，独立于实验 Agent 分支。
+
+- [最新盘后复盘](reports/close/index.html)、[盘后历史](reports/close/archive.html) 和现有晨报共用 GitHub Pages。
+- 盘前09:30前冻结原始方向判断、板块映射及预设代表股。多子板块的组合预测仅算一条样本；watch/mixed/neutral 与代理板块不硬算对错。
+- 盘后收集行业/概念收盘指数、代表个股及热门板块，热门板块不计晨报预测命中率。新闻归因由GPT核实，并保留报道发布时间、来源、证据级别。
+- GitHub Actions 定时采集由独立 ChatGPT 盘后总控监督；遇到休市、行情缺失和无法核验新闻，标注降级，不伪造当日结果。
+- 实施细则见 [盘后实施与运维规范](docs/CLOSE_REVIEW.md)。
