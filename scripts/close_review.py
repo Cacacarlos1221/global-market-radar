@@ -244,7 +244,7 @@ def collect_close(day, root=ROOT, now=None):
             data = json_api("clist/get", {"pn": 1, "pz": 6, "po": 1, "np": 1, "fltt": 2,
                             "invt": 2, "fid": "f3", "fs": "b:" + board["code"], "fields": STOCK_FIELDS})
             for row in get_diff(data):
-                code, market = str(row.get("f12") or ""), str(row.get("f13") or "")
+                code, market = str(row.get("f12") or ""), str(row.get("f13") if row.get("f13") is not None else "")
                 if len(code) == 6 and market in ("0", "1"):
                     hot_stocks.append(stock_price((code, market, str(row.get("f14") or code))))
                 if len(hot_stocks) == 2:
@@ -282,7 +282,7 @@ def render_close(root=ROOT):
         validate_close_analysis(analysis)
         target = root / "reports/close" / day[:4] / day[5:7] / (day + ".html")
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(render_close_report(raw, analysis, "../../../"), encoding="utf-8")
+        target.write_text(render_close_report(raw, analysis, "../../../../"), encoding="utf-8")
         ready.append(day)
     folder = root / "reports/close"
     folder.mkdir(parents=True, exist_ok=True)
@@ -342,7 +342,7 @@ def main():
     else:
         result = check_release(day)
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        if not result["published"]: raise SystemExit(1)
+        if not result.get("published", False): raise SystemExit(1)
 
 if __name__ == "__main__":
     main()
