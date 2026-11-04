@@ -136,3 +136,7 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 - reports/close/index.html、reports/close/archive.html 和 reports/close/YYYY/MM/YYYY-MM-DD.html：仅展示有收盘快照、GPT盘后分析的记录。
 
 盘后板块/个股接口为东方财富非官方公开行情源，可能延迟、变化或限流；板块无法严格匹配时标记 unavailable，不能凭想象填涨跌幅。
+
+## 无冻结盘后观察口径（v1.1）
+
+data/close 中 forecast_status 约定为 frozen、morning_analysis_unfrozen、watchlist_only；后两种只作观察，direction_hit=null。缺冻结时仍可由晨报 data/analysis 匹配当日主题（必须提供可信且早于09:30的分析时间），或退化为配置的固定行业池。morning_analysis_sha256 仅证明盘后使用的晨报文件内容，不代表盘前冻结证据。observed_close_instruments 记录同日报价成功的观察条目数量。基准指数不存在时超额收益为 null、如实标注；仍可做其他同日价格及新闻总结。
