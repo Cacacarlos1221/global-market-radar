@@ -40,7 +40,9 @@
       ],
       "board_names": [
         "AI服务器",
-        "服务器"
+        "服务器",
+        "液冷服务器",
+        "数据中心"
       ],
       "board_type": "concept",
       "stocks": [
