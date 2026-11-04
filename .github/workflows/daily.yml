@@ -4,6 +4,7 @@ on:
     - cron: '5 0 * * *'  # 08:05 Beijing: start facts ahead of GPT total controller
     - cron: '15 0 * * *' # 08:15 Beijing: original safety trigger
     - cron: '35 0 * * *' # 08:35 Beijing: bounded fallback, idempotent
+    - cron: '5 1 * * *'  # 09:05 Beijing: last pre-open freeze/release guard
   workflow_dispatch:
   push:
     paths:
