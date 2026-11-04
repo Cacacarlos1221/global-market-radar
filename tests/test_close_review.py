@@ -108,6 +108,58 @@ class TestCloseReview(unittest.TestCase):
         self.assertEqual(result["predicted_groups"][0]["components"][0]["stocks"], [])
         self.assertTrue(any("without preselected stocks" in msg for msg in result["warnings"]))
 
+    def test_no_freeze_still_collects_morning_sector_but_never_scores(self):
+        boards = [
+            {"name": "半导体", "kind": "industry", "code": "BK1", "change_pct_indicative": 2},
+            {"name": "AI服务器", "kind": "concept", "code": "BK2", "change_pct_indicative": 3},
+            {"name": "存储芯片", "kind": "concept", "code": "BK3", "change_pct_indicative": 4}
+        ]
+        with patch("scripts.close_review.list_sectors", side_effect=lambda kind, warnings: [
+            x for x in boards if x["kind"] == kind]), \
+             patch("scripts.close_review.safe_bar", side_effect=fake_close), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
+             patch("scripts.close_review.time.sleep"):
+            status = collect_close(DAY, self.root, datetime(2026, 11, 5, 15, 35, tzinfo=BJ))
+        self.assertEqual(status, "collected")
+        data = json.loads(data_path(self.root, "close", DAY).read_text(encoding="utf-8"))
+        self.assertIsNone(data["forecast_sha256"])
+        self.assertEqual(data["forecast_status"], "morning_analysis_unfrozen")
+        self.assertEqual(len(data["predicted_groups"]), 1)
+        self.assertEqual(len(data["predicted_groups"][0]["components"]), 3)
+        self.assertEqual(data["predicted_groups"][0]["aggregated_change_pct"], 2.0)
+        self.assertIsNone(data["predicted_groups"][0]["direction_hit"])
+        self.assertEqual(data["predicted_groups"][0]["evaluation"], "unfrozen_observation")
+
+    def test_without_morning_analysis_uses_preconfigured_observation_pool(self):
+        data_path(self.root, "analysis", DAY).unlink()
+        with patch("scripts.close_review.list_sectors", return_value=[]), \
+             patch("scripts.close_review.safe_bar", side_effect=fake_close), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
+             patch("scripts.close_review.time.sleep"):
+            self.assertEqual(collect_close(DAY, self.root,
+                             datetime(2026, 11, 5, 15, 35, tzinfo=BJ)), "collected")
+        result = json.loads(data_path(self.root, "close", DAY).read_text(encoding="utf-8"))
+        self.assertEqual(result["forecast_status"], "watchlist_only")
+        self.assertEqual(len(result["predicted_groups"]), 3)
+        self.assertTrue(all(g["direction_hit"] is None for g in result["predicted_groups"]))
+
+    def test_no_benchmark_still_keeps_same_day_sector_and_stock(self):
+        with patch("scripts.close_review.list_sectors",
+                   side_effect=lambda kind, warnings: [{"name": "半导体", "kind": "industry",
+                   "code": "BK1", "change_pct_indicative": 2}] if kind == "industry" else []), \
+             patch("scripts.close_review.safe_bar", side_effect=lambda secid, day, warnings, label:
+                   {"status": "unavailable", "change_pct": None, "market_date": None}
+                   if secid == "1.000300" else fake_close(secid, day, warnings, label)), \
+             patch("scripts.close_review.yahoo_benchmark_fallback",
+                   return_value={"status": "unavailable", "change_pct": None, "market_date": None}), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
+             patch("scripts.close_review.time.sleep"):
+            self.assertEqual(collect_close(DAY, self.root,
+                             datetime(2026, 11, 5, 15, 35, tzinfo=BJ)), "collected")
+        result = json.loads(data_path(self.root, "close", DAY).read_text(encoding="utf-8"))
+        self.assertIsNone(result["predicted_groups"][0]["excess_vs_csi300_pct"])
+        self.assertGreater(result["observed_close_instruments"], 0)
+
     def test_unverifiable_news_rejected_and_html_escaped(self):
         with self.assertRaises(ValueError):
             validate_close_analysis({"summary": "s", "new_events": [
