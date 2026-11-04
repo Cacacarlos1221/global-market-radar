@@ -61,6 +61,42 @@ class ReportSectionsTests(unittest.TestCase):
         self.assertEqual((asset["key"], asset["symbol"], asset["unit"], asset["category"]),
                          ("USD_CNY", "CNY=X", "CNY/USD", "fx"))
         self.assertEqual(cfg["assets"][-1]["key"], "AUD_USD")
+    def test_bias_tags_all_five_and_unknown(self):
+        from scripts.render import bias_tag
+        cases = {
+            "positive": ("bias-positive", "偏利好"),
+            "negative": ("bias-negative", "偏利空"),
+            "mixed": ("bias-mixed", "多空交织"),
+            "watch": ("bias-watch", "重点观察"),
+            "neutral": ("bias-neutral", "中性"),
+        }
+        for key, (css, zh) in cases.items():
+            with self.subTest(key=key):
+                html = bias_tag(key)
+                self.assertIn(css, html)
+                self.assertIn(zh, html)
+                self.assertIn(f"({key})", html)
+        self.assertIn("未分类", bias_tag("unlikely_value"))
+        self.assertNotIn("bias-neutral", bias_tag("unlikely_value"))
+        self.assertNotIn("<script>", bias_tag("<script>"))
+
+    def test_overall_and_sectors_have_colored_bias(self):
+        self.analysis["a_share_bias"] = "neutral"
+        self.analysis["a_share_sectors"] = [
+            {"sector": "利好行业", "bias": "positive", "reason": "test"},
+            {"sector": "利空行业", "bias": "negative", "reason": "test"},
+            {"sector": "多空行业", "bias": "mixed", "reason": "test"},
+            {"sector": "观察行业", "bias": "watch", "reason": "test"},
+            {"sector": "中性行业", "bias": "neutral", "reason": "test"}
+        ]
+        html = render_report(self.raw, self.analysis)
+        self.assertIn('class="bias-summary"', html)
+        self.assertIn('class="sector-list"', html)
+        self.assertEqual(html.count('class="bias-tag bias-neutral"'), 2)
+        for css in ("positive", "negative", "mixed", "watch"):
+            self.assertIn(f'class="bias-tag bias-{css}"', html)
+        self.assertNotIn("多空交织：具体定义", html)
+
     def test_new_sections_and_collapsed_raw_news(self):
         validate_analysis(self.analysis)
         html = render_report(self.raw, self.analysis)

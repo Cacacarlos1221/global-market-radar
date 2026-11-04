@@ -63,7 +63,7 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 }
 ```
 
-以上示意文本不是实际投资研判。建议 bias 取 positive/negative/mixed/watch，uncertainty 取 high/medium/low，evidence_urls 应是当日真实且可访问的来源，不要杜撰链接。对分析的变更通过 Git commit 保留审计轨迹。
+以上示意文本不是实际投资研判。建议 bias 取 positive/negative/mixed/watch/neutral，uncertainty 取 high/medium/low，evidence_urls 应是当日真实且可访问的来源，不要杜撰链接。对分析的变更通过 Git commit 保留审计轨迹。
 
 ## 时间对齐与后验验证
 
@@ -120,3 +120,7 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 - `USD_CNY`：美元兑人民币，Yahoo Finance `CNY=X`，`category=fx`，`unit=CNY/USD`，报价含义 **1 USD = N CNY**。
 - 此项列为首页第 1 张行情卡片；`AUD_USD` 移到第 6 张卡片，详细行情表按采集指标顺序展示。
 - 新增监测指标从下一次正式成功采集开始记入当日 `quotes[]` 与历史 `quotes.csv`，不追溯改写此前不可变的原始快照。早期 HTML 展示缺失提示，不能当作 0 汇率。
+
+## Bias 五类倾向标签（2026-11）
+
+正式取值为 `positive`（偏利好）、`negative`（偏利空）、`mixed`（多空交织）、`watch`（重点观察、信息不足）、`neutral`（中性、已评估影响有限）。`watch` 不是 `mixed`，也不是 `neutral`。网页由 `scripts/render.py` 按五类固定映射渲染颜色块，未知值显示“未分类”。统一定义、色彩和其他术语见 [README：报告术语与标签定义](../README.md#报告术语与标签定义统一规范)。历史分析无需补写字段；不改动原始判断。

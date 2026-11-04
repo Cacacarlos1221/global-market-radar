@@ -26,6 +26,16 @@ table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;p
 .source-list{list-style:none;padding-left:0;margin:0}.source-list li{padding:11px 0;border-bottom:1px solid var(--line)}.source-list li:last-child{border:0}
 .cite{font-size:12px;font-weight:700}.hint{color:var(--muted);font-size:12px}.quality{margin-top:24px;padding:10px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 details{margin-top:14px}summary{cursor:pointer;font-weight:600;color:var(--blue)}.outdated{background:#fff9ed}.warn{color:#92651a;font-weight:650}.report-stage{margin-top:10px;padding:10px 12px;background:#eef3ff;border-radius:8px;font-size:13px}.small{font-size:12px;color:var(--muted)}.notice{border-left:3px solid #e9a23b;padding:10px 16px;background:#fff8e8;border-radius:4px}
+.bias-tag{display:inline-flex;align-items:center;gap:6px;border-radius:7px;padding:3px 10px;font-size:12px;font-weight:750;line-height:1.5;white-space:nowrap;border:1px solid transparent;vertical-align:baseline}
+.bias-tag small{font-size:11px;font-weight:600;opacity:.83}
+.bias-positive{background:#dcfce7;color:#166534;border-color:#86efac}
+.bias-negative{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.bias-mixed{background:#ede9fe;color:#5b21b6;border-color:#c4b5fd}
+.bias-watch{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+.bias-neutral{background:#e2e8f0;color:#334155;border-color:#cbd5e1}
+.bias-unknown{background:#f1f5f9;color:#64748b;border-color:#cbd5e1}
+.bias-summary{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:2px 0 16px}
+.sector-list{padding-left:21px}.sector-list li{margin:8px 0}.sector-list .bias-tag{margin:0 3px}
 footer{margin-top:40px;color:var(--muted);font-size:12px}ul{padding-left:20px}
 @media(max-width:600px){header{align-items:flex-start;flex-direction:column}main{padding:14px 14px 50px}th,td{padding:8px}}
 """
@@ -55,6 +65,23 @@ def metric(quote):
     return (f'<article class="metric"><div class="label">{safe(quote["label"])}</div>'
             f'<div class="value">{quote["value"]:,.4f}</div><div class="{cls}">{delta}</div>'
             f'<div class="small">{safe(quote["market_date"])} · {safe(quote["value_kind"])}{provenance}</div></article>')
+
+BIAS_LABELS = {
+    "positive": ("偏利好", "积极因素相对占优"),
+    "negative": ("偏利空", "消极因素相对占优"),
+    "mixed": ("多空交织", "积极与消极因素并存"),
+    "watch": ("重点观察", "证据不足或关键条件尚未触发"),
+    "neutral": ("中性", "现有证据显示影响相对有限"),
+}
+
+def bias_tag(value):
+    """Compact, accessible colored bias badge; unknown values are not silently neutral."""
+    key = value.strip().lower() if isinstance(value, str) else ""
+    if key not in BIAS_LABELS:
+        return '<span class="bias-tag bias-unknown" title="未识别的倾向标签">未分类</span>'
+    label, meaning = BIAS_LABELS[key]
+    return (f'<span class="bias-tag bias-{key}" title="{safe(meaning)}">'
+            f'{safe(label)} <small>({key})</small></span>')
 
 def valid_url(value):
     """Only explicit HTTPS URLs can become clickable links."""
@@ -248,11 +275,12 @@ def render_report(data, analysis=None, home="index.html"):
     references_html = render_sources(analysis, data, sources)
     if analysis:
         summary = '<div class="card"><p>' + safe(analysis.get("market_summary", "暂无综述")) + '</p></div>'
-        sectors = "".join('<li><strong>' + safe(s.get("sector")) + '</strong> (' +
-                          safe(s.get("bias")) + ')：' + safe(s.get("reason")) + '</li>'
+        sectors = "".join('<li><strong>' + safe(s.get("sector")) + '</strong> ' +
+                          bias_tag(s.get("bias")) + '：' + safe(s.get("reason")) + '</li>'
                           for s in analysis.get("a_share_sectors", []) if isinstance(s, dict))
-        outlook = ('<div class="card"><p><strong>总体倾向：</strong>' + safe(analysis.get("a_share_bias")) +
-                   '</p><p>' + safe(analysis.get("a_share_outlook")) + '</p><ul>' + sectors +
+        outlook = ('<div class="card"><div class="bias-summary"><strong>总体倾向：</strong>' +
+                   bias_tag(analysis.get("a_share_bias")) + '</div><p>' +
+                   safe(analysis.get("a_share_outlook")) + '</p><ul class="sector-list">' + sectors +
                    '</ul><p><strong>风险：</strong>' + safe("；".join(analysis.get("risks", []))) +
                    '</p><div class="small">分析时间：' + safe(analysis.get("generated_at_utc")) +
                    ' · 不确定性：' + safe(analysis.get("uncertainty")) + '</div></div>')
