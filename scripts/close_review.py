@@ -59,7 +59,8 @@ def freeze_forecast(day, root=ROOT, now=None):
         "a_share_sectors": analysis["a_share_sectors"],
         "a_share_outlook": analysis.get("a_share_outlook"),
         "watchlist": watch,
-        "selection_rule": "每条盘前组合研判仅计一个评估样本，子板块及预选股不独立增加预测次数"
+        "selection_rule": "每条盘前组合研判仅计一个评估样本，子板块及预选股不独立增加预测次数",
+        "unconfigured_sector_policy": "仅允许依原始晨报板块全名，在行业板块和概念板块中进行完全同名的确定性匹配，绝不追涨挑选近义词"
     }
     dump_json(out, forecast)
     return "frozen"
@@ -246,7 +247,19 @@ def collect_close(day, root=ROOT, now=None):
     observed_keys = set()
     for entry in selected:
         components = []
-        for track in entry["tracks"]:
+        tracks = entry["tracks"]
+        if not tracks:
+            # An unconfigured new topic may use an exact-name board; this is deterministic,
+            # never a post-close search for the best-performing "similar" board.
+            label = entry["sector"].strip()
+            kind = next((k for k in ("industry", "concept") if (k, label) in board_by_kind_name), None)
+            if kind:
+                tracks = [{"key": "exact:" + label, "name": label,
+                           "board_names": [label], "board_type": kind, "stocks": []}]
+                warnings.append("new morning sector exact-name matched without preselected stocks: " + label)
+            else:
+                warnings.append("unmapped morning sector; cannot score: " + label)
+        for track in tracks:
             matches = [board_by_kind_name[(track["board_type"], alias)]
                        for alias in track["board_names"]
                        if (track["board_type"], alias) in board_by_kind_name]
