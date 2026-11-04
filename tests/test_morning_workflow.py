@@ -16,7 +16,10 @@ class MorningWorkflowContractTests(unittest.TestCase):
         s = (ROOT / ".github/workflows/daily.yml").read_text(encoding="utf-8")
         self.assertIn("python -m scripts.close_review --freeze-only", s)
         self.assertIn("python -m scripts.pipeline --collect-only", s)
+        self.assertIn("python -m scripts.backfill_missing --date", s)
         self.assertIn("python -m scripts.pipeline --render-only", s)
+        self.assertLess(s.index("python -m scripts.backfill_missing --date"),
+                        s.index("python -m scripts.pipeline --render-only"))
         self.assertIn("python -m scripts.release_check --date", s)
         self.assertIn("python -m scripts.morning_audit --date", s)
         self.assertLess(s.index("python -m scripts.close_review --freeze-only"),
