@@ -60,33 +60,46 @@ def stock_table(stocks, legend):
             '<div class="table-wrap"><table><thead><tr><th>股票</th><th>日涨跌</th><th>收盘价</th><th>交易日</th>'
             '</tr></thead><tbody>' + "".join(rows) + '</tbody></table></div>')
 
-def predicted_card(group):
+def predicted_card(group, benchmark=None):
     direction = group.get("direction_hit")
     status = ('仅作收盘观察（无预测冻结）' if group.get("evaluation") == "unfrozen_observation"
               else '方向一致' if direction is True else '方向偏离' if direction is False
               else '不计分（缺指数/代理或非方向判断）')
     delta = group.get("aggregated_change_pct")
+    benchmark = benchmark or {}
+    benchmark_pct = benchmark.get("change_pct") if benchmark.get("status") == "ok" else None
+    benchmark_date = benchmark.get("market_date")
     parts = []
     for item in group.get("components", []):
         quote = item.get("quote", {})
         change = quote.get("change_pct") if quote.get("status") == "ok" else None
-        proxy = ' · 代理主题（不计分）' if item.get("is_proxy") else ''
+        proxy = ' · 代理主题（仅用于观察，不参与命中率）' if item.get("is_proxy") else ''
+        excess = (round(change - benchmark_pct, 4)
+                  if isinstance(change, (int, float)) and isinstance(benchmark_pct, (int, float))
+                  and quote.get("market_date") == benchmark_date else None)
+        excess_note = ('<span class="' + colour(excess) + '"><strong>' + pct(excess, " 个百分点") +
+                       '</strong></span>' if excess is not None else '—（缺少同日可比指数）')
         parts.append('<article class="news-card"><strong>' + safe(item.get("name")) +
                      '</strong> · 实际板块：' + safe(item.get("board_name")) + proxy +
                      '<div class="' + colour(change) + '"><strong>' + pct(change) + '</strong> '
                      '<span class="small">指数/板块 ' + safe(item.get("board_code")) +
                      ' · ' + safe(quote.get("market_date")) + '</span></div>' +
+                     '<div class="small">相对沪深300：' + excess_note +
+                     ' · 大盘当日涨跌 ' + pct(benchmark_pct) + '</div>' +
                      stock_table(item.get("stocks", []), "盘前预选的代表股") + '</article>')
     if not parts:
         parts = ['<div class="notice">盘前判断没有匹配的独立指数或股票池，保留原始观点但不纳入准确率。</div>']
+    composite = ('<div class="grid"><div class="metric"><div class="label">组合板块等权涨跌</div>'
+                 '<div class="value ' + colour(delta) + '">' + pct(delta) + '</div></div>'
+                 '<div class="metric"><div class="label">对沪深300超额收益</div><div class="value ' +
+                 colour(group.get("excess_vs_csi300_pct")) + '">' + pct(group.get("excess_vs_csi300_pct")) +
+                 '</div></div></div>' if delta is not None else
+                 '<p class="small">此组合不具备完整、同名的可比板块指数（或包含代理主题）；'
+                 '不展示虚构的综合涨跌，下面按各子板块分别与沪深300比较。</p>')
     return ('<details open><summary>' + safe(group.get("sector")) + ' ' +
             bias_tag(group.get("bias")) + ' · ' + status + '</summary>' +
-            '<div class="card"><div class="grid"><div class="metric"><div class="label">组合板块等权涨跌</div>'
-            '<div class="value ' + colour(delta) + '">' + pct(delta) + '</div></div>'
-            '<div class="metric"><div class="label">对沪深300超额收益</div><div class="value ' +
-            colour(group.get("excess_vs_csi300_pct")) + '">' + pct(group.get("excess_vs_csi300_pct")) +
-            '</div></div></div><p><strong>原始预测理由：</strong>' + safe(group.get("reason")) +
-            '</p><p class="small">组合内每项板块必须拥有名称直接对应、同一交易日的有效收盘K线，才可计算等权方向。</p>' +
+            '<div class="card">' + composite + '<p><strong>原始预测理由：</strong>' + safe(group.get("reason")) +
+            '</p><p class="small">单个子板块可以独立观察超额涨跌；组合正式方向评分仍按冻结预测和有效指数规则计算。</p>' +
             "".join(parts) + '</div></details>')
 
 def hot_card(board):
@@ -100,7 +113,7 @@ def hot_card(board):
 
 def narrative(analysis):
     sources = {x["id"]: x for x in analysis.get("news_sources", [])}
-    blocks = ['<div class="digest-overview"><strong>盘后综合判断</strong><p>' +
+    blocks = ['<div class="digest-overview"><strong>GMR · 盘后综合判断</strong><p>' +
               safe(analysis["summary"]) + '</p></div>']
     for item in analysis.get("key_findings", []):
         blocks.append('<article class="news-card"><h3>' + safe(item.get("title")) + '</h3><p>' +
@@ -169,7 +182,7 @@ def render_close_report(raw, analysis, prefix="../../"):
                  '并继续提供盘后新闻研究。仅不计算严格预测命中率。</div>')
     if not evaluable:
         head += '<p class="small">严格预测命中率不适用；并不妨碍阅读今日市场观察。</p>'
-    forecast_cards = "".join(predicted_card(x) for x in groups) if groups else (
+    forecast_cards = "".join(predicted_card(x, quote) for x in groups) if groups else (
         '<div class="notice">没有可回溯的盘前板块记录。</div>')
     hot_cards = "".join(hot_card(x) for x in raw.get("hot_sectors", [])) or (
         '<div class="notice">今日热门板块暂无可靠收盘数据。</div>')
@@ -192,7 +205,7 @@ def render_close_report(raw, analysis, prefix="../../"):
                '未预测的热门板块另列，新闻同现不等于因果。</p></details></div>')
     body = (head + '<h2>01 / 晨间关注主题与收盘观察</h2>' + forecast_cards +
             '<h2>02 / 盘后发现的热门板块</h2><p class="small">仅展示新发现，不加入盘前预测命中率。</p>' +
-            hot_cards + '<h2>03 / GPT 盘后复盘与新闻归因</h2>' + narrative(analysis) +
+            hot_cards + '<h2>03 / GMR 盘后复盘与新闻归因</h2>' + narrative(analysis) +
             '<h2>04 / 新闻检索线索与数据审计</h2>' + source_clues + quality +
             '<p class="small">分析生成：' + beijing_time(analysis.get("generated_at_utc")) + '</p>')
     return shell("A股盘后复盘 · " + day, body, prefix + "index.html")
@@ -206,6 +219,6 @@ def render_close_archive(days):
 def render_close_home(raw, analysis):
     if not raw:
         return shell("A股盘后复盘", '<div class="card"><h2>盘后页面已就绪</h2>'
-                     '<p>首次取得可核验的当日收盘行情及 GPT 盘后分析后自动展示；未冻结预测也可正常生成收盘观察和新闻总结。</p>'
+                     '<p>首次取得可核验的当日收盘行情及 GMR 盘后分析后自动展示；未冻结预测也可正常生成收盘观察和新闻总结。</p>'
                      '<p><a href="archive.html">查看盘后历史归档</a></p></div>', "../../index.html")
     return render_close_report(raw, analysis, "../../")
