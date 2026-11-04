@@ -1,7 +1,9 @@
 """HTML renderer: escapes every externally supplied field and avoids fabricated analysis."""
+from datetime import datetime
 from html import escape
 import re
 from urllib.parse import urlsplit
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import json
 
@@ -23,7 +25,7 @@ table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;p
 .digest-overview p{margin:5px 0}.news-card h3{margin:0 0 10px}.impact{background:#f6f8fc;padding:11px 14px;border-radius:9px;margin:10px 0}
 .source-list{list-style:none;padding-left:0;margin:0}.source-list li{padding:11px 0;border-bottom:1px solid var(--line)}.source-list li:last-child{border:0}
 .cite{font-size:12px;font-weight:700}.hint{color:var(--muted);font-size:12px}.quality{margin-top:24px;padding:10px 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
-details{margin-top:14px}summary{cursor:pointer;font-weight:600;color:var(--blue)}.small{font-size:12px;color:var(--muted)}.notice{border-left:3px solid #e9a23b;padding:10px 16px;background:#fff8e8;border-radius:4px}
+details{margin-top:14px}summary{cursor:pointer;font-weight:600;color:var(--blue)}.outdated{background:#fff9ed}.warn{color:#92651a;font-weight:650}.report-stage{margin-top:10px;padding:10px 12px;background:#eef3ff;border-radius:8px;font-size:13px}.small{font-size:12px;color:var(--muted)}.notice{border-left:3px solid #e9a23b;padding:10px 16px;background:#fff8e8;border-radius:4px}
 footer{margin-top:40px;color:var(--muted);font-size:12px}ul{padding-left:20px}
 @media(max-width:600px){header{align-items:flex-start;flex-direction:column}main{padding:14px 14px 50px}th,td{padding:8px}}
 """
@@ -166,6 +168,47 @@ def render_sources(analysis, data, sources):
             '引用报道与市场影响分析不等于已确认因果关系。</p>' +
             citations + details + '</div>')
 
+def beijing_time(value):
+    if not value:
+        return "未提供"
+    try:
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            return safe(value)
+        return dt.astimezone(ZoneInfo("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M")
+    except (ValueError, TypeError):
+        return safe(value)
+
+def quote_quality_flags(data):
+    """Compare dates within the same exchange, not to the report date."""
+    cn_dates = [q.get("market_date") for q in data.get("quotes", [])
+                if q.get("category") == "cn_index" and q.get("status") == "ok"
+                and q.get("market_date")]
+    latest_cn = max(cn_dates) if cn_dates else None
+    flags = {}
+    for q in data.get("quotes", []):
+        if q.get("status") != "ok":
+            continue
+        messages = []
+        if q.get("category") == "cn_index" and latest_cn and q.get("market_date") and q["market_date"] < latest_cn:
+            messages.append("同市场指数已更新至 " + latest_cn + "，此报价疑似滞后")
+        if q.get("change_pct") is None:
+            messages.append("缺少可比较涨跌幅的参考日线")
+        if messages:
+            flags[q.get("key")] = "；".join(messages)
+    return flags
+
+def market_date_context(data):
+    quotes = {q.get("key"): q for q in data.get("quotes", [])}
+    fx = quotes.get("USD_CNY", {}).get("market_date")
+    us = quotes.get("NASDAQ", {}).get("market_date")
+    cn = max((q.get("market_date") for q in data.get("quotes", [])
+              if q.get("category") == "cn_index" and q.get("status") == "ok"
+              and q.get("market_date")), default=None)
+    return ("行情所属日期：汇率 " + safe(fx) + "（盘中/最新可得） · 美股 " +
+            safe(us) + "（上一交易日收盘） · A股 " + safe(cn) +
+            "（最近可得收盘）。报告日期不等于每项资产的交易日期。")
+
 def render_report(data, analysis=None, home="index.html"):
     date = data["report_date"]
     by_key = {x["key"]: x for x in data.get("quotes", [])}
@@ -175,19 +218,31 @@ def render_report(data, analysis=None, home="index.html"):
     important = [by_key.get(k, {"label": label, "status": "unavailable",
                                "error": "历史快照尚未采集该指标"}) for k, label in core]
     cards = '<div class="grid">' + "".join(metric(x) for x in important) + "</div>"
+    quality_flags = quote_quality_flags(data)
     rows = []
+    kind_labels = {"daily_close": "最近交易日收盘", "daily_bar": "日线",
+                   "daily_bar_live": "尚未确认收盘",
+                   "intraday_observation": "盘中观测",
+                   "official_daily_close": "交易所官方收盘"}
     for q in data.get("quotes", []):
         val = f'{q["value"]:,.4f}' if q["value"] is not None else "—"
         change = f'{q["change_pct"]:+.2f}%' if q.get("change_pct") is not None else "—"
-        label = safe(q["label"]) + ("（补采）" if q.get("supplement_collected_at_utc") else "")
-        rows.append(f'<tr><td>{label}</td><td>{val}</td><td>{change}</td>'
-                    f'<td>{safe(q["market_date"])}</td><td>{safe(q["observed_at_utc"])}</td>'
-                    f'<td>{safe(q["status"])}</td></tr>')
+        revised = bool(q.get("correction_note"))
+        label = safe(q["label"]) + ("（来源修正）" if revised else "（补采）" if q.get("supplement_collected_at_utc") else "")
+        issue = quality_flags.get(q.get("key"))
+        status = ('<span class="warn">' + safe(issue) + '</span>') if issue else ('已核实修正' if revised else safe(q["status"]))
+        source_note = (' <a target="_blank" rel="noopener noreferrer" href="' +
+                       safe(q["source_url"]) + '">官方来源</a>') if revised and valid_url(q.get("source_url")) else ""
+        row_class = ' class="outdated"' if issue else ""
+        rows.append(f'<tr{row_class}><td>{label}{source_note}</td><td>{val}</td><td>{change}</td>'
+                    f'<td>{safe(q["market_date"])}</td><td>{safe(kind_labels.get(q.get("value_kind"), q.get("value_kind")))}</td>'
+                    f'<td>{safe(q["observed_at_utc"])}</td><td>{status}</td></tr>')
     table = ('<div class="card table-wrap"><table><thead><tr><th>资产</th><th>最新值</th><th>相对前日</th>'
-             '<th>行情日期</th><th>UTC K线时间</th><th>状态</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
+             '<th>行情日期</th><th>类型</th><th>UTC K线时间</th><th>状态</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>'
              '<p class="small">汇率日内观测值与前一交易日参考价比较；美股指数使用最近一个已结束交易日收盘价。'
              '日线 UTC 时间可能是 K 线开盘时间，而非收盘时间；daily_bar_live 表示未确认收盘。'
-             '假期可能显示上一交易日行情。价格源：Yahoo Finance 非官方行情接口。</p></div>')
+             '不同市场采用自己的交易日期，不能统一改成报告日期；若同一市场出现日期不一致，页面会警示。'
+             '价格主要来自 Yahoo Finance 非官方行情接口，带来源修正的记录标有官方链接。</p></div>')
     sources = source_catalog(analysis)
     digest_html = render_news_digest(analysis, sources)
     references_html = render_sources(analysis, data, sources)
@@ -206,13 +261,23 @@ def render_report(data, analysis=None, home="index.html"):
         outlook = '<div class="card"><p>等待核实后的盘前研判；无可靠证据时不作方向判断。</p></div>'
     supplement_note = (" · 补采： " + ", ".join(safe(x["key"]) + "@" + safe(x["collected_at_utc"])
                                           for x in data.get("supplements", []))) if data.get("supplements") else ""
+    issues = quality_flags
     quality = ('<div class="quality">数据状态：' +
                str(sum(q["status"] == "ok" for q in data.get("quotes", []))) + '/' +
                str(len(data.get("quotes", []))) + ' 项行情可用 · ' +
                str(len(data.get("news", []))) + ' 条原始 RSS 线索 · 采集时刻（UTC）：' +
-               safe(data.get("collected_at_utc")) + supplement_note + ' · 缺失与异常详情见当日 JSON。</div>')
+               safe(data.get("collected_at_utc")) + supplement_note +
+               (' · ' + str(len(issues)) + ' 项指标需注意' if issues else '') +
+               (' · ' + str(len(data.get("quote_revisions", []))) + ' 项来源修正' if data.get("quote_revisions") else '') +
+               ' · 原始快照与修正来源均可在仓库查阅。</div>')
+    stage = ('完整分析版 · 分析生成（北京时间）：' + beijing_time(analysis.get("generated_at_utc"))
+             if analysis and analysis.get("news_digest", {}).get("items")
+             else '基础行情版 · 深度新闻与A股研判尚待分析更新')
+    heading = ('<div class="report-stage"><strong>' + safe(stage) + '</strong></div>'
+               '<p class="small">' + market_date_context(data) + '</p>')
     body = ('<p class="sub">报告日期（北京时间）：' + safe(date) + ' · 数据采集时间（UTC）：' +
-            safe(data.get("collected_at_utc")) + '</p><h2>01 / 关键市场数据</h2>' + cards +
+            safe(data.get("collected_at_utc")) + '</p>' + heading +
+            '<h2>01 / 关键市场数据</h2>' + cards +
             '<h2>02 / 全量监测指标</h2>' + table + '<h2>03 / 昨夜市场走势与原因</h2>' + summary +
             '<h2>04 / 国际重要新闻综述</h2>' + digest_html +
             '<h2>05 / A股开盘前研判</h2>' + outlook +

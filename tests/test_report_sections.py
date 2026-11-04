@@ -26,6 +26,27 @@ class ReportSectionsTests(unittest.TestCase):
                              "verification": "reported"}]
         }
 
+    def test_market_dates_and_analysis_version_are_explicit(self):
+        self.raw["quotes"] = [
+            {"key": "NASDAQ", "category": "us_index", "status": "ok",
+             "label": "纳斯达克综合指数", "value": 25000,
+             "change_pct": 1.0, "market_date": "2026-11-02",
+             "observed_at_utc": "2026-11-02T14:30:00Z", "value_kind": "daily_close"},
+            {"key": "SSE", "category": "cn_index", "status": "ok",
+             "label": "上证综指", "value": 3600,
+             "change_pct": 0.1, "market_date": "2026-11-01",
+             "observed_at_utc": "2026-11-01T01:30:00Z", "value_kind": "daily_close"},
+            {"key": "CSI300", "category": "cn_index", "status": "ok",
+             "label": "沪深300", "value": 4000, "change_pct": None,
+             "market_date": "2026-11-02",
+             "observed_at_utc": "2026-11-02T07:00:00Z", "value_kind": "daily_close"}
+        ]
+        self.analysis["generated_at_utc"] = "2026-11-03T00:40:41Z"
+        html = render_report(self.raw, self.analysis)
+        self.assertIn("完整分析版", html)
+        self.assertIn("同市场指数已更新至 2026-11-02", html)
+        self.assertIn("缺少可比较涨跌幅的参考日线", html)
+        self.assertIn("行情所属日期：汇率", html)
     def test_six_core_metric_cards_and_order(self):
         html = render_report(self.raw, self.analysis)
         keys = ("美元/人民币", "澳元/人民币", "纳斯达克综合指数",

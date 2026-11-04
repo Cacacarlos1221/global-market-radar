@@ -30,6 +30,47 @@ class SupplementTests(unittest.TestCase):
             self.assertEqual(merged["quotes"][0]["value"], 7.2)
             self.assertEqual(len(original["quotes"]), 1)
             self.assertIn("补采UTC", render_report(merged))
+    def test_authoritative_source_correction_is_versioned(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            folder = root / "data/supplements/2026/11/2026-11-04"
+            folder.mkdir(parents=True)
+            official = "https://www.sse.com.cn/market/sseindex/overview/"
+            record = {"report_date": "2026-11-04", "kind": "source_correction",
+                      "source_url": official, "collected_at_utc": "2026-11-04T01:00:00Z",
+                      "quote": {"key": "SSE", "label": "上证综指",
+                                "category": "cn_index", "status": "ok",
+                                "market_date": "2026-11-03", "value": 3608.10,
+                                "change_pct": -0.8227, "value_kind": "official_daily_close",
+                                "observed_at_utc": None, "source_url": official}}
+            (folder / "SSE.json").write_text(json.dumps(record), encoding="utf-8")
+            original = {"report_date": "2026-11-04", "collected_at_utc": "2026-11-04T00:36:00Z",
+                        "quotes": [{"key": "SSE", "category": "cn_index", "status": "ok",
+                                    "market_date": "2026-11-02", "value": 3638.03}], "news": []}
+            merged = with_supplements(original, root)
+            self.assertEqual(merged["quotes"][0]["value"], 3608.10)
+            self.assertEqual(original["quotes"][0]["value"], 3638.03)
+            self.assertEqual(merged["quote_revisions"][0]["old_market_date"], "2026-11-02")
+            html = render_report(merged)
+            self.assertIn("来源修正", html)
+            self.assertIn("官方来源", html)
+    def test_reject_correction_without_newer_date(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            folder = root / "data/supplements/2026/11/2026-11-04"
+            folder.mkdir(parents=True)
+            (folder / "SSE.json").write_text(json.dumps({
+                "report_date": "2026-11-04", "kind": "source_correction",
+                "source_url": "https://www.sse.com.cn/market/sseindex/overview/",
+                "collected_at_utc": "2026-11-04T01:00:00Z",
+                "quote": {"key": "SSE", "status": "ok", "market_date": "2026-11-02",
+                          "value": 999, "source_url": "https://www.sse.com.cn/market/sseindex/overview/"}
+            }), encoding="utf-8")
+            original = {"report_date": "2026-11-04",
+                        "quotes": [{"key": "SSE", "status": "ok",
+                                     "market_date": "2026-11-02", "value": 3638.03}]}
+            with self.assertRaises(ValueError):
+                with_supplements(original, root)
     def test_existing_valid_quote_never_overwritten(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

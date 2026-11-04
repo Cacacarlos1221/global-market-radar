@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "kind": "source_correction",
+  "report_date": "2026-11-04",
+  "asset_key": "SSE",
+  "collected_at_utc": "2026-11-04T00:49:17.416Z",
+  "base_snapshot_collected_at_utc": "2026-11-04T00:36:50.946321+00:00",
+  "source_url": "https://www.sse.com.cn/market/sseindex/overview/",
+  "reason": "Yahoo Finance SSE quote was stale at 2026-11-02 while SSE official latest 2026-11-03 close is 3608.10; original daily snapshot preserved",
+  "quote": {
+    "key": "SSE",
+    "symbol": "000001.SS",
+    "label": "上证综指",
+    "category": "cn_index",
+    "unit": "points",
+    "status": "ok",
+    "value_kind": "official_daily_close",
+    "market_date": "2026-11-03",
+    "observed_at_utc": null,
+    "value": 3608.1,
+    "reference_close": 3638.03,
+    "reference_date": "2026-11-02",
+    "change_pct": -0.8227,
+    "source": "Shanghai Stock Exchange official index overview",
+    "source_url": "https://www.sse.com.cn/market/sseindex/overview/",
+    "error": null
+  }
+}

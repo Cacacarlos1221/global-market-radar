@@ -56,3 +56,9 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 - 保存独立补采文件到 data/supplements/YYYY/MM/YYYY-MM-DD/USD_CNY.json，包含上游行情观测时间、实际采集时间、对照原始快照时间和来源。
 - 渲染 HTML 时叠加补采记录，卡片标明补采 UTC 时间，并写入历史 quotes.csv。原始 data/daily JSON 保持不变。
 - 补采时间晚于早晨正式快照，不能冒充 08:15 的盘前价格；无法抓到可靠报价时应失败，而不是估算或造数。
+
+## 同一市场行情源滞后与官方修正
+
+对同一个市场的主要指数，比较 market_date；发现单项滞后时先查官方交易所或可靠原始来源。无法核验时标注“疑似滞后”，不补造数据。
+
+已核验的旧快照数据可以使用 data/supplements/<year>/<month>/<report-date>/<asset-key>.json 的 source_correction 修正，需满足原记录已存在、修正后的 market_date 更晚且不超过 report_date、HTTPS source_url 与 quote.source_url 一致。修正只叠加在生成 HTML 的视图上，原始快照不动；必须记录真实采集时刻与来源。不要在补录时虚构原始观察时间戳。历史行情CSV当前仍保存原始采集结果，研究时须合并独立修正记录。

@@ -67,6 +67,7 @@ def with_supplements(snapshot, root=ROOT):
     data = dict(snapshot)
     data["quotes"] = [dict(x) for x in snapshot.get("quotes", [])]
     data["supplements"] = []
+    data["quote_revisions"] = []
     date = data["report_date"]
     folder = root / "data/supplements" / date[:4] / date[5:7] / date
     if not folder.exists():
@@ -82,8 +83,24 @@ def with_supplements(snapshot, root=ROOT):
         value["supplement_collected_at_utc"] = record["collected_at_utc"]
         existing = {x["key"]: i for i, x in enumerate(data["quotes"])}
         if value["key"] in existing:
-            if data["quotes"][existing[value["key"]]].get("status") == "ok":
-                raise ValueError(f"Supplement would overwrite a valid quote: {path}")
+            original = data["quotes"][existing[value["key"]]]
+            if original.get("status") == "ok":
+                if record.get("kind") != "source_correction":
+                    raise ValueError(f"Supplement would overwrite a valid quote: {path}")
+                source_url = record.get("source_url", "")
+                old_date = original.get("market_date") or ""
+                new_date = value.get("market_date") or ""
+                if not (source_url.startswith("https://") and old_date < new_date <= date):
+                    raise ValueError(f"Source correction must cite evidence and a newer market date: {path}")
+                if value.get("source_url") != source_url:
+                    raise ValueError(f"Source URL mismatch in correction: {path}")
+                value["correction_note"] = "数据源滞后，采用可核实来源修正"
+                data["quote_revisions"].append({
+                    "key": value["key"], "old_market_date": old_date,
+                    "old_value": original["value"], "new_market_date": new_date,
+                    "new_value": value["value"], "source_url": source_url,
+                    "corrected_at_utc": record["collected_at_utc"]
+                })
             data["quotes"][existing[value["key"]]] = value
         elif value["key"] == "USD_CNY":
             data["quotes"].insert(0, value)
