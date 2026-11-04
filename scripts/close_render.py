@@ -62,7 +62,9 @@ def stock_table(stocks, legend):
 
 def predicted_card(group):
     direction = group.get("direction_hit")
-    status = ('方向一致' if direction is True else '方向偏离' if direction is False else '不计分（缺指数/代理或非方向判断）')
+    status = ('仅作收盘观察（无预测冻结）' if group.get("evaluation") == "unfrozen_observation"
+              else '方向一致' if direction is True else '方向偏离' if direction is False
+              else '不计分（缺指数/代理或非方向判断）')
     delta = group.get("aggregated_change_pct")
     parts = []
     for item in group.get("components", []):
@@ -143,23 +145,30 @@ def render_close_report(raw, analysis, prefix="../../"):
     hits = sum(x.get("direction_hit") is True for x in evaluable)
     quote = raw.get("benchmark", {}).get("quote", {})
     benchmark_move = quote.get("change_pct")
+    frozen = bool(raw.get("forecast_sha256"))
+    scope = raw.get("forecast_status", "frozen" if frozen else "watchlist_only")
+    scope_text = {"frozen": "已冻结的盘前预测",
+                  "morning_analysis_unfrozen": "晨间报告主题（无冻结，仅作观察）",
+                  "watchlist_only": "固定跟踪池（未提供可核验晨报）"}.get(scope, "收盘观察")
     head = ('<p class="sub">交易日：' + safe(day) + ' · 收盘数据抓取：' +
             beijing_time(raw.get("captured_at_utc")) + ' · 盘前冻结时间：' +
             beijing_time(raw.get("forecast_frozen_at_utc")) + '</p>' +
-            '<div class="report-stage">事实：交易日收盘K线 · 预测：开盘前冻结 · 新闻：盘后另行核验。'
+            '<div class="report-stage">事实：同日可核验收盘K线 · 研究来源：' + safe(scope_text) +
+            ' · 新闻：盘后另行核验。没有冻结不妨碍正常生成收盘观察与新闻总结。'
             '本页不是投资建议，板块数据源为非官方接口。</div>' +
-            '<div class="grid"><article class="metric"><div class="label">盘前研判板块组</div>' +
+            '<div class="grid"><article class="metric"><div class="label">今日跟踪主题组</div>' +
             '<div class="value">' + str(len(groups)) + '</div></article>' +
             '<article class="metric"><div class="label">方向可验证</div><div class="value">' +
             str(len(evaluable)) + '</div></article>' +
             '<article class="metric"><div class="label">方向一致</div><div class="value">' +
-            str(hits) + '/' + str(len(evaluable)) + '</div></article>' +
+            (str(hits) + '/' + str(len(evaluable)) if evaluable else '不适用') + '</div></article>' +
             '<article class="metric"><div class="label">沪深300 日涨跌</div><div class="value ' +
             colour(benchmark_move) + '">' + pct(benchmark_move) + '</div></article></div>')
-    if raw.get("forecast_sha256") is None:
-        head += '<div class="notice">没有开盘前的冻结记录；本期不得计算晨间预测准确率。</div>'
+    if not frozen:
+        head += ('<div class="notice">今天没有开盘前冻结记录，但板块、代表股及热门主题仍按真实收盘价格展示，'
+                 '并继续提供盘后新闻研究。仅不计算严格预测命中率。</div>')
     if not evaluable:
-        head += '<p class="small">没有满足方向性标签和同日完整指数映射的可评分项；0/0 不代表准确率为零。</p>'
+        head += '<p class="small">严格预测命中率不适用；并不妨碍阅读今日市场观察。</p>'
     forecast_cards = "".join(predicted_card(x) for x in groups) if groups else (
         '<div class="notice">没有可回溯的盘前板块记录。</div>')
     hot_cards = "".join(hot_card(x) for x in raw.get("hot_sectors", [])) or (
@@ -181,7 +190,7 @@ def render_close_report(raw, analysis, prefix="../../"):
                "".join('<li>' + safe(x) + '</li>' for x in warnings) +
                '</ul><p>数据缺失、非同日K线和代理板块不参与方向统计；'
                '未预测的热门板块另列，新闻同现不等于因果。</p></details></div>')
-    body = (head + '<h2>01 / 今日预测验证</h2>' + forecast_cards +
+    body = (head + '<h2>01 / 晨间关注主题与收盘观察</h2>' + forecast_cards +
             '<h2>02 / 盘后发现的热门板块</h2><p class="small">仅展示新发现，不加入盘前预测命中率。</p>' +
             hot_cards + '<h2>03 / GPT 盘后复盘与新闻归因</h2>' + narrative(analysis) +
             '<h2>04 / 新闻检索线索与数据审计</h2>' + source_clues + quality +
@@ -197,6 +206,6 @@ def render_close_archive(days):
 def render_close_home(raw, analysis):
     if not raw:
         return shell("A股盘后复盘", '<div class="card"><h2>盘后页面已就绪</h2>'
-                     '<p>首次符合要求的交易日收盘、晨间冻结预测与 GPT 核验报告完成后，将自动展示复盘。</p>'
+                     '<p>首次取得可核验的当日收盘行情及 GPT 盘后分析后自动展示；未冻结预测也可正常生成收盘观察和新闻总结。</p>'
                      '<p><a href="archive.html">查看盘后历史归档</a></p></div>', "../../index.html")
     return render_close_report(raw, analysis, "../../")
