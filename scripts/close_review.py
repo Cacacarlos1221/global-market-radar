@@ -186,6 +186,30 @@ def find_tracks(forecast):
                     "tracks": matched})
     return out
 
+def observation_plan(day, root, frozen):
+    """A missing freeze disables statistical scoring, never collection or the daily review."""
+    if frozen:
+        return frozen, "frozen", None
+    watchlist = load_json(root / "config/sector_watchlist.json")
+    morning_path = data_path(root, "analysis", day)
+    if morning_path.exists():
+        morning = load_json(morning_path)
+        if morning.get("report_date") == day and isinstance(morning.get("a_share_sectors"), list):
+            generated = morning.get("generated_at_utc")
+            try:
+                early = as_utc(generated).astimezone(BJ)
+                if early.date().isoformat() == day and early.time() < clock(9, 30):
+                    return {"a_share_sectors": morning["a_share_sectors"], "watchlist": watchlist}, \
+                        "morning_analysis_unfrozen", hashlib.sha256(morning_path.read_bytes()).hexdigest()
+            except (ValueError, TypeError, AttributeError):
+                pass
+    return {
+        "a_share_sectors": [
+            {"sector": track["name"], "bias": "watch", "reason": "默认固定观察池；非当天预测"}
+            for track in watchlist["tracks"]
+        ], "watchlist": watchlist
+    }, "watchlist_only", None
+
 def collect_news_clues(day, warnings):
     """仅作为未核验线索；盘中发生的事实必须由后续 GPT 独立查证。"""
     queries = ["A股 半导体 AI算力 存储 产业政策 when:1d", "中国 股票 经济 政策 盘中 when:1d"]
@@ -219,15 +243,12 @@ def collect_close(day, root=ROOT, now=None):
     benchmark = safe_bar("1.000300", day, warnings, "沪深300")
     if benchmark["status"] != "ok":
         benchmark = yahoo_benchmark_fallback(day, warnings)
-    if benchmark["status"] != "ok":
-        return "benchmark_unavailable_or_market_closed: " + "; ".join(warnings)
     forecast_path = data_path(root, "forecasts", day)
     frozen = load_json(forecast_path) if forecast_path.exists() else None
-    if frozen is None:
-        warnings.append("没有开盘前冻结记录，禁止计算方向命中率")
+    plan, forecast_status, morning_analysis_sha256 = observation_plan(day, root, frozen)
     boards = list_sectors("industry", warnings) + list_sectors("concept", warnings)
     board_by_kind_name = {(b["kind"], b["name"]): b for b in boards}
-    selected = find_tracks(frozen) if frozen else []
+    selected = find_tracks(plan)
     observed_board_cache, stock_cache = {}, {}
     def board_price(board):
         key = board["code"]
@@ -278,11 +299,15 @@ def collect_close(day, root=ROOT, now=None):
             x["quote"].get("status") == "ok" and not x["is_proxy"] for x in components)
         move = round(sum(x["quote"]["change_pct"] for x in components) / len(components), 4) if eligible else None
         bias = str(entry["bias"]).lower()
-        hit = (move > 0 if bias == "positive" else move < 0) if eligible and move != 0 and bias in ("positive", "negative") else None
+        hit = ((move > 0 if bias == "positive" else move < 0)
+               if frozen and eligible and move != 0 and bias in ("positive", "negative") else None)
         groups.append({"sector": entry["sector"], "bias": bias, "reason": entry["reason"],
                        "components": components, "aggregated_change_pct": move,
-                       "excess_vs_csi300_pct": round(move - benchmark["change_pct"], 4) if move is not None else None,
-                       "direction_hit": hit, "evaluation": "directional" if hit is not None else "not_scorable"})
+                       "excess_vs_csi300_pct": round(move - benchmark["change_pct"], 4)
+                       if move is not None and benchmark.get("status") == "ok" else None,
+                       "direction_hit": hit,
+                       "evaluation": "directional" if hit is not None
+                       else "unfrozen_observation" if not frozen else "not_scorable"})
     hot = []
     for board in sorted(boards, key=lambda b: b["change_pct_indicative"] if isinstance(b["change_pct_indicative"], (int, float)) else -999, reverse=True):
         if board["code"] in observed_keys or len(hot) >= 5:
@@ -305,15 +330,27 @@ def collect_close(day, root=ROOT, now=None):
         hot.append({"name": board["name"], "code": board["code"],
                     "board_type": board["kind"], "quote": quote,
                     "stocks": hot_stocks, "classification": "post_close_discovery"})
-    result = {"schema_version": "1.0", "report_date": day, "market_date": day,
+    observed_count = sum(
+        quote.get("status") == "ok" and quote.get("market_date") == day
+        for quote in [benchmark]
+        + [c["quote"] for group in groups for c in group["components"]]
+        + [s for group in groups for comp in group["components"] for s in comp["stocks"]]
+        + [b["quote"] for b in hot]
+    )
+    if not observed_count:
+        return "no_same_day_close_data: " + "; ".join(warnings)
+    result = {"schema_version": "1.1", "report_date": day, "market_date": day,
               "captured_at_utc": now.isoformat(), "source": SOURCE,
               "benchmark": {"name": "沪深300", "quote": benchmark},
               "forecast_sha256": hashlib.sha256(forecast_path.read_bytes()).hexdigest() if frozen else None,
               "forecast_frozen_at_utc": frozen.get("frozen_at_utc") if frozen else None,
               "forecast_generated_at_utc": frozen.get("forecast_generated_at_utc") if frozen else None,
+              "forecast_status": forecast_status,
+              "morning_analysis_sha256": morning_analysis_sha256,
+              "observed_close_instruments": observed_count,
               "predicted_groups": groups, "hot_sectors": hot,
               "news_clues": collect_news_clues(day, warnings), "warnings": warnings,
-              "methodology": "仅对盘前冻结的方向性组合研判计分；组合内全部板块有同日原名指数才以等权涨幅比较绝对方向；代理指数、重点观察、混合和中性不计入命中率。"
+              "methodology": "没有冻结也应生成盘后收盘观察报告；只对已冻结的方向性组合研判计分，未冻结晨报只能定性对照。子板块需同日原名指数；代理、watch/mixed/neutral 不计分。"
              }
     dump_json(out, result)
     return "collected"
@@ -358,13 +395,20 @@ def check_release(day, root=ROOT):
     try: validate_close_analysis(analysis)
     except ValueError as exc: errors.append(str(exc))
     if data.get("benchmark", {}).get("quote", {}).get("market_date") != day:
-        errors.append("benchmark not same-day")
-    if not data.get("forecast_sha256"):
-        warnings.append("no preopen forecast freeze: do not calculate accuracy")
-    if not any(x.get("aggregated_change_pct") is not None for x in data.get("predicted_groups", [])):
-        warnings.append("no fully comparable forecast sector index")
+        warnings.append("benchmark unavailable for excess-return calculation")
+    if not data.get("forecast_sha256") and any(x.get("direction_hit") is not None for x in data.get("predicted_groups", [])):
+        errors.append("unfrozen observations must never be scored")
+    if not any(
+        q.get("status") == "ok" and q.get("market_date") == day
+        for q in ([data.get("benchmark", {}).get("quote", {})]
+                  + [s.get("quote", {}) for g in data.get("predicted_groups", [])
+                     for s in g.get("components", [])]
+                  + [stock for g in data.get("predicted_groups", []) for s in g.get("components", [])
+                     for stock in s.get("stocks", [])]
+                  + [h.get("quote", {}) for h in data.get("hot_sectors", [])])):
+        errors.append("no verified same-day market observations")
     if not any(s.get("quote", {}).get("status") == "ok" for g in data.get("predicted_groups", []) for s in g.get("components", [])):
-        warnings.append("no confirmed close quote for forecast sectors")
+        warnings.append("no confirmed close quote for morning-observed sector indices")
     if day not in html.read_text(encoding="utf-8") or day not in index.read_text(encoding="utf-8"):
         errors.append("HTML missing expected date")
     from html import escape
