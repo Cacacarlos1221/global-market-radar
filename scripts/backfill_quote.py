@@ -42,11 +42,27 @@ def backfill_quote(asset_key="USD_CNY", report_date=None, *, render=True):
     append_unique(ROOT / "data/history/quotes.csv", QUOTE_COLS,
                   [{"report_date": date, "asset_key": asset_key, **quote}],
                   ["report_date", "asset_key"])
-    # Never publish a partial morning HTML before the verified AI analysis exists.
+    # Re-render only when a real, source-validated full morning analysis is present.
     if render:
         analysis_path = ROOT / "data/analysis" / date[:4] / date[5:7] / (date + ".json")
         if analysis_path.is_file():
-            render_all()
+            from .render import validate_analysis
+            analysis = json.loads(analysis_path.read_text(encoding="utf-8"))
+            digest = analysis.get("news_digest") or {}
+            full = (analysis.get("report_date") == date and
+                    bool(analysis.get("market_summary")) and
+                    bool(analysis.get("a_share_outlook")) and
+                    isinstance(digest, dict) and bool(digest.get("overview")) and
+                    bool(digest.get("items")))
+            if full:
+                try:
+                    validate_analysis(analysis)
+                except ValueError:
+                    full = False
+            if full:
+                render_all()
+            else:
+                print("PENDING: analysis is not complete and source-valid; do not publish")
         else:
             print("PENDING: verified analysis is missing; do not render an incomplete HTML")
     print(f"BACKFILLED {asset_key}={quote['value']} {quote['unit']} "
