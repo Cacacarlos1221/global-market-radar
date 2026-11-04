@@ -1,8 +1,9 @@
 name: Daily market data and HTML
 on:
   schedule:
-    - cron: '15 0 * * *'
-    - cron: '35 0 * * *' # Backup trigger, idempotent if today's snapshot already exists
+    - cron: '5 0 * * *'  # 08:05 Beijing: start facts ahead of GPT total controller
+    - cron: '15 0 * * *' # 08:15 Beijing: original safety trigger
+    - cron: '35 0 * * *' # 08:35 Beijing: bounded fallback, idempotent
   workflow_dispatch:
   push:
     paths:
@@ -40,14 +41,17 @@ jobs:
           if [ -f "$REPORT_PATH" ] && [ -f "$ANALYSIS_PATH" ]; then
             python -m scripts.pipeline --render-only
             python -m scripts.release_check --date "$REPORT_DATE"
+            python -m scripts.morning_audit --date "$REPORT_DATE" --require-published
           elif [ -f "$REPORT_PATH" ]; then
             echo "Facts collected; waiting for verified AI analysis before publishing today's HTML"
           else
             echo "Collecting fact snapshot only: no incomplete public HTML is generated"
             python -m scripts.pipeline --collect-only
             if [ -f "$ANALYSIS_PATH" ]; then
+              python -m scripts.close_review --freeze-only --date "$REPORT_DATE"
               python -m scripts.pipeline --render-only
               python -m scripts.release_check --date "$REPORT_DATE"
+              python -m scripts.morning_audit --date "$REPORT_DATE" --require-published
             fi
           fi
       - name: Validate regression tests
