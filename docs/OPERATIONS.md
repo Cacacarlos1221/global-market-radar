@@ -91,3 +91,23 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 ## 盘前冻结缺失的恢复规则
 
 盘后任务**不得因为缺少 data/forecasts 而停止或只报 FAILED**。正常采集观察数据及 GPT 分析；有晨报时对照晨报板块（不算命中率），晨报缺失时采用固定观察池。若基准沪深300暂时缺数据，也继续抓取其他同日板块与股票并诚实标注不可计算超额收益。只有没有任何可靠同日行情时才不能形成有效收盘行情快照。报告质量/发布失败与预测准确率不可评分是两个不同状态。
+
+
+## 2026-11-05 起：晨报自动化四道保障与完整验收
+
+**每日北京时间执行顺序（不需要用户消息触发）**：
+
+- 08:05：GitHub Actions daily.yml 主动拉取快照，提前避开08:15总控/采集同一时刻起跑的问题。
+- 08:15：ChatGPT「全球市场雷达仓库维护」总控检查今日快照、主动补触发、核验新闻并向 data/analysis 写入完整分析；GitHub Actions 在 08:15 再次进行幂等兜底。
+- 08:30：ChatGPT「每日全球市场与A股晨报」单独推送聊天消息；它不是仓库发布的成功凭据，尽可能与 data/daily 同口径。
+- 08:35：GitHub Actions 第三次幂等补采或重渲染。分析文件推送会自动触发同一 workflow。
+- 08:50：ChatGPT「GMR 晨报补救验收」独立检查日快照、分析、HTML、Pages 与 forecast，不依赖08:15主控会保持运行；缺失时有限次数主动补采、研究分析及重新触发 GitHub 渲染。
+- 09:05：GitHub Actions 最后一次盘前冻结/HTML 兜底。分析若在09:30前就绪，则 daily.yml 先运行 freeze-only，再验证完整HTML；超过开盘不能伪装为盘前冻结。
+
+**新增可重复的机器验收**：
+    
+    python -m scripts.morning_audit --date YYYY-MM-DD --require-published
+
+该命令不访问外网，只对 GitHub checkout 的 data/daily、data/analysis、reports/index 和 data/forecasts 做本地交叉检查；报告层状态和冻结评分能力单独输出，news_digest、六章、六核心指标通过 release_check 联合验证。注意它不验证 Pages HTTPS/部署版本，必须由ChatGPT总控继续核对。出现 PENDING/FAILED/DEGRADED 或数据新鲜度问题需如实记录并尽最大能力恢复，不能把脚本退出码0就当作线上完整发布。
+
+**边界**：四次 GitHub cron 并不代表 GitHub 承诺按分钟触发，ChatGPT任务也不会在任务返回之后无限轮询。08:50 是独立补救任务，能够避免仅靠用户提醒，但外部行情中断、GitHub限流或插件授权异常依然可能导致失败，届时必须反馈错误和当前状态。
