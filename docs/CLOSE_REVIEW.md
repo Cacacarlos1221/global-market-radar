@@ -1,0 +1,88 @@
+# GMR 盘后验证 · 研究和运维契约
+
+## 目的与范围
+
+北京时间每个 A 股交易日 15:30 启动收盘行情采集，随后由 ChatGPT 总控分析晨间盘前预测与真实走势的偏差、筛选盘中发生且可核验的重要事件，生成独立静态盘后报告。
+
+此模块属于 main 分支的业务主线，与实验 Agent 框架分支无关。前瞻推断、已发生行情和后验解释必须保持独立记录，不允许用未来信息重写原预测。
+
+## 项目入口
+
+- 晨报首页：index.html
+- 当日盘后最新页：reports/close/index.html
+- 盘后历史：reports/close/archive.html
+- 盘后每日页：reports/close/YYYY/MM/YYYY-MM-DD.html
+
+## 定时编排
+
+1. 08:15/08:35 GitHub Actions 负责盘前行情和报告；当 verified analysis 已存在且北京时间尚未到 09:30，执行 scripts.close_review --freeze-only，冻结报告日、原始预测、分析生成时间、分析文件 SHA256，以及当时的板块/代表股跟踪池。
+2. 15:30（UTC 07:30）GitHub Actions close.yml 定时采集；15:50 同样执行幂等兜底。只有本地北京时间达到 15:30、日期等于报告日期且沪深300同日收盘 K 线有效时才保存原始事实。
+3. ChatGPT 15:30 总控检查采集与冻结状态，必要时向 data/close_requests/YYYY/MM/YYYY-MM-DD.json 提交请求触发工作流；读取收盘原始 JSON 及真实新闻来源，对原始预测逐条核验，生成 data/close_analysis/YYYY/MM/YYYY-MM-DD.json。
+4. 分析文件 push 自动 render-only、单日发布检查及 GitHub Pages 部署；报告 COMPLETE 必须核实网页真实可访问且为对应交易日。来源缺失、冻结缺失或可评分标的缺失只能标记 DEGRADED；采集/部署失败标记 FAILED。
+
+GitHub scheduled 工作流存在排队和延误，不承诺准点完成或无限等待；ChatGPT 定时任务也不能充当常驻 worker。
+
+## 行情接口与严格质量门禁
+
+- 公开东方财富板块分类及同日 K 线接口为非官方接口，可能限流、返回空或改变字段。采集前先确认沪深300指数同一交易日，随后每个板块和每只股票都必须自身拥有匹配日期的日 K。
+- 日涨跌幅按同一标的当日收盘价和上一可用交易日收盘价计算；指数、股票都带 market_date、reference_close、value_kind、source。没有同日数据返回 unavailable，不抄昨日收盘。
+- 中国市场周末直接跳过；工作日没有行情时不能立即断言“休市”，因为也可能是 API 异常。节假日由总控结合交易所公告或权威日历判定。
+- config/sector_watchlist.json 的固定跟踪池：名称匹配透明、股票仅为固定观测标的，绝非推荐。名称不完全一致的代理主题可以展示，但标记 is_proxy=true，不参与方向命中率。
+- 热门板块使用当日现有板块榜与可核查同日K线，top5 板块及每板块不超过2只领涨活跃股；热股于盘后才选择，因此不参与预测命中率。
+- 盘后新闻 RSS 只是检索线索，09:30–15:00 发表范围外的新闻不能称为盘中新增驱动。GPT 必须二次查阅可靠消息的正文或官方材料，保留引用、时间、核验状态。没有证据时不猜测因果。
+
+## 预测评分原则
+
+晨报 a_share_sectors[] 的每个条目对应 **一个预测样本**。若原始条目为“半导体、AI服务器与存储”，可以展示三个子板块，但仅在三者全部拥有当天有效且语义直接对应的指数时，采用三者等权涨跌幅，得到一条组合判断的实际表现。
+
+- positive：等权日涨跌 > 0 时方向一致，< 0 时方向偏离；negative 相反。
+- 不可评分：等权日涨跌恰好为0、任意子板块指数缺失、板块语义为代理、方向标签是 watch/mixed/neutral、缺晨间有效冻结。
+- 超额收益：该条组合的等权日涨跌 - 沪深300日涨跌（百分点），与方向一致率分别展示。方向一致不等于跑赢市场。
+- 代表股按已冻结标的池展示全部收盘结果，不事后只挑领涨股。单股业绩、概念差异不得直接替代板块判断。
+- 不将未预测的市场强势板块倒算为预测成功。长期准确率需保存完整分母、来源及交易日，统计显著性和基线需独立研究。
+
+## 盘后分析 JSON 合同
+
+路径：data/close_analysis/YYYY/MM/YYYY-MM-DD.json
+
+示意格式（不是事实分析）：
+
+    {
+      "report_date": "YYYY-MM-DD",
+      "generated_at_utc": "ISO-8601 UTC",
+      "summary": "今天大盘和盘前研判偏离的总结，需要有真实收盘数据作支持",
+      "key_findings": [
+        {"title": "核心发现", "finding": "描述收盘事实与条件推演的关系", "source_ids": []}
+      ],
+      "attributions": [
+        {"sector": "半导体", "observation": "相对走势", "explanation": "可能的驱动与限制条件",
+         "causal_status": "hypothesis", "source_ids": []}
+      ],
+      "new_events": [
+        {"title": "经核验的盘中事件", "summary": "已确认事实",
+         "published_at_utc": "ISO-8601 UTC", "source_ids": ["S1"]}
+      ],
+      "news_sources": [
+        {"id": "S1", "title": "真实报道标题", "publisher": "机构",
+         "published_at_utc": "ISO-8601 UTC",
+         "url": "https://真实网页",
+         "verification": "reported"}
+      ],
+      "next_watch": ["后续需要验证的变量"]
+    }
+
+不要复制示例的假链接。key_findings、attributions 若无新闻来源，应仅陈述已存 JSON 支撑的收盘事实或明确写为不确定性假说。new_events 每条必须引用实际有效的 news_sources.id，不能引述未核验 RSS 标题作证据。
+
+## 复现与故障处理
+
+从仓库根目录：
+
+    python -m unittest discover -s tests -v
+    python -m scripts.close_review --freeze-only
+    python -m scripts.close_review --collect-only
+    python -m scripts.close_review --render-only
+    python -m scripts.close_review --check --date YYYY-MM-DD
+
+原始 data/forecasts 和 data/close 快照一经提交不可静默覆盖；补数必须新建带时点/来源的显式修订，不得将下午才采到的事实伪装为盘前快照。需要重新抓取过去日期时，不得滥用 --date：采集与冻结命令会检查本地当天及时间窗口。
+
+源站数据质量、成交状态与新闻真实性均存在不可控风险。本项目仅用于研究与信息整理，不构成投资建议。
