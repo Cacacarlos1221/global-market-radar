@@ -5,7 +5,7 @@ import json
 from datetime import datetime, time, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from .pipeline import ROOT
+from .pipeline import ROOT, with_supplements
 from .release_check import CORE, verify
 
 BJ = ZoneInfo("Asia/Shanghai")
@@ -37,7 +37,7 @@ def audit(day, root=ROOT, now=None):
         "errors": [], "warnings": [], "quotes": {}, "release": None
     }
     if snapshot.is_file():
-        data = read_json(snapshot)
+        data = with_supplements(read_json(snapshot), root)
         if data.get("report_date") != day:
             result["errors"].append("snapshot report_date mismatch")
         if not data.get("collected_at_utc"):
@@ -49,7 +49,8 @@ def audit(day, root=ROOT, now=None):
                 "status": q.get("status", "missing"),
                 "market_date": q.get("market_date"),
                 "source": q.get("source"),
-                "observed_at_utc": q.get("observed_at_utc")
+                "observed_at_utc": q.get("observed_at_utc"),
+                "supplement_collected_at_utc": q.get("supplement_collected_at_utc")
             }
             if q.get("status") != "ok":
                 result["warnings"].append(key + " unavailable")
