@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "note": "盘前固定跟踪池；索引名称采用供应商原名精确匹配。不可把相邻主题替换成被预测的板块。",
+  "tracks": [
+    {
+      "key": "semiconductor",
+      "name": "半导体",
+      "terms": [
+        "半导体"
+      ],
+      "board_names": [
+        "半导体"
+      ],
+      "board_type": "industry",
+      "stocks": [
+        [
+          "688981",
+          "1",
+          "中芯国际"
+        ],
+        [
+          "002371",
+          "0",
+          "北方华创"
+        ],
+        [
+          "603986",
+          "1",
+          "兆易创新"
+        ]
+      ]
+    },
+    {
+      "key": "server",
+      "name": "AI服务器",
+      "terms": [
+        "AI服务器",
+        "服务器",
+        "算力"
+      ],
+      "board_names": [
+        "AI服务器",
+        "服务器"
+      ],
+      "board_type": "concept",
+      "stocks": [
+        [
+          "000977",
+          "0",
+          "浪潮信息"
+        ],
+        [
+          "603019",
+          "1",
+          "中科曙光"
+        ],
+        [
+          "002837",
+          "0",
+          "英维克"
+        ]
+      ]
+    },
+    {
+      "key": "memory",
+      "name": "存储芯片",
+      "terms": [
+        "存储"
+      ],
+      "board_names": [
+        "存储芯片"
+      ],
+      "board_type": "concept",
+      "stocks": [
+        [
+          "603986",
+          "1",
+          "兆易创新"
+        ],
+        [
+          "300223",
+          "0",
+          "北京君正"
+        ],
+        [
+          "688008",
+          "1",
+          "澜起科技"
+        ]
+      ]
+    },
+    {
+      "key": "rare_earth",
+      "name": "稀土",
+      "terms": [
+        "稀土"
+      ],
+      "board_names": [
+        "稀土永磁",
+        "稀土"
+      ],
+      "board_type": "concept",
+      "stocks": [
+        [
+          "600111",
+          "1",
+          "北方稀土"
+        ],
+        [
+          "000831",
+          "0",
+          "中国稀土"
+        ]
+      ]
+    },
+    {
+      "key": "metals",
+      "name": "有色金属",
+      "terms": [
+        "有色金属",
+        "有色"
+      ],
+      "board_names": [
+        "有色金属"
+      ],
+      "board_type": "industry",
+      "stocks": [
+        [
+          "601899",
+          "1",
+          "紫金矿业"
+        ],
+        [
+          "603993",
+          "1",
+          "洛阳钼业"
+        ]
+      ]
+    },
+    {
+      "key": "export",
+      "name": "出口制造",
+      "terms": [
+        "出口制造"
+      ],
+      "board_names": [],
+      "board_type": "none",
+      "stocks": []
+    },
+    {
+      "key": "new_energy",
+      "name": "新能源",
+      "terms": [
+        "新能源"
+      ],
+      "board_names": [
+        "新能源"
+      ],
+      "board_type": "concept",
+      "stocks": [
+        [
+          "300750",
+          "0",
+          "宁德时代"
+        ],
+        [
+          "002594",
+          "0",
+          "比亚迪"
+        ]
+      ]
+    },
+    {
+      "key": "brokerage",
+      "name": "券商",
+      "terms": [
+        "券商",
+        "证券"
+      ],
+      "board_names": [
+        "证券"
+      ],
+      "board_type": "industry",
+      "stocks": [
+        [
+          "600030",
+          "1",
+          "中信证券"
+        ],
+        [
+          "300059",
+          "0",
+          "东方财富"
+        ]
+      ]
+    },
+    {
+      "key": "broad",
+      "name": "宽基指数",
+      "terms": [
+        "宽基指数"
+      ],
+      "board_names": [],
+      "board_type": "benchmark",
+      "stocks": []
+    }
+  ],
+  "hot_sector_limit": 5,
+  "hot_stock_limit": 2
+}
