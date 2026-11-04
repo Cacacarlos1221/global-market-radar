@@ -1,0 +1,7 @@
+{
+  "report_date": "2026-11-04",
+  "request_type": "collect_close",
+  "reason": "15:30 close controller: same-day close snapshot absent; request bounded idempotent collection",
+  "requested_at_utc": "2026-11-04T07:30:00Z",
+  "forecast_status": "missing_no_retroactive_freeze"
+}
