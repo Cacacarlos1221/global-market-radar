@@ -160,6 +160,35 @@ class TestCloseReview(unittest.TestCase):
         self.assertIsNone(result["predicted_groups"][0]["excess_vs_csi300_pct"])
         self.assertGreater(result["observed_close_instruments"], 0)
 
+    def test_individual_sector_excess_without_composite_index(self):
+        analysis = {"summary": "观察性研究", "news_sources": [], "key_findings": [],
+                    "attributions": [], "new_events": [], "next_watch": []}
+        raw = {"report_date": DAY, "captured_at_utc": "2026-11-05T07:40:00+00:00",
+               "forecast_sha256": None, "forecast_status": "morning_analysis_unfrozen",
+               "benchmark": {"quote": {"status": "ok", "change_pct": 2.3066,
+                                        "market_date": DAY}},
+               "predicted_groups": [{
+                   "sector": "半导体、AI服务器与存储", "bias": "positive",
+                   "reason": "晨报方向", "aggregated_change_pct": None,
+                   "excess_vs_csi300_pct": None, "direction_hit": None,
+                   "evaluation": "unfrozen_observation", "components": [
+                       {"name": "半导体", "board_name": "半导体", "board_code": "BK1",
+                        "is_proxy": False, "quote": {"status": "ok", "change_pct": 10.6424,
+                                                   "market_date": DAY}, "stocks": []},
+                       {"name": "AI服务器", "board_name": "液冷服务器", "board_code": "BK2",
+                        "is_proxy": True, "quote": {"status": "ok", "change_pct": 5.3407,
+                                                  "market_date": DAY}, "stocks": []}
+                   ]
+               }], "hot_sectors": [], "news_clues": [], "warnings": []}
+        page = render_close_report(raw, analysis)
+        self.assertIn("03 / GMR 盘后复盘与新闻归因", page)
+        self.assertIn("GMR · 盘后综合判断", page)
+        self.assertIn("不展示虚构的综合涨跌", page)
+        self.assertIn("+8.34 个百分点", page)
+        self.assertIn("+3.03 个百分点", page)
+        self.assertIn("代理主题（仅用于观察，不参与命中率）", page)
+        self.assertNotIn("03 / GPT", page)
+
     def test_unverifiable_news_rejected_and_html_escaped(self):
         with self.assertRaises(ValueError):
             validate_close_analysis({"summary": "s", "new_events": [
