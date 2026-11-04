@@ -81,7 +81,8 @@ class MissingQuoteRecoveryTests(unittest.TestCase):
             a.write_text(json.dumps({"report_date": DAY,
                                      "market_summary": "Still researching news"}), encoding="utf-8")
             quote = {"key": "USD_CNY", "status": "ok", "value": 6.8,
-                     "source": "unit_test", "observed_at_utc": "2026-11-04T00:20:00Z"}
+                     "unit": "CNY/USD", "source": "unit_test",
+                     "observed_at_utc": "2026-11-04T00:20:00Z"}
             with patch("scripts.backfill_quote.ROOT", root), \
                  patch("scripts.backfill_quote.collect_quotes", return_value=[quote]), \
                  patch("scripts.backfill_quote.render_all") as render_mock:
