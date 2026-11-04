@@ -66,5 +66,28 @@ class MissingQuoteRecoveryTests(unittest.TestCase):
             self.assertEqual(snapshot.read_bytes(), original)
             self.assertFalse((root / "index.html").exists())
 
+    def test_existing_but_incomplete_analysis_is_not_rendered(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            make_snapshot(root)
+            cfg = root / "config/instruments.json"
+            cfg.parent.mkdir(parents=True)
+            cfg.write_text(json.dumps({"assets": [
+                {"key": "USD_CNY", "symbol": "CNY=X", "label": "USD/CNY",
+                 "category": "fx", "unit": "CNY/USD"}
+            ]}), encoding="utf-8")
+            a = root / "data/analysis" / DAY[:4] / DAY[5:7] / (DAY + ".json")
+            a.parent.mkdir(parents=True)
+            a.write_text(json.dumps({"report_date": DAY,
+                                     "market_summary": "Still researching news"}), encoding="utf-8")
+            quote = {"key": "USD_CNY", "status": "ok", "value": 6.8,
+                     "source": "unit_test", "observed_at_utc": "2026-11-04T00:20:00Z"}
+            with patch("scripts.backfill_quote.ROOT", root), \
+                 patch("scripts.backfill_quote.collect_quotes", return_value=[quote]), \
+                 patch("scripts.backfill_quote.render_all") as render_mock:
+                self.assertTrue(backfill_quote("USD_CNY", DAY))
+                render_mock.assert_not_called()
+            self.assertFalse((root / "index.html").exists())
+
 if __name__ == "__main__":
     unittest.main()
