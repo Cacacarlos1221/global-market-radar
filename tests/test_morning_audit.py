@@ -56,6 +56,29 @@ class MorningAuditTests(unittest.TestCase):
             self.assertEqual(report["forecast_state"], "MISSING")
             self.assertFalse(report["forecast_eligible_for_scoring"])
 
+    def test_available_supplement_clears_missing_quote_warning(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            fixture(root)
+            snap = root / "data/daily/2026/11/2026-11-05.json"
+            data = json.loads(snap.read_text(encoding="utf-8"))
+            data["quotes"][0]["status"] = "unavailable"
+            data["quotes"][0]["value"] = None
+            snap.write_text(json.dumps(data), encoding="utf-8")
+            folder = root / "data/supplements/2026/11/2026-11-05"
+            folder.mkdir(parents=True)
+            fixed = dict(data["quotes"][0])
+            fixed.update({"status": "ok", "value": 6.7, "source": "validated supplement"})
+            (folder / "USD_CNY.json").write_text(json.dumps({
+                "report_date": DAY, "collected_at_utc": "2026-11-05T00:42:00+00:00",
+                "quote": fixed
+            }), encoding="utf-8")
+            report = audit(DAY, root, NOW)
+            self.assertTrue(report["report_published"], report["errors"])
+            self.assertEqual(report["quotes"]["USD_CNY"]["status"], "ok")
+            self.assertIsNotNone(report["quotes"]["USD_CNY"]["supplement_collected_at_utc"])
+            self.assertFalse(any("USD_CNY unavailable" in x for x in report["warnings"]))
+
     def test_freeze_content_hash_and_time_checked(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
