@@ -65,7 +65,7 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 
 ## 单次完成的 ChatGPT 总控任务（2026-11）
 
-- 每天北京时间08:15由已有 ChatGPT “全球市场雷达仓库维护”任务启动一次总控检查；GitHub 定时采集 08:15、08:35 保留兜底，避免单点故障。
+- 每天北京时间08:15由 ChatGPT “全球市场雷达仓库维护”执行主总控；GitHub 定时采集在08:05、08:15、08:35、09:05提供独立兜底，08:50另有 ChatGPT “GMR 晨报补救验收”进行二次修复。
 - 先读取当日 `data/daily/` 和最近 GitHub Actions：若当天无快照且无正在运行的采集任务，就创建 `data/requests/YYYY/MM/YYYY-MM-DD.json`，以 GitHub push 启动采集；若已在运行，优先检查日志。任务重试须有上限，避免无休止地重复 push。
 - GitHub 的采集阶段只写原始数据，不再发布缺少AI分析的当日 HTML。必须得到 `data/analysis/` 中符合数据字典的完整分析 JSON，push 才会进行 `--render-only`。
 - `python -m scripts.release_check --date YYYY-MM-DD` 用于校验本地发布产物包含01–06全章节、当日分析、核心行情与新闻引用；这个脚本不检测线上 GitHub Pages。
