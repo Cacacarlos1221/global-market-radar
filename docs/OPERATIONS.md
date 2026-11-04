@@ -87,3 +87,7 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 代码中的 --date 绝非历史行情回填开关；collect-only/freeze-only 同时验证当前北京时间和日期。单日真实数据写入 data/close，分析数据写入 data/close_analysis；推送后自动渲染 reports/close。若自动采集失败，可推送 data/close_requests/YYYY/MM/YYYY-MM-DD.json 请求当天再采集。源站异常、无当日沪深300收盘K线时不冒充已结算，也不擅自宣布休市；保留原始错误。
 
 盘后 GPT 总控需要检查晨报冻结、事实快照、新闻原始发布时间、来源引用、发布校验、GitHub Actions 及 Pages 实际上线状态；仅全部成功才报告 COMPLETE，否则明确 DEGRADED/FAILED。自动化无法无限期阻塞等待，运行时可作有限重试，最终必须反馈真实状态。
+
+## 盘前冻结缺失的恢复规则
+
+盘后任务**不得因为缺少 data/forecasts 而停止或只报 FAILED**。正常采集观察数据及 GPT 分析；有晨报时对照晨报板块（不算命中率），晨报缺失时采用固定观察池。若基准沪深300暂时缺数据，也继续抓取其他同日板块与股票并诚实标注不可计算超额收益。只有没有任何可靠同日行情时才不能形成有效收盘行情快照。报告质量/发布失败与预测准确率不可评分是两个不同状态。
