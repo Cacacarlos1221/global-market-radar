@@ -111,3 +111,16 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 该命令不访问外网，只对 GitHub checkout 的 data/daily、data/analysis、reports/index 和 data/forecasts 做本地交叉检查；报告层状态和冻结评分能力单独输出，news_digest、六章、六核心指标通过 release_check 联合验证。注意它不验证 Pages HTTPS/部署版本，必须由ChatGPT总控继续核对。出现 PENDING/FAILED/DEGRADED 或数据新鲜度问题需如实记录并尽最大能力恢复，不能把脚本退出码0就当作线上完整发布。
 
 **边界**：四次 GitHub cron 并不代表 GitHub 承诺按分钟触发，ChatGPT任务也不会在任务返回之后无限轮询。08:50 是独立补救任务，能够避免仅靠用户提醒，但外部行情中断、GitHub限流或插件授权异常依然可能导致失败，届时必须反馈错误和当前状态。
+
+
+## 核心指标的自动单项补采（2026-11-05）
+
+原始日快照是不可变记录，早上08:05采集失败的个别核心报价**不会被直接重新写入 data/daily**。daily.yml 的08:05、08:15、08:35及09:05幂等触发现在都会在存在原始快照后运行：
+
+    python -m scripts.backfill_missing --date YYYY-MM-DD
+
+该脚本仅检查 USD_CNY、AUD_CNY、NASDAQ、SP500、DOW、AUD_USD 六大核心资产中原始 status=unavailable 或缺失的记录；如对应 data/supplements/YYYY/MM/YYYY-MM-DD/<asset>.json 已存在则跳过。重试成功的价格写入独立补采文件，记录真实补采时间，原始快照与缺失错误保留；未成功则记入日志，**不能补零、虚构行情或悄悄覆盖原始JSON**。
+
+渲染层用 pipeline.with_supplements 叠加有效补采，scripts.morning_audit 也按同样视图验收，避免错误地把已补好的指标判为缺失。补采源可能滞后，仍需核实实际 market_date 与 observed_at_utc，不能将稍晚取得的报价冒充08:05原始采集价。
+
+`scripts.backfill_quote` 的手动补采模式已增加正式分析门禁：即使补到报价，**没有具备market_summary、a_share_outlook、非空news_digest.items及有效来源引用的完整分析JSON时，也不会单独渲染HTML**。自动批量补采强制使用 render=False，由daily.yml在完整分析准备好后统一渲染并执行release_check/morning_audit。短暂来源异常不会导致一次早采失败永久固化到页面，但任何上游持续异常仍须按DEGRADED/FAILED报告。
