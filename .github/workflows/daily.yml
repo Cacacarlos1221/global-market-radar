@@ -34,6 +34,9 @@ jobs:
           REPORT_DATE=$(TZ=Asia/Shanghai date +%Y-%m-%d)
           REPORT_PATH="data/daily/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
           ANALYSIS_PATH="data/analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
+          if [ -f "$ANALYSIS_PATH" ]; then
+            python -m scripts.close_review --freeze-only --date "$REPORT_DATE"
+          fi
           if [ -f "$REPORT_PATH" ] && [ -f "$ANALYSIS_PATH" ]; then
             python -m scripts.pipeline --render-only
             python -m scripts.release_check --date "$REPORT_DATE"
