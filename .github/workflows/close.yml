@@ -51,7 +51,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- data/close reports/close
+          git add -A -- reports/close
+          if [ -d data/close ]; then git add -A -- data/close; fi
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh A-share after-close review"
             git pull --rebase origin main
