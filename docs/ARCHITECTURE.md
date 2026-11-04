@@ -51,3 +51,12 @@ GitHub scheduled workflows 是 best effort。若行情接口限流，当日可�
 ## 访问与部署
 
 GitHub Pages 可展示 main 根目录的 index.html，直接访问 reports/archive.html 和每个日报页面。无需 Web 服务、数据库或云密钥。GitHub App 或模型自动写入 analysis JSON 后，push 触发只渲染已有快照，不抓取新价格。
+
+## A股盘后复盘流水线
+
+- 盘前09:30前：data/analysis + config/sector_watchlist.json → data/forecasts（append-only）。
+- 盘后15:30：close.yml / GPT 总控 → 同日沪深300日K门禁 → 东方财富板块列表及沪深个股同日收盘K线 → data/close（append-only）。
+- GPT 独立核验盘中新闻、解释行情偏差 → data/close_analysis（版本由Git维护） → scripts.close_review --render-only → reports/close/index.html + 每日HTML + archive。
+- scripts.close_review --check 验证收盘快照、分析与页面一致性，GPT 再检查 GitHub Pages 实际部署。
+
+原始晨报每个板块条目为一个判断样本，组合子板块等权观察但不可拆开增加预测次数。全部子板块均有同一交易日、语义严格匹配的指数才可进行组合评分；任何代理指数不混入命中率。盘后新发现热点不计入盘前指标。未核实 RSS 标题只能作为线索。
