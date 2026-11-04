@@ -89,6 +89,25 @@ class TestCloseReview(unittest.TestCase):
         self.assertEqual(collect_close(DAY, self.root,
                          datetime(2026, 11, 5, 15, 45, tzinfo=BJ)), "already_collected")
 
+    def test_unconfigured_exact_board_keeps_single_sample(self):
+        analysis_path = data_path(self.root, "analysis", DAY)
+        a = json.loads(analysis_path.read_text(encoding="utf-8"))
+        a["a_share_sectors"] = [{"sector": "消费电子", "bias": "positive", "reason": "新板块"}]
+        analysis_path.write_text(json.dumps(a, ensure_ascii=False), encoding="utf-8")
+        freeze_forecast(DAY, self.root, datetime(2026, 11, 5, 8, 50, tzinfo=BJ))
+        sectors = [{"name": "消费电子", "kind": "industry",
+                    "code": "BK10", "change_pct_indicative": 1}]
+        with patch("scripts.close_review.list_sectors", side_effect=lambda typ, warnings: [s for s in sectors if s["kind"] == typ]), \
+             patch("scripts.close_review.safe_bar", side_effect=fake_close), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
+             patch("scripts.close_review.time.sleep"):
+            self.assertEqual(collect_close(DAY, self.root, datetime(2026, 11, 5, 15, 35, tzinfo=BJ)), "collected")
+        result = json.loads(data_path(self.root, "close", DAY).read_text(encoding="utf-8"))
+        self.assertEqual(len(result["predicted_groups"]), 1)
+        self.assertTrue(result["predicted_groups"][0]["direction_hit"])
+        self.assertEqual(result["predicted_groups"][0]["components"][0]["stocks"], [])
+        self.assertTrue(any("without preselected stocks" in msg for msg in result["warnings"]))
+
     def test_unverifiable_news_rejected_and_html_escaped(self):
         with self.assertRaises(ValueError):
             validate_close_analysis({"summary": "s", "new_events": [
