@@ -124,3 +124,15 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 ## Bias 五类倾向标签（2026-11）
 
 正式取值为 `positive`（偏利好）、`negative`（偏利空）、`mixed`（多空交织）、`watch`（重点观察、信息不足）、`neutral`（中性、已评估影响有限）。`watch` 不是 `mixed`，也不是 `neutral`。网页由 `scripts/render.py` 按五类固定映射渲染颜色块，未知值显示“未分类”。统一定义、色彩和其他术语见 [README：报告术语与标签定义](../README.md#报告术语与标签定义统一规范)。历史分析无需补写字段；不改动原始判断。
+
+## 盘后复盘事实与验证口径
+
+- data/forecasts/YYYY/MM/YYYY-MM-DD.json：盘前预测冻结时间、原始 a_share_sectors、晨间分析 SHA256、同步冻结的 watchlist 配置；09:30后禁止补冻。
+- data/close/YYYY/MM/YYYY-MM-DD.json：report_date、captured_at_utc、market_date、source、benchmark.quote（沪深300）、predicted_groups、hot_sectors、news_clues、warnings。行情日与报告日不一致则不可评分。
+- predicted_groups[]：保留晨报原始一条判断。components[] 含实际板块名/代码/来源、同日 quote、预选 stocks、is_proxy 标志。aggregated_change_pct 为所有可评分成分板块日涨跌幅的等权均值；任一缺失或代理则 null。
+- excess_vs_csi300_pct = aggregated_change_pct - 沪深300收盘涨跌幅，单位百分点。direction_hit：Positive且聚合涨幅>0为true，Negative且聚合涨幅<0为true；方向相反false；零涨幅、无有效指数、代理板块和其他标签均为null，不计准确率分母。
+- hot_sectors[]：仅限盘后自动发现，独立展示，不参与命中率。
+- data/close_analysis/YYYY/MM/YYYY-MM-DD.json：report_date、generated_at_utc、summary、key_findings[]、attributions[]、new_events[]、next_watch[]、news_sources[]。news_sources 为带可用HTTPS来源链接的引用目录；new_events 必须引用至少一项来源，不能以收盘后发表的消息反推盘中行情原因。
+- reports/close/index.html、reports/close/archive.html 和 reports/close/YYYY/MM/YYYY-MM-DD.html：仅展示有收盘快照、GPT盘后分析的记录。
+
+盘后板块/个股接口为东方财富非官方公开行情源，可能延迟、变化或限流；板块无法严格匹配时标记 unavailable，不能凭想象填涨跌幅。
