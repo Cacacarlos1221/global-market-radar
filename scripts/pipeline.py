@@ -146,7 +146,9 @@ def render_all():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Beijing report date, YYYY-MM-DD")
-    parser.add_argument("--render-only", action="store_true", help="No network, render snapshots and analyses")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--render-only", action="store_true", help="No network, render snapshots and analyses")
+    mode.add_argument("--collect-only", action="store_true", help="Collect facts without publishing a partial HTML report")
     args = parser.parse_args()
     today = datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat()
     date = args.date or today
@@ -156,8 +158,9 @@ def main():
             collect(date)
         except FileExistsError as exc:
             print(f"SKIP: {exc}")
-    render_all()
-    print(f"Done: {date}; render_only={args.render_only}")
+    if not args.collect_only:
+        render_all()
+    print(f"Done: {date}; render_only={args.render_only}; collect_only={args.collect_only}")
 
 if __name__ == "__main__":
     main()

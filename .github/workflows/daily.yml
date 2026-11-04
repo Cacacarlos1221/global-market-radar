@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - 'data/analysis/**'
+      - 'data/requests/**'
       - 'data/supplements/**'
       - 'scripts/render.py'
       - 'config/instruments.json'
@@ -28,14 +29,23 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Collect or rerender
+      - name: Collect facts or build fully analyzed report
         run: |
+          REPORT_DATE=$(TZ=Asia/Shanghai date +%Y-%m-%d)
           REPORT_PATH="data/daily/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
-          if [ "$GITHUB_EVENT_NAME" = "push" ] && [ -f "$REPORT_PATH" ]; then
+          ANALYSIS_PATH="data/analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
+          if [ -f "$REPORT_PATH" ] && [ -f "$ANALYSIS_PATH" ]; then
             python -m scripts.pipeline --render-only
+            python -m scripts.release_check --date "$REPORT_DATE"
+          elif [ -f "$REPORT_PATH" ]; then
+            echo "Facts collected; waiting for verified AI analysis before publishing today's HTML"
           else
-            echo "Daily snapshot absent or scheduled/manual run: collecting today's data"
-            python -m scripts.pipeline
+            echo "Collecting fact snapshot only: no incomplete public HTML is generated"
+            python -m scripts.pipeline --collect-only
+            if [ -f "$ANALYSIS_PATH" ]; then
+              python -m scripts.pipeline --render-only
+              python -m scripts.release_check --date "$REPORT_DATE"
+            fi
           fi
       - name: Validate regression tests
         run: python -m unittest discover -s tests -v

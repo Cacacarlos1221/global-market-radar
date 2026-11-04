@@ -98,3 +98,7 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 ## 单指标缺失补采
 
 可单独执行 `python -m scripts.backfill_quote --asset USD_CNY`，只获取当天缺失的美元兑人民币汇率，保存于 data/supplements 并合并到 HTML 与历史 CSV，不修改原始 JSON 快照。详见 [OPERATIONS.md](docs/OPERATIONS.md)。
+
+## 单次总控、完整晨报发布机制（2026-11）
+
+定时仓库维护任务以北京时间08:15为目标触发，负责检查 GitHub 数据采集、必要时通过 `data/requests/` 请求主动采集、输出经过核验的分析JSON并验收网页发布。GitHub仍保留定时兜底；数据采集不再主动发布分析尚未齐备的HTML。完整发布门禁为 `python -m scripts.release_check --date YYYY-MM-DD`，参考 [运维手册](docs/OPERATIONS.md)。不能保证定时任务无限期等待，失败必须报告。

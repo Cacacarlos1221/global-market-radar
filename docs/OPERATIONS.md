@@ -62,3 +62,13 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 对同一个市场的主要指数，比较 market_date；发现单项滞后时先查官方交易所或可靠原始来源。无法核验时标注“疑似滞后”，不补造数据。
 
 已核验的旧快照数据可以使用 data/supplements/<year>/<month>/<report-date>/<asset-key>.json 的 source_correction 修正，需满足原记录已存在、修正后的 market_date 更晚且不超过 report_date、HTTPS source_url 与 quote.source_url 一致。修正只叠加在生成 HTML 的视图上，原始快照不动；必须记录真实采集时刻与来源。不要在补录时虚构原始观察时间戳。历史行情CSV当前仍保存原始采集结果，研究时须合并独立修正记录。
+
+## 单次完成的 ChatGPT 总控任务（2026-11）
+
+- 每天北京时间08:15由已有 ChatGPT “全球市场雷达仓库维护”任务启动一次总控检查；GitHub 定时采集 08:15、08:35 保留兜底，避免单点故障。
+- 先读取当日 `data/daily/` 和最近 GitHub Actions：若当天无快照且无正在运行的采集任务，就创建 `data/requests/YYYY/MM/YYYY-MM-DD.json`，以 GitHub push 启动采集；若已在运行，优先检查日志。任务重试须有上限，避免无休止地重复 push。
+- GitHub 的采集阶段只写原始数据，不再发布缺少AI分析的当日 HTML。必须得到 `data/analysis/` 中符合数据字典的完整分析 JSON，push 才会进行 `--render-only`。
+- `python -m scripts.release_check --date YYYY-MM-DD` 用于校验本地发布产物包含01–06全章节、当日分析、核心行情与新闻引用；这个脚本不检测线上 GitHub Pages。
+- ChatGPT 总控任务应再检查 GitHub Actions 成功提交、Pages deployment 成功，并尽可能验证公开页面日期和摘要与仓库内容一致。所有这些环节完成才汇报 `COMPLETE`；否则给 `DEGRADED` 或 `FAILED` 和对应链接。
+- 自动任务不能保证无限期等待。执行期间可依次重试、有界恢复；遇到 GitHub权限限制、源数据不可用或超过执行窗口时必须明确汇报失败，保留当次诊断记录，不得说“已完成”。
+- 如未来自部署 V2 Agent Harness，可以承接上述同一契约，将AI分析和重试放进持久化 worker，做到真正可恢复的工作流。
