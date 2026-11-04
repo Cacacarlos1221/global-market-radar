@@ -64,14 +64,30 @@ def freeze_forecast(day, root=ROOT, now=None):
     dump_json(out, forecast)
     return "frozen"
 
+API_LAST_REQUEST = 0.0
+
 def json_api(endpoint, params):
+    """Limit public Eastmoney requests and retry transient API failures."""
+    global API_LAST_REQUEST
     host = "https://push2his.eastmoney.com/api/qt/" if endpoint.startswith("stock/kline/") else BASE
     url = host + endpoint + "?" + urllib.parse.urlencode(params)
-    raw = read_url(url, timeout=18)
-    payload = json.loads(raw.decode("utf-8-sig"))
-    if not isinstance(payload, dict) or not isinstance(payload.get("data"), dict):
-        raise ValueError("接口返回缺失data: " + endpoint)
-    return payload["data"]
+    last_error = None
+    for attempt in range(2):
+        pause = 1.1 - (time.monotonic() - API_LAST_REQUEST)
+        if pause > 0:
+            time.sleep(pause)
+        API_LAST_REQUEST = time.monotonic()
+        try:
+            raw = read_url(url, timeout=15)
+            payload = json.loads(raw.decode("utf-8-sig"))
+            if not isinstance(payload, dict) or not isinstance(payload.get("data"), dict):
+                raise ValueError("接口返回缺失data: " + endpoint)
+            return payload["data"]
+        except Exception as exc:
+            last_error = exc
+            if attempt == 0:
+                time.sleep(3)
+    raise RuntimeError("Eastmoney API unavailable: " + str(last_error)[:180])
 
 def get_diff(data):
     diff = data.get("diff") or []
@@ -131,6 +147,25 @@ def close_bar(secid, day):
             "change_pct": round((close / previous - 1) * 100, 4),
             "value_kind": "daily_close", "source": SOURCE, "secid": secid}
 
+def yahoo_benchmark_fallback(day, warnings):
+    """Use CSI300 Yahoo daily bars only when Eastmoney benchmark is unavailable."""
+    from .sources import yahoo_chart, parse_bars
+    try:
+        bars = parse_bars(yahoo_chart("000300.SS", "1d", "14d"))
+        if len(bars) < 2 or bars[-1]["market_date"] != day:
+            raise ValueError("Yahoo benchmark has no same-day close")
+        previous, close = bars[-2]["value"], bars[-1]["value"]
+        if previous <= 0 or close <= 0:
+            raise ValueError("Yahoo benchmark missing valid prices")
+        return {"status": "ok", "market_date": day, "close": close,
+                "reference_close": previous, "change_pct": round((close / previous - 1) * 100, 4),
+                "value_kind": "daily_close", "source": "Yahoo Finance chart API (unofficial)",
+                "secid": "000300.SS"}
+    except Exception as exc:
+        warnings.append("Yahoo CSI300 fallback: " + str(exc)[:170])
+        return {"status": "unavailable", "change_pct": None, "market_date": None,
+                "source": "Yahoo Finance chart API (unofficial)", "secid": "000300.SS"}
+
 def safe_bar(secid, day, warnings, label):
     try:
         result = close_bar(secid, day)
@@ -181,6 +216,8 @@ def collect_close(day, root=ROOT, now=None):
         return "already_collected"
     warnings = []
     benchmark = safe_bar("1.000300", day, warnings, "沪深300")
+    if benchmark["status"] != "ok":
+        benchmark = yahoo_benchmark_fallback(day, warnings)
     if benchmark["status"] != "ok":
         return "benchmark_unavailable_or_market_closed: " + "; ".join(warnings)
     forecast_path = data_path(root, "forecasts", day)
@@ -317,7 +354,8 @@ def check_release(day, root=ROOT):
         warnings.append("no confirmed close quote for forecast sectors")
     if day not in html.read_text(encoding="utf-8") or day not in index.read_text(encoding="utf-8"):
         errors.append("HTML missing expected date")
-    if analysis.get("summary", "") not in html.read_text(encoding="utf-8"):
+    from html import escape
+    if escape(analysis.get("summary", "")) not in html.read_text(encoding="utf-8"):
         errors.append("analysis summary not found in HTML")
     warnings.extend(data.get("warnings", []))
     return {"complete": not errors and len(warnings) == 0, "published": not errors,
