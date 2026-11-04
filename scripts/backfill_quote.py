@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 from .pipeline import ROOT, QUOTE_COLS, append_unique, dump_json, render_all
 from .sources import collect_quotes
 
-def backfill_quote(asset_key="USD_CNY", report_date=None):
+def backfill_quote(asset_key="USD_CNY", report_date=None, *, render=True):
     today = datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat()
     date = report_date or today
     if date != today:
@@ -42,7 +42,13 @@ def backfill_quote(asset_key="USD_CNY", report_date=None):
     append_unique(ROOT / "data/history/quotes.csv", QUOTE_COLS,
                   [{"report_date": date, "asset_key": asset_key, **quote}],
                   ["report_date", "asset_key"])
-    render_all()
+    # Never publish a partial morning HTML before the verified AI analysis exists.
+    if render:
+        analysis_path = ROOT / "data/analysis" / date[:4] / date[5:7] / (date + ".json")
+        if analysis_path.is_file():
+            render_all()
+        else:
+            print("PENDING: verified analysis is missing; do not render an incomplete HTML")
     print(f"BACKFILLED {asset_key}={quote['value']} {quote['unit']} "
           f"quote_at={quote['observed_at_utc']} collected_at={captured_at}")
     return True
