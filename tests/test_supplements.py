@@ -53,7 +53,7 @@ class SupplementTests(unittest.TestCase):
             self.assertEqual(merged["quote_revisions"][0]["old_market_date"], "2026-11-02")
             html = render_report(merged)
             self.assertIn("来源修正", html)
-            self.assertIn("官方来源", html)
+            self.assertIn("核验来源", html)
     def test_reject_correction_without_newer_date(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -265,7 +265,7 @@ def render_report(data, analysis=None, home="index.html"):
         issue = quality_flags.get(q.get("key"))
         status = ('<span class="warn">' + safe(issue) + '</span>') if issue else ('已核实修正' if revised else safe(q["status"]))
         source_note = (' <a target="_blank" rel="noopener noreferrer" href="' +
-                       safe(q["source_url"]) + '">官方来源</a>') if revised and valid_url(q.get("source_url")) else ""
+                       safe(q["source_url"]) + '">核验来源</a>') if revised and valid_url(q.get("source_url")) else ""
         row_class = ' class="outdated"' if issue else ""
         rows.append(f'<tr{row_class}><td>{label}{source_note}</td><td>{val}</td><td>{change}</td>'
                     f'<td>{safe(q["market_date"])}</td><td>{safe(kind_labels.get(q.get("value_kind"), q.get("value_kind")))}</td>'
