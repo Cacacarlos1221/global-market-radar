@@ -66,6 +66,10 @@ def freeze_forecast(day, root=ROOT, now=None):
     return "frozen"
 
 API_LAST_REQUEST = 0.0
+# Public price endpoints may hang; the after-close workflow has a 26 minute job timeout.
+# Keep per-call waits bounded and prefer a flagged partial snapshot over losing the whole run.
+API_TIMEOUT_SECONDS = 7
+MAX_COLLECTION_SECONDS = 480
 
 def json_api(endpoint, params):
     """Limit public Eastmoney requests and retry transient API failures."""
@@ -79,7 +83,7 @@ def json_api(endpoint, params):
             time.sleep(pause)
         API_LAST_REQUEST = time.monotonic()
         try:
-            raw = read_url(url, timeout=15)
+            raw = read_url(url, timeout=API_TIMEOUT_SECONDS)
             payload = json.loads(raw.decode("utf-8-sig"))
             if not isinstance(payload, dict) or not isinstance(payload.get("data"), dict):
                 raise ValueError("接口返回缺失data: " + endpoint)
@@ -87,7 +91,7 @@ def json_api(endpoint, params):
         except Exception as exc:
             last_error = exc
             if attempt == 0:
-                time.sleep(3)
+                time.sleep(1)
     raise RuntimeError("Eastmoney API unavailable: " + str(last_error)[:180])
 
 def get_diff(data):
@@ -100,8 +104,8 @@ def get_diff(data):
 
 def list_sectors(kind, warnings):
     result = []
-    size = 60
-    for page in range(1, 16):
+    size = 160
+    for page in range(1, 9):
         try:
             data = json_api("clist/get", {
                 "pn": page, "pz": size, "po": 1, "np": 1, "fltt": 2, "invt": 2,
@@ -114,7 +118,7 @@ def list_sectors(kind, warnings):
                           for x in batch if str(x.get("f12", "")).startswith("BK"))
             if not batch or len(result) >= int(data.get("total") or 0):
                 break
-            time.sleep(1)
+            time.sleep(0.2)
         except Exception as exc:
             warnings.append(f"{kind} board list page {page}: {str(exc)[:160]}")
             break
@@ -240,19 +244,28 @@ def collect_close(day, root=ROOT, now=None):
     if out.exists():
         return "already_collected"
     warnings = []
+    started = time.monotonic()
+    def past_budget():
+        return time.monotonic() - started >= MAX_COLLECTION_SECONDS
+    print(f"GMR_CLOSE stage=benchmark day={day}", flush=True)
     benchmark = safe_bar("1.000300", day, warnings, "沪深300")
     if benchmark["status"] != "ok":
         benchmark = yahoo_benchmark_fallback(day, warnings)
     forecast_path = data_path(root, "forecasts", day)
     frozen = load_json(forecast_path) if forecast_path.exists() else None
     plan, forecast_status, morning_analysis_sha256 = observation_plan(day, root, frozen)
+    print(f"GMR_CLOSE stage=boards elapsed={time.monotonic()-started:.1f}s benchmark={benchmark['status']}", flush=True)
     boards = list_sectors("industry", warnings) + list_sectors("concept", warnings)
+    print(f"GMR_CLOSE stage=groups elapsed={time.monotonic()-started:.1f}s board_count={len(boards)}", flush=True)
     board_by_kind_name = {(b["kind"], b["name"]): b for b in boards}
     selected = find_tracks(plan)
     observed_board_cache, stock_cache = {}, {}
     def board_price(board):
         key = board["code"]
         if key not in observed_board_cache:
+            if past_budget():
+                warnings.append("time budget exhausted before board: " + board["name"])
+                return {"status": "unavailable", "change_pct": None, "market_date": None}
             observed_board_cache[key] = safe_bar("90." + key, day, warnings, board["name"])
             time.sleep(0.2)
         return observed_board_cache[key]
@@ -260,6 +273,10 @@ def collect_close(day, root=ROOT, now=None):
         code, market, name = item
         key = market + "." + code
         if key not in stock_cache:
+            if past_budget():
+                warnings.append("time budget exhausted before stock: " + name)
+                return {"code": code, "name": name, "market": market,
+                        "status": "unavailable", "change_pct": None, "market_date": None}
             stock_cache[key] = {"code": code, "name": name, "market": market,
                                 **safe_bar(key, day, warnings, name)}
             time.sleep(0.2)
@@ -308,8 +325,12 @@ def collect_close(day, root=ROOT, now=None):
                        "direction_hit": hit,
                        "evaluation": "directional" if hit is not None
                        else "unfrozen_observation" if not frozen else "not_scorable"})
+    print(f"GMR_CLOSE stage=hot elapsed={time.monotonic()-started:.1f}s groups={len(groups)}", flush=True)
     hot = []
     for board in sorted(boards, key=lambda b: b["change_pct_indicative"] if isinstance(b["change_pct_indicative"], (int, float)) else -999, reverse=True):
+        if past_budget():
+            warnings.append("time budget exhausted; remaining hot sector scan skipped")
+            break
         if board["code"] in observed_keys or len(hot) >= 5:
             continue
         quote = board_price(board)
@@ -339,6 +360,7 @@ def collect_close(day, root=ROOT, now=None):
     )
     if not observed_count:
         return "no_same_day_close_data: " + "; ".join(warnings)
+    print(f"GMR_CLOSE stage=saving elapsed={time.monotonic()-started:.1f}s confirmed_quotes={observed_count}", flush=True)
     result = {"schema_version": "1.1", "report_date": day, "market_date": day,
               "captured_at_utc": now.isoformat(), "source": SOURCE,
               "benchmark": {"name": "沪深300", "quote": benchmark},
