@@ -17,7 +17,7 @@ TRACKS = {
          "board_names": ["半导体"], "board_type": "industry",
          "stocks": [["688981", "1", "中芯国际"]]},
         {"key": "server", "name": "AI服务器", "terms": ["AI服务器"],
-         "board_names": ["AI服务器", "服务器"], "board_type": "concept",
+         "board_names": ["AI服务器", "服务器", "液冷服务器"], "board_type": "concept",
          "stocks": [["000977", "0", "浪潮信息"]]},
         {"key": "memory", "name": "存储芯片", "terms": ["存储"],
          "board_names": ["存储芯片"], "board_type": "concept",
