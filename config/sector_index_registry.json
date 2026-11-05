@@ -53,9 +53,18 @@
           "board_type": "concept",
           "mapping_type": "gold_sector_related_not_exact_precious_metals",
           "source_url": "https://basic.10jqka.com.cn/885530/",
-          "verification": "ths_official_name_code_and_broad_constituents_verified; automated_daily_kline_not_yet_qa",
+          "verification": "ths_official_name_code_constituents_verified; github_actions_akshare_daily_kline_2026-11-05_pass; not_yet_production_tracking",
           "constituents_observed": 82,
-          "note": "黄金上中下游广义概念，覆盖约82家公司，含首饰、加工及其他涉金企业；不应直接等同于行业「贵金属」，若未来预测的是黄金概念可单独固定此口径。"
+          "note": "黄金上中下游广义概念，覆盖约82家公司，含首饰、加工及其他涉金企业；不应直接等同于行业「贵金属」，若未来预测的是黄金概念可单独固定此口径。 GitHub独立AKShare测试成功取得2026-11-05日K，但属于第三方非官方数据适配，不代表已选为贵金属评分主指数。",
+          "source_qa_path": "data/quality/sector_index_probe/2026/11/ths_2026-11-05.json",
+          "observed_kline": {
+            "market_date": "2026-11-05",
+            "close": 3209.687,
+            "bar_range": [
+              "2026-11-02",
+              "2026-11-05"
+            ]
+          }
         },
         {
           "index_name": "中国贵金属指数",
@@ -159,9 +168,15 @@
           "board_type": "industry",
           "mapping_type": "exact_rare_earth_producers_but_narrow_constituents",
           "source_url": "https://basic.10jqka.com.cn/884215/",
-          "verification": "ths_official_name_code_and_four_constituents_verified; automated_daily_kline_not_yet_qa",
+          "verification": "ths_official_name_code_and_four_constituents_verified; historical_daily_kline_2026-11-05_probe_failed_remote_disconnected",
           "constituents_observed": 4,
-          "note": "聚焦北方稀土、中国稀土、中稀有色、盛和资源四家核心稀土企业；比稀土永磁代理更精准，但中国稀土可能停牌，仍需检验指数交易日K和数据接口稳定性。"
+          "note": "聚焦北方稀土、中国稀土、中稀有色、盛和资源四家核心稀土企业；比稀土永磁代理更精准，但中国稀土可能停牌，仍需检验指数交易日K和数据接口稳定性。",
+          "source_qa_path": "data/quality/sector_index_probe/2026/11/ths_2026-11-05.json",
+          "last_probe": {
+            "market_date": "2026-11-05",
+            "status": "unavailable",
+            "reason": "AKShare/THS industry endpoint connection aborted by remote host"
+          }
         },
         {
           "index_name": "稀土永磁",
