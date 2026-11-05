@@ -86,5 +86,42 @@ class SectorMappingAuditTests(unittest.TestCase):
         self.assertEqual(frozen["sector_mapping_approvals_applied"][0]["topic"], "贵金属")
         self.assertEqual(frozen["watchlist"]["tracks"][0]["board_names"], ["贵金属"])
 
+    def test_approved_frozen_board_code_bypasses_502_listing(self):
+        from unittest.mock import patch
+        from scripts.close_review import collect_close
+        self.registry(approved=[{"topic": "贵金属", "status": "approved",
+            "approved_at_utc": "2026-11-05T08:35:00+00:00",
+            "effective_from": "2026-11-06",
+            "track": {"key": "precious_metals", "name": "贵金属",
+                "terms": ["贵金属"], "board_type": "industry",
+                "board_names": ["贵金属"], "board_code": "BK0732",
+                "board_name": "贵金属", "stocks": []}}])
+        analysis = data_path(self.root, "analysis", "2026-11-06")
+        analysis.parent.mkdir(parents=True, exist_ok=True)
+        analysis.write_text(json.dumps({
+            "report_date": "2026-11-06",
+            "generated_at_utc": "2026-11-06T00:00:00+00:00",
+            "a_share_sectors": [{"sector": "贵金属", "bias": "positive", "reason": "早盘观察"}]
+        }, ensure_ascii=False))
+        self.assertEqual(freeze_forecast("2026-11-06", self.root,
+            datetime(2026, 11, 6, 8, 25, tzinfo=BJ)), "frozen")
+        frozen = json.loads(data_path(self.root, "forecasts", "2026-11-06").read_text())
+        self.assertEqual(frozen["watchlist"]["tracks"][0]["board_code"], "BK0732")
+        def mock_quote(secid, day, warnings, name):
+            return {"status": "ok", "market_date": day, "secid": secid,
+                    "change_pct": 2.0, "close": 102, "reference_close": 100}
+        with patch("scripts.close_review.list_sectors", return_value=[]), \\
+             patch("scripts.close_review.safe_bar", side_effect=mock_quote), \\
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \\
+             patch("scripts.close_review.time.sleep"):
+            self.assertEqual(collect_close("2026-11-06", self.root,
+                datetime(2026, 11, 6, 15, 40, tzinfo=BJ)), "collected")
+        d = json.loads(data_path(self.root, "close", "2026-11-06").read_text())
+        part = d["predicted_groups"][0]["components"][0]
+        self.assertEqual(part["board_code"], "BK0732")
+        self.assertEqual(part["quote"]["secid"], "90.BK0732")
+        self.assertFalse(part["is_proxy"])
+        self.assertTrue(d["predicted_groups"][0]["direction_hit"])
+
 if __name__ == "__main__":
     unittest.main()
