@@ -42,6 +42,7 @@ jobs:
             echo "Collecting 15:30+ same-day close for $DAY"
             python -m scripts.close_review --collect-only --date "$DAY"
           fi
+          python -m scripts.close_review --enrich-only --date "$DAY"
           python -m scripts.close_review --render-only
           FACT_PATH="data/close/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
           ANALYSIS_PATH="data/close_analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
@@ -60,6 +61,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A -- reports/close
           if [ -d data/close ]; then git add -A -- data/close; fi
+          if [ -d data/close_revisions ]; then git add -A -- data/close_revisions; fi
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh A-share after-close review"
             git pull --rebase origin main
