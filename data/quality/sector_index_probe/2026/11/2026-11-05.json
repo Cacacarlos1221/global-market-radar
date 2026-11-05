@@ -1,0 +1,36 @@
+{
+  "checked_at_utc": "2026-11-05T08:54:14.950465+00:00",
+  "eastmoney_bk0732": {
+    "index_name": "贵金属",
+    "quote": {
+      "change_pct": 5.8362,
+      "close": 2144.95,
+      "market_date": "2026-11-05",
+      "reference_close": 2026.67,
+      "secid": "90.BK0732",
+      "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+      "status": "ok",
+      "value_kind": "daily_close"
+    },
+    "source_url": "https://quote.eastmoney.com/bk/90.BK0732.html",
+    "vendor": "东方财富",
+    "verified_same_day_kline": true
+  },
+  "purpose": "prospective_index_source_validation_not_historical_forecast_scoring",
+  "report_date": "2026-11-05",
+  "ths_884215": {
+    "historical_daily_kline_qa": "not_integrated",
+    "identity_confirmed": true,
+    "index_name": "稀土",
+    "source_url": "https://basic.10jqka.com.cn/884215/",
+    "vendor": "同花顺"
+  },
+  "ths_885530": {
+    "historical_daily_kline_qa": "not_integrated",
+    "identity_confirmed": true,
+    "index_name": "黄金概念",
+    "source_url": "https://basic.10jqka.com.cn/885530/",
+    "vendor": "同花顺"
+  },
+  "warnings": []
+}
