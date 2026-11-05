@@ -6,7 +6,7 @@
     "RSS headlines are not independently fact checked",
     "Quote change uses the previous available daily bar, not necessarily yesterday calendar day"
   ],
-  "methodology": "Deterministic raw+supplement overlay; use available_at_utc for as-of research.",
+  "methodology": "Deterministic raw+supplement overlay. Use available_at_utc for as-of research; CN index bars observed before 15:15 Beijing time are intraday and not final close/return labels.",
   "news": [
     {
       "event_id": "3f9a1806748cc982",
@@ -173,6 +173,7 @@
       "raw_source": null,
       "raw_status": "missing",
       "raw_value": null,
+      "raw_value_kind": null,
       "reference_close": 6.66099977,
       "reference_date": "2026-11-02",
       "revision_kind": "supplement",
@@ -202,6 +203,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 4.64419985,
+      "raw_value_kind": "intraday_observation",
       "reference_close": 4.6816802,
       "reference_date": "2026-11-02",
       "revision_kind": "none",
@@ -230,6 +232,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 25164.31054688,
+      "raw_value_kind": "daily_close",
       "reference_close": 25437.0,
       "reference_date": "2026-10-30",
       "revision_kind": "none",
@@ -258,6 +261,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 7541.39990234,
+      "raw_value_kind": "daily_close",
       "reference_close": 7580.06982422,
       "reference_date": "2026-10-30",
       "revision_kind": "none",
@@ -286,6 +290,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 51983.98046875,
+      "raw_value_kind": "daily_close",
       "reference_close": 51770.30859375,
       "reference_date": "2026-10-30",
       "revision_kind": "none",
@@ -314,6 +319,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 101.72599792,
+      "raw_value_kind": "daily_close",
       "reference_close": 101.75,
       "reference_date": "2026-11-02",
       "revision_kind": "none",
@@ -342,6 +348,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 105.80999756,
+      "raw_value_kind": "daily_close",
       "reference_close": 104.76999664,
       "reference_date": "2026-11-02",
       "revision_kind": "none",
@@ -370,6 +377,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 3934.5,
+      "raw_value_kind": "daily_close",
       "reference_close": 3969.60009766,
       "reference_date": "2026-11-02",
       "revision_kind": "none",
@@ -398,6 +406,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 4.89400005,
+      "raw_value_kind": "daily_close",
       "reference_close": 4.9289999,
       "reference_date": "2026-10-30",
       "revision_kind": "none",
@@ -420,12 +429,15 @@
       "label": "上证综指",
       "market_date": "2026-11-03",
       "observed_at_utc": "2026-11-03T01:30:00+00:00",
-      "quality_flags": [],
+      "quality_flags": [
+        "unclosed_cn_session_asof"
+      ],
       "raw_market_date": "2026-11-03",
       "raw_snapshot_sha256": "c7e980a241ec235780f71d30caea2811698c77d34c15d18a427a512f2176a524",
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 3595.87231445,
+      "raw_value_kind": "daily_close",
       "reference_close": 3638.03100586,
       "reference_date": "2026-11-02",
       "revision_kind": "none",
@@ -435,9 +447,9 @@
       "symbol": "000001.SS",
       "unit": "points",
       "usable_for_price_analysis": true,
-      "usable_for_return_analysis": true,
+      "usable_for_return_analysis": false,
       "value": 3595.87231445,
-      "value_kind": "daily_close"
+      "value_kind": "daily_bar_live"
     },
     {
       "available_at_utc": "2026-11-03T06:44:56.022003+00:00",
@@ -450,13 +462,15 @@
       "observed_at_utc": "2026-11-03T06:29:50+00:00",
       "quality_flags": [
         "missing_return_reference",
-        "missing_return_change"
+        "missing_return_change",
+        "unclosed_cn_session_asof"
       ],
       "raw_market_date": "2026-11-03",
       "raw_snapshot_sha256": "c7e980a241ec235780f71d30caea2811698c77d34c15d18a427a512f2176a524",
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 3994.91577148,
+      "raw_value_kind": "daily_close",
       "reference_close": null,
       "reference_date": null,
       "revision_kind": "none",
@@ -468,7 +482,7 @@
       "usable_for_price_analysis": true,
       "usable_for_return_analysis": false,
       "value": 3994.91577148,
-      "value_kind": "daily_close"
+      "value_kind": "daily_bar_live"
     },
     {
       "available_at_utc": "2026-11-03T06:44:56.022003+00:00",
@@ -485,6 +499,7 @@
       "raw_source": "Yahoo Finance chart API (unofficial)",
       "raw_status": "ok",
       "raw_value": 0.69847035,
+      "raw_value_kind": "intraday_observation",
       "reference_close": 0.70287997,
       "reference_date": "2026-11-02",
       "revision_kind": "none",
