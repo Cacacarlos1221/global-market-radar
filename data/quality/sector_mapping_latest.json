@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T08:56:03.268782+00:00",
+  "generated_at_utc": "2026-11-05T08:57:07.023861+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05"
   ],
-  "pending_count": 5,
-  "high_priority_count": 2,
+  "pending_count": 4,
+  "high_priority_count": 1,
   "pending": [
     {
       "topic": "券商与宽基指数",
@@ -57,30 +57,6 @@
       "user_question": "请定义「券商与宽基」：拆成券商、沪深300两条独立观察，还是保留组合并明确两个指数及合成权重？",
       "user_reported_recurrent": false,
       "existing_proposal": true
-    },
-    {
-      "topic": "贵金属",
-      "priority": "high",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-05"
-      ],
-      "observed_days": 1,
-      "last_observed": "2026-11-05",
-      "seen_today": true,
-      "groups": [
-        "贵金属"
-      ],
-      "biases": [
-        "positive"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「贵金属」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
     },
     {
       "topic": "AI服务器",
