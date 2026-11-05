@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T08:39:26.605475+00:00",
+  "generated_at_utc": "2026-11-05T08:43:50.032562+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
@@ -39,8 +39,8 @@
           "index_code": "BK0473",
           "board_type": "industry",
           "mapping_type": "related_name_requires_approval",
-          "source_url": "https://daxiapi.com/dfcf-gainian.html",
-          "verification": "public_catalog_identity_only",
+          "source_url": "https://data.eastmoney.com/bkzj/BK0473.html",
+          "verification": "official_eastmoney_board_name_and_code_verified; exact observation definition still requires user approval",
           "note": "用于券商子板块候选，和名称「券商」并非完全同名；需要确认。"
         },
         {
@@ -84,8 +84,8 @@
           "index_code": "BK0732",
           "board_type": "industry",
           "mapping_type": "exact_name_candidate",
-          "source_url": "https://daxiapi.com/dfcf-gainian.html",
-          "verification": "public_catalog_identity_only; same-day K-line and constituents not yet QA-verified",
+          "source_url": "https://quote.eastmoney.com/bk/90.BK0732.html",
+          "verification": "official_eastmoney_board_name_and_code_verified; same-day K-line and membership pending QA",
           "note": "A股贵金属股票行业走势，非黄金现货/商品价格；须用户确认用于GMR板块评分。"
         },
         {
