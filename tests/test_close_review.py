@@ -271,6 +271,52 @@ class TestCloseReview(unittest.TestCase):
             self.assertEqual(enrich_close(DAY, self.root), "no_verified_same_day_board_quotes")
         self.assertFalse(data_path(self.root, "close_revisions", DAY).exists())
 
+    def test_board_list_502_uses_alternate_host_with_public_token(self):
+        from scripts.close_review import json_api
+        payload = {"data": {"total": 1, "diff": [
+            {"f12": "BK1036", "f14": "半导体", "f3": 2.8}
+        ]}}
+        called = []
+        def fake_api(url, timeout):
+            called.append(url)
+            if len(called) == 1:
+                raise OSError("HTTP Error 502: Bad Gateway")
+            return json.dumps(payload).encode("utf-8")
+        with patch("scripts.close_review.read_url", side_effect=fake_api), \
+             patch("scripts.close_review.time.sleep"):
+            data = json_api("clist/get", {"pn": 1, "fs": "m:90+t:2+f:!50",
+                                         "fields": "f12,f14,f3"})
+        self.assertEqual(data["diff"][0]["f12"], "BK1036")
+        self.assertEqual(len(called), 2)
+        self.assertIn("push2delay.eastmoney.com", called[1])
+        self.assertIn("ut=bd1d9ddb04089700cf9c27f6f7426281", called[1])
+
+    def test_partial_live_ranking_keeps_historically_confirmed_fixed_boards(self):
+        yesterday = data_path(self.root, "close", "2026-11-04")
+        yesterday.parent.mkdir(parents=True, exist_ok=True)
+        yesterday.write_text(json.dumps({"report_date": "2026-11-04", "predicted_groups": [{
+            "components": [
+                {"board_type": "concept", "board_name": "存储芯片", "board_code": "BK3"},
+                {"board_type": "concept", "board_name": "液冷服务器", "board_code": "BK2"}
+            ]}], "hot_sectors": []}, ensure_ascii=False), encoding="utf-8")
+        live = [{"name": "半导体", "kind": "industry", "code": "BK1",
+                 "change_pct_indicative": 2.0}]
+        with patch("scripts.close_review.list_sectors",
+                   side_effect=lambda kind, warnings: live if kind == "industry" else []), \
+             patch("scripts.close_review.safe_bar", side_effect=fake_close), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
+             patch("scripts.close_review.time.sleep"):
+            self.assertEqual(collect_close(DAY, self.root,
+                             datetime(2026, 11, 5, 15, 35, tzinfo=BJ)), "collected")
+        raw = json.loads(data_path(self.root, "close", DAY).read_text(encoding="utf-8"))
+        group = raw["predicted_groups"][0]
+        self.assertEqual(len(group["components"]), 3)
+        self.assertEqual({x["board_code"] for x in group["components"]},
+                         {"BK1", "BK2", "BK3"})
+        self.assertTrue(next(x for x in group["components"]
+                             if x["name"] == "AI服务器")["is_proxy"])
+        self.assertIsNone(group["direction_hit"])
+
     def test_unverifiable_news_rejected_and_html_escaped(self):
         with self.assertRaises(ValueError):
             validate_close_analysis({"summary": "s", "new_events": [
