@@ -204,6 +204,73 @@ class TestCloseReview(unittest.TestCase):
         self.assertIn("代理主题（仅用于观察，不参与命中率）", page)
         self.assertNotIn("03 / GPT", page)
 
+    def test_board_list_502_can_be_recovered_without_overwriting_raw(self):
+        from scripts.close_review import enrich_close, effective_close
+        yesterday = data_path(self.root, "close", "2026-11-04")
+        yesterday.parent.mkdir(parents=True, exist_ok=True)
+        yesterday.write_text(json.dumps({
+            "report_date": "2026-11-04",
+            "predicted_groups": [{"components": [
+                {"board_type": "industry", "board_name": "半导体", "board_code": "BK1"},
+                {"board_type": "concept", "board_name": "液冷服务器", "board_code": "BK2"}]}],
+            "hot_sectors": []
+        }, ensure_ascii=False), encoding="utf-8")
+        freeze_forecast(DAY, self.root, datetime(2026, 11, 5, 8, 50, tzinfo=BJ))
+        base = data_path(self.root, "close", DAY)
+        base.write_text(json.dumps({
+            "report_date": DAY, "forecast_sha256": "frozen", "warnings": [
+                "concept board list page 1: HTTP 502"],
+            "benchmark": {"quote": {"status": "ok", "market_date": DAY, "change_pct": 1.0}},
+            "predicted_groups": [
+                {"sector": "半导体", "bias": "positive", "components": [
+                    {"key": "semiconductor", "name": "半导体", "board_type": "industry",
+                     "board_code": None, "board_name": None, "is_proxy": False,
+                     "quote": {"status": "unavailable"}}]},
+                {"sector": "AI服务器", "bias": "positive", "components": [
+                    {"key": "server", "name": "AI服务器", "board_type": "concept",
+                     "board_code": None, "board_name": None, "is_proxy": False,
+                     "quote": {"status": "unavailable"}}]}
+            ], "hot_sectors": []
+        }, ensure_ascii=False), encoding="utf-8")
+        unchanged = base.read_bytes()
+        with patch("scripts.close_review.safe_bar", return_value={
+            "status": "ok", "market_date": DAY, "change_pct": 4.0,
+            "close": 104.0, "reference_close": 100.0
+        }):
+            result = enrich_close(DAY, self.root)
+        self.assertIn("半导体", result)
+        self.assertEqual(base.read_bytes(), unchanged)
+        corrected = effective_close(self.root, DAY)
+        self.assertEqual(corrected["original_close_sha256"], __import__("hashlib").sha256(unchanged).hexdigest())
+        self.assertEqual(corrected["predicted_groups"][0]["components"][0]["board_code"], "BK1")
+        self.assertTrue(corrected["predicted_groups"][0]["direction_hit"])
+        self.assertEqual(corrected["predicted_groups"][0]["excess_vs_csi300_pct"], 3.0)
+        self.assertEqual(corrected["predicted_groups"][1]["components"][0]["board_name"], "液冷服务器")
+        self.assertTrue(corrected["predicted_groups"][1]["components"][0]["is_proxy"])
+        self.assertIsNone(corrected["predicted_groups"][1]["direction_hit"])
+        self.assertEqual(enrich_close(DAY, self.root), "revision_already_exists")
+
+    def test_recovery_rejects_old_date_quotes_and_keeps_snapshot_unchanged(self):
+        from scripts.close_review import enrich_close
+        prev = data_path(self.root, "close", "2026-11-04")
+        prev.parent.mkdir(parents=True, exist_ok=True)
+        prev.write_text(json.dumps({"predicted_groups": [{"components": [
+            {"board_type": "industry", "board_name": "半导体", "board_code": "BK1"}]}]}))
+        freeze_forecast(DAY, self.root, datetime(2026, 11, 5, 8, 50, tzinfo=BJ))
+        current = data_path(self.root, "close", DAY)
+        current.write_text(json.dumps({"report_date": DAY, "warnings": [],
+            "benchmark": {"quote": {"status": "ok", "market_date": DAY, "change_pct": 1.0}},
+            "forecast_sha256": "frozen", "predicted_groups": [
+                {"sector": "半导体", "bias": "positive", "components": [{
+                    "key": "semiconductor", "name": "半导体", "quote": {"status": "unavailable"}
+                }]}
+            ], "hot_sectors": []}))
+        with patch("scripts.close_review.safe_bar", return_value={
+            "status": "unavailable", "market_date": "2026-11-04", "change_pct": None
+        }):
+            self.assertEqual(enrich_close(DAY, self.root), "no_verified_same_day_board_quotes")
+        self.assertFalse(data_path(self.root, "close_revisions", DAY).exists())
+
     def test_unverifiable_news_rejected_and_html_escaped(self):
         with self.assertRaises(ValueError):
             validate_close_analysis({"summary": "s", "new_events": [
