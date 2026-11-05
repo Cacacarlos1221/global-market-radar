@@ -317,6 +317,47 @@ class TestCloseReview(unittest.TestCase):
                              if x["name"] == "AI服务器")["is_proxy"])
         self.assertIsNone(group["direction_hit"])
 
+    def test_all_eight_frozen_opinions_have_separate_observation_and_hit_labels(self):
+        from scripts.close_render import observation_overview, forecast_verdict
+        day = DAY
+        benchmark = {"status": "ok", "market_date": day, "change_pct": 0.2943}
+        def group(name, bias, board=None, change=None, proxy=False, hit=None):
+            parts = [] if board is None else [{"name": name, "board_name": board, "is_proxy": proxy,
+                "quote": {"status": "ok", "market_date": day, "change_pct": change}}]
+            return {"sector": name, "bias": bias, "components": parts, "direction_hit": hit}
+        groups = [
+            group("券商与宽基", "positive"),
+            group("半导体", "mixed", "半导体", 2.7786),
+            group("AI服务器", "watch", "液冷服务器", 2.5361, True),
+            group("存储", "mixed", "存储芯片", 2.3651),
+            group("新能源", "positive", "新能源", 2.5989, False, True),
+            group("稀土与有色", "watch", "稀土永磁", 2.7987, True),
+            group("贵金属", "positive"),
+            group("出口制造", "mixed")
+        ]
+        html = observation_overview(groups, benchmark, True, day)
+        for name in ["券商与宽基", "半导体", "AI服务器", "存储",
+                     "新能源", "稀土与有色", "贵金属", "出口制造"]:
+            self.assertIn(name, html)
+        self.assertEqual(html.count("<tr>"), 9)
+        self.assertIn("液冷服务器（代理）", html)
+        self.assertIn("+2.78%", html)
+        self.assertIn("+2.48个百分点", html)
+        self.assertIn("非方向研判（不计命中率）", html)
+        self.assertIn("方向一致", html)
+        self.assertEqual(forecast_verdict(groups[0], True), "缺完整同名指数（待评分）")
+        self.assertEqual(forecast_verdict(groups[2], True), "非方向研判（不计命中率）")
+        self.assertEqual(forecast_verdict(groups[4], True), "方向一致")
+
+    def test_observation_survives_unavailable_market_benchmark(self):
+        from scripts.close_render import observation_overview
+        group = [{"sector": "半导体", "bias": "mixed", "direction_hit": None,
+                  "components": [{"name": "半导体", "board_name": "半导体", "is_proxy": False,
+                  "quote": {"status": "ok", "market_date": DAY, "change_pct": 1.5}}]}]
+        html = observation_overview(group, {"status": "unavailable"}, True, DAY)
+        self.assertIn("+1.50%", html)
+        self.assertIn("超额—", html)
+
     def test_unverifiable_news_rejected_and_html_escaped(self):
         with self.assertRaises(ValueError):
             validate_close_analysis({"summary": "s", "new_events": [
