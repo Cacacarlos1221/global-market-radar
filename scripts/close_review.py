@@ -233,6 +233,32 @@ def collect_news_clues(day, warnings):
             warnings.append("CN RSS: " + str(exc)[:160])
     return sorted(out, key=lambda x: x["published_at_utc"], reverse=True)[:20]
 
+def historical_board_catalog(root, day):
+    """Reuse only previously verified vendor board identities, never old quote values."""
+    history = sorted(p for p in (root / "data/close").glob("*/*/*.json") if p.stem < day)
+    catalog = {}
+    for p in history[-30:]:
+        snap = load_json(p)
+        entries = []
+        for group in snap.get("predicted_groups", []):
+            entries.extend(group.get("components", []))
+        for item in entries:
+            kind, code, name = item.get("board_type"), item.get("board_code"), item.get("board_name")
+            if kind in ("industry", "concept") and name and str(code).startswith("BK"):
+                catalog[(kind, name)] = {"code": code, "name": name, "kind": kind,
+                                          "mapping_asof": p.stem, "change_pct_indicative": None}
+        for item in snap.get("hot_sectors", []):
+            kind, code, name = item.get("board_type"), item.get("code"), item.get("name")
+            if kind in ("industry", "concept") and name and str(code).startswith("BK"):
+                catalog[(kind, name)] = {"code": code, "name": name, "kind": kind,
+                                          "mapping_asof": p.stem, "change_pct_indicative": None}
+    return catalog
+
+def effective_close(root, day):
+    """Render and score a dated revision if one exists; keep original close immutable."""
+    version = data_path(root, "close_revisions", day)
+    return load_json(version if version.exists() else data_path(root, "close", day))
+
 def collect_close(day, root=ROOT, now=None):
     now = now or utc_now()
     local = now.astimezone(BJ)
@@ -255,7 +281,12 @@ def collect_close(day, root=ROOT, now=None):
     frozen = load_json(forecast_path) if forecast_path.exists() else None
     plan, forecast_status, morning_analysis_sha256 = observation_plan(day, root, frozen)
     print(f"GMR_CLOSE stage=boards elapsed={time.monotonic()-started:.1f}s benchmark={benchmark['status']}", flush=True)
-    boards = list_sectors("industry", warnings) + list_sectors("concept", warnings)
+    live_boards = list_sectors("industry", warnings) + list_sectors("concept", warnings)
+    boards = live_boards
+    if not boards:
+        boards = list(historical_board_catalog(root, day).values())
+        if boards:
+            warnings.append("board listing unavailable; only previous verified board identities reused, same-day K-lines independently fetched")
     print(f"GMR_CLOSE stage=groups elapsed={time.monotonic()-started:.1f}s board_count={len(boards)}", flush=True)
     board_by_kind_name = {(b["kind"], b["name"]): b for b in boards}
     selected = find_tracks(plan)
@@ -327,7 +358,7 @@ def collect_close(day, root=ROOT, now=None):
                        else "unfrozen_observation" if not frozen else "not_scorable"})
     print(f"GMR_CLOSE stage=hot elapsed={time.monotonic()-started:.1f}s groups={len(groups)}", flush=True)
     hot = []
-    for board in sorted(boards, key=lambda b: b["change_pct_indicative"] if isinstance(b["change_pct_indicative"], (int, float)) else -999, reverse=True):
+    for board in sorted(live_boards, key=lambda b: b["change_pct_indicative"] if isinstance(b["change_pct_indicative"], (int, float)) else -999, reverse=True):
         if past_budget():
             warnings.append("time budget exhausted; remaining hot sector scan skipped")
             break
@@ -377,6 +408,74 @@ def collect_close(day, root=ROOT, now=None):
     dump_json(out, result)
     return "collected"
 
+def enrich_close(day, root=ROOT):
+    """Append one source-attributed corrected view if a sealed raw day lacks board quotes."""
+    base_path = data_path(root, "close", day)
+    revision_path = data_path(root, "close_revisions", day)
+    if not base_path.exists():
+        return "base_close_missing"
+    if revision_path.exists():
+        return "revision_already_exists"
+    import copy
+    raw = load_json(base_path)
+    candidate = copy.deepcopy(raw)
+    catalog = historical_board_catalog(root, day)
+    forecast = data_path(root, "forecasts", day)
+    if not catalog or not forecast.exists():
+        return "historical_board_identity_or_forecast_missing"
+    frozen = load_json(forecast)
+    by_track = {x["key"]: x for x in frozen.get("watchlist", {}).get("tracks", [])}
+    recovered = []
+    attempted = set()
+    for group in candidate.get("predicted_groups", []):
+        for component in group.get("components", []):
+            if component.get("quote", {}).get("status") == "ok":
+                continue
+            track = by_track.get(component.get("key"))
+            if not track:
+                # Unknown morning topics are not assigned after-the-fact substitutes.
+                continue
+            match = next((catalog[(track["board_type"], alias)] for alias in track.get("board_names", [])
+                          if (track["board_type"], alias) in catalog), None)
+            if not match:
+                continue
+            key = match["code"]
+            if key not in attempted:
+                attempted.add(key)
+                print(f"GMR_CLOSE_ENRICH board={match['name']} code={key}", flush=True)
+            quote = safe_bar("90." + key, day, candidate.setdefault("warnings", []), match["name"])
+            if quote.get("status") != "ok" or quote.get("market_date") != day:
+                continue
+            quote["recovered_at_utc"] = utc_now().isoformat()
+            quote["identity_mapping_asof"] = match["mapping_asof"]
+            component.update({"board_name": match["name"], "board_code": key,
+                              "is_proxy": match["name"] != component.get("name"), "quote": quote})
+            recovered.append(match["name"])
+        components = group.get("components", [])
+        eligible = bool(components) and all(
+            c.get("quote", {}).get("status") == "ok" and not c.get("is_proxy")
+            and c["quote"].get("market_date") == day for c in components)
+        move = round(sum(c["quote"]["change_pct"] for c in components) / len(components), 4) if eligible else None
+        benchmark = candidate.get("benchmark", {}).get("quote", {})
+        bias = group.get("bias")
+        group["aggregated_change_pct"] = move
+        group["excess_vs_csi300_pct"] = (round(move - benchmark["change_pct"], 4)
+            if move is not None and benchmark.get("status") == "ok" and benchmark.get("market_date") == day else None)
+        group["direction_hit"] = ((move > 0 if bias == "positive" else move < 0)
+            if candidate.get("forecast_sha256") and move is not None and move != 0
+            and bias in ("positive", "negative") else None)
+        group["evaluation"] = ("directional" if group["direction_hit"] is not None else
+                               "unfrozen_observation" if not candidate.get("forecast_sha256") else "not_scorable")
+    if not recovered:
+        return "no_verified_same_day_board_quotes"
+    candidate["revision_kind"] = "historically_confirmed_board_identity_with_same_day_kline"
+    candidate["original_close_sha256"] = hashlib.sha256(base_path.read_bytes()).hexdigest()
+    candidate["enriched_at_utc"] = utc_now().isoformat()
+    candidate["recovered_board_names"] = sorted(set(recovered))
+    candidate["warnings"].append("board index recovered via historical vendor identity and same-day Kline; original snapshot preserved")
+    dump_json(revision_path, candidate)
+    return "enriched: " + ", ".join(sorted(set(recovered)))
+
 def render_close(root=ROOT):
     from .close_render import render_close_report, render_close_archive, render_close_home, validate_close_analysis
     snapshots = sorted((root / "data/close").glob("*/*/*.json"))
@@ -386,7 +485,7 @@ def render_close(root=ROOT):
         analysis_path = data_path(root, "close_analysis", day)
         if not analysis_path.exists():
             continue
-        raw, analysis = load_json(path), load_json(analysis_path)
+        raw, analysis = effective_close(root, day), load_json(analysis_path)
         if raw.get("report_date") != day or analysis.get("report_date") != day:
             raise ValueError(f"date mismatch: {day}")
         validate_close_analysis(analysis)
@@ -397,7 +496,7 @@ def render_close(root=ROOT):
     folder = root / "reports/close"
     folder.mkdir(parents=True, exist_ok=True)
     (folder / "archive.html").write_text(render_close_archive(ready), encoding="utf-8")
-    latest_raw = load_json(data_path(root, "close", max(ready))) if ready else None
+    latest_raw = effective_close(root, max(ready)) if ready else None
     latest_analysis = load_json(data_path(root, "close_analysis", max(ready))) if ready else None
     (folder / "index.html").write_text(render_close_home(latest_raw, latest_analysis), encoding="utf-8")
     return ready
@@ -413,7 +512,7 @@ def check_release(day, root=ROOT):
     if not analysis_path.exists(): errors.append("verified close analysis missing")
     if not html.exists() or not index.exists(): errors.append("close HTML missing")
     if errors: return {"complete": False, "errors": errors, "warnings": warnings, "date": day}
-    data, analysis = load_json(raw_path), load_json(analysis_path)
+    data, analysis = effective_close(root, day), load_json(analysis_path)
     try: validate_close_analysis(analysis)
     except ValueError as exc: errors.append(str(exc))
     if data.get("benchmark", {}).get("quote", {}).get("market_date") != day:
@@ -450,6 +549,7 @@ def main():
     mode.add_argument("--freeze-only", action="store_true")
     mode.add_argument("--collect-only", action="store_true")
     mode.add_argument("--render-only", action="store_true")
+    mode.add_argument("--enrich-only", action="store_true")
     mode.add_argument("--check", action="store_true")
     args = p.parse_args()
     day = args.date or utc_now().astimezone(BJ).date().isoformat()
@@ -461,6 +561,7 @@ def main():
         if result not in ("collected", "already_collected", "weekend", "not_collection_window"):
             raise SystemExit(1)
     elif args.render_only: print("rendered: " + str(render_close()))
+    elif args.enrich_only: print(enrich_close(day))
     else:
         result = check_release(day)
         print(json.dumps(result, ensure_ascii=False, indent=2))
