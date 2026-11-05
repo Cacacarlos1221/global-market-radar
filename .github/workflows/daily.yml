@@ -13,6 +13,7 @@ on:
       - 'data/supplements/**'
       - 'scripts/render.py'
       - 'scripts/sources.py'
+      - 'scripts/curate_data.py'
       - 'config/instruments.json'
       - 'docs/REPORT_SPEC.md'
       - '.github/workflows/daily.yml'
@@ -50,6 +51,8 @@ jobs:
           # Original daily snapshot remains sealed. Recover missing core quotes in
           # separate versioned supplements. Do not render until analysis exists.
           python -m scripts.backfill_missing --date "$REPORT_DATE"
+          # Always archive complete corrected research facts, even without AI analysis.
+          python -m scripts.curate_data
           if [ -f "$REPORT_PATH" ] && [ -f "$ANALYSIS_PATH" ]; then
             python -m scripts.pipeline --render-only
             python -m scripts.release_check --date "$REPORT_DATE"
