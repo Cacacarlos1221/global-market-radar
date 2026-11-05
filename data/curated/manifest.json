@@ -1,0 +1,21 @@
+{
+  "daily_files": 3,
+  "dataset_type": "curated_history_manifest",
+  "history_csv": "data/curated/history/quotes.csv",
+  "price_usable_rows": 36,
+  "primary_key": [
+    "report_date",
+    "asset_key"
+  ],
+  "quote_rows": 36,
+  "raw_history_unchanged": true,
+  "report_dates": [
+    "2026-11-03",
+    "2026-11-04",
+    "2026-11-05"
+  ],
+  "return_usable_rows": 33,
+  "schema_version": "1.0",
+  "source_corrected_rows": 2,
+  "supplemented_rows": 1
+}
