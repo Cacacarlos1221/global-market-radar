@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "description": "用户确认的映射在未来晨间冻结时才生效；候选仅供复核，不会自动进入预测评分。",
+  "approved": [],
+  "proposals": [
+    {
+      "topic": "贵金属",
+      "priority": "high",
+      "status": "pending_user_confirmation",
+      "first_verified_gap": "2026-11-05",
+      "user_reported_recurrent": true,
+      "reason": "2026-11-05盘前positive但收盘组未配置板块指数；用户另反馈主题连续两日出现，待核实历史研判次数。",
+      "candidates": [
+        {
+          "index_name": "贵金属",
+          "vendor": "东方财富行业板块",
+          "index_code": "BK0732",
+          "board_type": "industry",
+          "mapping_type": "exact_name_candidate",
+          "source_url": "https://daxiapi.com/dfcf-gainian.html",
+          "verification": "public_catalog_identity_only; same-day K-line and constituents not yet QA-verified",
+          "note": "A股贵金属股票行业走势，非黄金现货/商品价格；须用户确认用于GMR板块评分。"
+        },
+        {
+          "index_name": "中国贵金属指数",
+          "vendor": "上海有色网",
+          "index_code": "SMMI.PM",
+          "board_type": "commodity",
+          "mapping_type": "different_asset_class",
+          "source_url": "https://www.smm.cn/pmi_index",
+          "verification": "public_source",
+          "note": "代表贵金属商品价格，不能替代A股贵金属板块股票走势；只适合商品市场背景观察。"
+        }
+      ],
+      "question": "请确认：以后对A股「贵金属」板块方向，是否固定采用东方财富行业板块 BK0732（而非黄金现货价格）？",
+      "proposed_track": {
+        "key": "precious_metals",
+        "name": "贵金属",
+        "terms": [
+          "贵金属"
+        ],
+        "board_names": [
+          "贵金属"
+        ],
+        "board_type": "industry",
+        "stocks": []
+      }
+    },
+    {
+      "topic": "券商与宽基指数",
+      "priority": "high",
+      "status": "pending_user_definition",
+      "first_verified_gap": "2026-11-04",
+      "reason": "组合中券商与宽基的测量口径不清：已有券商观察股，缺确认的证券指数；宽基应选择哪个基准亦未明确。",
+      "candidates": [
+        {
+          "index_name": "证券Ⅱ",
+          "vendor": "东方财富行业板块",
+          "index_code": "BK0473",
+          "board_type": "industry",
+          "mapping_type": "related_name_requires_approval",
+          "source_url": "https://daxiapi.com/dfcf-gainian.html",
+          "verification": "public_catalog_identity_only",
+          "note": "用于券商子板块候选，和名称「券商」并非完全同名；需要确认。"
+        },
+        {
+          "index_name": "沪深300",
+          "vendor": "中证指数",
+          "index_code": "000300",
+          "board_type": "benchmark",
+          "mapping_type": "benchmark_candidate",
+          "source_url": "https://www.csindex.com.cn/",
+          "verification": "already_collected_in_GMR_close",
+          "note": "可作为宽基候选，但若本身用沪深300做超额收益基准，须明确是否重复统计。"
+        }
+      ],
+      "question": "请定义「券商与宽基」：拆成券商、沪深300两条独立观察，还是保留组合并明确两个指数及合成权重？"
+    },
+    {
+      "topic": "出口制造",
+      "priority": "medium",
+      "status": "pending_user_definition",
+      "first_verified_gap": "2026-11-04",
+      "reason": "不是标准单一行业板块，缺固定的可重复市场指数或可解释的子行业篮子。",
+      "candidates": [],
+      "question": "「出口制造」希望跟踪哪些固定子行业（如家电、纺织、汽车零部件）？需要你确定适合的市场指数或拆分口径。"
+    },
+    {
+      "topic": "AI服务器",
+      "priority": "medium",
+      "status": "pending_proxy_review",
+      "first_verified_gap": "2026-11-04",
+      "reason": "目前液冷服务器仅是代理观察，不等同于AI服务器整体行业；需预先定义未来的跟踪对象。",
+      "candidates": [
+        {
+          "index_name": "液冷服务器",
+          "vendor": "东方财富概念板块",
+          "index_code": "BK1138",
+          "board_type": "concept",
+          "mapping_type": "proxy_not_strict_score",
+          "source_url": "https://github.com/Cacacarlos1221/global-market-radar/blob/main/data/close/2026/11/2026-11-04.json",
+          "verification": "historical_GMR_verified_board_identity",
+          "note": "若继续使用，应明确仅代理观察，不能自动宣称预测AI服务器整体的方向。"
+        }
+      ],
+      "question": "是否继续把液冷服务器 BK1138 作为AI服务器的公开代理观察指标？如要严格评分，建议改为你认可的精确主题定义。"
+    },
+    {
+      "topic": "稀土",
+      "priority": "medium",
+      "status": "pending_proxy_review",
+      "first_verified_gap": "2026-11-04",
+      "reason": "稀土永磁当前作为稀土代理，不等于整个稀土产业；虽有行情也不直接用于严格评分。",
+      "candidates": [
+        {
+          "index_name": "稀土永磁",
+          "vendor": "东方财富概念板块",
+          "index_code": "BK0578",
+          "board_type": "concept",
+          "mapping_type": "proxy_not_strict_score",
+          "source_url": "https://github.com/Cacacarlos1221/global-market-radar/blob/main/data/close/2026/11/2026-11-04.json",
+          "verification": "historical_GMR_verified_board_identity",
+          "note": "需明确未来使用代理还是另寻完整稀土产业指数。"
+        }
+      ],
+      "question": "稀土方向继续只观察稀土永磁 BK0578，还是使用另一个更贴近稀土产业的指数？"
+    }
+  ]
+}
