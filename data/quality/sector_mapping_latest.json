@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T09:02:39.434077+00:00",
+  "generated_at_utc": "2026-11-05T09:10:32.642966+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05"
   ],
-  "pending_count": 4,
+  "pending_count": 3,
   "high_priority_count": 1,
   "pending": [
     {
@@ -118,59 +118,6 @@
       ],
       "candidate_indices": [],
       "user_question": "「出口制造」希望跟踪哪些固定子行业（如家电、纺织、汽车零部件）？需要你确定适合的市场指数或拆分口径。",
-      "user_reported_recurrent": false,
-      "existing_proposal": true
-    },
-    {
-      "topic": "稀土",
-      "priority": "medium",
-      "status": "pending_proxy_review",
-      "observed_dates": [
-        "2026-11-04",
-        "2026-11-05"
-      ],
-      "observed_days": 2,
-      "last_observed": "2026-11-05",
-      "seen_today": true,
-      "groups": [
-        "稀土与有色金属"
-      ],
-      "biases": [
-        "watch"
-      ],
-      "gap_reasons": [
-        "现有板块是代理指标，需确认是否适合该预测主题"
-      ],
-      "candidate_indices": [
-        {
-          "index_name": "稀土",
-          "vendor": "同花顺行业板块",
-          "index_code": "884215",
-          "board_type": "industry",
-          "mapping_type": "exact_rare_earth_producers_but_narrow_constituents",
-          "source_url": "https://basic.10jqka.com.cn/884215/",
-          "verification": "ths_official_name_code_and_four_constituents_verified; historical_daily_kline_2026-11-05_probe_failed_remote_disconnected",
-          "constituents_observed": 4,
-          "note": "聚焦北方稀土、中国稀土、中稀有色、盛和资源四家核心稀土企业；比稀土永磁代理更精准，但中国稀土可能停牌，仍需检验指数交易日K和数据接口稳定性。",
-          "source_qa_path": "data/quality/sector_index_probe/2026/11/ths_2026-11-05.json",
-          "last_probe": {
-            "market_date": "2026-11-05",
-            "status": "unavailable",
-            "reason": "AKShare/THS industry endpoint connection aborted by remote host"
-          }
-        },
-        {
-          "index_name": "稀土永磁",
-          "vendor": "东方财富概念板块",
-          "index_code": "BK0578",
-          "board_type": "concept",
-          "mapping_type": "proxy_not_strict_score",
-          "source_url": "https://github.com/Cacacarlos1221/global-market-radar/blob/main/data/close/2026/11/2026-11-04.json",
-          "verification": "historical_GMR_verified_board_identity",
-          "note": "需明确未来使用代理还是另寻完整稀土产业指数。"
-        }
-      ],
-      "user_question": "同花顺884215「稀土」聚焦4家主要稀土企业，比东方财富BK0578稀土永磁代理更精确；如果同花顺日K采集可稳定自动化，是否将884215用于未来稀土核心方向评分，BK0578保留扩大观察？",
       "user_reported_recurrent": false,
       "existing_proposal": true
     }
