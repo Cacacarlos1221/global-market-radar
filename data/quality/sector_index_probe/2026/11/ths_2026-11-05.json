@@ -1,0 +1,45 @@
+{
+  "akshare_version": "1.20.29",
+  "generated_at_utc": "2026-11-05T09:00:34.959440+00:00",
+  "probe_only_no_production_source_change": true,
+  "report_date": "2026-11-05",
+  "ths_884215_rare_industry": {
+    "days": [],
+    "error": "ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
+    "interface": "stock_board_industry_index_ths",
+    "last_quote": null,
+    "same_day_bar": false,
+    "status": "unavailable",
+    "symbol": "稀土"
+  },
+  "ths_885530_gold_concept": {
+    "columns": [
+      "日期",
+      "开盘价",
+      "最高价",
+      "最低价",
+      "收盘价",
+      "成交量",
+      "成交额"
+    ],
+    "days": [
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05"
+    ],
+    "interface": "stock_board_concept_index_ths",
+    "last_quote": {
+      "开盘价": "3162.891",
+      "成交量": "2953894100",
+      "成交额": "43950766000.0",
+      "收盘价": "3209.687",
+      "日期": "2026-11-05",
+      "最低价": "3159.476",
+      "最高价": "3223.9"
+    },
+    "same_day_bar": true,
+    "status": "ok",
+    "symbol": "黄金概念"
+  }
+}
