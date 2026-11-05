@@ -37,8 +37,10 @@ def audit(asof, root=ROOT):
     datetime.strptime(asof, "%Y-%m-%d")
     path = root / "config/sector_index_registry.json"
     registry = load_json(path) if path.is_file() else {"approved": [], "proposals": []}
+    # Approval resolves the user-review question immediately; effective_from is
+    # separately enforced by morning freeze, and never permits backdating.
     approved = {x.get("topic") for x in registry.get("approved", [])
-                if x.get("effective_from", "9999-99-99") <= asof}
+                if x.get("status") == "approved"}
     proposals = {x["topic"]: x for x in registry.get("proposals", [])
                  if x.get("status", "").startswith("pending")}
     files = sorted(x for x in (root / "data/close").glob("*/*/*.json")
