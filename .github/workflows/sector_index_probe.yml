@@ -1,0 +1,36 @@
+name: GMR sector index source QA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/probe_sector_index.py'
+      - '.github/workflows/sector_index_probe.yml'
+permissions:
+  contents: write
+concurrency:
+  group: market-radar-index-probe
+  cancel-in-progress: false
+jobs:
+  verify_index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Probe same-day K-line availability without changing frozen forecasts
+        run: |
+          python -m scripts.probe_sector_index --date 2026-11-05
+      - name: Commit read-only QA record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/quality/sector_index_probe
+          if ! git diff --cached --quiet; then
+            git commit -m "data: record prospective sector-index source QA"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
