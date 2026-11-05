@@ -1,0 +1,41 @@
+name: GMR sector index mapping audit
+on:
+  schedule:
+    - cron: '25 8 * * 1-5' # Beijing 16:25 on weekdays, after the close fallback
+  workflow_dispatch:
+  push:
+    paths:
+      - 'config/sector_index_registry.json'
+      - 'scripts/sector_mapping_audit.py'
+      - '.github/workflows/sector_mapping_audit.yml'
+permissions:
+  contents: write
+concurrency:
+  group: market-radar-sector-mapping-audit
+  cancel-in-progress: false
+jobs:
+  mapping_audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Scan frozen tracking gaps and repeated unmapped themes
+        run: |
+          DAY=$(TZ=Asia/Shanghai date +%Y-%m-%d)
+          python -m scripts.sector_mapping_audit --date "$DAY"
+          python -m unittest tests.test_sector_mapping_audit -v
+      - name: Archive mapping backlog and refresh latest summary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- data/quality/sector_mapping data/quality/sector_mapping_latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: audit user-reviewable GMR sector mappings"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
