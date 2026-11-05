@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T08:38:47.858688+00:00",
+  "generated_at_utc": "2026-11-05T08:39:26.605475+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05"
   ],
-  "pending_count": 7,
-  "high_priority_count": 4,
+  "pending_count": 5,
+  "high_priority_count": 2,
   "pending": [
     {
-      "topic": "券商",
+      "topic": "券商与宽基指数",
       "priority": "high",
-      "status": "needs_mapping_review",
+      "status": "pending_user_definition",
       "observed_dates": [
         "2026-11-04",
         "2026-11-05"
@@ -29,38 +29,34 @@
         "watch"
       ],
       "gap_reasons": [
-        "有候选板块名称，但没有核验通过的指数代码"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「券商」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
-      "topic": "宽基指数",
-      "priority": "high",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-04",
-        "2026-11-05"
-      ],
-      "observed_days": 2,
-      "last_observed": "2026-11-05",
-      "seen_today": true,
-      "groups": [
-        "券商与宽基指数"
-      ],
-      "biases": [
-        "positive",
-        "watch"
-      ],
-      "gap_reasons": [
+        "有候选板块名称，但没有核验通过的指数代码",
         "组合内宽基指数尚未明确口径"
       ],
-      "candidate_indices": [],
-      "user_question": "请确认「宽基指数」的固定指数代码、供应商与是否仅作代理观察。",
+      "candidate_indices": [
+        {
+          "index_name": "证券Ⅱ",
+          "vendor": "东方财富行业板块",
+          "index_code": "BK0473",
+          "board_type": "industry",
+          "mapping_type": "related_name_requires_approval",
+          "source_url": "https://daxiapi.com/dfcf-gainian.html",
+          "verification": "public_catalog_identity_only",
+          "note": "用于券商子板块候选，和名称「券商」并非完全同名；需要确认。"
+        },
+        {
+          "index_name": "沪深300",
+          "vendor": "中证指数",
+          "index_code": "000300",
+          "board_type": "benchmark",
+          "mapping_type": "benchmark_candidate",
+          "source_url": "https://www.csindex.com.cn/",
+          "verification": "already_collected_in_GMR_close",
+          "note": "可作为宽基候选，但若本身用沪深300做超额收益基准，须明确是否重复统计。"
+        }
+      ],
+      "user_question": "请定义「券商与宽基」：拆成券商、沪深300两条独立观察，还是保留组合并明确两个指数及合成权重？",
       "user_reported_recurrent": false,
-      "existing_proposal": false
+      "existing_proposal": true
     },
     {
       "topic": "贵金属",
@@ -105,43 +101,6 @@
       ],
       "user_question": "请确认：以后对A股「贵金属」板块方向，是否固定采用东方财富行业板块 BK0732（而非黄金现货价格）？",
       "user_reported_recurrent": true,
-      "existing_proposal": true
-    },
-    {
-      "topic": "券商与宽基指数",
-      "priority": "high",
-      "status": "pending_user_definition",
-      "observed_dates": [],
-      "observed_days": 0,
-      "last_observed": null,
-      "seen_today": false,
-      "groups": [],
-      "biases": [],
-      "gap_reasons": [],
-      "candidate_indices": [
-        {
-          "index_name": "证券Ⅱ",
-          "vendor": "东方财富行业板块",
-          "index_code": "BK0473",
-          "board_type": "industry",
-          "mapping_type": "related_name_requires_approval",
-          "source_url": "https://daxiapi.com/dfcf-gainian.html",
-          "verification": "public_catalog_identity_only",
-          "note": "用于券商子板块候选，和名称「券商」并非完全同名；需要确认。"
-        },
-        {
-          "index_name": "沪深300",
-          "vendor": "中证指数",
-          "index_code": "000300",
-          "board_type": "benchmark",
-          "mapping_type": "benchmark_candidate",
-          "source_url": "https://www.csindex.com.cn/",
-          "verification": "already_collected_in_GMR_close",
-          "note": "可作为宽基候选，但若本身用沪深300做超额收益基准，须明确是否重复统计。"
-        }
-      ],
-      "user_question": "请定义「券商与宽基」：拆成券商、沪深300两条独立观察，还是保留组合并明确两个指数及合成权重？",
-      "user_reported_recurrent": false,
       "existing_proposal": true
     },
     {
