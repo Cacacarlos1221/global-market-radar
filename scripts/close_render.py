@@ -60,11 +60,56 @@ def stock_table(stocks, legend):
             '<div class="table-wrap"><table><thead><tr><th>股票</th><th>日涨跌</th><th>收盘价</th><th>交易日</th>'
             '</tr></thead><tbody>' + "".join(rows) + '</tbody></table></div>')
 
+def forecast_verdict(group, frozen):
+    """Never treat an observation label as a directional hit or a market-data failure."""
+    if not frozen:
+        return "仅供观察（未冻结）"
+    if group.get("bias") in ("mixed", "watch", "neutral"):
+        return "非方向研判（不计命中率）"
+    hit = group.get("direction_hit")
+    if hit is True:
+        return "方向一致"
+    if hit is False:
+        return "方向偏离"
+    components = group.get("components", [])
+    if any(x.get("is_proxy") for x in components):
+        return "代理指数不计分"
+    return "缺完整同名指数（待评分）"
+
+def observation_overview(groups, benchmark, frozen):
+    """One glance at *every* frozen opinion, independent of strict scoring."""
+    market_date = benchmark.get("market_date")
+    benchmark_pct = benchmark.get("change_pct") if benchmark.get("status") == "ok" else None
+    rows = []
+    for group in groups:
+        components = []
+        for item in group.get("components", []):
+            q = item.get("quote") or {}
+            if q.get("status") != "ok" or q.get("market_date") != market_date:
+                continue
+            change = q.get("change_pct")
+            if not isinstance(change, (int, float)):
+                continue
+            title = item.get("board_name") or item.get("name")
+            proxy = "（代理）" if item.get("is_proxy") else ""
+            extra = (round(change - benchmark_pct, 4)
+                     if isinstance(benchmark_pct, (int, float)) else None)
+            components.append(safe(title) + proxy + " <span class=\"" + colour(change) + "\">" +
+                              pct(change) + "</span>（超额" + pct(extra, "个百分点") + "）")
+        value = "；".join(components) if components else "暂无严格对应的当日板块指数"
+        rows.append("<tr><td>" + safe(group.get("sector")) + "</td><td>" +
+                    bias_tag(group.get("bias")) + "</td><td>" + value +
+                    "</td><td>" + safe(forecast_verdict(group, frozen)) + "</td></tr>")
+    return ('<div class="table-wrap"><table><thead><tr><th>盘前关注主题</th>'
+            '<th>冻结标签</th><th>当日板块表现与相对沪深300</th><th>方向评分状态</th>'
+            '</tr></thead><tbody>' + "".join(rows) + '</tbody></table></div>'
+            '<p class="small">说明：Positive/Negative 才有明确涨跌方向；Mixed、Watch、Neutral '
+            '不是上涨或下跌预测，仍逐项对照收盘表现。代理指标可观察，但不可冒充原主题。'
+            '方向一致率只统计真正有方向、且获得同日严格对应指数的研判；不能把1/1理解成8/8。</p>')
+
 def predicted_card(group, benchmark=None):
     direction = group.get("direction_hit")
-    status = ('仅作收盘观察（无预测冻结）' if group.get("evaluation") == "unfrozen_observation"
-              else '方向一致' if direction is True else '方向偏离' if direction is False
-              else '不计分（缺指数/代理或非方向判断）')
+    status = forecast_verdict(group, group.get("evaluation") != "unfrozen_observation")
     delta = group.get("aggregated_change_pct")
     benchmark = benchmark or {}
     benchmark_pct = benchmark.get("change_pct") if benchmark.get("status") == "ok" else None
@@ -120,7 +165,7 @@ def narrative(analysis):
                       safe(item.get("finding")) + '</p><div class="small">相关来源：' +
                       cite_refs(item, sources) + '</div></article>')
     if analysis.get("attributions"):
-        blocks.append('<h3>预测偏差与可能的驱动因素</h3>')
+        blocks.append('<h3>盘前研判对照与可能的驱动因素</h3>')
         for item in analysis["attributions"]:
             blocks.append('<article class="news-card"><strong>' + safe(item.get("sector")) +
                           '</strong><p>实际表现：' + safe(item.get("observation")) +
@@ -156,7 +201,11 @@ def render_close_report(raw, analysis, prefix="../../"):
     groups = raw.get("predicted_groups", [])
     evaluable = [x for x in groups if x.get("direction_hit") is not None]
     hits = sum(x.get("direction_hit") is True for x in evaluable)
+    directional = sum(x.get("bias") in ("positive", "negative") for x in groups)
     quote = raw.get("benchmark", {}).get("quote", {})
+    observable = sum(any(c.get("quote", {}).get("status") == "ok"
+                         and c.get("quote", {}).get("market_date") == raw.get("report_date")
+                         for c in g.get("components", [])) for g in groups)
     benchmark_move = quote.get("change_pct")
     frozen = bool(raw.get("forecast_sha256"))
     scope = raw.get("forecast_status", "frozen" if frozen else "watchlist_only")
@@ -171,9 +220,13 @@ def render_close_report(raw, analysis, prefix="../../"):
             '本页不是投资建议，板块数据源为非官方接口。</div>' +
             '<div class="grid"><article class="metric"><div class="label">今日跟踪主题组</div>' +
             '<div class="value">' + str(len(groups)) + '</div></article>' +
-            '<article class="metric"><div class="label">方向可验证</div><div class="value">' +
+            '<article class="metric"><div class="label">有板块走势可观察</div><div class="value">' +
+            str(observable) + '</div></article>' +
+            '<article class="metric"><div class="label">明确方向判断</div><div class="value">' +
+            str(directional) + '</div></article>' +
+            '<article class="metric"><div class="label">严格可评分</div><div class="value">' +
             str(len(evaluable)) + '</div></article>' +
-            '<article class="metric"><div class="label">方向一致</div><div class="value">' +
+            '<article class="metric"><div class="label">方向一致（有效样本）</div><div class="value">' +
             (str(hits) + '/' + str(len(evaluable)) if evaluable else '不适用') + '</div></article>' +
             '<article class="metric"><div class="label">沪深300 日涨跌</div><div class="value ' +
             colour(benchmark_move) + '">' + pct(benchmark_move) + '</div></article></div>')
@@ -203,7 +256,10 @@ def render_close_report(raw, analysis, prefix="../../"):
                "".join('<li>' + safe(x) + '</li>' for x in warnings) +
                '</ul><p>数据缺失、非同日K线和代理板块不参与方向统计；'
                '未预测的热门板块另列，新闻同现不等于因果。</p></details></div>')
-    body = (head + '<h2>01 / 晨间关注主题与收盘观察</h2>' + forecast_cards +
+    body = (head + '<h2>01 / 晨间关注主题与收盘观察</h2>' +
+            '<h3>全部盘前观点的收盘表现一览</h3>' +
+            observation_overview(groups, quote, frozen) +
+            '<h3>逐组研判理由、指数与代表股</h3>' + forecast_cards +
             '<h2>02 / 盘后发现的热门板块</h2><p class="small">仅展示新发现，不加入盘前预测命中率。</p>' +
             hot_cards + '<h2>03 / GMR 盘后复盘与新闻归因</h2>' + narrative(analysis) +
             '<h2>04 / 新闻检索线索与数据审计</h2>' + source_clues + quality +
