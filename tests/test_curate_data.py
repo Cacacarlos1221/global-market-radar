@@ -81,6 +81,7 @@ class CuratedDataTests(unittest.TestCase):
         snapshot["collected_at_utc"] = "2026-11-03T06:44:56+00:00"
         snapshot["quotes"][0]["market_date"] = "2026-11-03"
         snapshot["quotes"][0]["value_kind"] = "daily_close"
+        snapshot["quotes"][1]["market_date"] = "2026-11-03"
         p = self.root / "data/daily/2026/11/2026-11-03.json"
         p.write_text(json.dumps(snapshot), encoding="utf-8")
         daily = materialize_day(p, self.root)
