@@ -148,3 +148,15 @@ data/close 中 forecast_status 约定为 frozen、morning_analysis_unfrozen、wa
 ## 订正层盘中数据质量规则（2026-11-05）
 
 如果来源将 A 股指数在同一市场日、北京时间 15:15 前采集的日线标为 `daily_close`，订正层不会直接信任该标注：统一标记 `unclosed_cn_session_asof`，并使用 `value_kind=daily_bar_live`（原标签保存到 `raw_value_kind`）。此类值仍可能适合盘中价格研究，但 `usable_for_return_analysis=false`，不能当做日终收益。此保护适用于首次历史归档中的 2026-11-03 下午快照。`available_at_utc` 是进入项目的时间，不是交易所收盘时间。
+
+
+## GMR盘后板块指数修订及评分字段
+
+- 原始行情路径：`data/close/YYYY/MM/YYYY-MM-DD.json`，留存首次收盘采集结果和接口错误。
+- 修订路径：`data/close_revisions/YYYY/MM/YYYY-MM-DD.json`，仅在历史已确认代码可获得当日K线时写入一次；保留原始文件SHA256、恢复时间、历史名称映射的日期和恢复板块列表。渲染和验收默认优先采用修订视图。
+- `recovered_board_names`：在修订中真正重新取得当日有效K线的板块名称；**不是当日涨幅排名**。
+- `original_close_sha256`：修订引用的原始数据文件字节SHA256，用于研究口径溯源。
+- 组件的 `quote.identity_mapping_asof`：供应商板块代码与名称映射来自哪一天的已核验历史事实；`quote.recovered_at_utc`：当天日K补采的实际UTC时刻。值的 `market_date` 必须等于研究交易日。
+- `is_proxy`：板块实际供应商名称不等于被预测的跟踪主题名称时为真；即便涨跌值有效，只可定性对照，不进入严格命中率。
+- `direction_hit`：只有冻结早于09:30、方向标签为positive/negative、全部组合成分有同日同名有效板块指数且走势非零时为布尔值；其他均null。原始晨报的单个组合预测仍是一个样本。
+- 盘后榜单缺失与已恢复固定观察池板块不矛盾。没有当日榜单不应生成热门Top5；也不妨碍发行事实可靠的GMR盘后报告（发布质量标为DEGRADED）。
