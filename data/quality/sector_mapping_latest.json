@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T08:53:08.094530+00:00",
+  "generated_at_utc": "2026-11-05T08:56:03.268782+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
@@ -61,7 +61,7 @@
     {
       "topic": "贵金属",
       "priority": "high",
-      "status": "pending_user_confirmation",
+      "status": "needs_mapping_review",
       "observed_dates": [
         "2026-11-05"
       ],
@@ -77,42 +77,10 @@
       "gap_reasons": [
         "晨报主题没有固定跟踪指数"
       ],
-      "candidate_indices": [
-        {
-          "index_name": "贵金属",
-          "vendor": "东方财富行业板块",
-          "index_code": "BK0732",
-          "board_type": "industry",
-          "mapping_type": "exact_name_candidate",
-          "source_url": "https://quote.eastmoney.com/bk/90.BK0732.html",
-          "verification": "official_eastmoney_board_name_and_code_verified; same-day K-line and membership pending QA",
-          "note": "A股贵金属股票行业走势，非黄金现货/商品价格；须用户确认用于GMR板块评分。"
-        },
-        {
-          "index_name": "黄金概念",
-          "vendor": "同花顺概念板块",
-          "index_code": "885530",
-          "board_type": "concept",
-          "mapping_type": "gold_sector_related_not_exact_precious_metals",
-          "source_url": "https://basic.10jqka.com.cn/885530/",
-          "verification": "ths_official_name_code_and_broad_constituents_verified; automated_daily_kline_not_yet_qa",
-          "constituents_observed": 82,
-          "note": "黄金上中下游广义概念，覆盖约82家公司，含首饰、加工及其他涉金企业；不应直接等同于行业「贵金属」，若未来预测的是黄金概念可单独固定此口径。"
-        },
-        {
-          "index_name": "中国贵金属指数",
-          "vendor": "上海有色网",
-          "index_code": "SMMI.PM",
-          "board_type": "commodity",
-          "mapping_type": "different_asset_class",
-          "source_url": "https://www.smm.cn/pmi_index",
-          "verification": "public_source",
-          "note": "代表贵金属商品价格，不能替代A股贵金属板块股票走势；只适合商品市场背景观察。"
-        }
-      ],
-      "user_question": "GMR的「贵金属」建议以东方财富行业贵金属BK0732作为主评分指标；同花顺黄金概念885530覆盖更广、用于独立黄金产业链观察。是否批准主评分指标？先核验BK0732当天有效K线。",
-      "user_reported_recurrent": true,
-      "existing_proposal": true
+      "candidate_indices": [],
+      "user_question": "请确认「贵金属」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
     },
     {
       "topic": "AI服务器",
