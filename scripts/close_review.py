@@ -433,7 +433,11 @@ def main():
     day = args.date or utc_now().astimezone(BJ).date().isoformat()
     datetime.strptime(day, "%Y-%m-%d")
     if args.freeze_only: print(freeze_forecast(day))
-    elif args.collect_only: print(collect_close(day))
+    elif args.collect_only:
+        result = collect_close(day)
+        print(result)
+        if result not in ("collected", "already_collected", "weekend", "not_collection_window"):
+            raise SystemExit(1)
     elif args.render_only: print("rendered: " + str(render_close()))
     else:
         result = check_release(day)
