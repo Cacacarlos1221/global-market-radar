@@ -16,7 +16,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: market-radar-writer
+  group: market-radar-close-writer
   cancel-in-progress: false
 jobs:
   after_close:
