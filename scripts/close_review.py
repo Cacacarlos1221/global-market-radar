@@ -32,6 +32,46 @@ def as_utc(value):
         raise ValueError("时间必须包含时区")
     return dt.astimezone(timezone.utc)
 
+def approved_watchlist(root, day, now):
+    """Apply only user-confirmed sector tracks with a strictly future effective day."""
+    watch = load_json(root / "config/sector_watchlist.json")
+    registry_path = root / "config/sector_index_registry.json"
+    if not registry_path.exists():
+        return watch, [], None
+    registry = load_json(registry_path)
+    tracks = list(watch.get("tracks", []))
+    applied = []
+    for decision in registry.get("approved", []):
+        if decision.get("status") != "approved":
+            continue
+        try:
+            approved_at = as_utc(decision["approved_at_utc"])
+            effective = datetime.strptime(decision["effective_from"], "%Y-%m-%d").date()
+            track = decision["track"]
+            if (approved_at > now or effective <= approved_at.astimezone(BJ).date()
+                    or effective.isoformat() > day):
+                continue
+            if not (track.get("key") and track.get("name")
+                    and track.get("board_type") in ("industry", "concept")
+                    and isinstance(track.get("board_names"), list)
+                    and all(isinstance(name, str) and name for name in track["board_names"])
+                    and track["board_names"]):
+                continue
+            tracks = [x for x in tracks if x.get("key") != track["key"]]
+            tracks.append({
+                "key": track["key"], "name": track["name"],
+                "terms": list(track.get("terms", [track["name"]])),
+                "board_names": list(track["board_names"]), "board_type": track["board_type"],
+                "stocks": list(track.get("stocks", []))
+            })
+            applied.append({"topic": decision.get("topic", track["name"]),
+                            "key": track["key"], "effective_from": decision["effective_from"],
+                            "approved_at_utc": decision["approved_at_utc"]})
+        except (KeyError, TypeError, ValueError):
+            continue
+    watch["tracks"] = tracks
+    return watch, applied, hashlib.sha256(registry_path.read_bytes()).hexdigest()
+
 def freeze_forecast(day, root=ROOT, now=None):
     """晨间写入不可变预选股票池；开盘后禁止补冻或伪装历史预测。"""
     now = now or utc_now()
@@ -50,7 +90,7 @@ def freeze_forecast(day, root=ROOT, now=None):
     generated = as_utc(analysis["generated_at_utc"])
     if generated > now or generated.astimezone(BJ).time() >= clock(9, 30):
         return "late_morning_analysis"
-    watch = load_json(root / "config/sector_watchlist.json")
+    watch, mapping_decisions, mapping_sha = approved_watchlist(root, day, now)
     forecast = {
         "schema_version": "1.0", "report_date": day,
         "frozen_at_utc": now.isoformat(), "forecast_generated_at_utc": analysis["generated_at_utc"],
@@ -59,6 +99,8 @@ def freeze_forecast(day, root=ROOT, now=None):
         "a_share_sectors": analysis["a_share_sectors"],
         "a_share_outlook": analysis.get("a_share_outlook"),
         "watchlist": watch,
+        "sector_mapping_approvals_applied": mapping_decisions,
+        "sector_mapping_registry_sha256": mapping_sha,
         "selection_rule": "每条盘前组合研判仅计一个评估样本，子板块及预选股不独立增加预测次数",
         "unconfigured_sector_policy": "仅允许依原始晨报板块全名，在行业板块和概念板块中进行完全同名的确定性匹配，绝不追涨挑选近义词"
     }
