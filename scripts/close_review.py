@@ -58,12 +58,17 @@ def approved_watchlist(root, day, now):
                     and track["board_names"]):
                 continue
             tracks = [x for x in tracks if x.get("key") != track["key"]]
-            tracks.append({
+            new_track = {
                 "key": track["key"], "name": track["name"],
                 "terms": list(track.get("terms", [track["name"]])),
                 "board_names": list(track["board_names"]), "board_type": track["board_type"],
-                "stocks": list(track.get("stocks", []))
-            })
+                "stocks": list(track.get("stocks", [])), "user_approved": True
+            }
+            code = str(track.get("board_code") or "")
+            if code.startswith("BK") and code[2:].isdigit():
+                new_track["board_code"] = code
+                new_track["board_name"] = str(track.get("board_name") or track["board_names"][0])
+            tracks.append(new_track)
             applied.append({"topic": decision.get("topic", track["name"]),
                             "key": track["key"], "effective_from": decision["effective_from"],
                             "approved_at_utc": decision["approved_at_utc"]})
@@ -394,6 +399,12 @@ def collect_close(day, root=ROOT, now=None):
                        for alias in track["board_names"]
                        if (track["board_type"], alias) in board_by_kind_name]
             matched = matches[0] if matches else None
+            # User-approved and frozen vendor ID can bypass broken board-list API.
+            if (track.get("user_approved") and str(track.get("board_code", "")).startswith("BK")
+                    and str(track["board_code"])[2:].isdigit()):
+                matched = {"code": track["board_code"],
+                           "name": track.get("board_name") or track["board_names"][0],
+                           "kind": track["board_type"]}
             quote = board_price(matched) if matched else {"status": "unavailable", "change_pct": None}
             component = {"key": track["key"], "name": track["name"],
                          "board_name": matched["name"] if matched else None,
