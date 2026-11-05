@@ -129,7 +129,7 @@ def materialize_day(snapshot_path, root=ROOT):
         "quotes": quotes, "news": original.get("news", []),
         "source_errors": original.get("source_errors", {}),
         "limitations": original.get("limitations", []),
-        "methodology": "Deterministic raw+supplement overlay; use available_at_utc for as-of research."
+        "methodology": "Deterministic raw+supplement overlay. Use available_at_utc for as-of research; CN index bars observed before 15:15 Beijing time are intraday and not final close/return labels."
     }
 
 def csv_record(day, q):
