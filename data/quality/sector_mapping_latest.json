@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T08:57:07.023861+00:00",
+  "generated_at_utc": "2026-11-05T09:02:39.434077+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
@@ -149,9 +149,15 @@
           "board_type": "industry",
           "mapping_type": "exact_rare_earth_producers_but_narrow_constituents",
           "source_url": "https://basic.10jqka.com.cn/884215/",
-          "verification": "ths_official_name_code_and_four_constituents_verified; automated_daily_kline_not_yet_qa",
+          "verification": "ths_official_name_code_and_four_constituents_verified; historical_daily_kline_2026-11-05_probe_failed_remote_disconnected",
           "constituents_observed": 4,
-          "note": "聚焦北方稀土、中国稀土、中稀有色、盛和资源四家核心稀土企业；比稀土永磁代理更精准，但中国稀土可能停牌，仍需检验指数交易日K和数据接口稳定性。"
+          "note": "聚焦北方稀土、中国稀土、中稀有色、盛和资源四家核心稀土企业；比稀土永磁代理更精准，但中国稀土可能停牌，仍需检验指数交易日K和数据接口稳定性。",
+          "source_qa_path": "data/quality/sector_index_probe/2026/11/ths_2026-11-05.json",
+          "last_probe": {
+            "market_date": "2026-11-05",
+            "status": "unavailable",
+            "reason": "AKShare/THS industry endpoint connection aborted by remote host"
+          }
         },
         {
           "index_name": "稀土永磁",
