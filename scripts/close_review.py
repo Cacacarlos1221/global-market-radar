@@ -62,7 +62,8 @@ def approved_watchlist(root, day, now):
                 "key": track["key"], "name": track["name"],
                 "terms": list(track.get("terms", [track["name"]])),
                 "board_names": list(track["board_names"]), "board_type": track["board_type"],
-                "stocks": list(track.get("stocks", [])), "user_approved": True
+                "stocks": list(track.get("stocks", [])), "user_approved": True,
+                "mapping_relation": track.get("mapping_relation", "exact")
             }
             code = str(track.get("board_code") or "")
             if code.startswith("BK") and code[2:].isdigit():
@@ -71,7 +72,9 @@ def approved_watchlist(root, day, now):
             tracks.append(new_track)
             applied.append({"topic": decision.get("topic", track["name"]),
                             "key": track["key"], "effective_from": decision["effective_from"],
-                            "approved_at_utc": decision["approved_at_utc"]})
+                            "approved_at_utc": decision["approved_at_utc"],
+                            "mapping_relation": track.get("mapping_relation", "exact"),
+                            "approved_scope": decision.get("approved_scope")})
         except (KeyError, TypeError, ValueError):
             continue
     watch["tracks"] = tracks
