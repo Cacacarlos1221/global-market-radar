@@ -12,6 +12,7 @@ on:
       - 'data/requests/**'
       - 'data/supplements/**'
       - 'scripts/render.py'
+      - 'scripts/sources.py'
       - 'config/instruments.json'
       - 'docs/REPORT_SPEC.md'
       - '.github/workflows/daily.yml'

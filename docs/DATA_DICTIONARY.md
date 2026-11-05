@@ -140,3 +140,7 @@ CSV 增加 `report_date`；按 (`report_date`, `asset_key`) 去重。
 ## 无冻结盘后观察口径（v1.1）
 
 data/close 中 forecast_status 约定为 frozen、morning_analysis_unfrozen、watchlist_only；后两种只作观察，direction_hit=null。缺冻结时仍可由晨报 data/analysis 匹配当日主题（必须提供可信且早于09:30的分析时间），或退化为配置的固定行业池。morning_analysis_sha256 仅证明盘后使用的晨报文件内容，不代表盘前冻结证据。observed_close_instruments 记录同日报价成功的观察条目数量。基准指数不存在时超额收益为 null、如实标注；仍可做其他同日价格及新闻总结。
+
+## 数据质量补充：stale（2026-11-05）
+
+`quotes[].status` 可取 `ok / unavailable / stale`，其中 `stale` 代表**获取到数值但该交易日期明显落后于同市场其他指数**，不可以与最新数据同等看待。该字段不表示该数值本身为零或无效；分析和报告必须核对 `market_date` 与 `error`。东财优先源为非官方公开API，来源记录于 `source` 和可选 `source_url`；日K无可靠实际取样时间则 `observed_at_utc=null`，不可造 UTC 收盘时刻。历史回补通过 data/supplements 的 source_correction 单独保留来源及时间，不改写原始 data/daily。

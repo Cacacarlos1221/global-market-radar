@@ -124,3 +124,10 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 渲染层用 pipeline.with_supplements 叠加有效补采，scripts.morning_audit 也按同样视图验收，避免错误地把已补好的指标判为缺失。补采源可能滞后，仍需核实实际 market_date 与 observed_at_utc，不能将稍晚取得的报价冒充08:05原始采集价。
 
 `scripts.backfill_quote` 的手动补采模式已增加正式分析门禁：即使补到报价，**没有具备market_summary、a_share_outlook、非空news_digest.items及有效来源引用的完整分析JSON时，也不会单独渲染HTML**。自动批量补采强制使用 render=False，由daily.yml在完整分析准备好后统一渲染并执行release_check/morning_audit。短暂来源异常不会导致一次早采失败永久固化到页面，但任何上游持续异常仍须按DEGRADED/FAILED报告。
+
+## 国内指数上游行情滞后排查（2026-11-05）
+
+- 已确认 Yahoo Finance 的 `000001.SS` 在11月5日08:18仍返回11月3日上证综指3608.10，尽管同一快照沪深300已更新11月4日。这是**源数据过期而不是GitHub触发失败**。11月4日真实上证收盘3686.17（+2.16%），详见[data/supplements/2026/11/2026-11-05/SSE.json](../data/supplements/2026/11/2026-11-05/SSE.json)。
+- `scripts/sources.py` 对上证及沪深300尝试东方财富日K线接口作为优先行情源（`1.000001` / `1.000300`），只取中国市场已结束的交易日，不使用当天未收盘日K线；失败自动回退 Yahoo。该公开接口**并非交易所官方 API**，可能被限流和返回缺失，需运行日志/快照验证。
+- 同一市场两项指数若市场日期不一致，会在采集数据中把较旧一项标记为 `stale` 而非 `ok`，附带异常原因。原始快照永不重写；有可核验的历史修正另存补录文件。11月5日上证修正来源为同花顺收盘快讯（并由英为财情历史行情交叉核对），**不是交易所官方直连**。
+- CI 测试覆盖东方财富数据解析、未完结日线剔除、代码校验和 Yahoo 异常回退。明天必须验收实时接口成功返回（CI不能验证远端接口未来可用性）。

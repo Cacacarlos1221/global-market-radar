@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "kind": "source_correction",
+  "report_date": "2026-11-05",
+  "asset_key": "SSE",
+  "collected_at_utc": "2026-11-05T00:41:39.671Z",
+  "base_snapshot_collected_at_utc": "2026-11-05T00:18:21.110685+00:00",
+  "source_url": "https://yuanchuang.10jqka.com.cn/20261104/c681451423.shtml",
+  "verified_by_urls": [
+    "https://yuanchuang.10jqka.com.cn/20261104/c681451423.shtml",
+    "https://cn.investing.com/indices/shanghai-composite-historical-data"
+  ],
+  "reason": "Yahoo Finance 000001.SS stopped at 2026-11-03 while 000300.SS had 2026-11-04 close; verified Nov 4 close against two independent public reports. No alteration of original JSON.",
+  "quote": {
+    "key": "SSE",
+    "symbol": "000001.SS",
+    "label": "上证综指",
+    "category": "cn_index",
+    "unit": "points",
+    "status": "ok",
+    "value_kind": "daily_close",
+    "market_date": "2026-11-04",
+    "observed_at_utc": null,
+    "value": 3686.17,
+    "reference_close": 3608.1,
+    "reference_date": "2026-11-03",
+    "change_pct": 2.1637,
+    "source": "同花顺金融研究中心 2026-11-04 收盘快讯（英为财情历史数据交叉核对）",
+    "source_url": "https://yuanchuang.10jqka.com.cn/20261104/c681451423.shtml",
+    "error": null
+  }
+}
