@@ -1,15 +1,40 @@
 {
   "schema_version": "1.0",
   "description": "用户确认的映射在未来晨间冻结时才生效；候选仅供复核，不会自动进入预测评分。",
-  "approved": [],
+  "approved": [
+    {
+      "topic": "贵金属",
+      "status": "approved",
+      "approved_at_utc": "2026-11-05T08:55:51.477Z",
+      "effective_from": "2026-11-06",
+      "approved_scope": "A股贵金属行业股票的盘前方向预测评分（不代表黄金现货或黄金产业链概念）",
+      "approval_basis": "用户2026-11-05条件性同意在指数概念符合且方向合适时使用BK0732；已核验东方财富行业身份及同日有效日K",
+      "source_url": "https://quote.eastmoney.com/bk/90.BK0732.html",
+      "source_qa_path": "data/quality/sector_index_probe/2026/11/2026-11-05.json",
+      "track": {
+        "key": "precious_metals",
+        "name": "贵金属",
+        "terms": [
+          "贵金属"
+        ],
+        "board_type": "industry",
+        "board_names": [
+          "贵金属"
+        ],
+        "board_name": "贵金属",
+        "board_code": "BK0732",
+        "stocks": []
+      }
+    }
+  ],
   "proposals": [
     {
       "topic": "贵金属",
       "priority": "high",
-      "status": "pending_user_confirmation",
+      "status": "approved_future_effective",
       "first_verified_gap": "2026-11-05",
       "user_reported_recurrent": true,
-      "reason": "2026-11-05盘前positive但收盘组未配置板块指数；用户另反馈主题连续两日出现，待核实历史研判次数。",
+      "reason": "2026-11-05盘前positive但收盘组未配置板块指数；用户另反馈主题连续两日出现，待核实历史研判次数。 2026-11-05已核验东方财富BK0732同日K线并获用户条件性认可，自2026-11-06盘前起生效；2026-11-05冻结预测不回填。",
       "candidates": [
         {
           "index_name": "贵金属",
@@ -58,7 +83,8 @@
         "board_name": "贵金属",
         "board_code": "BK0732"
       },
-      "reviewed_at": "2026-11-05"
+      "reviewed_at": "2026-11-05",
+      "approval_ref": "approved:贵金属"
     },
     {
       "topic": "券商与宽基指数",
