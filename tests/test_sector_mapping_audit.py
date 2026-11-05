@@ -125,5 +125,45 @@ class SectorMappingAuditTests(unittest.TestCase):
         self.assertFalse(part["is_proxy"])
         self.assertTrue(d["predicted_groups"][0]["direction_hit"])
 
+    def test_user_approved_rare_earth_proxy_is_frozen_and_not_strict_scored(self):
+        from unittest.mock import patch
+        from scripts.close_review import collect_close
+        self.registry(approved=[{"topic":"稀土", "status":"approved",
+            "approved_at_utc":"2026-11-05T09:10:00+00:00",
+            "effective_from":"2026-11-06",
+            "approved_scope":"稀土使用稀土永磁代理观察，不冒充严格稀土指数",
+            "track":{"key":"rare_earth","name":"稀土","terms":["稀土"],
+                "board_type":"concept","board_names":["稀土永磁"],
+                "board_code":"BK0578","board_name":"稀土永磁",
+                "mapping_relation":"approved_proxy","stocks":[]}}])
+        path = data_path(self.root,"analysis","2026-11-06")
+        path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text(json.dumps({"report_date":"2026-11-06",
+            "generated_at_utc":"2026-11-06T00:00:00+00:00",
+            "a_share_sectors":[{"sector":"稀土","bias":"positive","reason":"盘前"}]},
+            ensure_ascii=False))
+        self.assertEqual(freeze_forecast("2026-11-06",self.root,
+            datetime(2026,11,6,8,25,tzinfo=BJ)),"frozen")
+        frozen = json.loads(data_path(self.root,"forecasts","2026-11-06").read_text())
+        track = frozen["watchlist"]["tracks"][0]
+        self.assertEqual(track["board_code"],"BK0578")
+        self.assertEqual(track["mapping_relation"],"approved_proxy")
+        self.assertEqual(frozen["sector_mapping_approvals_applied"][0]["mapping_relation"],"approved_proxy")
+        with patch("scripts.close_review.list_sectors", return_value=[]), \
+             patch("scripts.close_review.safe_bar", return_value={
+                 "status":"ok","market_date":"2026-11-06",
+                 "change_pct":2.8,"close":102.8,"reference_close":100}), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
+             patch("scripts.close_review.time.sleep"):
+            self.assertEqual(collect_close("2026-11-06",self.root,
+                datetime(2026,11,6,15,40,tzinfo=BJ)),"collected")
+        day = json.loads(data_path(self.root,"close","2026-11-06").read_text())
+        group = day["predicted_groups"][0]
+        component = group["components"][0]
+        self.assertEqual(component["board_code"],"BK0578")
+        self.assertEqual(component["board_name"],"稀土永磁")
+        self.assertTrue(component["is_proxy"])
+        self.assertIsNone(group["direction_hit"])
+
 if __name__ == "__main__":
     unittest.main()
