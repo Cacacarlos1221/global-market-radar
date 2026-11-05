@@ -34,7 +34,12 @@ jobs:
         run: |
           DAY=$(TZ=Asia/Shanghai date +%Y-%m-%d)
           REQUEST_PATH="data/close_requests/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
-          if [[ "$GITHUB_EVENT_NAME" == "schedule" || "$GITHUB_EVENT_NAME" == "workflow_dispatch" || -f "$REQUEST_PATH" ]]; then
+          LOCAL_TIME=$(TZ=Asia/Shanghai date +%H%M)
+          if [[ "$LOCAL_TIME" < "1530" ]]; then
+            echo "::notice title=PRE_CLOSE_SKIPPED::北京时间未到15:30，不能采集收盘K线；此run不代表已采集"
+            echo "⚠️ PRE_CLOSE_SKIPPED: 当日收盘行情尚未采集，不能将此run作为盘后交付成功凭据" >> "$GITHUB_STEP_SUMMARY"
+          elif [[ "$GITHUB_EVENT_NAME" == "schedule" || "$GITHUB_EVENT_NAME" == "workflow_dispatch" || -f "$REQUEST_PATH" ]]; then
+            echo "Collecting 15:30+ same-day close for $DAY"
             python -m scripts.close_review --collect-only --date "$DAY"
           fi
           python -m scripts.close_review --render-only
@@ -42,8 +47,10 @@ jobs:
           ANALYSIS_PATH="data/close_analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
           if [[ -f "$FACT_PATH" && -f "$ANALYSIS_PATH" ]]; then
             python -m scripts.close_review --check --date "$DAY"
+            echo "✅ Today's verified close snapshot and GMR research analysis exist; rendered release checked." >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "Awaiting today's verified close snapshot and GPT post-close analysis."
+            echo "::warning title=CLOSE_NOT_PUBLISHED::当日收盘快照或GMR研究分析尚缺失，不能视为完整盘后发布"
+            echo "⚠️ CLOSE_NOT_PUBLISHED: 缺失当日收盘快照或GMR分析；需通过16:05独立补救任务验收。" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Validate tests
         run: python -m unittest discover -s tests -v
