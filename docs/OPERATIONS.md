@@ -135,3 +135,13 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 ## 订正层研究数据验收
 
 运行 `python -m scripts.curate_data` 可重建每日报价及全历史订正 CSV，且重复运行输出字节稳定；源修正变化通过 SHA256 与 Git 历史留痕。每天的 `daily.yml` 在单资产补采之后执行，原始文件不重写。检查 `data/curated/manifest.json` 的 `daily_files`、`quote_rows`、`source_corrected_rows`、`return_usable_rows`，不要仅以行数判断数据可信。模型训练优先筛选 quality_flags、`usable_for_return_analysis` 及 `available_at_utc`，避免盘中价当日终价。
+
+
+## 盘后行情采集缓慢、API 502 与并发排队恢复（2026-11-05）
+
+- 在Github Actions查看 `A-share after-close verification` 的具体run，而不能仅看绿色success：北京时间15:30前触发会返回 `not_collection_window`，不代表当日已采集。当前workflow将PRE_CLOSE_SKIPPED写入Actions step summary。
+- 盘后workflow使用独立 `market-radar-close-writer` 并发组，避免早晨 `market-radar-writer` 或长采集导致修复任务连续排队被取消。任务内部对东财公开API逐次限时，并打印GMR_CLOSE阶段日志与最终可核验报价数量。
+- 若当天原始 `data/close` 已落库但板块列表有HTTP 502，不覆盖原始快照；自动调用 `python -m scripts.close_review --enrich-only --date YYYY-MM-DD`，从以前保存的板块身份映射重新请求当天日K并保存 `data/close_revisions`。检验recovered_board_names，避免把未恢复的板块认为可评分。
+- `close.yml` 运行 `--render-only` 和 `--check`，预期输出 `published=true`，同时如实显示COMPLETE/DEGRADED；后者往往是榜单接口、个股K线或来源缺口，而不是HTML未发布。
+- 发布后同步检查`data/close_analysis` 的GMR summary与数据修订视图一致，特别是命中率、相对沪深300收益以及不应计分的代理主题。
+- 16:05的“GMR盘后补救验收”是第二道独立救援任务，不能替代15:30工作流自身的质量门禁，不能无限等待第三方API恢复。查看CI和GitHub Pages真实发布版本后再对外宣称COMPLETE。
