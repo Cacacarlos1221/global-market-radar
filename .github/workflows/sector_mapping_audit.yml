@@ -1,7 +1,8 @@
 name: GMR sector index mapping audit
 on:
   schedule:
-    - cron: '25 8 * * 1-5' # Beijing 16:25 on weekdays, after the close fallback
+    - cron: '55 7 * * 1-5' # Beijing 15:55 before the 16:05 ChatGPT reminder
+    - cron: '25 8 * * 1-5' # Beijing 16:25 reconcile any late close revisions
   workflow_dispatch:
   push:
     paths:
