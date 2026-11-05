@@ -2,7 +2,7 @@
 
 > A reproducible, evidence-aware daily research log for AUD exchange rates, US equities, global macro news and the next A-share session.
 
-[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · **[盘后复盘](https://Cacacarlos1221.github.io/global-market-radar/reports/close/index.html)** · [晨报历史](reports/archive.html) · [盘后历史](reports/close/archive.html) · **[HTML 晨报规范](docs/REPORT_SPEC.md)** · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md)
+[最新晨报](https://Cacacarlos1221.github.io/global-market-radar/) · **[盘后复盘](https://Cacacarlos1221.github.io/global-market-radar/reports/close/index.html)** · [晨报历史](reports/archive.html) · [盘后历史](reports/close/archive.html) · **[HTML 晨报规范](docs/REPORT_SPEC.md)** · [数据字典](docs/DATA_DICTIONARY.md) · [架构](docs/ARCHITECTURE.md) · [运维手册](docs/OPERATIONS.md) · **[板块指数映射确认机制](docs/SECTOR_INDEX_MAPPING.md)**
 
 ## 项目目标
 
@@ -163,6 +163,15 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 - 盘后收集行业/概念收盘指数、代表个股及热门板块，热门板块不计晨报预测命中率。新闻归因由GPT核实，并保留报道发布时间、来源、证据级别。
 - GitHub Actions 定时采集由独立 ChatGPT 盘后总控监督；遇到休市、行情缺失和无法核验新闻，标注降级，不伪造当日结果。
 - 实施细则见 [盘后实施与运维规范](docs/CLOSE_REVIEW.md)。
+
+## 盘前主题指数映射的迭代与提醒（2026-11-05）
+
+对于贵金属、券商与宽基、出口制造等缺少正式可比指数的主题，不再无限期只写“暂无可比指数”。GMR会记录**缺口类型、可核验的实际出现日期和次数、候选指数及是否属于代理**。
+
+- GitHub Actions 每个交易日北京时间 **15:55、16:25** 扫描，保存 [最新待确认台账](data/quality/sector_mapping_latest.json) 和[逐日审计](data/quality/sector_mapping/)。
+- 现有 **16:05「GMR 盘后补救验收」** ChatGPT 定时任务在正常盘后验收之余，主动附带最多3条待你确认的指数口径，避免靠人工反复催促；没有证据的候选不会变成正式映射。
+- 用户明确批准后才写入 `config/sector_index_registry.json` 的 `approved`，且**仅对批准日之后的盘前冻结生效**。已经冻结的预测、历史收盘事实及评分不追溯改写。
+- 股票板块指数与黄金等商品现货指数不能混用；代理概念可以作走势观察，需明确代理身份及评分边界。详细操作见[板块指数映射确认机制](docs/SECTOR_INDEX_MAPPING.md)。
 
 ## 预测研究优先使用订正数据（Curated）
 
