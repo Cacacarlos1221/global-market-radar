@@ -72,26 +72,43 @@ API_TIMEOUT_SECONDS = 7
 MAX_COLLECTION_SECONDS = 480
 
 def json_api(endpoint, params):
-    """Limit public Eastmoney requests and retry transient API failures."""
+    """Rate-limit public quotes; fail over across documented board-list endpoints."""
     global API_LAST_REQUEST
-    host = "https://push2his.eastmoney.com/api/qt/" if endpoint.startswith("stock/kline/") else BASE
-    url = host + endpoint + "?" + urllib.parse.urlencode(params)
+    params = dict(params)
+    kline = endpoint.startswith("stock/kline/")
+    board_list = endpoint == "clist/get" and str(params.get("fs", "")).startswith("m:90+t:")
+    if board_list:
+        params.setdefault("ut", "bd1d9ddb04089700cf9c27f6f7426281")
+        board_host = ("17.push2.eastmoney.com" if "+t:2" in params["fs"] else
+                      "79.push2.eastmoney.com" if "+t:3" in params["fs"] else
+                      "push2.eastmoney.com")
+        hosts = [BASE, "https://push2delay.eastmoney.com/api/qt/",
+                 "https://" + board_host + "/api/qt/"]
+    else:
+        hosts = ["https://push2his.eastmoney.com/api/qt/" if kline else BASE]
     last_error = None
-    for attempt in range(2):
-        pause = 1.1 - (time.monotonic() - API_LAST_REQUEST)
-        if pause > 0:
-            time.sleep(pause)
-        API_LAST_REQUEST = time.monotonic()
-        try:
-            raw = read_url(url, timeout=API_TIMEOUT_SECONDS)
-            payload = json.loads(raw.decode("utf-8-sig"))
-            if not isinstance(payload, dict) or not isinstance(payload.get("data"), dict):
-                raise ValueError("接口返回缺失data: " + endpoint)
-            return payload["data"]
-        except Exception as exc:
-            last_error = exc
-            if attempt == 0:
-                time.sleep(1)
+    for host in dict.fromkeys(hosts):
+        url = host + endpoint + "?" + urllib.parse.urlencode(params)
+        for attempt in range(1 if board_list else 2):
+            pause = 1.1 - (time.monotonic() - API_LAST_REQUEST)
+            if pause > 0:
+                time.sleep(pause)
+            API_LAST_REQUEST = time.monotonic()
+            try:
+                raw = read_url(url, timeout=API_TIMEOUT_SECONDS)
+                payload = json.loads(raw.decode("utf-8-sig"))
+                data = payload.get("data") if isinstance(payload, dict) else None
+                if not isinstance(data, dict):
+                    raise ValueError("接口返回缺失data: " + endpoint)
+                if board_list and int(params.get("pn", 1)) == 1 and not data.get("diff"):
+                    raise ValueError("板块排行接口返回空列表")
+                return data
+            except Exception as exc:
+                last_error = exc
+                if attempt == 0 and not board_list:
+                    time.sleep(1)
+        if board_list:
+            print(f"GMR_CLOSE board-list host fallback after {host}: {str(last_error)[:110]}", flush=True)
     raise RuntimeError("Eastmoney API unavailable: " + str(last_error)[:180])
 
 def get_diff(data):
@@ -104,8 +121,10 @@ def get_diff(data):
 
 def list_sectors(kind, warnings):
     result = []
-    size = 160
-    for page in range(1, 9):
+    # Top 120 from each category is ample for observed Top-5; preselected
+    # themes outside the ranking sample use historical verified board identities.
+    size = 40
+    for page in range(1, 4):
         try:
             data = json_api("clist/get", {
                 "pn": page, "pz": size, "po": 1, "np": 1, "fltt": 2, "invt": 2,
@@ -122,8 +141,6 @@ def list_sectors(kind, warnings):
         except Exception as exc:
             warnings.append(f"{kind} board list page {page}: {str(exc)[:160]}")
             break
-    else:
-        warnings.append(f"{kind} board list truncated at {len(result)}")
     return result
 
 def close_bar(secid, day):
@@ -282,11 +299,13 @@ def collect_close(day, root=ROOT, now=None):
     plan, forecast_status, morning_analysis_sha256 = observation_plan(day, root, frozen)
     print(f"GMR_CLOSE stage=boards elapsed={time.monotonic()-started:.1f}s benchmark={benchmark['status']}", flush=True)
     live_boards = list_sectors("industry", warnings) + list_sectors("concept", warnings)
-    boards = live_boards
-    if not boards:
-        boards = list(historical_board_catalog(root, day).values())
-        if boards:
-            warnings.append("board listing unavailable; only previous verified board identities reused, same-day K-lines independently fetched")
+    known = historical_board_catalog(root, day)
+    board_index = {(b["kind"], b["name"]): b for b in live_boards}
+    for identity, board in known.items():
+        board_index.setdefault(identity, board)
+    boards = list(board_index.values())
+    if not live_boards and known:
+        warnings.append("board listing unavailable; only previous verified board identities reused, same-day K-lines independently fetched")
     print(f"GMR_CLOSE stage=groups elapsed={time.monotonic()-started:.1f}s board_count={len(boards)}", flush=True)
     board_by_kind_name = {(b["kind"], b["name"]): b for b in boards}
     selected = find_tracks(plan)
