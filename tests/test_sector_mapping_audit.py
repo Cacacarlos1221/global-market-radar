@@ -67,6 +67,8 @@ class SectorMappingAuditTests(unittest.TestCase):
         self.assertEqual(len(approvals), 1)
         self.assertEqual(len(sha), 64)
         self.snapshot("2026-11-05")
+        self.assertFalse(any(x["topic"] == "贵金属" for x in audit("2026-11-05", self.root)["pending"]),
+                         "Approved decision must stop notifications before its future scoring effective date")
         self.assertFalse(any(x["topic"] == "贵金属" for x in audit("2026-11-06", self.root)["pending"]))
     def test_frozen_watchlist_records_approval_provenance(self):
         self.registry(approved=[{"topic": "贵金属", "status": "approved",
