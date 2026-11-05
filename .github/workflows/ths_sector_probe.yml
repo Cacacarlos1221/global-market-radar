@@ -1,0 +1,37 @@
+name: GMR THS sector source feasibility QA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/probe_ths_sector_index.py'
+      - '.github/workflows/ths_sector_probe.yml'
+permissions:
+  contents: write
+concurrency:
+  group: market-radar-ths-sector-probe
+  cancel-in-progress: false
+jobs:
+  ths_probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test-only public data library
+        run: python -m pip install -q --disable-pip-version-check akshare
+      - name: Probe THS daily index feasibility without touching freezes
+        run: python -m scripts.probe_ths_sector_index --date 2026-11-05
+      - name: Archive test outcomes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- data/quality/sector_index_probe
+          if ! git diff --cached --quiet; then
+            git commit -m "data: record THS sector data feasibility QA"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
