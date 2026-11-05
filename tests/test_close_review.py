@@ -58,6 +58,21 @@ class TestCloseReview(unittest.TestCase):
         self.assertEqual(freeze_forecast(DAY, self.root, datetime(2026, 11, 5, 15, 0, tzinfo=BJ)),
                          "outside_preopen_window")
 
+    def test_collect_cli_fails_when_no_same_day_market_data(self):
+        from scripts.close_review import main
+        with patch("sys.argv", ["close_review", "--collect-only", "--date", DAY]), \
+             patch("scripts.close_review.collect_close",
+                   return_value="no_same_day_close_data: public market API unavailable"):
+            with self.assertRaises(SystemExit) as raised:
+                main()
+            self.assertEqual(raised.exception.code, 1)
+
+    def test_collect_cli_skips_valid_early_window_without_false_error(self):
+        from scripts.close_review import main
+        with patch("sys.argv", ["close_review", "--collect-only", "--date", DAY]), \
+             patch("scripts.close_review.collect_close", return_value="not_collection_window"):
+            main()
+
     def test_no_fake_historical_freeze(self):
         self.assertEqual(freeze_forecast(DAY, self.root,
                          datetime(2026, 11, 6, 8, 15, tzinfo=BJ)), "outside_preopen_window")
