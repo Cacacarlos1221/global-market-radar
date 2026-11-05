@@ -110,3 +110,14 @@ GitHub scheduled 工作流存在排队和延误，不承诺准点完成或无限
 晨间 GitHub Actions 已增加 08:05/08:15/08:35/09:05 四个北京时间触发窗口；ChatGPT总控在08:15，08:50另有独立的补救验收任务。只要完整 data/analysis 在09:30前提交，daily.yml 的 analysis push 流程先冻结预测，再验证01–06完整HTML并发布。scripts/morning_audit.py 独立核对真正的 frozen_at_utc 与 analysis_sha256，避免今天（11月4日）出现的“有完整晨报却没有盘前冻结”再次被误认为完全合格。
 
 如果某次调度/数据发布延迟导致超过09:30，不能补造冻结；但晨报和下午观察仍按各自发布质量要求执行。网页发布成功和预测评分资格是两个独立指标。
+
+
+## 行情源502时的历史代码降级与修订契约（2026-11-05）
+
+- `data/close/YYYY/MM/YYYY-MM-DD.json` 为不可变的原始盘后采集快照，可能带有板块列表接口HTTP 502/503等失败记录；**不可静默覆盖它**。
+- GitHub `close.yml` 在15:30之后采集原始事实后运行 `python -m scripts.close_review --enrich-only --date YYYY-MM-DD`。如果原始快照中板块报价缺失，则只允许从**早于当日报告日**的、已核验 `data/close` 历史快照恢复供应商的**板块名称、类型与代码身份**。本日的涨跌和收盘价必须另外请求对应代码的**当日真实K线**；绝不复制过去日期的涨跌幅。
+- 如成功恢复，写入 `data/close_revisions/YYYY/MM/YYYY-MM-DD.json`：含 `original_close_sha256`、`revision_kind`、`enriched_at_utc`、`recovered_board_names`；每条报价含 `identity_mapping_asof`、`recovered_at_utc`。原始收盘快照仍保持不变，作为审计证据。
+- `render_close` 和 `check_release` 优先读取已存在的修订快照；否则读取原始快照。研究建模同样必须明确采用原始版还是已核验修订版及其采集时点，不能把修订后的价格伪装为原始冻结时刻已知。
+- 只针对**早晨已固定跟踪池允许的板块别名**匹配历史供应商代码；AI服务器→液冷服务器、稀土→稀土永磁等代理继续明确标记 `is_proxy=true`，不能因为恢复报价就变成严格评分标的。
+- 对主题如券商与宽基、贵金属、出口制造等，若没有预设且语义对应的合法映射则继续不计分；不事后挑板块提高命中率。若榜单接口失败，即使已恢复部分主题指数，也不能根据昨日热度生成今日热门Top5；维持列表缺失并提示。
+- **文字结论必须跟随数据修订更新**：若板块原先缺失，后来已恢复指数，报告 summary、key_findings、attributions、下一步观察与评分描述均要同步更正。今日具体修订实例见 `data/close_revisions/2026/11/2026-11-05.json`。
