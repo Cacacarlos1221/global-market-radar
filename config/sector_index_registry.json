@@ -22,6 +22,17 @@
           "note": "A股贵金属股票行业走势，非黄金现货/商品价格；须用户确认用于GMR板块评分。"
         },
         {
+          "index_name": "黄金概念",
+          "vendor": "同花顺概念板块",
+          "index_code": "885530",
+          "board_type": "concept",
+          "mapping_type": "gold_sector_related_not_exact_precious_metals",
+          "source_url": "https://basic.10jqka.com.cn/885530/",
+          "verification": "ths_official_name_code_and_broad_constituents_verified; automated_daily_kline_not_yet_qa",
+          "constituents_observed": 82,
+          "note": "黄金上中下游广义概念，覆盖约82家公司，含首饰、加工及其他涉金企业；不应直接等同于行业「贵金属」，若未来预测的是黄金概念可单独固定此口径。"
+        },
+        {
           "index_name": "中国贵金属指数",
           "vendor": "上海有色网",
           "index_code": "SMMI.PM",
@@ -32,7 +43,7 @@
           "note": "代表贵金属商品价格，不能替代A股贵金属板块股票走势；只适合商品市场背景观察。"
         }
       ],
-      "question": "请确认：以后对A股「贵金属」板块方向，是否固定采用东方财富行业板块 BK0732（而非黄金现货价格）？",
+      "question": "GMR的「贵金属」建议以东方财富行业贵金属BK0732作为主评分指标；同花顺黄金概念885530覆盖更广、用于独立黄金产业链观察。是否批准主评分指标？先核验BK0732当天有效K线。",
       "proposed_track": {
         "key": "precious_metals",
         "name": "贵金属",
@@ -46,7 +57,8 @@
         "stocks": [],
         "board_name": "贵金属",
         "board_code": "BK0732"
-      }
+      },
+      "reviewed_at": "2026-11-05"
     },
     {
       "topic": "券商与宽基指数",
@@ -115,6 +127,17 @@
       "reason": "稀土永磁当前作为稀土代理，不等于整个稀土产业；虽有行情也不直接用于严格评分。",
       "candidates": [
         {
+          "index_name": "稀土",
+          "vendor": "同花顺行业板块",
+          "index_code": "884215",
+          "board_type": "industry",
+          "mapping_type": "exact_rare_earth_producers_but_narrow_constituents",
+          "source_url": "https://basic.10jqka.com.cn/884215/",
+          "verification": "ths_official_name_code_and_four_constituents_verified; automated_daily_kline_not_yet_qa",
+          "constituents_observed": 4,
+          "note": "聚焦北方稀土、中国稀土、中稀有色、盛和资源四家核心稀土企业；比稀土永磁代理更精准，但中国稀土可能停牌，仍需检验指数交易日K和数据接口稳定性。"
+        },
+        {
           "index_name": "稀土永磁",
           "vendor": "东方财富概念板块",
           "index_code": "BK0578",
@@ -125,7 +148,8 @@
           "note": "需明确未来使用代理还是另寻完整稀土产业指数。"
         }
       ],
-      "question": "稀土方向继续只观察稀土永磁 BK0578，还是使用另一个更贴近稀土产业的指数？"
+      "question": "同花顺884215「稀土」聚焦4家主要稀土企业，比东方财富BK0578稀土永磁代理更精确；如果同花顺日K采集可稳定自动化，是否将884215用于未来稀土核心方向评分，BK0578保留扩大观察？",
+      "reviewed_at": "2026-11-05"
     }
   ]
 }
