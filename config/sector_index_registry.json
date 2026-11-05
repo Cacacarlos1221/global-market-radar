@@ -25,6 +25,47 @@
         "board_code": "BK0732",
         "stocks": []
       }
+    },
+    {
+      "topic": "稀土",
+      "status": "approved",
+      "approved_at_utc": "2026-11-05T09:10:21.816Z",
+      "effective_from": "2026-11-06",
+      "approved_scope": "作为稀土主题的固定、公开可得的产业链代理行情，不将稀土永磁直接表述为同名稀土行业指数；保留严格预测评分隔离",
+      "approval_basis": "2026-11-05用户明确表示如同花顺884215取数困难，直接采用GMR建议的东方财富稀土永磁BK0578",
+      "source_url": "https://github.com/Cacacarlos1221/global-market-radar/blob/main/data/close_revisions/2026/11/2026-11-05.json",
+      "evidence": "2026-11-05东方财富BK0578稀土永磁同日K线已在收盘修订快照有效取得；同花顺884215日K试验RemoteDisconnected",
+      "track": {
+        "key": "rare_earth",
+        "name": "稀土",
+        "terms": [
+          "稀土"
+        ],
+        "board_type": "concept",
+        "board_names": [
+          "稀土永磁"
+        ],
+        "board_name": "稀土永磁",
+        "board_code": "BK0578",
+        "mapping_relation": "approved_proxy",
+        "stocks": [
+          [
+            "600111",
+            "1",
+            "北方稀土"
+          ],
+          [
+            "000831",
+            "0",
+            "中国稀土"
+          ],
+          [
+            "600392",
+            "1",
+            "盛和资源"
+          ]
+        ]
+      }
     }
   ],
   "proposals": [
@@ -157,7 +198,7 @@
     {
       "topic": "稀土",
       "priority": "medium",
-      "status": "pending_proxy_review",
+      "status": "approved_future_effective",
       "first_verified_gap": "2026-11-04",
       "reason": "稀土永磁当前作为稀土代理，不等于整个稀土产业；虽有行情也不直接用于严格评分。",
       "candidates": [
@@ -189,8 +230,9 @@
           "note": "需明确未来使用代理还是另寻完整稀土产业指数。"
         }
       ],
-      "question": "同花顺884215「稀土」聚焦4家主要稀土企业，比东方财富BK0578稀土永磁代理更精确；如果同花顺日K采集可稳定自动化，是否将884215用于未来稀土核心方向评分，BK0578保留扩大观察？",
-      "reviewed_at": "2026-11-05"
+      "question": "当前优先使用东方财富BK0578稀土永磁作为已批准的代理观察口径，未来若同花顺884215取数恢复再比较；无需重复向用户询问同一事项。",
+      "reviewed_at": "2026-11-05",
+      "approval_ref": "approved:稀土"
     }
   ]
 }
