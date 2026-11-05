@@ -51,10 +51,13 @@ def audit(asof, root=ROOT):
         except (OSError, ValueError, KeyError):
             continue
         for group in snap.get("predicted_groups", []):
+            label = group.get("sector", "")
             for topic, reason in set(issues_for(group)):
-                key = (topic, reason)
+                # Composite decisions are reviewed once, not as three noisy notices.
+                review_topic = label if label in proposals else topic
+                key = (review_topic, reason)
                 recorded[key]["dates"].add(day)
-                recorded[key]["groups"].add(group.get("sector", topic))
+                recorded[key]["groups"].add(label or topic)
                 recorded[key]["biases"].add(group.get("bias", "unknown"))
                 recorded[key]["reasons"].add(LABELS[reason])
     current_file = data_path(root, "close", asof)
