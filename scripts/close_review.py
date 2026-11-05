@@ -445,6 +445,8 @@ def enrich_close(day, root=ROOT):
                 print(f"GMR_CLOSE_ENRICH board={match['name']} code={key}", flush=True)
             quote = safe_bar("90." + key, day, candidate.setdefault("warnings", []), match["name"])
             if quote.get("status") != "ok" or quote.get("market_date") != day:
+                why = candidate["warnings"][-1] if candidate.get("warnings") else "unknown"
+                print(f"GMR_CLOSE_ENRICH_MISSING board={match['name']} code={key} reason={why}", flush=True)
                 continue
             quote["recovered_at_utc"] = utc_now().isoformat()
             quote["identity_mapping_asof"] = match["mapping_asof"]
