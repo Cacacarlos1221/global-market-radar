@@ -76,9 +76,9 @@ def forecast_verdict(group, frozen):
         return "代理指数不计分"
     return "缺完整同名指数（待评分）"
 
-def observation_overview(groups, benchmark, frozen):
+def observation_overview(groups, benchmark, frozen, day=None):
     """One glance at *every* frozen opinion, independent of strict scoring."""
-    market_date = benchmark.get("market_date")
+    market_date = day or benchmark.get("market_date")
     benchmark_pct = benchmark.get("change_pct") if benchmark.get("status") == "ok" else None
     rows = []
     for group in groups:
@@ -258,7 +258,7 @@ def render_close_report(raw, analysis, prefix="../../"):
                '未预测的热门板块另列，新闻同现不等于因果。</p></details></div>')
     body = (head + '<h2>01 / 晨间关注主题与收盘观察</h2>' +
             '<h3>全部盘前观点的收盘表现一览</h3>' +
-            observation_overview(groups, quote, frozen) +
+            observation_overview(groups, quote, frozen, day) +
             '<h3>逐组研判理由、指数与代表股</h3>' + forecast_cards +
             '<h2>02 / 盘后发现的热门板块</h2><p class="small">仅展示新发现，不加入盘前预测命中率。</p>' +
             hot_cards + '<h2>03 / GMR 盘后复盘与新闻归因</h2>' + narrative(analysis) +
