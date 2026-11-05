@@ -110,9 +110,9 @@ class SectorMappingAuditTests(unittest.TestCase):
         def mock_quote(secid, day, warnings, name):
             return {"status": "ok", "market_date": day, "secid": secid,
                     "change_pct": 2.0, "close": 102, "reference_close": 100}
-        with patch("scripts.close_review.list_sectors", return_value=[]), \\
-             patch("scripts.close_review.safe_bar", side_effect=mock_quote), \\
-             patch("scripts.close_review.collect_news_clues", return_value=[]), \\
+        with patch("scripts.close_review.list_sectors", return_value=[]), \
+             patch("scripts.close_review.safe_bar", side_effect=mock_quote), \
+             patch("scripts.close_review.collect_news_clues", return_value=[]), \
              patch("scripts.close_review.time.sleep"):
             self.assertEqual(collect_close("2026-11-06", self.root,
                 datetime(2026, 11, 6, 15, 40, tzinfo=BJ)), "collected")
