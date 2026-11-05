@@ -144,3 +144,7 @@ data/close 中 forecast_status 约定为 frozen、morning_analysis_unfrozen、wa
 ## 数据质量补充：stale（2026-11-05）
 
 `quotes[].status` 可取 `ok / unavailable / stale`，其中 `stale` 代表**获取到数值但该交易日期明显落后于同市场其他指数**，不可以与最新数据同等看待。该字段不表示该数值本身为零或无效；分析和报告必须核对 `market_date` 与 `error`。东财优先源为非官方公开API，来源记录于 `source` 和可选 `source_url`；日K无可靠实际取样时间则 `observed_at_utc=null`，不可造 UTC 收盘时刻。历史回补通过 data/supplements 的 source_correction 单独保留来源及时间，不改写原始 data/daily。
+
+## 订正层盘中数据质量规则（2026-11-05）
+
+如果来源将 A 股指数在同一市场日、北京时间 15:15 前采集的日线标为 `daily_close`，订正层不会直接信任该标注：统一标记 `unclosed_cn_session_asof`，并使用 `value_kind=daily_bar_live`（原标签保存到 `raw_value_kind`）。此类值仍可能适合盘中价格研究，但 `usable_for_return_analysis=false`，不能当做日终收益。此保护适用于首次历史归档中的 2026-11-03 下午快照。`available_at_utc` 是进入项目的时间，不是交易所收盘时间。

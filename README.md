@@ -163,3 +163,12 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 - 盘后收集行业/概念收盘指数、代表个股及热门板块，热门板块不计晨报预测命中率。新闻归因由GPT核实，并保留报道发布时间、来源、证据级别。
 - GitHub Actions 定时采集由独立 ChatGPT 盘后总控监督；遇到休市、行情缺失和无法核验新闻，标注降级，不伪造当日结果。
 - 实施细则见 [盘后实施与运维规范](docs/CLOSE_REVIEW.md)。
+
+## 预测研究优先使用订正数据（Curated）
+
+- **[完整订正历史 CSV](data/curated/history/quotes.csv)**：按晨报日、资产唯一，包含源记录、修正前后数值、实际可用时间、质量标签。
+- **[每日完整订正 JSON](data/curated/daily/)**：保留全部监测指标、新闻线索、原始快照 SHA256、补录 SHA256 和修正日志。
+- **[数据集验收清单](data/curated/manifest.json)**：记录覆盖天数、修正数量和可用记录数量。
+- **[生成代码](scripts/curate_data.py)**：每天自动从不可变原始快照及补录文件重建。原始 `data/daily`、`data/history/quotes.csv` 保留用于审计。
+
+特别说明：原始日线在交易日 15:00 前采集时可能尚未收盘。订正层会将这种 A 股指数记录标记为 `unclosed_cn_session_asof`，并将 `value_kind` 规范为 `daily_bar_live`；可作**盘中观测**，但不能冒充**当日最终收盘或最终涨跌幅**。此外，事后修正的价格绝不能用于早于 `available_at_utc` 的预测回测，防止未来信息泄漏。

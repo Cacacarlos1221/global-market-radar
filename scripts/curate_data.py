@@ -4,7 +4,8 @@ import csv
 import hashlib
 import json
 import math
-from datetime import date
+from datetime import date, datetime, time
+from zoneinfo import ZoneInfo
 from .pipeline import ROOT, dump_json, with_supplements
 
 VERSION = "1.0"
@@ -14,7 +15,7 @@ CSV_COLUMNS = [
     "reference_date", "change_pct", "status", "quality_flags",
     "usable_for_price_analysis", "usable_for_return_analysis", "source",
     "source_url", "revision_kind", "revision_record", "raw_market_date",
-    "raw_value", "raw_status", "raw_source", "raw_snapshot_sha256"
+    "raw_value", "raw_status", "raw_source", "raw_value_kind", "raw_snapshot_sha256"
 ]
 
 def digest(data):
@@ -47,11 +48,25 @@ def enrich(q, original, correction, supplement_path, day, collected, raw_hash, l
         flags.append("missing_return_reference")
     if not isinstance(q.get("change_pct"), (int, float)) or not math.isfinite(q["change_pct"]):
         flags.append("missing_return_change")
+    # An intraday CN index bar must never become a final close in research data.
+    unclosed = False
+    try:
+        captured_local = datetime.fromisoformat(collected.replace("Z", "+00:00")).astimezone(ZoneInfo("Asia/Shanghai"))
+        unclosed = (q.get("category") == "cn_index"
+                    and q.get("market_date") == captured_local.date().isoformat()
+                    and captured_local.time() < time(15, 15) and not correction)
+    except (AttributeError, TypeError, ValueError):
+        flags.append("unknown_capture_time")
+    if unclosed:
+        flags.append("unclosed_cn_session_asof")
     price_ok = q.get("status") == "ok" and not any(
         f in flags for f in ("invalid_or_missing_price", "invalid_market_date", "stale_vs_cn_index_peer")
     )
-    return_ok = price_ok and "missing_return_reference" not in flags and "missing_return_change" not in flags
+    return_ok = (price_ok and not unclosed and "missing_return_reference" not in flags
+                 and "missing_return_change" not in flags)
     enriched = dict(q)
+    if unclosed:
+        enriched["value_kind"] = "daily_bar_live"
     enriched.update({
         "available_at_utc": correction.get("collected_at_utc") if correction else collected if old else None,
         "quality_flags": flags,
@@ -64,6 +79,7 @@ def enrich(q, original, correction, supplement_path, day, collected, raw_hash, l
         "raw_value": old.get("value") if old else None,
         "raw_status": old.get("status") if old else "missing",
         "raw_source": old.get("source") if old else None,
+        "raw_value_kind": old.get("value_kind") if old else None,
         "raw_snapshot_sha256": raw_hash
     })
     return enriched

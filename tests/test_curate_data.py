@@ -75,6 +75,22 @@ class CuratedDataTests(unittest.TestCase):
         build(self.root)
         self.assertEqual(p.read_bytes(), data_bytes)
 
+    def test_cn_intraday_is_not_final_close_or_final_return(self):
+        snapshot = json.loads(self.path.read_text(encoding="utf-8"))
+        snapshot["report_date"] = "2026-11-03"
+        snapshot["collected_at_utc"] = "2026-11-03T06:44:56+00:00"
+        snapshot["quotes"][0]["market_date"] = "2026-11-03"
+        snapshot["quotes"][0]["value_kind"] = "daily_close"
+        p = self.root / "data/daily/2026/11/2026-11-03.json"
+        p.write_text(json.dumps(snapshot), encoding="utf-8")
+        daily = materialize_day(p, self.root)
+        sse = next(q for q in daily["quotes"] if q["key"] == "SSE")
+        self.assertIn("unclosed_cn_session_asof", sse["quality_flags"])
+        self.assertEqual(sse["value_kind"], "daily_bar_live")
+        self.assertEqual(sse["raw_value_kind"], "daily_close")
+        self.assertTrue(sse["usable_for_price_analysis"])
+        self.assertFalse(sse["usable_for_return_analysis"])
+
     def test_stale_without_correction_not_model_usable(self):
         self.supp.unlink()
         day = materialize_day(self.path, self.root)

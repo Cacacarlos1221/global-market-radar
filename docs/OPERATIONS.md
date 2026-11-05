@@ -131,3 +131,7 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 - `scripts/sources.py` 对上证及沪深300尝试东方财富日K线接口作为优先行情源（`1.000001` / `1.000300`），只取中国市场已结束的交易日，不使用当天未收盘日K线；失败自动回退 Yahoo。该公开接口**并非交易所官方 API**，可能被限流和返回缺失，需运行日志/快照验证。
 - 同一市场两项指数若市场日期不一致，会在采集数据中把较旧一项标记为 `stale` 而非 `ok`，附带异常原因。原始快照永不重写；有可核验的历史修正另存补录文件。11月5日上证修正来源为同花顺收盘快讯（并由英为财情历史行情交叉核对），**不是交易所官方直连**。
 - CI 测试覆盖东方财富数据解析、未完结日线剔除、代码校验和 Yahoo 异常回退。明天必须验收实时接口成功返回（CI不能验证远端接口未来可用性）。
+
+## 订正层研究数据验收
+
+运行 `python -m scripts.curate_data` 可重建每日报价及全历史订正 CSV，且重复运行输出字节稳定；源修正变化通过 SHA256 与 Git 历史留痕。每天的 `daily.yml` 在单资产补采之后执行，原始文件不重写。检查 `data/curated/manifest.json` 的 `daily_files`、`quote_rows`、`source_corrected_rows`、`return_usable_rows`，不要仅以行数判断数据可信。模型训练优先筛选 quality_flags、`usable_for_return_analysis` 及 `available_at_utc`，避免盘中价当日终价。
