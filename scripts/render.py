@@ -41,6 +41,10 @@ footer{margin-top:40px;color:var(--muted);font-size:12px}ul{padding-left:20px}
 @media(max-width:600px){header{align-items:flex-start;flex-direction:column}main{padding:14px 14px 50px}th,td{padding:8px}}
 """
 
+# Public Umami Cloud tracking snippet for GMR's static GitHub Pages site.
+UMAMI_SCRIPT = ('<script defer src="https://cloud.umami.is/script.js" '
+                'data-website-id="32e1aaa4-49e7-4a4b-beb4-af8e74a5a1bf"></script>')
+
 def safe(value):
     return escape(str(value)) if value is not None else "—"
 
@@ -53,7 +57,7 @@ def shell(title, content, home):
     return ('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
             '<meta name="description" content="全球市场雷达：汇率、美股、国际事件与A股盘前研究">'
-            f'<title>{safe(title)} · Global Market Radar</title><style>{STYLE}</style></head><body>'
+            f'<title>{safe(title)} · Global Market Radar</title><style>{STYLE}</style>{UMAMI_SCRIPT}</head><body>'
             '<main><header><div><div class="brand">GLOBAL MARKET RADAR</div>'
             f'<h1>{safe(title)}</h1><div class="sub">全球市场数据 · 重要新闻 · A股盘前研究</div></div>'
             f'<a class="pill" href="{safe(home)}">{"查看历史晨报" if home.endswith("archive.html") else "返回最新晨报"}</a></header>{navigation}{content}'
