@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "kind": "source_correction",
+  "report_date": "2026-11-06",
+  "asset_key": "SSE",
+  "collected_at_utc": "2026-11-06T00:18:27.160Z",
+  "base_snapshot_collected_at_utc": "2026-11-06T00:18:09.739772+00:00",
+  "source_url": "https://hk.finance.yahoo.com/quote/000001.SS/history/",
+  "verified_by_urls": [
+    "https://hk.finance.yahoo.com/quote/000001.SS/history/",
+    "https://cn.investing.com/indices/shanghai-composite-historical-data"
+  ],
+  "reason": "Yahoo chart snapshot SSE stale at Nov 4 while CSI300 was Nov 5; independent Yahoo historical and Investing.com historical confirm Nov 5 close 3689.91, previous 3686.17. Original snapshot preserved.",
+  "quote": {
+    "category": "cn_index",
+    "change_pct": 0.1015,
+    "error": null,
+    "fallback_note": "Eastmoney not available: Remote end closed connection without response",
+    "key": "SSE",
+    "label": "上证综指",
+    "market_date": "2026-11-05",
+    "observed_at_utc": null,
+    "reference_close": 3686.17,
+    "reference_date": "2026-11-04",
+    "source": "Yahoo Finance 历史收盘记录（Investing.com 独立交叉核验）",
+    "status": "ok",
+    "symbol": "000001.SS",
+    "unit": "points",
+    "value": 3689.91,
+    "value_kind": "official_daily_close",
+    "source_url": "https://hk.finance.yahoo.com/quote/000001.SS/history/"
+  }
+}
