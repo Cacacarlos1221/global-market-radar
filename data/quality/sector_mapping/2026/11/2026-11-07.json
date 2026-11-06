@@ -1,0 +1,159 @@
+{
+  "schema_version": "1.0",
+  "audit_date": "2026-11-07",
+  "generated_at_utc": "2026-11-06T16:01:57.163102+00:00",
+  "latest_close_snapshot_present": false,
+  "verified_close_days_scanned": [
+    "2026-11-04",
+    "2026-11-05",
+    "2026-11-06"
+  ],
+  "pending_count": 4,
+  "high_priority_count": 1,
+  "pending": [
+    {
+      "topic": "券商与宽基指数",
+      "priority": "high",
+      "status": "pending_user_definition",
+      "observed_dates": [
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06"
+      ],
+      "observed_days": 3,
+      "last_observed": "2026-11-06",
+      "seen_today": false,
+      "groups": [
+        "券商与宽基指数"
+      ],
+      "biases": [
+        "positive",
+        "watch"
+      ],
+      "gap_reasons": [
+        "有候选板块名称，但没有核验通过的指数代码",
+        "组合内宽基指数尚未明确口径"
+      ],
+      "candidate_indices": [
+        {
+          "index_name": "证券Ⅱ",
+          "vendor": "东方财富行业板块",
+          "index_code": "BK0473",
+          "board_type": "industry",
+          "mapping_type": "related_name_requires_approval",
+          "source_url": "https://data.eastmoney.com/bkzj/BK0473.html",
+          "verification": "official_eastmoney_board_name_and_code_verified; exact observation definition still requires user approval",
+          "note": "用于券商子板块候选，和名称「券商」并非完全同名；需要确认。"
+        },
+        {
+          "index_name": "沪深300",
+          "vendor": "中证指数",
+          "index_code": "000300",
+          "board_type": "benchmark",
+          "mapping_type": "benchmark_candidate",
+          "source_url": "https://www.csindex.com.cn/",
+          "verification": "already_collected_in_GMR_close",
+          "note": "可作为宽基候选，但若本身用沪深300做超额收益基准，须明确是否重复统计。"
+        }
+      ],
+      "user_question": "请定义「券商与宽基」：拆成券商、沪深300两条独立观察，还是保留组合并明确两个指数及合成权重？",
+      "user_reported_recurrent": false,
+      "existing_proposal": true
+    },
+    {
+      "topic": "AI服务器",
+      "priority": "medium",
+      "status": "pending_proxy_review",
+      "observed_dates": [
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06"
+      ],
+      "observed_days": 3,
+      "last_observed": "2026-11-06",
+      "seen_today": false,
+      "groups": [
+        "AI服务器",
+        "半导体、AI服务器与存储"
+      ],
+      "biases": [
+        "negative",
+        "positive",
+        "watch"
+      ],
+      "gap_reasons": [
+        "现有板块是代理指标，需确认是否适合该预测主题"
+      ],
+      "candidate_indices": [
+        {
+          "index_name": "液冷服务器",
+          "vendor": "东方财富概念板块",
+          "index_code": "BK1138",
+          "board_type": "concept",
+          "mapping_type": "proxy_not_strict_score",
+          "source_url": "https://github.com/Cacacarlos1221/global-market-radar/blob/main/data/close/2026/11/2026-11-04.json",
+          "verification": "historical_GMR_verified_board_identity",
+          "note": "若继续使用，应明确仅代理观察，不能自动宣称预测AI服务器整体的方向。"
+        }
+      ],
+      "user_question": "是否继续把液冷服务器 BK1138 作为AI服务器的公开代理观察指标？如要严格评分，建议改为你认可的精确主题定义。",
+      "user_reported_recurrent": false,
+      "existing_proposal": true
+    },
+    {
+      "topic": "出口制造",
+      "priority": "medium",
+      "status": "pending_user_definition",
+      "observed_dates": [
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06"
+      ],
+      "observed_days": 3,
+      "last_observed": "2026-11-06",
+      "seen_today": false,
+      "groups": [
+        "出口制造"
+      ],
+      "biases": [
+        "mixed"
+      ],
+      "gap_reasons": [
+        "跟踪子板块尚无标准化指数定义"
+      ],
+      "candidate_indices": [],
+      "user_question": "「出口制造」希望跟踪哪些固定子行业（如家电、纺织、汽车零部件）？需要你确定适合的市场指数或拆分口径。",
+      "user_reported_recurrent": false,
+      "existing_proposal": true
+    },
+    {
+      "topic": "机器人",
+      "priority": "medium",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-06"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-06",
+      "seen_today": false,
+      "groups": [
+        "机器人"
+      ],
+      "biases": [
+        "watch"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「机器人」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    }
+  ],
+  "notes": [
+    "用户反馈的连续出现次数与仓库可验证的observed_days分开记账",
+    "候选指数和代理都不能自动进入严格预测评分，必须用户确认并在未来盘前冻结",
+    "已有代码但同日行情接口失败应由数据QA处理，不应自动归类为指数定义缺口"
+  ]
+}

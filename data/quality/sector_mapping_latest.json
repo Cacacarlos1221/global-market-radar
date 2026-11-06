@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-06",
-  "generated_at_utc": "2026-11-06T15:24:48.376573+00:00",
-  "latest_close_snapshot_present": true,
+  "audit_date": "2026-11-07",
+  "generated_at_utc": "2026-11-06T16:01:57.163102+00:00",
+  "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05",
@@ -22,7 +22,7 @@
       ],
       "observed_days": 3,
       "last_observed": "2026-11-06",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "券商与宽基指数"
       ],
@@ -71,7 +71,7 @@
       ],
       "observed_days": 3,
       "last_observed": "2026-11-06",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "AI服务器",
         "半导体、AI服务器与存储"
@@ -111,7 +111,7 @@
       ],
       "observed_days": 3,
       "last_observed": "2026-11-06",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "出口制造"
       ],
@@ -135,7 +135,7 @@
       ],
       "observed_days": 1,
       "last_observed": "2026-11-06",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "机器人"
       ],
