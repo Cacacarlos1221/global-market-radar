@@ -1,13 +1,14 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-05",
-  "generated_at_utc": "2026-11-05T09:10:32.642966+00:00",
+  "audit_date": "2026-11-06",
+  "generated_at_utc": "2026-11-06T15:24:48.376573+00:00",
   "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
-    "2026-11-05"
+    "2026-11-05",
+    "2026-11-06"
   ],
-  "pending_count": 3,
+  "pending_count": 4,
   "high_priority_count": 1,
   "pending": [
     {
@@ -16,10 +17,11 @@
       "status": "pending_user_definition",
       "observed_dates": [
         "2026-11-04",
-        "2026-11-05"
+        "2026-11-05",
+        "2026-11-06"
       ],
-      "observed_days": 2,
-      "last_observed": "2026-11-05",
+      "observed_days": 3,
+      "last_observed": "2026-11-06",
       "seen_today": true,
       "groups": [
         "券商与宽基指数"
@@ -64,16 +66,18 @@
       "status": "pending_proxy_review",
       "observed_dates": [
         "2026-11-04",
-        "2026-11-05"
+        "2026-11-05",
+        "2026-11-06"
       ],
-      "observed_days": 2,
-      "last_observed": "2026-11-05",
+      "observed_days": 3,
+      "last_observed": "2026-11-06",
       "seen_today": true,
       "groups": [
         "AI服务器",
         "半导体、AI服务器与存储"
       ],
       "biases": [
+        "negative",
         "positive",
         "watch"
       ],
@@ -102,10 +106,11 @@
       "status": "pending_user_definition",
       "observed_dates": [
         "2026-11-04",
-        "2026-11-05"
+        "2026-11-05",
+        "2026-11-06"
       ],
-      "observed_days": 2,
-      "last_observed": "2026-11-05",
+      "observed_days": 3,
+      "last_observed": "2026-11-06",
       "seen_today": true,
       "groups": [
         "出口制造"
@@ -120,6 +125,30 @@
       "user_question": "「出口制造」希望跟踪哪些固定子行业（如家电、纺织、汽车零部件）？需要你确定适合的市场指数或拆分口径。",
       "user_reported_recurrent": false,
       "existing_proposal": true
+    },
+    {
+      "topic": "机器人",
+      "priority": "medium",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-06"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-06",
+      "seen_today": true,
+      "groups": [
+        "机器人"
+      ],
+      "biases": [
+        "watch"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「机器人」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
     }
   ],
   "notes": [
