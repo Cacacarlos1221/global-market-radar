@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1",
+  "report_date": "2026-11-06",
+  "generated_at_utc": "2026-11-06T08:06:53.344Z",
+  "report_type": "GMR_independent_after_close_analysis",
+  "analysis_status": "verified_close_with_proxy_and_mapping_limits",
+  "summary": "GMR 11月6日盘后复盘：沪深300收4054.28点、跌1.4375%。第一财经15:21报道沪指-1.10%、深成指-2.57%、创业板指-3.96%，两市成交额1.66万亿元，超过4700只股票下跌。九条盘前冻结研判中，仅半导体negative、存储negative、贵金属positive三条有同日有效非代理指数且具明确方向；半导体-3.3328%、存储芯片-3.2404%方向一致，贵金属-1.5777%与positive偏离，严格评分2/3。其余六条是watch/mixed、缺映射或代理，均不计分。AI服务器BK1138-3.1402%与稀土永磁BK0578-1.9268%仅作代理观察。海外科技股风险重估可能是市场背景，但GMR不声称单一因果。",
+  "key_findings": [
+    {
+      "title": "沪深300同日有效K线收跌1.44%",
+      "finding": "东方财富2026-11-06沪深300日K收4054.28，前收4113.41，涨跌-1.4375%。第一财经15:21确认沪指-1.10%、深成指-2.57%、创业板指-3.96%，成交额1.66万亿元，超4700股下跌。",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "title": "三条严格方向样本：半导体与存储一致、贵金属偏离",
+      "finding": "盘前半导体negative，BK1036跌3.3328%，相对沪深300-1.8953个百分点；存储negative，BK1137跌3.2404%，相对-1.8029个百分点；贵金属positive，BK0732跌1.5777%，相对-0.1402个百分点。方向一致2/3，不得用九条全部作为分母。",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "title": "AI服务器与稀土属于代理观察",
+      "finding": "AI服务器概念代理BK1138跌3.1402%，相对沪深300-1.7027个百分点；稀土永磁代理BK0578跌1.9268%，相对-0.4893个百分点；有色金属BK0478跌2.3445%，相对-0.9070个百分点。不能将代理转换为严格评分。",
+      "source_ids": []
+    },
+    {
+      "title": "收盘防御板块相对强势、科技硬件承压",
+      "finding": "第一财经收盘报道银行、电力、粮食概念、公路铁路运输居前，元件、CPO、电子化学品、PCB、光纤概念居后。仓库热门概念含昨日连板等交易特征分类，不能冒充产业行业排行。",
+      "source_ids": [
+        "S1"
+      ]
+    }
+  ],
+  "attributions": [
+    {
+      "sector": "券商与宽基指数",
+      "observation": "盘前watch。券商当日无数据；宽基指数当日无数据。代表股：中信证券-1.00%、东方财富-1.05%、华泰证券-0.34%。不参与严格方向评分",
+      "explanation": "watch、mixed、缺指数或代理均不能在盘后改为严格方向命中。",
+      "causal_status": "data_limited",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "半导体",
+      "observation": "盘前negative。半导体-3.33%，相对沪深300-1.90%。代表股：中芯国际+0.19%、北方华创-0.18%、兆易创新-8.99%。方向一致，本条计1个严格样本",
+      "explanation": "GMR按冻结方向与同日有效指数对照；新闻仅提供可能背景，不能据此断定因果。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "AI服务器",
+      "observation": "盘前negative。AI服务器（代理）-3.14%，相对沪深300-1.70%。代表股：浪潮信息-2.29%、中科曙光-1.88%、英维克-5.68%。不参与严格方向评分",
+      "explanation": "BK1138属于概念代理，不能替代完整AI服务器行业的严格评分。",
+      "causal_status": "data_limited",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "存储",
+      "observation": "盘前negative。存储芯片-3.24%，相对沪深300-1.80%。代表股：兆易创新-8.99%、北京君正-6.92%、澜起科技-8.36%。方向一致，本条计1个严格样本",
+      "explanation": "GMR按冻结方向与同日有效指数对照；新闻仅提供可能背景，不能据此断定因果。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "新能源",
+      "observation": "盘前mixed。新能源-0.78%，相对沪深300+0.66%。代表股：宁德时代-3.73%、比亚迪-1.18%、隆基绿能-0.40%。不参与严格方向评分",
+      "explanation": "watch、mixed、缺指数或代理均不能在盘后改为严格方向命中。",
+      "causal_status": "data_limited",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "稀土与有色金属",
+      "observation": "盘前watch。有色金属-2.34%，相对沪深300-0.91%；稀土（代理）-1.93%，相对沪深300-0.49%。代表股：紫金矿业-4.07%、洛阳钼业-5.14%、中国铝业-2.16%、北方稀土-1.33%。不参与严格方向评分",
+      "explanation": "BK0578稀土永磁已批准为代理观察，但不等于稀土同名行业指数；中国稀土当日无K线，禁止旧价补算。",
+      "causal_status": "data_limited",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "贵金属",
+      "observation": "盘前positive。贵金属-1.58%，相对沪深300-0.14%。代表股：未配置。方向偏离，本条计1个严格样本",
+      "explanation": "GMR按冻结方向与同日有效指数对照；新闻仅提供可能背景，不能据此断定因果。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "出口制造",
+      "observation": "盘前mixed。出口制造当日无数据。代表股：未配置。不参与严格方向评分",
+      "explanation": "watch、mixed、缺指数或代理均不能在盘后改为严格方向命中。",
+      "causal_status": "data_limited",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "机器人",
+      "observation": "盘前watch。无固定指数。代表股：未配置。不参与严格方向评分",
+      "explanation": "watch、mixed、缺指数或代理均不能在盘后改为严格方向命中。",
+      "causal_status": "data_limited",
+      "source_ids": [
+        "S1"
+      ]
+    }
+  ],
+  "new_events": [
+    {
+      "title": "早盘四大指数大幅低开，AI硬件承压",
+      "summary": "第一财经09:32滚动报道沪指开盘-2.11%、深成指-3.72%、创业板指-4.99%，AI硬件侧领跌、银行保险相对活跃；这是盘中行情事实，不是已证实的单一催化。",
+      "published_at_utc": "2026-11-06T01:32:00Z",
+      "source_ids": [
+        "S2"
+      ]
+    },
+    {
+      "title": "收盘银行电力相对强势、科技链疲弱",
+      "summary": "第一财经15:21收盘报道银行、电力、粮食概念较强，PCB、CPO等较弱。该报道属于收盘后核验，不标记为盘中新增驱动。",
+      "published_at_utc": "2026-11-06T07:21:07Z",
+      "source_ids": [
+        "S1"
+      ]
+    }
+  ],
+  "next_watch": [
+    "观察半导体、存储的次日延续与全球科技风险偏好，不能直接认定因果。",
+    "银行、电力、粮食概念的防御性是否持续；区分交易特征榜与行业榜。",
+    "BK1138与BK0578仅作代理，不能参与严格评分。",
+    "券商与宽基、出口制造缺固定指数定义；中国稀土当日K线缺失不得旧价补算。"
+  ],
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "收盘｜沪指跌1.1% 银行板块涨幅居前",
+      "publisher": "第一财经",
+      "published_at_utc": "2026-11-06T07:21:07Z",
+      "url": "https://www.yicai.com/news/103429445.html",
+      "verification": "original_article_read"
+    },
+    {
+      "id": "S2",
+      "title": "滚动更新丨A股四大指数集体低开，市场逾5400股下跌",
+      "publisher": "第一财经",
+      "published_at_utc": "2026-11-06T01:32:00Z",
+      "url": "https://cj.sina.com.cn/articles/view/1733360754/6750fc7202001l13g",
+      "verification": "reported_article_read"
+    }
+  ]
+}
