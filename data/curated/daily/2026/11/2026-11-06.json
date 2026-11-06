@@ -417,18 +417,17 @@
       "value_kind": "daily_bar"
     },
     {
-      "available_at_utc": "2026-11-06T00:18:09.739772+00:00",
+      "available_at_utc": "2026-11-06T00:18:27.160Z",
       "category": "cn_index",
-      "change_pct": 2.1639,
-      "error": "Quote dated 2026-11-04 is older than peer CN index 2026-11-05",
+      "change_pct": 0.1015,
+      "error": null,
       "fallback_note": "Eastmoney not available: Remote end closed connection without response",
       "key": "SSE",
       "label": "上证综指",
-      "market_date": "2026-11-04",
-      "observed_at_utc": "2026-11-04T01:30:00+00:00",
+      "market_date": "2026-11-05",
+      "observed_at_utc": null,
       "quality_flags": [
-        "source_status_stale",
-        "stale_vs_cn_index_peer"
+        "source_corrected"
       ],
       "raw_market_date": "2026-11-04",
       "raw_snapshot_sha256": "85db892ca904d73316c2c61f74bc55f4650b3c382a523d1c828129f763ed4dfd",
@@ -436,18 +435,20 @@
       "raw_status": "stale",
       "raw_value": 3686.1730957,
       "raw_value_kind": "daily_close",
-      "reference_close": 3608.09790039,
-      "reference_date": "2026-11-03",
-      "revision_kind": "none",
-      "revision_record": null,
-      "source": "Yahoo Finance chart API (unofficial)",
-      "status": "stale",
+      "reference_close": 3686.17,
+      "reference_date": "2026-11-04",
+      "revision_kind": "source_correction",
+      "revision_record": "data/supplements/2026/11/2026-11-06/SSE.json",
+      "source": "Yahoo Finance 历史收盘记录（Investing.com 独立交叉核验）",
+      "source_url": "https://hk.finance.yahoo.com/quote/000001.SS/history/",
+      "status": "ok",
+      "supplement_collected_at_utc": "2026-11-06T00:18:27.160Z",
       "symbol": "000001.SS",
       "unit": "points",
-      "usable_for_price_analysis": false,
-      "usable_for_return_analysis": false,
-      "value": 3686.1730957,
-      "value_kind": "daily_close"
+      "usable_for_price_analysis": true,
+      "usable_for_return_analysis": true,
+      "value": 3689.91,
+      "value_kind": "official_daily_close"
     },
     {
       "available_at_utc": "2026-11-06T00:18:09.739772+00:00",
@@ -520,5 +521,7 @@
   "source_errors": {
     "news": []
   },
-  "supplement_sha256": {}
+  "supplement_sha256": {
+    "SSE": "7534b7320a929aeeb8710b348f211578a3252e4c99c732fcd20ed2bca250330d"
+  }
 }
