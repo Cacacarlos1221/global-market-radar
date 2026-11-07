@@ -98,6 +98,34 @@ class MorningAuditTests(unittest.TestCase):
             self.assertEqual(mismatch["forecast_state"], "MISMATCH_ANALYSIS_HASH")
             self.assertFalse(mismatch["forecast_eligible_for_scoring"])
 
+    def test_weekend_forecast_is_never_created_or_scored(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            analysis = fixture(root)
+            weekend = "2026-11-07"
+            self.assertEqual(freeze_forecast(weekend, root, datetime(2026, 11, 7, 8, 20, tzinfo=BJ)), "non_trading_day")
+            self.assertFalse((root / "data/forecasts/2026/11/2026-11-07.json").exists())
+            raw = root / "data/daily/2026/11/2026-11-05.json"
+            daily = json.loads(raw.read_text(encoding="utf-8"))
+            daily["report_date"] = weekend
+            target_raw = root / "data/daily/2026/11/2026-11-07.json"
+            target_raw.write_text(json.dumps(daily), encoding="utf-8")
+            report_data = json.loads(analysis.read_text(encoding="utf-8"))
+            report_data["report_date"] = weekend
+            report_data["generated_at_utc"] = "2026-11-07T00:17:59Z"
+            target_analysis = root / "data/analysis/2026/11/2026-11-07.json"
+            target_analysis.write_text(json.dumps(report_data), encoding="utf-8")
+            forecast = root / "data/forecasts/2026/11/2026-11-07.json"
+            forecast.parent.mkdir(parents=True, exist_ok=True)
+            forecast.write_text(json.dumps({
+                "report_date": weekend, "frozen_at_utc": "2026-11-07T00:18:26Z",
+                "analysis_sha256": hashlib.sha256(target_analysis.read_bytes()).hexdigest(),
+                "a_share_sectors": [{"sector": "半导体"}]
+            }), encoding="utf-8")
+            report = audit(weekend, root, datetime(2026, 11, 7, 8, 22, tzinfo=BJ))
+            self.assertEqual(report["forecast_state"], "NON_TRADING_DAY")
+            self.assertFalse(report["forecast_eligible_for_scoring"])
+
     def test_frozen_after_open_never_eligible(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
