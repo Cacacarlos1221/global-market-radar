@@ -75,7 +75,9 @@ def audit(day, root=ROOT, now=None):
         frozen = read_json(forecast)
         try:
             created = parsed_utc(frozen["frozen_at_utc"]).astimezone(BJ)
-            if created.date().isoformat() != day or created.time() >= time(9, 30):
+            if datetime.strptime(day, "%Y-%m-%d").weekday() >= 5:
+                result["forecast_state"] = "NON_TRADING_DAY"
+            elif created.date().isoformat() != day or created.time() >= time(9, 30):
                 result["forecast_state"] = "INVALID_FREEZE_TIME"
             elif analysis.is_file() and hashlib.sha256(analysis.read_bytes()).hexdigest() != frozen.get("analysis_sha256"):
                 result["forecast_state"] = "MISMATCH_ANALYSIS_HASH"
