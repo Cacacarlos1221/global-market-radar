@@ -86,6 +86,9 @@ def freeze_forecast(day, root=ROOT, now=None):
     local = now.astimezone(BJ)
     if local.date().isoformat() != day or local.time() >= clock(9, 30):
         return "outside_preopen_window"
+    # Weekend reports are informational only: never create a scorable A-share forecast.
+    if local.weekday() >= 5:
+        return "non_trading_day"
     out = data_path(root, "forecasts", day)
     if out.exists():
         return "already_frozen"
