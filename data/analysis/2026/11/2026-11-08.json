@@ -1,0 +1,139 @@
+{
+  "report_date": "2026-11-08",
+  "generated_at_utc": "2026-11-08T00:20:00Z",
+  "market_summary": "北京时间2026年11月8日08:17:48采集。今天为周日，美股与A股均休市，不存在11月8日当日开盘价或当日A股方向预测；USD/CNY、AUD/CNY、AUD/USD属于最新可得周末外汇报价，不能解读为周日正常交易日的收盘价。按资产次序：USD/CNY 6.6648（market_date=2026-11-07，-0.35%）；AUD/CNY 4.5847（2026-11-07，-1.09%）；纳斯达克 24579.43（11月6日，+1.09%）；标普500 7376.86（11月6日，+0.31%）；道琼斯 51285.73（11月6日，-0.46%）；AUD/USD 0.68681（2026-11-07，-0.91%）。上证综指 3649.18（11月6日，-1.10%）与沪深300 4054.28（11月6日，-1.44%），同市场日期一致。11月6日美股科技反弹但周线仍弱，可能与此前AI板块急跌后的技术性修复有关；无法据此证明单一因果。美国就业和下周通胀数据、AI基础设施监管与投资回报仍是下一交易日风险变量。",
+  "news_digest": {
+    "overview": "周日无新股市交易，重点转向11月7日披露的中国10月外汇及黄金储备、伯克希尔第三季度业绩与回购，以及11月6日美股科技反弹但周线下跌的背景。所有行情均明确标注所属市场日；面向11月9日的判断仅为周末观察条件，不作为已冻结的正式盘前预测。",
+    "items": [
+      {
+        "title": "中国10月外汇储备小幅增加，黄金储备继续增长",
+        "summary": "据华尔街日报援引中国央行数据，10月外汇储备约3.405万亿美元，较9月增加约49亿美元；黄金持有量由7747万盎司增加至7830万盎司。储备估值变化不等于单月跨境资金净流入。",
+        "market_impact": "观察人民币汇率稳定、黄金概念与贵金属情绪；不把储备增长直接推断为相关股票上涨。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "伯克希尔第三季度回购96亿美元，经营利润同比下降",
+        "summary": "路透11月7日报道，伯克希尔第三季度回购约96亿美元股票，经营利润同比下降约6%至127.1亿美元，保险承保业务走弱。",
+        "market_impact": "回购体现资本配置变化，但利润下降也显示经营压力；对A股保险、金融板块只有间接参考价值。",
+        "importance": "medium",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美股科技周五反弹，但本周仍明显下跌",
+        "summary": "11月6日纳指上涨约1.09%，标普500上涨约0.31%，道指下跌约0.46%；Barron's指出纳指本周仍下跌约3.4%，下周通胀数据值得关注。",
+        "market_impact": "下个A股交易日关注AI服务器、半导体与存储是否修复；海外反弹不等于国内板块必然上涨。",
+        "importance": "high",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "全球股票基金连续七周净流入，科技资金热度降温",
+        "summary": "路透11月6日统计，截至11月4日的一周全球股票基金净流入约386亿美元，科技基金流入降至三周低点，金融与医疗板块获资金青睐。",
+        "market_impact": "说明风险偏好和板块轮动并存；该数据属于上周资金统计，不能当作11月8日新流量。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Berkshire Hathaway accelerates stock buybacks, operating profit falls",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/finance/berkshire-hathaway-accelerates-stock-buybacks-operating-profit-falls-2026-11-07/",
+      "verification": "2026-11-07 published; Reuters report text independently checked; exact UTC publication time not verified"
+    },
+    {
+      "id": "S2",
+      "title": "China Forex Reserves Edged Up in October",
+      "publisher": "The Wall Street Journal",
+      "published_at_utc": null,
+      "url": "https://www.wsj.com/economy/central-banking/china-forex-reserves-edged-up-in-october-89c34113",
+      "verification": "2026-11-07 publication; report states PBOC foreign reserves USD 3.405 trillion; exact UTC publication time not verified"
+    },
+    {
+      "id": "S3",
+      "title": "Global equity funds post seventh straight week of inflows",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/china/global-markets-flows-graphic-2026-11-06/",
+      "verification": "2026-11-06 published; background on weekly global capital flows; not represented as a new Sunday trading event"
+    },
+    {
+      "id": "S4",
+      "title": "Review & Preview: What a Week!",
+      "publisher": "Barron's",
+      "published_at_utc": null,
+      "url": "https://www.barrons.com/articles/stocks-today-indexes-lower-on-week-after-volatility-0b37989b",
+      "verification": "2026-11-07 report on Nov 6 close and next week's inflation releases; publication time not verified"
+    }
+  ],
+  "a_share_bias": "watch",
+  "a_share_outlook": "2026年11月8日为周日，中国A股休市，绝不生成当日A股开盘方向或可评分冻结预测。下个预计交易日11月9日仅观察条件：上证与沪深300最近收盘均为11月6日；纳指11月6日反弹，但科技板块周度风险仍高；中国10月外储与黄金储备数据提供宏观背景。11月9日正式盘前方向必须在当日以最新信息重新独立判断并冻结，本周末观察不可回填为11月9日预测。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "watch",
+      "reason": "11月6日A股指数下跌，需等11月9日真实量能与资金承接"
+    },
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "美股科技周五反弹，但周度调整和估值压力仍存"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "watch",
+      "reason": "关注美国AI监管、数据中心投资和国内订单验证"
+    },
+    {
+      "sector": "存储",
+      "bias": "mixed",
+      "reason": "海外科技波动较大，需核对产业价格与国内供需"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "watch",
+      "reason": "中国黄金储备继续增加，但现货金价、美元和利率影响不同"
+    },
+    {
+      "sector": "稀土有色",
+      "bias": "watch",
+      "reason": "缺少周末新的可靠价格信号，观察周一商品及板块指数"
+    },
+    {
+      "sector": "新能源",
+      "bias": "neutral",
+      "reason": "本次周末资料不足以形成独立方向判断"
+    },
+    {
+      "sector": "银行保险",
+      "bias": "neutral",
+      "reason": "伯克希尔保险利润变化不能直接外推至中国保险业"
+    }
+  ],
+  "risks": [
+    "周日A股和美股休市，最新行情所属市场日并非报告日",
+    "外汇周末报价可能是周五收盘后的数据商日界，不可视为真实周日活跃交易",
+    "11月9日行情和政策尚未发生，不得以周末报告冒充正式盘前冻结预测",
+    "美国AI监管与利率预期仍有不确定性",
+    "黄金储备变动不等于黄金概念股必然上涨",
+    "资金流报告统计截至11月4日，不能视为周日资金流"
+  ],
+  "uncertainty": "中高。周末无新增证券市场交易，跨市场行情时间戳不统一；新闻事实与市场因果推断分离。所有对11月9日的讨论均是观察条件而非已冻结预测。",
+  "evidence_urls": [
+    "https://www.reuters.com/business/finance/berkshire-hathaway-accelerates-stock-buybacks-operating-profit-falls-2026-11-07/",
+    "https://www.wsj.com/economy/central-banking/china-forex-reserves-edged-up-in-october-89c34113",
+    "https://www.reuters.com/world/china/global-markets-flows-graphic-2026-11-06/",
+    "https://www.barrons.com/articles/stocks-today-indexes-lower-on-week-after-volatility-0b37989b"
+  ]
+}
