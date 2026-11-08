@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-08",
+  "requested_at_utc": "2026-11-08T00:17:12Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "At 08:17 Asia/Shanghai, today's snapshot and analysis were absent and no current-day workflow run was visible; trigger idempotent Sunday fact collection. Non-trading day: no A-share forecast freeze."
+}
