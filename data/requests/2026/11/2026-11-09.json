@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-09",
+  "requested_at_utc": "2026-11-09T00:13:09Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "At 08:13 Beijing, today's snapshot and analysis are missing and no 2026-11-09 collection Actions run is listed; request immediate idempotent fact collection."
+}
