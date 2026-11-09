@@ -1,14 +1,15 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-07",
-  "generated_at_utc": "2026-11-06T16:01:57.163102+00:00",
+  "audit_date": "2026-11-10",
+  "generated_at_utc": "2026-11-09T17:51:36.854764+00:00",
   "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05",
-    "2026-11-06"
+    "2026-11-06",
+    "2026-11-09"
   ],
-  "pending_count": 4,
+  "pending_count": 6,
   "high_priority_count": 1,
   "pending": [
     {
@@ -18,10 +19,11 @@
       "observed_dates": [
         "2026-11-04",
         "2026-11-05",
-        "2026-11-06"
+        "2026-11-06",
+        "2026-11-09"
       ],
-      "observed_days": 3,
-      "last_observed": "2026-11-06",
+      "observed_days": 4,
+      "last_observed": "2026-11-09",
       "seen_today": false,
       "groups": [
         "券商与宽基指数"
@@ -67,16 +69,19 @@
       "observed_dates": [
         "2026-11-04",
         "2026-11-05",
-        "2026-11-06"
+        "2026-11-06",
+        "2026-11-09"
       ],
-      "observed_days": 3,
-      "last_observed": "2026-11-06",
+      "observed_days": 4,
+      "last_observed": "2026-11-09",
       "seen_today": false,
       "groups": [
         "AI服务器",
+        "AI服务器与算力",
         "半导体、AI服务器与存储"
       ],
       "biases": [
+        "mixed",
         "negative",
         "positive",
         "watch"
@@ -107,16 +112,18 @@
       "observed_dates": [
         "2026-11-04",
         "2026-11-05",
-        "2026-11-06"
+        "2026-11-06",
+        "2026-11-09"
       ],
-      "observed_days": 3,
-      "last_observed": "2026-11-06",
+      "observed_days": 4,
+      "last_observed": "2026-11-09",
       "seen_today": false,
       "groups": [
         "出口制造"
       ],
       "biases": [
-        "mixed"
+        "mixed",
+        "watch"
       ],
       "gap_reasons": [
         "跟踪子板块尚无标准化指数定义"
@@ -147,6 +154,54 @@
       ],
       "candidate_indices": [],
       "user_question": "请确认「机器人」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "油气与航运",
+      "priority": "medium",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-09"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-09",
+      "seen_today": false,
+      "groups": [
+        "油气与航运"
+      ],
+      "biases": [
+        "mixed"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「油气与航运」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "黄金概念",
+      "priority": "medium",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-09"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-09",
+      "seen_today": false,
+      "groups": [
+        "黄金概念"
+      ],
+      "biases": [
+        "watch"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「黄金概念」的固定指数代码、供应商与是否仅作代理观察。",
       "user_reported_recurrent": false,
       "existing_proposal": false
     }
