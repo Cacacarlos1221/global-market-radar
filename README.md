@@ -173,6 +173,12 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 90
 - 用户明确批准后才写入 `config/sector_index_registry.json` 的 `approved`，且**仅对批准日之后的盘前冻结生效**。已经冻结的预测、历史收盘事实及评分不追溯改写。
 - 股票板块指数与黄金等商品现货指数不能混用；代理概念可以作走势观察，需明确代理身份及评分边界。详细操作见[板块指数映射确认机制](docs/SECTOR_INDEX_MAPPING.md)。
 
+## 盘后调度接力修复（2026-11-09）
+
+11月9日旧15:30 ChatGPT总控实际15:38:50唤醒、15:39:38结束；收盘行情约15:40才入库，因此研究JSON与HTML未能在总控那轮完成。旧16:05独立补救任务截至16:39未查到当天执行记录；GitHub两个定时触发也未留下当日schedule运行记录，具体调度平台内部丢失/延迟原因无法从GitHub日志判定。**当天已手工完成独立GMR研究、HTML、Pages验收。**
+
+从11月10日起：GitHub收盘行情在北京时间**15:30、15:50、16:12**幂等采集；ChatGPT **15:55**总控优先使用已落库行情完成事实研究与发布；**16:25**独立救援复查遗漏并补做分析。GitHub Actions 和 ChatGPT 定时任务均可能延迟，不能把单纯采集success等同于完整报告。具体审计见 [运维手册](docs/OPERATIONS.md)。
+
 ## 预测研究优先使用订正数据（Curated）
 
 - **[完整订正历史 CSV](data/curated/history/quotes.csv)**：按晨报日、资产唯一，包含源记录、修正前后数值、实际可用时间、质量标签。
