@@ -3,6 +3,7 @@ on:
   schedule:
     - cron: '30 7 * * 1-5' # 15:30 Asia/Shanghai, weekday
     - cron: '50 7 * * 1-5' # 15:50 bounded backup; idempotent
+    - cron: '12 8 * * 1-5' # 16:12 independent data retry if GitHub skipped earlier schedules
   workflow_dispatch:
   push:
     paths:
@@ -51,7 +52,7 @@ jobs:
             echo "✅ Today's verified close snapshot and GMR research analysis exist; rendered release checked." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "::warning title=CLOSE_NOT_PUBLISHED::当日收盘快照或GMR研究分析尚缺失，不能视为完整盘后发布"
-            echo "⚠️ CLOSE_NOT_PUBLISHED: 缺失当日收盘快照或GMR分析；需通过16:05独立补救任务验收。" >> "$GITHUB_STEP_SUMMARY"
+            echo "⚠️ CLOSE_NOT_PUBLISHED: 缺失当日收盘快照或GMR分析；15:55 GMR研究总控、16:25独立补救任务需完成后续分析发布。" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Validate tests
         run: python -m unittest discover -s tests -v
