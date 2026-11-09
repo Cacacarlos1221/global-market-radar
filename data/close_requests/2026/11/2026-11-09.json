@@ -1,0 +1,7 @@
+{
+  "report_date": "2026-11-09",
+  "requested_at_utc": "2026-11-09T07:38:52Z",
+  "reason": "15:30+ total control: scheduled close collection not present; collect same-day confirmed bars only",
+  "request_kind": "collect_close",
+  "requested_by": "GMR after-close controller"
+}
