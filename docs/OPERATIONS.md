@@ -169,3 +169,29 @@ python -m scripts.stats --asset AUD_CNY --compare NASDAQ --days 60
 3. **16:25 ChatGPT独立补救验收**：和总控错开30分钟，再检查`data/close`、`data/close_analysis`、HTML、Pages及有效新闻归因；若缺分析立即补做而不是等待或仅发失败告警。若已经完整则不要覆盖。它还负责把指数映射缺口推送给用户。
 
 **注意**：GitHub Actions自身只能负责确定性采集、渲染及测试，不能替代需要经过可靠外部资料核验的GPT盘后研究。如果ChatGPT调度平台实际没有唤醒救援任务，现有GitHub cron无法凭空生成研究JSON。本机制减少任务赶在数据之前结束的风险，但仍需要持续审计两套调度记录，不能承诺绝对准点交付。
+
+
+## 2026-11-10 盘后自动事实版防断链与上午预检
+
+**根因与限制**：2026-11-09 的收盘采集由用户/ChatGPT提交请求后完成，但ChatGPT主任务在事实数据落库前结束，补救任务未在用户检查时留下当日记录；另外GitHub的定时事件存在跨日严重延迟，部分11月9日应运行的收盘cron直到11月10日凌晨才产生 `schedule` 记录。GitHub schedule 并无准点保证，不能依赖单一GitHub cron/ChatGPT调度做“必定15:30发布”的承诺。晨盘之所以稳定，是因为分析+行情早晨协同及时推送，而盘后旧链路只负责自动采集、不负责研究出稿。
+
+**新增防断链设计**（见 `scripts/close_facts_fallback.py`、`scripts/close_review.py`、`scripts/close_render.py`、`.github/workflows/close.yml`）：
+
+1. `close.yml`在15:30之后取得真实本地交易日收盘行情、`--enrich-only`完成后，如果尚无`data/close_analysis/YYYY/MM/YYYY-MM-DD.json`，自动生成`data/close_fact_analysis/YYYY/MM/YYYY-MM-DD.json`。代码只取已核实的日K、预先冻结板块、同日代表股与盘后事实热板块，**不读取RSS标题充当已核验新闻、不猜因果，也不事后改变盘前方向**。
+2. `render_close`优先选择`data/close_analysis`（独立GMR研究）；只有它不存在时才使用`data/close_fact_analysis`。两种文件在不同目录，避免ChatGPT人工研究与机器人同时提交同一JSON的Git冲突；原始`data/close`和已有正式研究都不得覆盖。
+3. 如仅事实版存在，HTML醒目提示**「自动收盘事实版（DEGRADED），待独立新闻研究」**；`--check`返回`published=true, status=DEGRADED, analysis_mode=facts_only_fallback, has_independent_research=false`。即使GitHub绿色成功，这不是GMR完整盘后研究完成，更不应报告COMPLETE。没有任何有效同日行情时**不生成**事实版，不能用旧数据代替。
+4. ChatGPT 15:55主总控和16:25独立后援已经同步明确：当天如果只有事实版和HTML，**仍必须继续独立核验可靠新闻、写入完整`data/close_analysis`**，通过研究文件push触发`close.yml`渲染升级。两条任务均不得仅因为事实版存在就提前收工，或覆盖已发布的真实研究。
+5. `scripts/close_preflight.py` + `.github/workflows/close_preflight.yml`每个交易日北京时间09:20预检，核对当天09:30前冻结、选取最近的**真实历史收盘快照**复制到临时目录做隔离测试：移除研究→生成事实版→验证DEGRADED页面→恢复历史研究→验证研究版优先。此演练只在临时目录操作，绝不修改历史行情/预测/报告。GitHub预检cron也可能严重延迟，不能被当作可靠提醒手段。
+
+**命令与手工验收**：
+```bash
+python -m scripts.close_preflight --date YYYY-MM-DD
+python -m unittest tests.test_close_facts_fallback -v
+python -m scripts.close_facts_fallback --date YYYY-MM-DD
+python -m scripts.close_review --render-only
+python -m scripts.close_review --check --date YYYY-MM-DD
+```
+
+第一次运行事实版脚本仅在当天已存在有效收盘快照且独立GMR研究缺失时创建审计文件；重复运行幂等。`--check`必须同时看`analysis_mode`和`has_independent_research`，不能只看`published`。2026-11-10上午真实历史快照隔离预检的GitHub run： https://github.com/Cacacarlos1221/global-market-radar/actions/runs/42732642043 。
+
+**风险边界**：这层修复能消除**「收盘行情已被GitHub成功采集，但缺研究就连当天页面都没有」**的故障；它不能保证GitHub或ChatGPT定时器绝不延迟，更不能让确定性脚本代替独立可信的新闻研究。实际完整报告仍以正式`data/close_analysis`和Pages验收为准。
