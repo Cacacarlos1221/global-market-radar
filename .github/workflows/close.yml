@@ -9,6 +9,9 @@ on:
     paths:
       - 'data/close_analysis/**'
       - 'data/close_requests/**'
+      - 'data/close/**'
+      - 'data/close_revisions/**'
+      - 'data/close_fact_analysis/**'
       - 'scripts/close_review.py'
       - 'scripts/close_facts_fallback.py'
       - 'scripts/close_render.py'
