@@ -136,3 +136,14 @@ GitHub scheduled 工作流存在排队和延误，不承诺准点完成或无限
 - 若希望提高未来**明确方向预测的覆盖率**，应在下一轮盘前研判时制定独立的方向与不确定度字段及验收阈值；不能盘后把当天的`mixed/watch`重写成`positive`，也不能为了增加评分分母强迫没有证据的主题押方向。
 
 **2026-11-05审计实例**：冻结8组；Positive 3组、Mixed 3组、Watch 2组；至少一个板块或代理指数可观察5组，符合严格评分仅新能源1组（方向一致）。券商与宽基、贵金属虽给出Positive但指数映射不完整，属于“方向预测已给出、事后暂无法客观评分”。这与“未做预测”完全不同。
+
+
+## 2026-11-10：同日行情先可见、GMR研究后完成的防断链机制
+
+盘后行情本身与可靠新闻的独立GMR研究不应互相阻塞页面。现有GitHub定时事件有严重延迟风险，ChatGPT研究任务也可能在行情入库前结束；不能用“GitHub工作流success”代替业务完整发布。为避免当日收盘事实已经采集却仍显示上一交易日，新增**独立、可审计且不冒充研究的降级模式**：
+
+- `data/close_fact_analysis/YYYY/MM/YYYY-MM-DD.json`：由确定性`scripts.close_facts_fallback`从本交易日有效收盘K线和既有冻结预测生成，只描述指数、板块、代表股和严格评分资格，保留原行情SHA256；**不能把RSS线索列入已核验新闻、不能捏造催化、不能回写冻结判断**。
+- `data/close_analysis/YYYY/MM/YYYY-MM-DD.json`：ChatGPT 15:55总控或16:25独立后援在核查可靠新闻来源后提交的正式研究结果，且仅此文件意味着独立新闻研究已完成。两个目录互不覆盖，上传正式研究后`close.yml`自动重新渲染，正式分析优先于事实版。
+- `--check`若返回`published=true, status=DEGRADED, has_independent_research=false, analysis_mode=facts_only_fallback`，说明**当天有真实行情报告，但完整盘后研究仍然缺失**；不能称COMPLETE。仅当研究JSON存在且通过验证时才可标记独立研究已完成；另外行情自身的质量异常仍可能使最终状态DEGRADED。
+- GitHub收盘采集工作流在行情有效且研究缺失时生成事实版+HTML，连同原始数据一起提交`main`；若行情没有任何有效同日K线，绝不发布假报告。
+- 每个交易日09:20前后调用`python -m scripts.close_preflight --date YYYY-MM-DD`，从最近一份真实历史行情复制到临时目录，验证无研究事实版发布以及正式研究优先切换。2026-11-10早上的实际GitHub演练通过。预检不修改历史数据，不保证GitHub schedule的触发准点。
