@@ -556,13 +556,19 @@ def enrich_close(day, root=ROOT):
     dump_json(revision_path, candidate)
     return "enriched: " + ", ".join(sorted(set(recovered)))
 
+def close_analysis_path(root, day):
+    """Independent research takes precedence; facts-only fallback remains archived."""
+    researched = data_path(root, "close_analysis", day)
+    fallback = data_path(root, "close_fact_analysis", day)
+    return researched if researched.exists() else fallback if fallback.exists() else researched
+
 def render_close(root=ROOT):
     from .close_render import render_close_report, render_close_archive, render_close_home, validate_close_analysis
     snapshots = sorted((root / "data/close").glob("*/*/*.json"))
     ready = []
     for path in snapshots:
         day = path.stem
-        analysis_path = data_path(root, "close_analysis", day)
+        analysis_path = close_analysis_path(root, day)
         if not analysis_path.exists():
             continue
         raw, analysis = effective_close(root, day), load_json(analysis_path)
@@ -577,14 +583,14 @@ def render_close(root=ROOT):
     folder.mkdir(parents=True, exist_ok=True)
     (folder / "archive.html").write_text(render_close_archive(ready), encoding="utf-8")
     latest_raw = effective_close(root, max(ready)) if ready else None
-    latest_analysis = load_json(data_path(root, "close_analysis", max(ready))) if ready else None
+    latest_analysis = load_json(close_analysis_path(root, max(ready))) if ready else None
     (folder / "index.html").write_text(render_close_home(latest_raw, latest_analysis), encoding="utf-8")
     return ready
 
 def check_release(day, root=ROOT):
     from .close_render import validate_close_analysis
     raw_path = data_path(root, "close", day)
-    analysis_path = data_path(root, "close_analysis", day)
+    analysis_path = close_analysis_path(root, day)
     html = root / "reports/close" / day[:4] / day[5:7] / (day + ".html")
     index = root / "reports/close/index.html"
     errors, warnings = [], []
@@ -593,6 +599,13 @@ def check_release(day, root=ROOT):
     if not html.exists() or not index.exists(): errors.append("close HTML missing")
     if errors: return {"complete": False, "errors": errors, "warnings": warnings, "date": day}
     data, analysis = effective_close(root, day), load_json(analysis_path)
+    facts_only = analysis.get("analysis_status") == "facts_only_pending_independent_research"
+    if facts_only:
+        warnings.append("facts-only automatic close published; independent GMR news research still pending")
+        if analysis_path != data_path(root, "close_fact_analysis", day):
+            errors.append("facts-only status used as independent research without verification")
+        if analysis.get("news_sources") or analysis.get("new_events"):
+            errors.append("facts-only report must not cite unverified news")
     try: validate_close_analysis(analysis)
     except ValueError as exc: errors.append(str(exc))
     if data.get("benchmark", {}).get("quote", {}).get("market_date") != day:
@@ -617,6 +630,8 @@ def check_release(day, root=ROOT):
         errors.append("analysis summary not found in HTML")
     warnings.extend(data.get("warnings", []))
     return {"complete": not errors and len(warnings) == 0, "published": not errors,
+            "has_independent_research": not facts_only,
+            "analysis_mode": "facts_only_fallback" if facts_only else "independent_research",
             "status": "FAILED" if errors else "DEGRADED" if warnings else "COMPLETE",
             "errors": errors, "warnings": warnings, "date": day,
             "directional_evaluable": sum(x.get("direction_hit") is not None for x in data.get("predicted_groups", [])),
