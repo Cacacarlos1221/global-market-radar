@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-10",
-  "generated_at_utc": "2026-11-10T15:50:32.730404+00:00",
-  "latest_close_snapshot_present": true,
+  "audit_date": "2026-11-11",
+  "generated_at_utc": "2026-11-10T16:29:27.060071+00:00",
+  "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05",
@@ -26,7 +26,7 @@
       ],
       "observed_days": 5,
       "last_observed": "2026-11-10",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "券商与宽基指数"
       ],
@@ -74,7 +74,7 @@
       ],
       "observed_days": 2,
       "last_observed": "2026-11-10",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "黄金概念"
       ],
@@ -98,7 +98,7 @@
       ],
       "observed_days": 1,
       "last_observed": "2026-11-10",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "出口与外贸"
       ],
@@ -122,7 +122,7 @@
       ],
       "observed_days": 1,
       "last_observed": "2026-11-10",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "油气开采"
       ],
@@ -146,7 +146,7 @@
       ],
       "observed_days": 1,
       "last_observed": "2026-11-10",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "航空与化工"
       ],
@@ -174,7 +174,7 @@
       ],
       "observed_days": 5,
       "last_observed": "2026-11-10",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "AI服务器",
         "AI服务器与算力",
@@ -206,30 +206,6 @@
       "existing_proposal": true
     },
     {
-      "topic": "光通信与数据中心",
-      "priority": "medium",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-10"
-      ],
-      "observed_days": 1,
-      "last_observed": "2026-11-10",
-      "seen_today": true,
-      "groups": [
-        "光通信与数据中心"
-      ],
-      "biases": [
-        "mixed"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「光通信与数据中心」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
       "topic": "出口制造",
       "priority": "medium",
       "status": "pending_user_definition",
@@ -256,6 +232,30 @@
       "user_question": "「出口制造」希望跟踪哪些固定子行业（如家电、纺织、汽车零部件）？需要你确定适合的市场指数或拆分口径。",
       "user_reported_recurrent": false,
       "existing_proposal": true
+    },
+    {
+      "topic": "光通信与数据中心",
+      "priority": "medium",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-10",
+      "seen_today": false,
+      "groups": [
+        "光通信与数据中心"
+      ],
+      "biases": [
+        "mixed"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「光通信与数据中心」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
     },
     {
       "topic": "机器人",
