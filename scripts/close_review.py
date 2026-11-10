@@ -556,11 +556,25 @@ def enrich_close(day, root=ROOT):
     dump_json(revision_path, candidate)
     return "enriched: " + ", ".join(sorted(set(recovered)))
 
+def usable_close_research(root, day):
+    """A malformed or mislabeled research JSON must not block a valid facts-only page."""
+    from .close_render import validate_close_analysis
+    path = data_path(root, "close_analysis", day)
+    if not path.exists():
+        return False
+    try:
+        data = load_json(path)
+        if data.get("report_date") != day or data.get("analysis_status") == "facts_only_pending_independent_research":
+            return False
+        return bool(validate_close_analysis(data))
+    except (ValueError, TypeError, KeyError, AttributeError, OSError):
+        return False
+
 def close_analysis_path(root, day):
-    """Independent research takes precedence; facts-only fallback remains archived."""
+    """Prefer valid authored research; otherwise use an explicit facts-only fallback."""
     researched = data_path(root, "close_analysis", day)
     fallback = data_path(root, "close_fact_analysis", day)
-    return researched if researched.exists() else fallback if fallback.exists() else researched
+    return researched if usable_close_research(root, day) else fallback if fallback.exists() else researched
 
 def render_close(root=ROOT):
     from .close_render import render_close_report, render_close_archive, render_close_home, validate_close_analysis
@@ -599,6 +613,8 @@ def check_release(day, root=ROOT):
     if not html.exists() or not index.exists(): errors.append("close HTML missing")
     if errors: return {"complete": False, "errors": errors, "warnings": warnings, "date": day}
     data, analysis = effective_close(root, day), load_json(analysis_path)
+    if data_path(root, "close_analysis", day).exists() and not usable_close_research(root, day):
+        warnings.append("authored research file failed validation; published facts-only fallback instead")
     facts_only = analysis.get("analysis_status") == "facts_only_pending_independent_research"
     if facts_only:
         warnings.append("facts-only automatic close published; independent GMR news research still pending")
