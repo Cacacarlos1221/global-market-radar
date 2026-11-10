@@ -69,6 +69,16 @@ def inspect(day, root=ROOT):
                 status["upgrade_check"] = upgrade
                 return status
             status["independent_research_upgrade"] = upgrade.get("status")
+            # A malformed later handoff must not erase a previously verified facts page.
+            dest.write_text('{"report_date":"' + reference.stem + '","summary":""}', encoding="utf-8")
+            render_close(scratch)
+            invalid = check_release(reference.stem, scratch)
+            if not (invalid.get("published") and invalid.get("status") == "DEGRADED"
+                    and invalid.get("analysis_mode") == "facts_only_fallback"):
+                status["error"] = "malformed later research displaced the verified facts page"
+                status["invalid_research_check"] = invalid
+                return status
+            status["invalid_research_recovery"] = "DEGRADED_facts_restored"
         else:
             status["independent_research_upgrade"] = "not_tested_no_prior_research"
         if raw.read_bytes() != original:
