@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-10",
+  "requested_at_utc": "2026-11-10T00:19:00Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "No current-date daily snapshot or running collection workflow at 08:19 Asia/Shanghai; trigger bounded morning collection."
+}
