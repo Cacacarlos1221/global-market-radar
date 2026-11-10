@@ -1,16 +1,17 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-10",
-  "generated_at_utc": "2026-11-09T18:56:58.859612+00:00",
-  "latest_close_snapshot_present": false,
+  "generated_at_utc": "2026-11-10T15:50:32.730404+00:00",
+  "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05",
     "2026-11-06",
-    "2026-11-09"
+    "2026-11-09",
+    "2026-11-10"
   ],
-  "pending_count": 6,
-  "high_priority_count": 1,
+  "pending_count": 10,
+  "high_priority_count": 5,
   "pending": [
     {
       "topic": "券商与宽基指数",
@@ -20,11 +21,12 @@
         "2026-11-04",
         "2026-11-05",
         "2026-11-06",
-        "2026-11-09"
+        "2026-11-09",
+        "2026-11-10"
       ],
-      "observed_days": 4,
-      "last_observed": "2026-11-09",
-      "seen_today": false,
+      "observed_days": 5,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
       "groups": [
         "券商与宽基指数"
       ],
@@ -63,6 +65,103 @@
       "existing_proposal": true
     },
     {
+      "topic": "黄金概念",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-09",
+        "2026-11-10"
+      ],
+      "observed_days": 2,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
+      "groups": [
+        "黄金概念"
+      ],
+      "biases": [
+        "watch"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「黄金概念」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "出口与外贸",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
+      "groups": [
+        "出口与外贸"
+      ],
+      "biases": [
+        "positive"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「出口与外贸」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "油气开采",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
+      "groups": [
+        "油气开采"
+      ],
+      "biases": [
+        "negative"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「油气开采」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "航空与化工",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
+      "groups": [
+        "航空与化工"
+      ],
+      "biases": [
+        "positive"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「航空与化工」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
       "topic": "AI服务器",
       "priority": "medium",
       "status": "pending_proxy_review",
@@ -70,11 +169,12 @@
         "2026-11-04",
         "2026-11-05",
         "2026-11-06",
-        "2026-11-09"
+        "2026-11-09",
+        "2026-11-10"
       ],
-      "observed_days": 4,
-      "last_observed": "2026-11-09",
-      "seen_today": false,
+      "observed_days": 5,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
       "groups": [
         "AI服务器",
         "AI服务器与算力",
@@ -104,6 +204,30 @@
       "user_question": "是否继续把液冷服务器 BK1138 作为AI服务器的公开代理观察指标？如要严格评分，建议改为你认可的精确主题定义。",
       "user_reported_recurrent": false,
       "existing_proposal": true
+    },
+    {
+      "topic": "光通信与数据中心",
+      "priority": "medium",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-10",
+      "seen_today": true,
+      "groups": [
+        "光通信与数据中心"
+      ],
+      "biases": [
+        "mixed"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「光通信与数据中心」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
     },
     {
       "topic": "出口制造",
@@ -178,30 +302,6 @@
       ],
       "candidate_indices": [],
       "user_question": "请确认「油气与航运」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
-      "topic": "黄金概念",
-      "priority": "medium",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-09"
-      ],
-      "observed_days": 1,
-      "last_observed": "2026-11-09",
-      "seen_today": false,
-      "groups": [
-        "黄金概念"
-      ],
-      "biases": [
-        "watch"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「黄金概念」的固定指数代码、供应商与是否仅作代理观察。",
       "user_reported_recurrent": false,
       "existing_proposal": false
     }
