@@ -158,7 +158,10 @@ def hot_card(board):
 
 def narrative(analysis):
     sources = {x["id"]: x for x in analysis.get("news_sources", [])}
-    blocks = ['<div class="digest-overview"><strong>GMR · 盘后综合判断</strong><p>' +
+    facts_only = analysis.get("analysis_status") == "facts_only_pending_independent_research"
+    label = ("GMR · 收盘事实快报（等待独立新闻研究）" if facts_only
+             else "GMR · 盘后综合判断")
+    blocks = ['<div class="digest-overview"><strong>' + safe(label) + '</strong><p>' +
               safe(analysis["summary"]) + '</p></div>']
     for item in analysis.get("key_findings", []):
         blocks.append('<article class="news-card"><h3>' + safe(item.get("title")) + '</h3><p>' +
@@ -230,6 +233,11 @@ def render_close_report(raw, analysis, prefix="../../"):
             (str(hits) + '/' + str(len(evaluable)) if evaluable else '不适用') + '</div></article>' +
             '<article class="metric"><div class="label">沪深300 日涨跌</div><div class="value ' +
             colour(benchmark_move) + '">' + pct(benchmark_move) + '</div></article></div>')
+    if analysis.get("analysis_status") == "facts_only_pending_independent_research":
+        head += ('<div class="notice"><strong>目前为自动收盘事实版（DEGRADED）</strong>：'
+                 '已确认当日行情与原冻结研判，但独立新闻研究、来源核验及归因尚未完成。'
+                 '下方新闻RSS仅是未核实线索，不代表本报告已完成GMR独立研究。'
+                 '完成独立核验后，页面将自动升级为正式研究版。</div>')
     if not frozen:
         head += ('<div class="notice">今天没有开盘前冻结记录，但板块、代表股及热门主题仍按真实收盘价格展示，'
                  '并继续提供盘后新闻研究。仅不计算严格预测命中率。</div>')
