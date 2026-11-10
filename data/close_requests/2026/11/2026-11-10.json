@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-10",
+  "requested_at_utc": "2026-11-10T07:59:45Z",
+  "reason": "GMR 15:55 control: same-day close snapshot absent after 15:30; request idempotent collection, preserve market-date gate",
+  "requested_by": "GMR"
+}
