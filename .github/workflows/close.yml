@@ -49,7 +49,7 @@ jobs:
           FACT_PATH="data/close/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
           ANALYSIS_PATH="data/close_analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
           FACTS_PATH="data/close_fact_analysis/$(TZ=Asia/Shanghai date +%Y/%m/%Y-%m-%d).json"
-          if [[ -f "$FACT_PATH" && "$LOCAL_TIME" > "1530" ]]; then
+          if [[ -f "$FACT_PATH" && "$LOCAL_TIME" > "1529" ]]; then
             python -m scripts.close_facts_fallback --date "$DAY"
           fi
           python -m scripts.close_review --render-only
