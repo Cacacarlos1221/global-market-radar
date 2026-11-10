@@ -18,11 +18,17 @@ def fmt_pct(value):
     return (f"{value:+.2f}%" if isinstance(value, (float, int)) and not isinstance(value, bool)
             else "暂无同日行情")
 
+def fmt_pp(value):
+    return f"{value:+.2f}个百分点" if isinstance(value, (float, int)) else "—"
+
 def valid_quote(quote, day):
     return (isinstance(quote, dict) and quote.get("status") == "ok"
             and quote.get("market_date") == day
             and isinstance(quote.get("change_pct"), (float, int))
-            and not isinstance(quote.get("change_pct"), bool))
+            and not isinstance(quote.get("change_pct"), bool)
+            and isinstance(quote.get("close"), (float, int))
+            and isinstance(quote.get("reference_close"), (float, int))
+            and quote["close"] > 0 and quote["reference_close"] > 0)
 
 def factual_review(day, root=ROOT, clock=None):
     """Return a fact-only review strictly grounded in the existing same-day snapshot."""
@@ -88,7 +94,7 @@ def factual_review(day, root=ROOT, clock=None):
             change = quote["change_pct"]
             label = str(component.get("board_name") or component.get("name") or "未知板块")
             proxy = "（已标注代理）" if component.get("is_proxy") else ""
-            relative = (f"，相对沪深300{fmt_pct(change-benchmark_pct)}（百分点）"
+            relative = (f"，相对沪深300{fmt_pp(change-benchmark_pct)}"
                         if benchmark_pct is not None else "，沪深300缺失，无法比较超额收益")
             stocks = [str(x.get("name", ""))+fmt_pct(x["change_pct"])
                       for x in component.get("stocks", []) if valid_quote(x, day)]
