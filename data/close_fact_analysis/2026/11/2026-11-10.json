@@ -1,0 +1,100 @@
+{
+  "analysis_status": "facts_only_pending_independent_research",
+  "attributions": [
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签watch；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "券商与宽基指数",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；半导体 +2.97%，相对沪深300+2.90个百分点；固定跟踪股：中芯国际-1.16%、北方华创-1.13%、兆易创新+2.58%；没有可严格评分的明确方向结果。",
+      "sector": "半导体",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；液冷服务器（已标注代理） +2.55%，相对沪深300+2.47个百分点；固定跟踪股：浪潮信息+0.02%、中科曙光-0.19%、英维克+5.24%；没有可严格评分的明确方向结果。",
+      "sector": "AI服务器与算力",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；存储芯片 +2.03%，相对沪深300+1.95个百分点；固定跟踪股：兆易创新+2.58%、北京君正+3.85%、澜起科技+3.43%；没有可严格评分的明确方向结果。",
+      "sector": "存储",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "光通信与数据中心",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签positive；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "出口与外贸",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签negative；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "油气开采",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签positive；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "航空与化工",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签watch；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "黄金概念",
+      "source_ids": []
+    }
+  ],
+  "generated_at_utc": "2026-11-10T08:01:41.680448+00:00",
+  "key_findings": [
+    {
+      "finding": "沪深300收盘4059.11点，日涨跌+0.07%",
+      "source_ids": [],
+      "title": "当日收盘基准（源自同日行情）"
+    },
+    {
+      "finding": "冻结或预选关注9组，至少一项同日板块可观察3组，明确方向3组，严格可评分0组，其中方向一致0组。盘后新增热点不计入盘前评分，所有预测方向均以原始冻结为准。",
+      "source_ids": [],
+      "title": "盘前研判覆盖和方向评分分开统计"
+    },
+    {
+      "finding": "其他数字媒体+9.80%；文字媒体+9.03%；影视动漫制作+8.03%；影视院线+7.05%；历史新高+6.74%。这些仅是当天价格观察，不能用于倒推早晨预测。",
+      "source_ids": [],
+      "title": "盘后筛选的热门板块（不计预测命中）"
+    }
+  ],
+  "new_events": [],
+  "news_sources": [],
+  "next_watch": [
+    "待GMR独立核验当日重大新闻正文、发布时间、公告与产业催化后，另行发布完整研究版。",
+    "复核盘前明确方向覆盖率与严格可评分样本数量，不把代理主题或盘后热点当作命中。",
+    "本日行情存在5条已记录质量或映射限制，逐项以原始行情异常清单为准。"
+  ],
+  "report_date": "2026-11-10",
+  "report_type": "GMR_deterministic_facts_only_fallback",
+  "schema_version": "1.1",
+  "source_close_sha256": "ba782dbcb6947e14059f91e322e80defd4298ef109aa73377f57c22231fd28c7",
+  "source_forecast_sha256": "6e9d70f54758a2f4b497ab47e9c2925883464b36d23b622f4d3de1e06ce929b3",
+  "source_revision_used": false,
+  "summary": "GMR自动收盘事实版（非独立新闻研究，等待后续研究升级）。2026-11-10已取得当日可核验行情；沪深300收盘4059.11点，日涨跌+0.07%。盘前跟踪共9组，有至少一项同日板块指数的3组，其中明确涨跌方向3组、具备严格评分条件0组，方向一致0组。只有存在有效方向评分样本时这些数字才可用于计算命中率；未给出方向或仅有代理指数的主题不计严格命中率。以下仅逐项复述已封存的收盘K线事实，尚未核实独立新闻正文、发布时间与驱动因素，本事实版不作新闻归因或确定性因果解释。"
+}
