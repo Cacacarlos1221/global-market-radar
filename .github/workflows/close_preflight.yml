@@ -1,0 +1,29 @@
+name: GMR after-close morning preflight
+on:
+  schedule:
+    - cron: '20 1 * * 1-5' # 09:20 Asia/Shanghai; GitHub cron may be delayed
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/close_preflight.py'
+      - '.github/workflows/close_preflight.yml'
+permissions:
+  contents: read
+concurrency:
+  group: market-radar-close-preflight
+  cancel-in-progress: false
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm today's preopen freeze and replay yesterday close in isolation
+        run: |
+          DAY=$(TZ=Asia/Shanghai date +%Y-%m-%d)
+          python -m scripts.close_preflight --date "$DAY"
+      - name: Verify close fallback regression suite
+        run: python -m unittest tests.test_close_facts_fallback -v
