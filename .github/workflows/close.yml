@@ -58,7 +58,7 @@ jobs:
           python -m scripts.close_review --render-only
           if [[ -f "$FACT_PATH" && ( -f "$ANALYSIS_PATH" || -f "$FACTS_PATH" ) ]]; then
             python -m scripts.close_review --check --date "$DAY"
-            if [[ -f "$ANALYSIS_PATH" ]]; then
+            if python -c 'import sys; from scripts.close_review import ROOT, usable_close_research; sys.exit(0 if usable_close_research(ROOT, sys.argv[1]) else 1)' "$DAY"; then
               echo "✅ Today's independent GMR research and market close passed validation." >> "$GITHUB_STEP_SUMMARY"
             else
               echo "::warning title=FACTS_ONLY::Today's same-day market fact report published; independent news research pending"
