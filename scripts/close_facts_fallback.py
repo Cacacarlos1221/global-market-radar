@@ -8,7 +8,7 @@ import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from .close_review import ROOT, data_path, effective_close, load_json
+from .close_review import ROOT, data_path, effective_close, load_json, usable_close_research
 from .pipeline import dump_json
 
 REPORT_TYPE = "GMR_deterministic_facts_only_fallback"
@@ -135,7 +135,7 @@ def create_facts_fallback(day, root=ROOT, clock=None):
     """Keep facts and authored research in different files; never overwrite either."""
     authored_path = data_path(root, "close_analysis", day)
     fallback_path = data_path(root, "close_fact_analysis", day)
-    if authored_path.exists():
+    if usable_close_research(root, day):
         return "independent_research_already_exists"
     if fallback_path.exists():
         return "facts_fallback_already_exists"
