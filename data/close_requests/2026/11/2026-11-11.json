@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-11",
+  "requested_at_utc": "2026-11-11T07:56:41Z",
+  "reason": "15:55 GMR controller: no same-day close snapshot and no running close workflow; trigger guarded same-day collection",
+  "requested_by": "GMR after-close controller"
+}
