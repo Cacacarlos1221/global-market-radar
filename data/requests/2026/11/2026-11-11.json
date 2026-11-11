@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-11",
+  "requested_at_utc": "2026-11-11T00:13:37Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "2026-11-11 08:13 Asia/Shanghai preflight: daily snapshot absent and no same-day Daily market data and HTML run in recent GitHub Actions; request idempotent morning collection."
+}
