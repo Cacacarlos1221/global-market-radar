@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-11",
-  "generated_at_utc": "2026-11-11T15:38:49.210494+00:00",
-  "latest_close_snapshot_present": true,
+  "audit_date": "2026-11-12",
+  "generated_at_utc": "2026-11-11T16:22:27.500058+00:00",
+  "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05",
@@ -28,7 +28,7 @@
       ],
       "observed_days": 6,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "券商与宽基指数"
       ],
@@ -77,7 +77,7 @@
       ],
       "observed_days": 3,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "黄金概念"
       ],
@@ -103,7 +103,7 @@
       ],
       "observed_days": 2,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "光通信与数据中心"
       ],
@@ -128,7 +128,7 @@
       ],
       "observed_days": 2,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "出口与外贸"
       ],
@@ -154,7 +154,7 @@
       ],
       "observed_days": 2,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "油气开采"
       ],
@@ -179,7 +179,7 @@
       ],
       "observed_days": 2,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "航空与化工"
       ],
@@ -208,7 +208,7 @@
       ],
       "observed_days": 6,
       "last_observed": "2026-11-11",
-      "seen_today": true,
+      "seen_today": false,
       "groups": [
         "AI服务器",
         "AI服务器与算力",
