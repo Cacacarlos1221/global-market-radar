@@ -1,0 +1,145 @@
+{
+  "report_date": "2026-11-11",
+  "generated_at_utc": "2026-11-11T00:14:50Z",
+  "market_summary": "截至北京时间2026-11-11 08:14:50的盘前研究，行情原始快照采集于08:14:21（各资产观察时间不同）。六大核心资产按固定顺序：USD/CNY 6.66830（market_date=11月10日，相对参考价-0.1153%，外汇观察）；AUD/CNY 4.58970（market_date=11月11日，-0.6188%，外汇观察）；纳斯达克25065.88（11月10日收盘，-0.7416%）；标普500 7520.93（11月10日收盘，-0.3842%）；道琼斯52231.89（11月10日收盘，-0.3013%）；AUD/USD 0.68724（market_date=11月11日，-0.7058%，外汇观察）。路透与AP报道美股三大指数11月10日同步回落，与快照方向一致。美国10月CPI环比+0.4%，高于+0.3%的市场预期，推动美债收益率和美元上行，可能是股市承压的重要因素之一，不能视作唯一已证实因果。快照美元指数102.217（+0.5578%）、10年期美债收益率约4.983%（该字段change_pct=+2.4466%为收益率自身相对变化，非基点）、黄金4046.20（-1.66%）、布伦特91.92（-0.7022%）；路透报道的布伦特期货结算91.49与快照值不同，属于行情时间/合约口径差异，不得混写为同一收盘价。A股最近收盘日均为11月10日：上证3663.72（+0.08%），沪深300 4059.11（+0.074%），无指数日期错配。美元兑人民币与澳元交叉盘market_date不同，不代表同一收盘时点。",
+  "news_digest": {
+    "overview": "11月11日A股开盘前，主要矛盾是美国10月通胀高于预期、联储进一步加息预期升温与科技估值承压；中国10月出口和AI相关高科技产品出口表现强劲，但外需依赖及贸易摩擦风险仍存；油价因美伊局势缓和预期下行，但双方关于谈判的表述不一致；美元与美债收益率上涨对黄金构成短期压力。以下严格区分已核实事实、市场解释及条件性推演。",
+    "items": [
+      {
+        "title": "美国10月CPI超预期，美债收益率跳升、美股三大指数收跌",
+        "summary": "路透报道10月美国CPI环比上涨0.4%，市场预期0.3%；核心CPI环比0.3%，预期0.2%。11月10日道指-0.30%、标普-0.38%、纳指-0.74%；两年期美债收益率大幅上行。",
+        "market_impact": "美元和美债收益率走强可能压制全球成长股估值，A股科技方向应观察资金承接；这是一种传导假设，不代表必然下跌。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "中国前10个月贸易顺差超过1万亿美元，AI相关出口强劲",
+        "summary": "路透引述海关数据：10月美元计价出口同比增长35.2%，前10个月顺差约1.04万亿美元；同期半导体出口额同比增长111.1%。但国内需求仍面临压力，出口依赖提高也可能增加贸易摩擦。",
+        "market_impact": "对半导体制造、外贸链和部分高科技出口企业构成基本面观察线索，但订单兑现、贸易政策和估值决定实际影响。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "油价跌至约两个月低位，美伊局势缓和仍有分歧",
+        "summary": "路透报道11月10日布伦特期货结算91.49美元/桶，WTI 86.04美元/桶；美国官员淡化进一步军事行动必要性，伊朗官员否认目前存在谈判，不能称已达成和平协议。",
+        "market_impact": "航空、化工等成本敏感行业可能受益于油价下行；油气开采利润预期可能承压，若地缘风险反转则方向可能迅速改变。",
+        "importance": "high",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "美元与美债收益率走强，黄金明显回落",
+        "summary": "路透报道美国通胀数据公布后现货黄金跌约2.7%，美元与国债收益率上行；具体金价和跌幅与仓库快照的观察时点不同，不应直接替换原始行情。",
+        "market_impact": "A股黄金概念短线可能受国际金价波动压制，但人民币汇率、公司成本和避险需求仍可能改变个股表现。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "US yields climb, stocks fall as inflation data boosts chances for larger Fed rate hike",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/china/global-markets-wrapup-1-2026-11-10/",
+      "verification": "Reuters 2026-11-10 full report reviewed; exact initial UTC publication timestamp not independently verified"
+    },
+    {
+      "id": "S2",
+      "title": "China's trade surplus soars past $1 trillion as AI boom powers exports",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/asia-pacific/chinas-trade-surplus-soars-past-1-trillion-october-exports-jump-352-yy-2026-11-10/",
+      "verification": "Reuters 2026-11-10 full report reviewed; customs statistics attributed to China's customs data"
+    },
+    {
+      "id": "S3",
+      "title": "Oil prices ease to two-month lows as US downplays further Iran strikes",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/energy/oil-falls-trump-downplays-prospect-escalation-with-iran-2026-11-10/",
+      "verification": "Reuters 2026-11-10 full report reviewed; Iran denies talks, de-escalation not a signed agreement"
+    },
+    {
+      "id": "S4",
+      "title": "Gold falls nearly 3% as CPI tops forecasts, lifting dollar and yields",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/india/gold-edges-lower-focus-shifts-us-inflation-data-2026-11-10/",
+      "verification": "Reuters 2026-11-10 full report reviewed; intraday spot gold differs from repository quote timing"
+    }
+  ],
+  "a_share_bias": "negative",
+  "a_share_outlook": "北京时间2026-11-11 08:14:50盘前条件性研判：美国10月通胀超预期，美债收益率及美元上行，11月10日美股三大指数回落，对A股科技成长估值和风险偏好可能形成压力；中国出口与AI相关高科技产品外需数据提供一定基本面支撑，故总体判断偏谨慎（negative），不是确定跌幅预测。A股11月10日上证和沪深300均微涨且日期一致，今日重点验证半导体、AI服务器、存储、光通信是否能在外部估值压力下获得资金承接；若高开后缩量，谨防回撤，若宽基与科技同步放量则风险压力可能被国内资金抵消。油价回落对航空/部分化工和上游油气方向可能相反；黄金概念观察美元与金价联动。不得使用11月11日开盘后行情修订该判断。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "watch",
+      "reason": "上证和沪深300前一交易日微涨，海外利率冲击下关注量能及内资承接"
+    },
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "中国半导体出口数据强劲，但美股科技回落和美债收益率上行压制估值"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "negative",
+      "reason": "海外科技风险偏好承压，AI资本开支需求仍存但估值和订单兑现需核验"
+    },
+    {
+      "sector": "存储",
+      "bias": "mixed",
+      "reason": "出口链基本面线索与海外利率估值压力并存，关注供需周期"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "mixed",
+      "reason": "海外AI基础设施需求尚在，贴现率上升与项目盈利风险仍突出"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "出口增长支持外贸链，但高顺差可能引发新的贸易壁垒"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "negative",
+      "reason": "油价下行可能压制上游盈利预期，地缘局势尚未正式解决"
+    },
+    {
+      "sector": "航空与化工",
+      "bias": "positive",
+      "reason": "原油回落可能降低燃油和部分原料成本，但需求和汇率影响不可忽视"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "negative",
+      "reason": "美元和美债收益率上行、国际黄金下跌，仍需观察人民币及避险需求"
+    }
+  ],
+  "risks": [
+    "美国10月CPI已公布且超预期，不得继续在当日晨报写成尚未发布",
+    "美元/澳元汇率的观察日期和美股11月10日收盘日期不一致，不能统一称为昨日收盘",
+    "布伦特行情快照与路透期货结算价存在口径/时间差异，不可直接覆盖",
+    "中美贸易及高顺差可能增加外部政策风险，出口数据不等于利润兑现",
+    "美伊局势未签署确定性协议，伊朗否认正在谈判",
+    "国际金价、美元和利率变化对A股黄金概念并非机械一一对应",
+    "盘前观点只基于上述时间截点，不得用盘后信息重写"
+  ],
+  "uncertainty": "high: 通胀、加息预期、AI估值、贸易摩擦及地缘局势变化均可能快速改变方向；行业偏向为条件性推演，不是收益承诺。",
+  "evidence_urls": [
+    "https://www.reuters.com/world/china/global-markets-wrapup-1-2026-11-10/",
+    "https://www.reuters.com/world/asia-pacific/chinas-trade-surplus-soars-past-1-trillion-october-exports-jump-352-yy-2026-11-10/",
+    "https://www.reuters.com/business/energy/oil-falls-trump-downplays-prospect-escalation-with-iran-2026-11-10/",
+    "https://www.reuters.com/world/india/gold-edges-lower-focus-shifts-us-inflation-data-2026-11-10/"
+  ]
+}
