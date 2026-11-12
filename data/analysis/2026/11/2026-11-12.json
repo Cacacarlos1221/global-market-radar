@@ -1,0 +1,146 @@
+{
+  "report_date": "2026-11-12",
+  "generated_at_utc": "2026-11-12T00:15:00Z",
+  "market_summary": "北京时间2026-11-12约08:15盘前研究；原始快照采集2026-11-12T00:14:23Z。核心六项依序：USD/CNY 6.66980（11月11日外汇观察，-0.0435%）、AUD/CNY 4.56620（11月11日外汇观察，-1.1276%）、纳指25466.19（11月11日收盘，+1.5971%）、标普500 7619.38（+1.3090%）、道指52486.49（+0.4874%）、AUD/USD 0.68442（11月12日早间外汇观察，-0.3709%）。美国科技股11月11日反弹，与路透市场综述一致，CoreWeave对AI基础设施需求的乐观展望是市场讨论的可能驱动，不能视为唯一因果。美元指数102.843（+0.5996%），布伦特期货快照92.51（+1.1149%），COMEX黄金期货3980（-1.2456%），10年美债收益率快照4.998%（change_pct +0.301%是收益率自身的相对变动，不能直接当基点）。美国退伍军人节债券市场休市，收益率报价应核查有效交易时段。A股上证3680.64（+0.4618%）、沪深300 4075.71（+0.4090%），均为11月11日，未见日期错配。美元和澳元外汇观察时点不完全一致，不可直接当作同一时刻银行结汇价。",
+  "news_digest": {
+    "overview": "11月12日A股开盘前，主要变量是美国科技股在AI算力需求乐观表述下反弹，但美元偏强、金价承压及能源地缘风险仍在；中国汽车国内需求疲弱与汽车出口韧性形成对比。以下将已核实的报道事实与对A股的条件性传导分开，不使用开盘后行情。",
+    "items": [
+      {
+        "title": "美股科技股反弹，三大指数11月11日收涨",
+        "summary": "路透报道11月11日纳指上涨约1.60%、标普500上涨约1.31%、道指上涨约0.49%，与仓库快照相符；科技股领涨，但市场对AI资本支出回报的争论未结束。",
+        "market_impact": "对A股半导体、算力及光通信的风险偏好可能构成短期支持，仍需观察国内成交量、汇率与盈利兑现。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "CoreWeave展望缓解部分AI基础设施需求担忧",
+        "summary": "路透报道CoreWeave公布乐观业务展望，市场将其视作AI基础设施需求仍有韧性的信号；公司预计2028年实现盈利属于前瞻指引，不是既成利润。",
+        "market_impact": "AI服务器、数据中心、光模块等链条或受情绪提振，但高资本开支和商业化回报不确定性仍高。",
+        "importance": "high",
+        "source_ids": [
+          "S2",
+          "S1"
+        ]
+      },
+      {
+        "title": "中国汽车内销承压，出口表现与国内需求分化",
+        "summary": "路透11月11日报道，中国汽车行业机构预计2026年国内乘用车销量可能低于1900万辆；10月汽车总体销量同比下降9.2%，而出口仍表现强劲。全年预测并非最终统计。",
+        "market_impact": "新能源整车和零部件需区分内销竞争、出口订单及海外贸易壁垒；不能把行业出口增长机械视为所有车企盈利改善。",
+        "importance": "high",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "中国高科技出口增长提供支撑，但贸易摩擦风险未消",
+        "summary": "路透11月10日引述海关数据称，中国前10个月贸易顺差约1.04万亿美元，10月美元计价出口同比增长35.2%；这是较早公布的背景数据，非11月12日新发布。",
+        "market_impact": "出口制造、半导体设备与AI相关供应链有需求线索，但高顺差也可能引发外部政策阻力。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Stocks rise on tech gains; Nvidia falls after hours",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/media-telecom/global-markets-global-markets-2026-11-11/",
+      "verification": "Reuters report reviewed on 2026-11-12 before A-share open; separate after-hours unverified allegation is excluded from factual investment thesis"
+    },
+    {
+      "id": "S2",
+      "title": "Stocks end higher as CoreWeave results ease AI spending worries",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/sp-500-nasdaq-futures-rise-after-coreweave-soothes-ai-spending-fears-2026-11-11/",
+      "verification": "Reuters 2026-11-11 market report reviewed; corporate outlook is a forecast, not realized profitability"
+    },
+    {
+      "id": "S3",
+      "title": "China's car sales seen falling below 19 million units for first time since 2014",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/retail-consumer/chinas-car-sales-seen-falling-below-19-million-units-first-time-since-2014-2026-11-11/",
+      "verification": "Reuters 2026-11-11 report reviewed; annual figure is industry projection, not completed 2026 sales"
+    },
+    {
+      "id": "S4",
+      "title": "China's trade surplus soars past $1 trillion as AI boom powers exports",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/asia-pacific/chinas-trade-surplus-soars-past-1-trillion-october-exports-jump-352-yy-2026-11-10/",
+      "verification": "Reuters 2026-11-10 customs report, earlier background context rather than newly released overnight fact"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "截至北京时间2026-11-12约08:15的条件性盘前判断：美国11月11日科技股反弹可能改善A股半导体、AI服务器、光通信情绪，但美元指数走强、黄金回落和油价地缘溢价对市场构成分化；国内汽车需求压力与出口韧性并存。总体mixed，不预测确定涨跌。上证及沪深300前一交易日同步上涨，今日观察宽基量能与科技承接；若高开缩量，应警惕回落，若宽基和科技同步放量则有利于风险偏好延续。严禁以11月12日开盘后行情修改本判断。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "watch",
+      "reason": "前一交易日两指数同步上涨，关注成交量和内资承接"
+    },
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "美股科技反弹提振情绪，但美元偏强及估值压力仍在"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "positive",
+      "reason": "海外AI基础设施需求展望改善，需警惕资本开支兑现风险"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "海外科技情绪改善，具体价格与订单证据不足"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "positive",
+      "reason": "AI基础设施需求预期支持，仍需验证实际订单及毛利"
+    },
+    {
+      "sector": "新能源整车与零部件",
+      "bias": "mixed",
+      "reason": "国内汽车需求偏弱但出口韧性较强，行业和公司差异大"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "出口数据强劲但高顺差伴随贸易摩擦风险"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "watch",
+      "reason": "油价地缘风险与需求不确定性并存"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "negative",
+      "reason": "美元走强与黄金期货下跌带来短期压力，仍需关注避险反转"
+    }
+  ],
+  "risks": [
+    "美股指数为11月11日收盘，外汇有11月11日和12日观察值，不能混称同一收盘时点",
+    "美国退伍军人节债券市场休市，10年期美债快照不应误称当日有效收盘",
+    "CoreWeave盈利预期为公司前瞻指引，不代表已实现",
+    "中国汽车全年销量是预测而非最终数据",
+    "油价与黄金期货快照可能与媒体结算时点和合约口径不同",
+    "不采用未经独立证实的企业高管传闻作为确定性投资依据",
+    "盘前预测禁止开盘后回填"
+  ],
+  "uncertainty": "high: AI资本支出回报、国内资金承接、美元利率、油价与汽车需求存在显著不确定性；方向标签仅为条件性研究假设。",
+  "evidence_urls": [
+    "https://www.reuters.com/business/media-telecom/global-markets-global-markets-2026-11-11/",
+    "https://www.reuters.com/business/sp-500-nasdaq-futures-rise-after-coreweave-soothes-ai-spending-fears-2026-11-11/",
+    "https://www.reuters.com/business/retail-consumer/chinas-car-sales-seen-falling-below-19-million-units-first-time-since-2014-2026-11-11/",
+    "https://www.reuters.com/world/asia-pacific/chinas-trade-surplus-soars-past-1-trillion-october-exports-jump-352-yy-2026-11-10/"
+  ]
+}
