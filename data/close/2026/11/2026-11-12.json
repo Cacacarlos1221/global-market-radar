@@ -1,0 +1,523 @@
+{
+  "benchmark": {
+    "name": "沪深300",
+    "quote": {
+      "change_pct": -0.7797,
+      "close": 4043.93,
+      "market_date": "2026-11-12",
+      "reference_close": 4075.71,
+      "secid": "1.000300",
+      "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+      "status": "ok",
+      "value_kind": "daily_close"
+    }
+  },
+  "captured_at_utc": "2026-11-12T07:59:58.857130+00:00",
+  "forecast_frozen_at_utc": "2026-11-12T00:15:01.809178+00:00",
+  "forecast_generated_at_utc": "2026-11-12T00:15:00Z",
+  "forecast_sha256": "092194575b7932a58ec3560757df75f52f21fc7864d04c15145454294fe4aad3",
+  "forecast_status": "frozen",
+  "hot_sectors": [],
+  "market_date": "2026-11-12",
+  "methodology": "没有冻结也应生成盘后收盘观察报告；只对已冻结的方向性组合研判计分，未冻结晨报只能定性对照。子板块需同日原名指数；代理、watch/mixed/neutral 不计分。",
+  "morning_analysis_sha256": null,
+  "news_clues": [
+    {
+      "event_id": "18737ac465fb59cf",
+      "headline": "半导体全产业链催化叠加AI设备需求旺盛，科创50ETF易方达（588080）动能积聚-ETF火线 - 金融界",
+      "published_at_utc": "2026-11-12T06:59:47+00:00",
+      "source": "金融界",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1YcVMzWmEyb2F0eE5QRm1JRlREMi1qeWF4cFFaazA1U1BLUnpHanBpZ1pGT0tKRnRDLXRVUXRrLWx5Ny05b2hxLUZ1dmZiN0JpZ0ZSaGgtaEhoRFVxZ3R3LVh3?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "579aa03eb55535ca",
+      "headline": "午后！亚太市场，大跳水！发生了什么？ - 证券之星",
+      "published_at_utc": "2026-11-12T06:29:59+00:00",
+      "source": "证券之星",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1DdmxpamMyaDZicGFUYzQ3TlBEWVJvVDlGcFBBSk0yb0lha2dzOGdEYkptUU9WM0xCUEp6Ny1yU1R6VDFQenFydnpQLTVKQkJ6TUczMWdBa0V3U2pJMlVQYw?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "1ee7941fc8a035ce",
+      "headline": "11月12日午间涨停快报：46股涨停，通用设备、汽车零部件涨停家数居前，日出东方5连板-电报君 - 金融界",
+      "published_at_utc": "2026-11-12T04:30:05+00:00",
+      "source": "金融界",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5PUTljRENLY2NBR2NLdFY4N1F2MEctcy1IVmgxVEZmT0ZrbTN2TV9XZlZQMUtzRHZFcV9NRk9nY3FiZEtnekhWZjJOaTlGTTRDcWllbmFiM2FETXVHQ1NickZoTXZ6NDA0dG1RaDhqUXZHZXVl?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "7b2cdf217de0fc7d",
+      "headline": "A股午评：科创50指数半日涨2.35%，半导体产业链、燃气板块活跃，贵金属概念股震荡走低 - 金融界",
+      "published_at_utc": "2026-11-12T03:34:02+00:00",
+      "source": "金融界",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE50bThHdXU2RDZWbGs1TWtMS0NQTUF6MGV5dGhveGQtUjJTei1fZnJpaW5MTGNWWEZ6S0VPWEZCMHNKRzhvYnFQTUN2eVQyX0NTRDFkaXRTSVVCRGNySGRPcU9DR1U5blo4U1MtQzBFY01PQQ?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "3b2cdc982a368ef5",
+      "headline": "开盘：三大指数集体低开 贵金属板块跌幅居前 - 新浪财经",
+      "published_at_utc": "2026-11-12T02:45:13+00:00",
+      "source": "新浪财经",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPUDc3OXVaSzBmZFZmdEtYTmZpTVNFc1FiX3hPOWotUERRU2k5dkpqTjRIZ19MM3JoLS12aG5Zdk1oYjNacnB0U2NiV0RMYktWN3JEX1RXUUJtdnpXZ3BRX2t2U2I2d3F2WEFCZXZ6WlRqQkJDVWdtQ0txeW51SHNPQw?oc=5",
+      "verification": "rss_headline_unverified"
+    }
+  ],
+  "observed_close_instruments": 1,
+  "predicted_groups": [
+    {
+      "aggregated_change_pct": null,
+      "bias": "watch",
+      "components": [
+        {
+          "board_code": null,
+          "board_name": null,
+          "board_type": "industry",
+          "is_proxy": false,
+          "key": "brokerage",
+          "name": "券商",
+          "quote": {
+            "change_pct": null,
+            "status": "unavailable"
+          },
+          "stocks": [
+            {
+              "change_pct": null,
+              "code": "600030",
+              "market": "1",
+              "market_date": null,
+              "name": "中信证券",
+              "secid": "1.600030",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "300059",
+              "market": "0",
+              "market_date": null,
+              "name": "东方财富",
+              "secid": "0.300059",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "601688",
+              "market": "1",
+              "market_date": null,
+              "name": "华泰证券",
+              "secid": "1.601688",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            }
+          ]
+        },
+        {
+          "board_code": null,
+          "board_name": null,
+          "board_type": "benchmark",
+          "is_proxy": false,
+          "key": "broad",
+          "name": "宽基指数",
+          "quote": {
+            "change_pct": null,
+            "status": "unavailable"
+          },
+          "stocks": []
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "前一交易日两指数同步上涨，关注成交量和内资承接",
+      "sector": "券商与宽基指数"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "mixed",
+      "components": [
+        {
+          "board_code": "BK1036",
+          "board_name": "半导体",
+          "board_type": "industry",
+          "is_proxy": false,
+          "key": "semiconductor",
+          "name": "半导体",
+          "quote": {
+            "change_pct": null,
+            "market_date": null,
+            "secid": "90.BK1036",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "unavailable"
+          },
+          "stocks": [
+            {
+              "change_pct": null,
+              "code": "688981",
+              "market": "1",
+              "market_date": null,
+              "name": "中芯国际",
+              "secid": "1.688981",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "002371",
+              "market": "0",
+              "market_date": null,
+              "name": "北方华创",
+              "secid": "0.002371",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "603986",
+              "market": "1",
+              "market_date": null,
+              "name": "兆易创新",
+              "secid": "1.603986",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "美股科技反弹提振情绪，但美元偏强及估值压力仍在",
+      "sector": "半导体"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "positive",
+      "components": [
+        {
+          "board_code": "BK1138",
+          "board_name": "液冷服务器",
+          "board_type": "concept",
+          "is_proxy": true,
+          "key": "server",
+          "name": "AI服务器",
+          "quote": {
+            "change_pct": null,
+            "market_date": null,
+            "secid": "90.BK1138",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "unavailable"
+          },
+          "stocks": [
+            {
+              "change_pct": null,
+              "code": "000977",
+              "market": "0",
+              "market_date": null,
+              "name": "浪潮信息",
+              "secid": "0.000977",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "603019",
+              "market": "1",
+              "market_date": null,
+              "name": "中科曙光",
+              "secid": "1.603019",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "002837",
+              "market": "0",
+              "market_date": null,
+              "name": "英维克",
+              "secid": "0.002837",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "海外AI基础设施需求展望改善，需警惕资本开支兑现风险",
+      "sector": "AI服务器与算力"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "watch",
+      "components": [
+        {
+          "board_code": "BK1137",
+          "board_name": "存储芯片",
+          "board_type": "concept",
+          "is_proxy": false,
+          "key": "memory",
+          "name": "存储芯片",
+          "quote": {
+            "change_pct": null,
+            "market_date": null,
+            "secid": "90.BK1137",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "unavailable"
+          },
+          "stocks": [
+            {
+              "change_pct": null,
+              "code": "603986",
+              "market": "1",
+              "market_date": null,
+              "name": "兆易创新",
+              "secid": "1.603986",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "300223",
+              "market": "0",
+              "market_date": null,
+              "name": "北京君正",
+              "secid": "0.300223",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "688008",
+              "market": "1",
+              "market_date": null,
+              "name": "澜起科技",
+              "secid": "1.688008",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "海外科技情绪改善，具体价格与订单证据不足",
+      "sector": "存储"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "positive",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "AI基础设施需求预期支持，仍需验证实际订单及毛利",
+      "sector": "光通信与数据中心"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "mixed",
+      "components": [
+        {
+          "board_code": "BK0493",
+          "board_name": "新能源",
+          "board_type": "concept",
+          "is_proxy": false,
+          "key": "new_energy",
+          "name": "新能源",
+          "quote": {
+            "change_pct": null,
+            "market_date": null,
+            "secid": "90.BK0493",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "unavailable"
+          },
+          "stocks": [
+            {
+              "change_pct": null,
+              "code": "300750",
+              "market": "0",
+              "market_date": null,
+              "name": "宁德时代",
+              "secid": "0.300750",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "002594",
+              "market": "0",
+              "market_date": null,
+              "name": "比亚迪",
+              "secid": "0.002594",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            },
+            {
+              "change_pct": null,
+              "code": "601012",
+              "market": "1",
+              "market_date": null,
+              "name": "隆基绿能",
+              "secid": "1.601012",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "unavailable"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "国内汽车需求偏弱但出口韧性较强，行业和公司差异大",
+      "sector": "新能源整车与零部件"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "mixed",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "出口数据强劲但高顺差伴随贸易摩擦风险",
+      "sector": "出口与外贸"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "watch",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "油价地缘风险与需求不确定性并存",
+      "sector": "油气开采"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "negative",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "美元走强与黄金期货下跌带来短期压力，仍需关注避险反转",
+      "sector": "黄金概念"
+    }
+  ],
+  "report_date": "2026-11-12",
+  "schema_version": "1.1",
+  "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+  "warnings": [
+    "industry board list page 3: Eastmoney API unavailable: Remote end closed connection without response",
+    "concept board list page 1: Eastmoney API unavailable: Remote end closed connection without response",
+    "中信证券: Eastmoney API unavailable: Remote end closed connection without response",
+    "东方财富: Eastmoney API unavailable: Remote end closed connection without response",
+    "华泰证券: Eastmoney API unavailable: Remote end closed connection without response",
+    "半导体: Eastmoney API unavailable: Remote end closed connection without response",
+    "中芯国际: Eastmoney API unavailable: Remote end closed connection without response",
+    "北方华创: Eastmoney API unavailable: Remote end closed connection without response",
+    "兆易创新: Eastmoney API unavailable: Remote end closed connection without response",
+    "液冷服务器: Eastmoney API unavailable: Remote end closed connection without response",
+    "浪潮信息: Eastmoney API unavailable: Remote end closed connection without response",
+    "中科曙光: Eastmoney API unavailable: Remote end closed connection without response",
+    "英维克: Eastmoney API unavailable: Remote end closed connection without response",
+    "存储芯片: Eastmoney API unavailable: Remote end closed connection without response",
+    "北京君正: Eastmoney API unavailable: Remote end closed connection without response",
+    "澜起科技: Eastmoney API unavailable: Remote end closed connection without response",
+    "unmapped morning sector; cannot score: 光通信与数据中心",
+    "新能源: Eastmoney API unavailable: Remote end closed connection without response",
+    "宁德时代: Eastmoney API unavailable: Remote end closed connection without response",
+    "比亚迪: Eastmoney API unavailable: Remote end closed connection without response",
+    "隆基绿能: Eastmoney API unavailable: Remote end closed connection without response",
+    "unmapped morning sector; cannot score: 出口与外贸",
+    "unmapped morning sector; cannot score: 油气开采",
+    "unmapped morning sector; cannot score: 黄金概念",
+    "水产养殖: Eastmoney API unavailable: Remote end closed connection without response",
+    "地面兵装Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "地面兵装Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "卫浴电器: Eastmoney API unavailable: Remote end closed connection without response",
+    "百货: Eastmoney API unavailable: Remote end closed connection without response",
+    "渔业: Eastmoney API unavailable: Remote end closed connection without response",
+    "水产饲料: Eastmoney API unavailable: Remote end closed connection without response",
+    "林业Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "林业Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "稀土: Eastmoney API unavailable: Remote end closed connection without response",
+    "集成电路制造: Eastmoney API unavailable: Remote end closed connection without response",
+    "金融信息服务: Eastmoney API unavailable: Remote end closed connection without response",
+    "预加工食品: Eastmoney API unavailable: Remote end closed connection without response",
+    "水泥制品: Eastmoney API unavailable: Remote end closed connection without response",
+    "半导体设备: Eastmoney API unavailable: Remote end closed connection without response",
+    "白酒Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "白酒Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "燃气Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "燃气Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "国有大型银行Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "啤酒: Eastmoney API unavailable: Remote end closed connection without response",
+    "软饮料: Eastmoney API unavailable: Remote end closed connection without response",
+    "纺织鞋类制造: Eastmoney API unavailable: Remote end closed connection without response",
+    "一般零售: Eastmoney API unavailable: Remote end closed connection without response",
+    "水泥: Eastmoney API unavailable: Remote end closed connection without response",
+    "端到端供应链服务: Eastmoney API unavailable: Remote end closed connection without response",
+    "瓷砖地板: Eastmoney API unavailable: Remote end closed connection without response",
+    "医疗研发外包: Eastmoney API unavailable: Remote end closed connection without response",
+    "肉鸡养殖: Eastmoney API unavailable: Remote end closed connection without response",
+    "长材: Eastmoney API unavailable: Remote end closed connection without response",
+    "水泥制造: Eastmoney API unavailable: Remote end closed connection without response",
+    "海洋捕捞: Eastmoney API unavailable: Remote end closed connection without response",
+    "高速公路: Eastmoney API unavailable: Remote end closed connection without response",
+    "饮料乳品: Eastmoney API unavailable: Remote end closed connection without response",
+    "生猪养殖: Eastmoney API unavailable: Remote end closed connection without response",
+    "核力发电: Eastmoney API unavailable: Remote end closed connection without response",
+    "乳品: Eastmoney API unavailable: Remote end closed connection without response",
+    "钢结构: Eastmoney API unavailable: Remote end closed connection without response",
+    "其他农产品加工: Eastmoney API unavailable: Remote end closed connection without response",
+    "养殖业: Eastmoney API unavailable: Remote end closed connection without response",
+    "超市: Eastmoney API unavailable: Remote end closed connection without response",
+    "多业态零售: Eastmoney API unavailable: Remote end closed connection without response",
+    "基建市政工程: Eastmoney API unavailable: Remote end closed connection without response",
+    "股份制银行Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "非白酒: Eastmoney API unavailable: Remote end closed connection without response",
+    "医疗服务: Eastmoney API unavailable: Remote end closed connection without response",
+    "食品加工: Eastmoney API unavailable: Remote end closed connection without response",
+    "光伏主材: Eastmoney API unavailable: Remote end closed connection without response",
+    "食品饮料: Eastmoney API unavailable: Remote end closed connection without response",
+    "粮油加工: Eastmoney API unavailable: Remote end closed connection without response",
+    "银行: Eastmoney API unavailable: Remote end closed connection without response",
+    "银行Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "饲料: Eastmoney API unavailable: Remote end closed connection without response",
+    "机场: Eastmoney API unavailable: Remote end closed connection without response",
+    "集成电路封测: Eastmoney API unavailable: Remote end closed connection without response",
+    "农商行Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "其他生物制品: Eastmoney API unavailable: Remote end closed connection without response",
+    "橡胶助剂: Eastmoney API unavailable: Remote end closed connection without response",
+    "氯碱: Eastmoney API unavailable: Remote end closed connection without response",
+    "中药Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "中药Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "商贸零售: Eastmoney API unavailable: Remote end closed connection without response",
+    "医院: Eastmoney API unavailable: Remote end closed connection without response",
+    "农林牧渔: Eastmoney API unavailable: Remote end closed connection without response",
+    "城商行Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "诊断服务: Eastmoney API unavailable: Remote end closed connection without response",
+    "零食: Eastmoney API unavailable: Remote end closed connection without response",
+    "水力发电: Eastmoney API unavailable: Remote end closed connection without response",
+    "线下药店: Eastmoney API unavailable: Remote end closed connection without response",
+    "油品石化贸易: Eastmoney API unavailable: Remote end closed connection without response",
+    "烘焙食品: Eastmoney API unavailable: Remote end closed connection without response",
+    "房屋建设Ⅲ: Eastmoney API unavailable: Remote end closed connection without response",
+    "房屋建设Ⅱ: Eastmoney API unavailable: Remote end closed connection without response",
+    "铁路公路: Eastmoney API unavailable: Remote end closed connection without response",
+    "肉制品: Eastmoney API unavailable: Remote end closed connection without response",
+    "农产品加工: Eastmoney API unavailable: Remote end closed connection without response",
+    "医药商业: Eastmoney API unavailable: Remote end closed connection without response",
+    "房地产综合服务: Eastmoney API unavailable: Remote end closed connection without response",
+    "其他酒类: Eastmoney API unavailable: Remote end closed connection without response",
+    "医药流通: Eastmoney API unavailable: Remote end closed connection without response"
+  ]
+}
