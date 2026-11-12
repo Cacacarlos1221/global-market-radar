@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-12",
+  "requested_at_utc": "2026-11-12T00:13:47Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "08:13 CST preflight found no daily snapshot and no active daily collection workflow; request bounded collection and downstream verification."
+}
