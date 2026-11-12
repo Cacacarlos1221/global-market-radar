@@ -1,0 +1,155 @@
+{
+  "report_date": "2026-11-12",
+  "generated_at_utc": "2026-11-12T08:24:00Z",
+  "summary": "GMR观察：沪深300当日收4043.93点，跌0.7797%。第一财经15:18报道沪指-0.67%、深成指-1.68%、创业板指-2.44%，两市成交1.93万亿元、逾4600股下跌，燃气、农业、白酒活跃，贵金属及AI漫剧走弱。冻结9组，其中3组明确方向；东方财富板块与代表股接口大量RemoteDisconnected，仅沪深300有同日有效K线，严格可评分0组，不计算命中率。",
+  "key_findings": [
+    {
+      "title": "市场放量普跌",
+      "finding": "沪深300-0.7797%至4043.93；第一财经收盘报道两市成交1.93万亿元、超4600股下跌。",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "title": "盘中半导体与芯片活跃",
+      "finding": "财联社12:22和东方财富10:59报道芯片盘中走强，但同日板块日K失败，不将午间报价冒充收盘。",
+      "source_ids": [
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "title": "盘后新发现燃气活跃、贵金属下挫",
+      "finding": "第一财经收盘报道燃气股东方环宇、洪通燃气涨停，山金国际、赤峰黄金等跌幅明显；这是盘后发现，不倒算盘前命中。",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "title": "数据质量限制",
+      "finding": "东方财富板块及股票接口广泛断连，已有批准的贵金属BK0732、稀土代理BK0578无需重新审批；应通过显式修订补采，不覆盖原始行情。",
+      "source_ids": []
+    }
+  ],
+  "attributions": [
+    {
+      "sector": "券商与宽基指数",
+      "observation": "冻结watch；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "指数缺失或定义未批准，不根据新闻猜测收盘方向。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "半导体",
+      "observation": "冻结mixed；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "财联社午间报道半导体活跃，但午间行情不等于收盘。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S2"
+      ]
+    },
+    {
+      "sector": "AI服务器与算力",
+      "observation": "冻结positive；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "东方财富BK1138液冷服务器仅为未批准代理，且本日K线失败；芯片盘中走强不等于AI服务器收盘上涨。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S3"
+      ]
+    },
+    {
+      "sector": "存储",
+      "observation": "冻结watch；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "指数缺失或定义未批准，不根据新闻猜测收盘方向。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "光通信与数据中心",
+      "observation": "冻结positive；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "指数缺失或定义未批准，不根据新闻猜测收盘方向。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "新能源整车与零部件",
+      "observation": "冻结mixed；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "指数缺失或定义未批准，不根据新闻猜测收盘方向。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "出口与外贸",
+      "observation": "冻结mixed；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "指数缺失或定义未批准，不根据新闻猜测收盘方向。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "油气开采",
+      "observation": "冻结watch；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "指数缺失或定义未批准，不根据新闻猜测收盘方向。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "黄金概念",
+      "observation": "冻结negative；板块及代表股同日K线不可用，沪深300-0.7797%，无法可靠计算板块超额收益或严格方向评分。",
+      "explanation": "第一财经收盘报道贵金属普跌，但贵金属BK0732不等于黄金概念885530，不可借此认定预测命中。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1"
+      ]
+    }
+  ],
+  "new_events": [
+    {
+      "title": "半导体产业链盘中走强",
+      "summary": "财联社午间报道半导体链活跃，非收盘价格，涨幅因果尚不确定。",
+      "published_at_utc": "2026-11-12T04:22:00Z",
+      "source_ids": [
+        "S2"
+      ]
+    },
+    {
+      "title": "算力芯片盘中活跃",
+      "summary": "东方财富研究中心10:59报道AI芯片走高，可能催化因素不视为确定因果。",
+      "published_at_utc": "2026-11-12T02:59:00Z",
+      "source_ids": [
+        "S3"
+      ]
+    }
+  ],
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "收盘丨创业板指跌2.44% 贵金属板块下挫",
+      "publisher": "第一财经",
+      "published_at_utc": "2026-11-12T07:18:00Z",
+      "url": "https://cj.sina.com.cn/articles/view/1733360754/6750fc7202001l8u4",
+      "verification": "reported"
+    },
+    {
+      "id": "S2",
+      "title": "午报三大指数冲高回落小幅收红，半导体产业链集体走强",
+      "publisher": "财联社",
+      "published_at_utc": "2026-11-12T04:22:00Z",
+      "url": "https://cj.sina.com.cn/articles/view/2868676035/aafc85c302001zm1w",
+      "verification": "reported"
+    },
+    {
+      "id": "S3",
+      "title": "寒王重返千元、四小龙集体暴涨 算力芯片赛道爆了！发生了什么？",
+      "publisher": "东方财富研究中心",
+      "published_at_utc": "2026-11-12T02:59:00Z",
+      "url": "https://fund.eastmoney.com/a/202611123929328492.html",
+      "verification": "reported"
+    }
+  ],
+  "next_watch": [
+    "修复东方财富RemoteDisconnected，显式修订补采同日板块与股票K线",
+    "确认券商BK0473与沪深300 000300拆分或固定组合口径",
+    "出口与外贸、光通信与数据中心需确认具体跟踪指数",
+    "黄金概念885530与已批准贵金属BK0732不能混为同名严格评分"
+  ]
+}
