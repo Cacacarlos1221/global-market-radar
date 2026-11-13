@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "audit_date": "2026-11-13",
-  "generated_at_utc": "2026-11-12T16:54:16.108369+00:00",
-  "latest_close_snapshot_present": false,
+  "generated_at_utc": "2026-11-13T15:42:51.494348+00:00",
+  "latest_close_snapshot_present": true,
   "verified_close_days_scanned": [
     "2026-11-04",
     "2026-11-05",
@@ -10,7 +10,8 @@
     "2026-11-09",
     "2026-11-10",
     "2026-11-11",
-    "2026-11-12"
+    "2026-11-12",
+    "2026-11-13"
   ],
   "pending_count": 10,
   "high_priority_count": 6,
@@ -26,11 +27,12 @@
         "2026-11-09",
         "2026-11-10",
         "2026-11-11",
-        "2026-11-12"
+        "2026-11-12",
+        "2026-11-13"
       ],
-      "observed_days": 7,
-      "last_observed": "2026-11-12",
-      "seen_today": false,
+      "observed_days": 8,
+      "last_observed": "2026-11-13",
+      "seen_today": true,
       "groups": [
         "券商与宽基指数"
       ],
@@ -76,11 +78,12 @@
         "2026-11-09",
         "2026-11-10",
         "2026-11-11",
-        "2026-11-12"
+        "2026-11-12",
+        "2026-11-13"
       ],
-      "observed_days": 4,
-      "last_observed": "2026-11-12",
-      "seen_today": false,
+      "observed_days": 5,
+      "last_observed": "2026-11-13",
+      "seen_today": true,
       "groups": [
         "黄金概念"
       ],
@@ -103,11 +106,12 @@
       "observed_dates": [
         "2026-11-10",
         "2026-11-11",
-        "2026-11-12"
+        "2026-11-12",
+        "2026-11-13"
       ],
-      "observed_days": 3,
-      "last_observed": "2026-11-12",
-      "seen_today": false,
+      "observed_days": 4,
+      "last_observed": "2026-11-13",
+      "seen_today": true,
       "groups": [
         "光通信与数据中心"
       ],
@@ -130,11 +134,12 @@
       "observed_dates": [
         "2026-11-10",
         "2026-11-11",
-        "2026-11-12"
+        "2026-11-12",
+        "2026-11-13"
       ],
-      "observed_days": 3,
-      "last_observed": "2026-11-12",
-      "seen_today": false,
+      "observed_days": 4,
+      "last_observed": "2026-11-13",
+      "seen_today": true,
       "groups": [
         "出口与外贸"
       ],
@@ -157,16 +162,18 @@
       "observed_dates": [
         "2026-11-10",
         "2026-11-11",
-        "2026-11-12"
+        "2026-11-12",
+        "2026-11-13"
       ],
-      "observed_days": 3,
-      "last_observed": "2026-11-12",
-      "seen_today": false,
+      "observed_days": 4,
+      "last_observed": "2026-11-13",
+      "seen_today": true,
       "groups": [
         "油气开采"
       ],
       "biases": [
         "negative",
+        "positive",
         "watch"
       ],
       "gap_reasons": [
@@ -213,11 +220,12 @@
         "2026-11-09",
         "2026-11-10",
         "2026-11-11",
-        "2026-11-12"
+        "2026-11-12",
+        "2026-11-13"
       ],
-      "observed_days": 7,
-      "last_observed": "2026-11-12",
-      "seen_today": false,
+      "observed_days": 8,
+      "last_observed": "2026-11-13",
+      "seen_today": true,
       "groups": [
         "AI服务器",
         "AI服务器与算力",
