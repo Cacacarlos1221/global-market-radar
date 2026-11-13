@@ -1,0 +1,483 @@
+{
+  "benchmark": {
+    "name": "沪深300",
+    "quote": {
+      "change_pct": -0.6835,
+      "close": 4016.29,
+      "market_date": "2026-11-13",
+      "reference_close": 4043.93,
+      "secid": "1.000300",
+      "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+      "status": "ok",
+      "value_kind": "daily_close"
+    }
+  },
+  "captured_at_utc": "2026-11-13T08:04:46.850200+00:00",
+  "forecast_frozen_at_utc": "2026-11-13T00:21:23.854857+00:00",
+  "forecast_generated_at_utc": "2026-11-13T00:21:15.083Z",
+  "forecast_sha256": "e830c9411a0018a70a5c45b74305410864b9108773621f936ea06e1d72038bee",
+  "forecast_status": "frozen",
+  "hot_sectors": [],
+  "market_date": "2026-11-13",
+  "methodology": "没有冻结也应生成盘后收盘观察报告；只对已冻结的方向性组合研判计分，未冻结晨报只能定性对照。子板块需同日原名指数；代理、watch/mixed/neutral 不计分。",
+  "morning_analysis_sha256": null,
+  "news_clues": [
+    {
+      "event_id": "10ce71a92bd7c9e4",
+      "headline": "南方财经全媒体集团 - 南方财经",
+      "published_at_utc": "2026-11-13T06:47:27+00:00",
+      "source": "南方财经",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE04NHFOczdBd1RyMWt6ME94Z3N0bzRwTUxZUVRXTWlHN25iRkMtOHNvSlBHcUJoYzFCZHAyUEFsZ2JyQlQtVW9tNkFoaFg2aG9WX3FOaFN5X2xaaUFXYkhCRnRCNUFkZ21BR2c?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "bc9a89fd14895e6f",
+      "headline": "11月13日证券之星午间消息汇总：长鑫科技发声！算力超级周期迈入分层时代_证券要闻 - 证券之星",
+      "published_at_utc": "2026-11-13T03:53:49+00:00",
+      "source": "证券之星",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5vWlNDcDROTkxtT2Q0OHVFODBZbGx2OVIzNndIcWJhOXRMU2tMemtTb3Z0aENweWszVFJqNjZYbnluSnRqM0d0R0hURDZkYndWVzRXYTF6cThVcmM4cUNDSw?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "5b6bb2c6ab2084dc",
+      "headline": "英伟达突发“换帅”，AI算力市场迎来大变局：危机之下，国产芯片会不会迎来新机会？ - Moomoo",
+      "published_at_utc": "2026-11-13T02:23:33+00:00",
+      "source": "Moomoo",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPcEk2ZW5MY3pLbmlqZ3pLcDk4MVNzZ0p6VlZHeWlCRTdRcEtxcXMwM0dJUGM3QU8xT0lfZ1hHU2pfRG5ZSk5BLUVnenQ5akx4TTZIUnltNS1iQ1Vra2g0U0EwQjdmc2lQUDZqWml2bVFaUnlvdWhBdWt1RV91aUN3ZTNCTGNPVURmZlRkNWxFaV93alV6cTVpUVJUZlBIeExiTVhWSXlhemtsZi1STEVXcmZUQ3ZMNTR0S1lyZXYxLWhvZU50QXc?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "9f97301fcafe3f20",
+      "headline": "多地信创政策持续加码信创ETF易方达（159540）景气度攀升-ETF火线 - 金融界",
+      "published_at_utc": "2026-11-13T01:34:46+00:00",
+      "source": "金融界",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1IYXVyVHQ1YVR4S3ZzUnJBQV9oQmZIZnlsa0tCamN0LTM1NlZlQmNPRV8wTF82dC1ZY1ZzZzJFcFVIVFN1M0lVYk0teGJuTmdodjZkQW1DRXV1dGFQVWdUejF1ckRzbk5aMFF0bWRDUks?oc=5",
+      "verification": "rss_headline_unverified"
+    },
+    {
+      "event_id": "ce84e08e50a89c65",
+      "headline": "A股开盘：创业板涨0.64%、科创50张1.56%，半导体、CPO、光刻机板块高开 - 金融界",
+      "published_at_utc": "2026-11-13T01:32:46+00:00",
+      "source": "金融界",
+      "topic": "a_share",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9PTUVxN2dqU2NxU1ZhUGdPNHlBaHluUFlQWjgxN2Ztal9XR0daZTBjdF9BS254THdHb3RRa1RtTm81T21ZaDFlU1I3RGxnb3NWN3dmenlhTHFkRkFnd1NOejRUV3lkQlgwd3pmNy1xdk80UQ?oc=5",
+      "verification": "rss_headline_unverified"
+    }
+  ],
+  "observed_close_instruments": 20,
+  "predicted_groups": [
+    {
+      "aggregated_change_pct": null,
+      "bias": "watch",
+      "components": [
+        {
+          "board_code": null,
+          "board_name": null,
+          "board_type": "industry",
+          "is_proxy": false,
+          "key": "brokerage",
+          "name": "券商",
+          "quote": {
+            "change_pct": null,
+            "status": "unavailable"
+          },
+          "stocks": [
+            {
+              "change_pct": -0.319,
+              "close": 25.0,
+              "code": "600030",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "中信证券",
+              "reference_close": 25.08,
+              "secid": "1.600030",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": 0.3291,
+              "close": 18.29,
+              "code": "300059",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "东方财富",
+              "reference_close": 18.23,
+              "secid": "0.300059",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -0.3507,
+              "close": 17.05,
+              "code": "601688",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "华泰证券",
+              "reference_close": 17.11,
+              "secid": "1.601688",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            }
+          ]
+        },
+        {
+          "board_code": null,
+          "board_name": null,
+          "board_type": "benchmark",
+          "is_proxy": false,
+          "key": "broad",
+          "name": "宽基指数",
+          "quote": {
+            "change_pct": null,
+            "status": "unavailable"
+          },
+          "stocks": []
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "前一交易日上证与沪深300同步回落，等待量能和资金承接确认",
+      "sector": "券商与宽基指数"
+    },
+    {
+      "aggregated_change_pct": -3.3312,
+      "bias": "mixed",
+      "components": [
+        {
+          "board_code": "BK1036",
+          "board_name": "半导体",
+          "board_type": "industry",
+          "is_proxy": false,
+          "key": "semiconductor",
+          "name": "半导体",
+          "quote": {
+            "change_pct": -3.3312,
+            "close": 2179.6,
+            "market_date": "2026-11-13",
+            "reference_close": 2254.71,
+            "secid": "90.BK1036",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "ok",
+            "value_kind": "daily_close"
+          },
+          "stocks": [
+            {
+              "change_pct": -1.092,
+              "close": 110.5,
+              "code": "688981",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "中芯国际",
+              "reference_close": 111.72,
+              "secid": "1.688981",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -1.0379,
+              "close": 553.0,
+              "code": "002371",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "北方华创",
+              "reference_close": 558.8,
+              "secid": "0.002371",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -4.9565,
+              "close": 246.02,
+              "code": "603986",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "兆易创新",
+              "reference_close": 258.85,
+              "secid": "1.603986",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": -2.6477,
+      "reason": "英伟达治理冲击与同业表现分化并存，关注国内产业链实际订单",
+      "sector": "半导体"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "negative",
+      "components": [
+        {
+          "board_code": "BK1138",
+          "board_name": "液冷服务器",
+          "board_type": "concept",
+          "is_proxy": true,
+          "key": "server",
+          "name": "AI服务器",
+          "quote": {
+            "change_pct": -3.0911,
+            "close": 1703.3,
+            "market_date": "2026-11-13",
+            "reference_close": 1757.63,
+            "secid": "90.BK1138",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "ok",
+            "value_kind": "daily_close"
+          },
+          "stocks": [
+            {
+              "change_pct": -3.3583,
+              "close": 54.1,
+              "code": "000977",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "浪潮信息",
+              "reference_close": 55.98,
+              "secid": "0.000977",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": 1.7621,
+              "close": 81.43,
+              "code": "603019",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "中科曙光",
+              "reference_close": 80.02,
+              "secid": "1.603019",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -6.3934,
+              "close": 38.36,
+              "code": "002837",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "英维克",
+              "reference_close": 40.98,
+              "secid": "0.002837",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "海外AI龙头突发管理层变动和融资担忧压制情绪，但不代表算力需求消失",
+      "sector": "AI服务器与算力"
+    },
+    {
+      "aggregated_change_pct": -3.3766,
+      "bias": "watch",
+      "components": [
+        {
+          "board_code": "BK1137",
+          "board_name": "存储芯片",
+          "board_type": "concept",
+          "is_proxy": false,
+          "key": "memory",
+          "name": "存储芯片",
+          "quote": {
+            "change_pct": -3.3766,
+            "close": 2256.91,
+            "market_date": "2026-11-13",
+            "reference_close": 2335.78,
+            "secid": "90.BK1137",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "ok",
+            "value_kind": "daily_close"
+          },
+          "stocks": [
+            {
+              "change_pct": -4.9565,
+              "close": 246.02,
+              "code": "603986",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "兆易创新",
+              "reference_close": 258.85,
+              "secid": "1.603986",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -3.8648,
+              "close": 108.95,
+              "code": "300223",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "北京君正",
+              "reference_close": 113.33,
+              "secid": "0.300223",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -7.3178,
+              "close": 150.97,
+              "code": "688008",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "澜起科技",
+              "reference_close": 162.89,
+              "secid": "1.688008",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": -2.6931,
+      "reason": "海外芯片板块分化，缺少直接的存储价格及订单新证据",
+      "sector": "存储"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "mixed",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "海外数据中心相关股票承压但长期需求仍有不确定支撑",
+      "sector": "光通信与数据中心"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "positive",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "原油期货上行与地缘风险溢价可能形成短期催化",
+      "sector": "油气开采"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "negative",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "美元和美债收益率上行、黄金期货下跌形成短期压力",
+      "sector": "黄金概念"
+    },
+    {
+      "aggregated_change_pct": -1.9866,
+      "bias": "watch",
+      "components": [
+        {
+          "board_code": "BK0493",
+          "board_name": "新能源",
+          "board_type": "concept",
+          "is_proxy": false,
+          "key": "new_energy",
+          "name": "新能源",
+          "quote": {
+            "change_pct": -1.9866,
+            "close": 15635.13,
+            "market_date": "2026-11-13",
+            "reference_close": 15952.03,
+            "secid": "90.BK0493",
+            "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+            "status": "ok",
+            "value_kind": "daily_close"
+          },
+          "stocks": [
+            {
+              "change_pct": -0.9583,
+              "close": 237.7,
+              "code": "300750",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "宁德时代",
+              "reference_close": 240.0,
+              "secid": "0.300750",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -0.4109,
+              "close": 79.99,
+              "code": "002594",
+              "market": "0",
+              "market_date": "2026-11-13",
+              "name": "比亚迪",
+              "reference_close": 80.32,
+              "secid": "0.002594",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            },
+            {
+              "change_pct": -0.6791,
+              "close": 11.7,
+              "code": "601012",
+              "market": "1",
+              "market_date": "2026-11-13",
+              "name": "隆基绿能",
+              "reference_close": 11.78,
+              "secid": "1.601012",
+              "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+              "status": "ok",
+              "value_kind": "daily_close"
+            }
+          ]
+        }
+      ],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": -1.3031,
+      "reason": "油价上涨与国内需求、竞争格局影响相反，缺少新确认数据",
+      "sector": "新能源与汽车"
+    },
+    {
+      "aggregated_change_pct": null,
+      "bias": "mixed",
+      "components": [],
+      "direction_hit": null,
+      "evaluation": "not_scorable",
+      "excess_vs_csi300_pct": null,
+      "reason": "人民币汇率、海外利率与贸易政策影响复杂，缺少一致方向",
+      "sector": "出口与外贸"
+    }
+  ],
+  "report_date": "2026-11-13",
+  "schema_version": "1.1",
+  "source": "东方财富公开行情 API（非官方、可能延迟或限流）",
+  "warnings": [
+    "industry board list page 1: Eastmoney API unavailable: Remote end closed connection without response",
+    "concept board list page 1: Eastmoney API unavailable: Remote end closed connection without response",
+    "board listing unavailable; only previous verified board identities reused, same-day K-lines independently fetched",
+    "unmapped morning sector; cannot score: 光通信与数据中心",
+    "unmapped morning sector; cannot score: 油气开采",
+    "unmapped morning sector; cannot score: 黄金概念",
+    "unmapped morning sector; cannot score: 出口与外贸"
+  ]
+}
