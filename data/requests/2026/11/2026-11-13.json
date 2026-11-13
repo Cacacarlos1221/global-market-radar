@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-13",
+  "requested_at_utc": "2026-11-13T00:18:44Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "08:18 Asia/Shanghai pre-open check: no 2026-11-13 daily snapshot or active Daily market data and HTML workflow run; trigger idempotent collection and release pipeline."
+}
