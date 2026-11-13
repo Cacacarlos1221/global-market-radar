@@ -1,0 +1,146 @@
+{
+  "report_date": "2026-11-13",
+  "generated_at_utc": "2026-11-13T00:21:15.083Z",
+  "market_summary": "北京时间2026-11-13盘前分析，行情原始采集2026-11-13T00:20:27.662677+00:00；六大核心顺序：USD/CNY 6.66260（2026-11-13，-0.12%）、AUD/CNY 4.54090（2026-11-13，-0.52%）、纳斯达克25366.09（2026-11-12，-0.39%）、标普500 7592.40（2026-11-12，-0.35%）、道琼斯52297.09（2026-11-12，-0.36%）、AUD/USD 0.68046（2026-11-13，-0.56%）。美股三大指数11月12日均小幅收跌，路透及美联社报道均与仓库收盘值一致。科技股承压但能源股受油价上行支撑，板块分化明显；不得将英伟达高管变动视作市场唯一因果。美元指数103.17（2026-11-12，+0.25%），布伦特近月期货95.88（2026-11-12，+3.36%）美元/桶，COMEX黄金近月期货3891.20（2026-11-12，-2.73%）美元/盎司，10年期美债收益率指数5.103%（收益率相对变化2.10%并非基点变化）。上证3655.83（2026-11-12，-0.67%）、沪深300 4043.93（2026-11-12，-0.78%），两者均为11月12日收盘且同步回落。外汇为11月13日早间不同观察时点，非银行结汇价；商品为期货合约报价，与媒体结算价可能不同。",
+  "news_digest": {
+    "overview": "11月13日盘前，海外核心变量是英伟达管理层突发变化带来的AI链估值与治理不确定性、美股行业轮动，以及伊朗相关地缘言论推动原油上涨并强化通胀/加息担忧。中国A股上个交易日两大指数均下跌；对今日行业的传导须以开盘后量价与国内政策验证，不能将美国单一股票波动直接等同于A股方向。",
+    "items": [
+      {
+        "title": "美股11月12日小幅收跌，AI与能源板块分化",
+        "summary": "路透11月12日报道，道指跌0.36%、标普500跌0.35%、纳指跌0.39%，英伟达下跌4.3%，能源板块上涨1.5%；美联社报道核对三大指数收盘点位一致。",
+        "market_impact": "A股半导体、算力与光通信可能面临海外风险偏好扰动，油气链可能获得短期关注；仍需观察国内成交和公司基本面。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S3"
+        ]
+      },
+      {
+        "title": "英伟达CEO离任，AI产业链治理与融资担忧升温",
+        "summary": "据路透11月12日报道，英伟达CEO黄仁勋离任，公司任命CFO Colette Kress为临时CEO；股价一度大幅下跌，收盘跌幅缩窄。报道涉及个人指控不作为独立证实的事实，也不据此推断中国企业关联。",
+        "market_impact": "AI芯片、服务器、数据中心投资预期可能短期承压；其他芯片厂商表现分化，不能简单推断全球AI需求已经逆转。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "伊朗相关地缘表态推动油价，通胀风险再被关注",
+        "summary": "路透11月12日报道，美国总统称美国不需要与伊朗达成协议后，原油价格上涨；美股能源板块受益。仓库布伦特近月期货快照上行3.36%，与报道方向一致但合约和观测时点不必完全相同。",
+        "market_impact": "油气开采与油服可能相对受益，航空和能源成本敏感型制造业可能承压；若油价反转则传导可能逆转。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美国通胀与利率预期强化，市场等待PPI",
+        "summary": "路透11月12日报道，市场在此前消费者通胀偏热后等待周五生产者价格指数，期货定价反映12月美联储加息至少25基点的预期；这是当时市场定价而非已发生的政策决定。",
+        "market_impact": "美元和美债收益率走强可能压制成长股估值与黄金，A股需关注人民币汇率及北向相关风险偏好变化。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美股资金从高估值科技向防御与价值板块轮动",
+        "summary": "路透11月12日评论文章指出，科技板块近期下跌同时，医疗和必需消费品表现较强；这属于市场结构观察及作者分析，不等于资金轮动必将持续。",
+        "market_impact": "A股成长与红利、防御板块可能继续分化，但中美市场结构不同，需结合本土资金流验证。",
+        "importance": "medium",
+        "source_ids": [
+          "S2"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Equities close lower as Nvidia drop outweighs energy gains",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-12T09:37:00Z",
+      "url": "https://www.reuters.com/business/nasdaq-futures-fall-nvidia-turmoil-rattles-ai-stocks-2026-11-12/",
+      "verification": "Reuters full article independently reviewed 2026-11-13 before A-share open; article updated after initial publication"
+    },
+    {
+      "id": "S2",
+      "title": "Wall Street withstands AI blues. What about Nvidia shock?",
+      "publisher": "Reuters Commentary",
+      "published_at_utc": "2026-11-12T14:59:00Z",
+      "url": "https://www.reuters.com/commentary/reuters-open-interest/wall-street-withstands-ai-blues-what-about-nvidia-shock-mcgeever-2026-11-12/",
+      "verification": "Reuters opinion/commentary reviewed; explicitly distinguished from reported facts"
+    },
+    {
+      "id": "S3",
+      "title": "How major US stock indexes fared Thursday 11/12/2026",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/3f3668a937a11535103e3a5c8d82c9fc",
+      "verification": "AP report reviewed; cross-check of US index closing values"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "截至北京时间2026-11-13开盘前（生成时间2026-11-13T00:21:15.083Z）的条件性判断：美股三大指数小幅回落、英伟达事件对AI估值与治理预期形成压力，油价上行及美国加息预期也构成风险；但芯片同业和能源板块存在分化，国内上证及沪深300前一交易日同步下跌。总体mixed、偏谨慎观察，不预言确定涨跌。重点看半导体与AI服务器能否放量承接、油气与黄金走势是否背离，以及券商宽基量能；若科技继续缩量下行，需降低乐观判断，若资金扩散则风险偏好可能修复。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "watch",
+      "reason": "前一交易日上证与沪深300同步回落，等待量能和资金承接确认"
+    },
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "英伟达治理冲击与同业表现分化并存，关注国内产业链实际订单"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "negative",
+      "reason": "海外AI龙头突发管理层变动和融资担忧压制情绪，但不代表算力需求消失"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "海外芯片板块分化，缺少直接的存储价格及订单新证据"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "mixed",
+      "reason": "海外数据中心相关股票承压但长期需求仍有不确定支撑"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "positive",
+      "reason": "原油期货上行与地缘风险溢价可能形成短期催化"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "negative",
+      "reason": "美元和美债收益率上行、黄金期货下跌形成短期压力"
+    },
+    {
+      "sector": "新能源与汽车",
+      "bias": "watch",
+      "reason": "油价上涨与国内需求、竞争格局影响相反，缺少新确认数据"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "人民币汇率、海外利率与贸易政策影响复杂，缺少一致方向"
+    }
+  ],
+  "risks": [
+    "Reuters关于英伟达管理层的报道已核验，但涉及个人指控不作独立事实确认或进一步推断",
+    "周五美国PPI尚未发布，不得用公布后的数据回填盘前预测",
+    "油价和黄金是近月期货快照，非统一时点现货结算价",
+    "美债收益率change_pct是收益率相对变动百分比，不是基点",
+    "外汇为11月13日不同时间的盘中观察，不等同银行结汇价",
+    "美股11月12日收盘与A股11月12日收盘属于不同交易时区，不能推断确定因果",
+    "预测在09:30后不得追溯改写，事实修订另存版本"
+  ],
+  "uncertainty": "high: AI龙头管理层与监管、地缘油价、美国通胀及加息预期、国内资金承接均有不确定性。所有方向标签仅为盘前条件性研究。",
+  "evidence_urls": [
+    "https://www.reuters.com/business/nasdaq-futures-fall-nvidia-turmoil-rattles-ai-stocks-2026-11-12/",
+    "https://www.reuters.com/commentary/reuters-open-interest/wall-street-withstands-ai-blues-what-about-nvidia-shock-mcgeever-2026-11-12/",
+    "https://apnews.com/article/3f3668a937a11535103e3a5c8d82c9fc"
+  ]
+}
