@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-13",
+  "reason": "GMR 15:55 after-close controller: same-day close missing after 15:30; request idempotent collection",
+  "requested_by": "GMR",
+  "request_type": "close_collection"
+}
