@@ -1,0 +1,165 @@
+{
+  "report_date": "2026-11-14",
+  "generated_at_utc": "2026-11-14T00:16:00Z",
+  "market_summary": "北京时间2026-11-14周六晨间观察；行情原始采集2026-11-14T00:15:15.829783Z。六大核心顺序：USD/CNY 6.67050（market_date=11月13日，+0.0030%）、AUD/CNY 4.51660（11月13日，-1.0563%）、纳斯达克25136.27（11月13日，-0.9060%）、标普500 7561.67（11月13日，-0.4047%）、道琼斯52347.55（11月13日，+0.0965%）、AUD/USD 0.67742（11月13日，-1.0032%）。11月13日美股科技股领跌而道指微涨，路透与AP收盘值交叉核对；纳指与标普下跌并非全部行业同步下跌。美元指数103.411（+0.2336%），布伦特期货96.08（+0.2713%），黄金期货3887.60（+0.0592%），美国10年期收益率5.154%（相对变化+0.9994%，不是增加0.9994个百分点）。上证3634.35（-0.5876%）、沪深300 4016.29（-0.6835%），同为11月13日收盘。外汇、商品属于各自上游观测/合约口径，不应与媒体不同合约结算价强行等同。周六A股休市，11月14日无可评分的当日盘前预测。原始RSS四类源均HTTP 503，RSS候选新闻0条；本报告新闻由独立查阅Reuters/AP正文与报道形成，不能声称RSS正常。",
+  "news_digest": {
+    "overview": "11月13日美国市场呈现AI与半导体继续承压、宽基行业分化，通胀和美联储加息预期抬升利率压力。IEA称四季度石油供应可能转为过剩，但霍尔木兹航运事件仍构成供给风险，能源价格不能单向推断。11月14日为A股非交易日，以下是下周一观察框架而非当日冻结预测。",
+    "items": [
+      {
+        "title": "美股科技板块拖累纳指与标普，道指小幅上涨",
+        "summary": "路透和美联社11月13日收盘报道显示纳指跌约0.91%、标普500跌约0.40%、道指涨约0.10%。费城半导体指数跌约3.4%；英伟达领导层变化及AI投资融资预期引发担忧，相关个人指控不作独立证实。",
+        "market_impact": "半导体、AI服务器、存储、光模块等成长链的风险偏好可能承压，但不能将美股科技下跌等同于下周A股必跌。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "title": "美国10月生产者价格同比上升6.5%，加息预期维持",
+        "summary": "据路透引用美国劳工部数据，10月生产者价格同比上涨6.5%，环比略低于预期。市场仍将12月美联储至少加息25基点视为主要情景，这是市场定价而非已经执行的决议。",
+        "market_impact": "美元与美债收益率偏强可能压制高估值成长资产和黄金，但实际传导受后续通胀数据及人民币走势影响。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "IEA预计2026年第四季度全球石油供给转为过剩",
+        "summary": "路透11月13日报道，IEA预计第四季度日均供应约1.05亿桶，较需求高约170万桶/日；这属于IEA预测而非已实现供需平衡。",
+        "market_impact": "若供给恢复兑现，油气开采价格支撑可能减弱，航空化工等用油行业成本压力或缓解；仍需关注地缘风险溢价。",
+        "importance": "high",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "霍尔木兹海峡仍有船舶安全事件报告",
+        "summary": "路透11月13日报道，伊朗方面称一艘LNG运输船触雷爆炸，具体船舶及损失细节未完整披露；相关说法应保留来源归属，不视为独立调查定论。",
+        "market_impact": "若航运风险扩大，油气、航运保险及化工原料成本可能波动，可能抵消IEA供给宽松预期。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "欧洲股市与美国科技股表现分化",
+        "summary": "路透11月13日分析称，欧洲STOXX 600在企业盈利支持下表现相对坚挺，科技权重与行业结构差异有助于解释市场分化。",
+        "market_impact": "全球风险偏好并非单一方向，A股应结合行业盈利、估值及国内流动性独立判断。",
+        "importance": "medium",
+        "source_ids": [
+          "S5"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "S&P 500, Nasdaq end lower as Nvidia uncertainty weighs on tech shares",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-13T10:35:00Z",
+      "url": "https://www.reuters.com/business/nasdaq-futures-dip-nvidia-tumult-keeps-investors-edge-2026-11-13/",
+      "verification": "Reuters正文已独立阅读；页面在首发后更新，收盘数据按最新正文核对"
+    },
+    {
+      "id": "S2",
+      "title": "How major US stock indexes fared Friday 11/13/2026",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/12c1e8155fb85c3c7b09e058ed6d3c74",
+      "verification": "AP报道摘要核对指数收盘值"
+    },
+    {
+      "id": "S3",
+      "title": "World oil market is returning to surplus as Gulf exports recover, IEA says",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-13T09:13:00Z",
+      "url": "https://www.reuters.com/business/energy/world-oil-market-is-returning-surplus-gulf-exports-recover-iea-says-2026-11-13/",
+      "verification": "Reuters正文已独立阅读；IEA预测为机构估计非既成结果"
+    },
+    {
+      "id": "S4",
+      "title": "Iran says tanker carrying LNG hit mine, suffered explosion in Hormuz",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-13T07:00:56Z",
+      "url": "https://www.reuters.com/world/iran-says-tanker-carrying-lng-hit-mine-suffered-explosion-hormuz-2026-11-13/",
+      "verification": "Reuters报道核验；事故为伊朗方面说法，具体船舶信息尚不完整"
+    },
+    {
+      "id": "S5",
+      "title": "How US tech pain is European stock markets' gain",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-13T12:40:00Z",
+      "url": "https://www.reuters.com/business/finance/how-us-tech-pain-is-european-stock-markets-gain-2026-11-13/",
+      "verification": "Reuters报道阅读；欧洲与美股对比属于市场结构分析"
+    }
+  ],
+  "a_share_bias": "watch",
+  "a_share_outlook": "2026年11月14日周六，A股休市，不存在当日开盘前可评分预测；仅为周末观察框架。下一交易日需重新获取周一开盘前信息并单独冻结判断。关注AI芯片、服务器、存储与光通信是否延续海外估值压力，美元及美债收益率是否继续走高，IEA供给过剩判断与霍尔木兹海峡航运风险的对冲，以及上证与沪深300周五同步下跌后的国内资金承接。不能用周末信息回填11月13日预测。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "watch",
+      "reason": "11月13日上证与沪深300同步收跌，下周需观察成交量和资金承接"
+    },
+    {
+      "sector": "半导体",
+      "bias": "negative",
+      "reason": "11月13日美国半导体指数明显下跌，外部风险偏好可能传导，但需独立验证A股"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "negative",
+      "reason": "英伟达管理层和AI基础设施融资预期扰动相关板块估值"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "科技股下跌但缺少当日存储现货价格及订单的独立证据"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "mixed",
+      "reason": "海外AI投资风险与中长期需求仍需分开评估"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "mixed",
+      "reason": "IEA供给过剩预测偏空，霍尔木兹运输安全风险偏多"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "watch",
+      "reason": "美元与美债收益率走强但黄金期货快照微涨，需观察后续走势"
+    },
+    {
+      "sector": "新能源与汽车",
+      "bias": "watch",
+      "reason": "缺乏周末新的直接订单或政策证据"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "汇率波动和海外利率压力并存，未形成单向判断"
+    }
+  ],
+  "risks": [
+    "今天为周六A股非交易日，不得生成可评分的11月14日盘前预测",
+    "原始RSS宏观、地缘、中国和澳洲四个源均HTTP 503，news[]为0；正式新闻另由独立可靠报道核验",
+    "美国PPI同比6.5%为已公布数据，但加息仍为市场预期而非已执行政策",
+    "关于英伟达的个人指控不作独立确认，不应衍生未核实结论",
+    "IEA石油供需为预测，霍尔木兹船舶事件具体细节未全部独立核实",
+    "美股与A股最近交易日均11月13日，外汇报价和期货结算口径不完全同步",
+    "美债收益率change_pct为收益率的相对百分比变化，不是基点",
+    "11月13日已冻结的盘前预测不得被周末信息反向改写"
+  ],
+  "uncertainty": "high：周末市场休市、AI产业链管理层和融资不确定性、美国利率路径、伊朗航运风险与IEA供应预测可能改变下周市场预期；本报告仅观察，不作11月14日可评分预测。",
+  "evidence_urls": [
+    "https://www.reuters.com/business/nasdaq-futures-dip-nvidia-tumult-keeps-investors-edge-2026-11-13/",
+    "https://apnews.com/article/12c1e8155fb85c3c7b09e058ed6d3c74",
+    "https://www.reuters.com/business/energy/world-oil-market-is-returning-surplus-gulf-exports-recover-iea-says-2026-11-13/",
+    "https://www.reuters.com/world/iran-says-tanker-carrying-lng-hit-mine-suffered-explosion-hormuz-2026-11-13/",
+    "https://www.reuters.com/business/finance/how-us-tech-pain-is-european-stock-markets-gain-2026-11-13/"
+  ]
+}
