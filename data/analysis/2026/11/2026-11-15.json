@@ -1,0 +1,125 @@
+{
+  "report_date": "2026-11-15",
+  "generated_at_utc": "2026-11-15T00:22:00Z",
+  "market_summary": "北京时间2026-11-15周日晨报，行情采集于2026-11-15T00:19:46Z。按核心顺序：USD/CNY 6.66210（行情日11月14日，相对前一可用日线-0.1244%）；AUD/CNY 4.52010（11月14日，-0.4443%）；纳斯达克25136.27（11月13日收盘，-0.9060%）；标普500 7561.67（11月13日收盘，-0.4047%）；道琼斯52347.55（11月13日收盘，+0.0965%）；AUD/USD 0.67742（11月14日，-0.4811%）。周末无新增美股与A股收盘，三大美股指数周五涨跌分化；AI科技风险偏好偏弱是可能的市场解释，不能据周末新闻反推周五行情因果。美元指数103.41（11月13日，+0.2326%）、布伦特95.84（+0.0209%）、COMEX黄金3886.30（+0.0257%）、美债10年期收益率5.154%（收益率相对变化+0.9994%，不是基点）；上证3634.35（11月13日，-0.5876%）、沪深300 4016.29（11月13日，-0.6835%），同一交易日无日期错配。外汇周末为Yahoo非官方日线观测，不是实时银行可成交报价；商品期货与媒体结算价未必同一口径。",
+  "news_digest": {
+    "overview": "11月14日至15日晨间可核实的主线是中美贸易磋商和下周高层会晤预期、美国航空交通系统故障的实际经济扰动，以及大国外交带来的不确定性。周末A股休市，以上是下周观察变量，不能当成已发生的周一市场反应。",
+    "items": [
+      {
+        "title": "中美贸易理事会首次会议讨论关税及农产品贸易",
+        "summary": "路透11月14日报道，中国商务部称双方在周五举行首次贸易理事会会议，讨论关税减让、农产品贸易等议题；未宣布达成新协议，拟议的双向关税削减方案尚未敲定。",
+        "market_impact": "若后续出现可核实的协议，可能改善出口链和农业贸易预期；目前仍是磋商阶段，不应提前计价为协议落地。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美国全国航班停飞事件后航空运输仍在恢复",
+        "summary": "美联社11月14日报道，FAA表示周五全国停飞后航班正在恢复，周六仍有大量取消和延误；原因调查涉及设备升级过程中通信及雷达系统问题。",
+        "market_impact": "航空公司短期运营成本与旅客出行受扰；对中国A股航空板块的直接影响有限且未量化，更多作为全球交通基础设施风险观察。",
+        "importance": "medium",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "美中俄领导人拟于下周APEC期间会面",
+        "summary": "美联社报道白宫与克里姆林宫确认计划在中国举行三方会面；具体成果仍不确定，不能将会面计划等同于外交协议。",
+        "market_impact": "地缘风险溢价和国际贸易预期可能随实际谈判进展变化，油气、黄金及出口板块需要关注后续官方消息。",
+        "importance": "high",
+        "source_ids": [
+          "S3"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "China, US discuss tariffs, farm trade ahead of Xi-Trump meeting",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-14T07:13:00Z",
+      "url": "https://www.reuters.com/world/china/china-us-discuss-tariffs-farm-trade-first-trade-council-meeting-2026-11-14/",
+      "verification": "original_article_read"
+    },
+    {
+      "id": "S2",
+      "title": "US air travel should normalize by Sunday after ground stop triggers mass cancellations, FAA says",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/ground-stop-flights-airlines-cancellations-faa-1fbf4992f0ddaa4c463b0e4990b6e291",
+      "verification": "original_article_read; precise publication time not confirmed"
+    },
+    {
+      "id": "S3",
+      "title": "Trump, Xi and Putin plan unprecedented joint meeting on APEC sidelines, White House and Kremlin say",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/trump-xi-putin-summit-china-5fe92253ef38100bae913834a9b74d72",
+      "verification": "original_article_read; precise publication time not confirmed"
+    }
+  ],
+  "a_share_bias": "watch",
+  "a_share_outlook": "2026年11月15日周日A股休市，无当日开盘交易，不生成可评分的周日预测。对11月16日仅提出观察条件：中美关税磋商是否出现正式成果、海外AI科技风险偏好、美元及利率走势和国内市场成交承接；周一开盘前应重新基于届时信息作判断，不将周末观察当作正式冻结预测。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "watch",
+      "reason": "周五纳指下跌0.906%，外部科技风险偏好偏弱；下周仍需结合芯片出口政策及A股资金承接"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "watch",
+      "reason": "海外AI链波动可能传导估值，但没有足够证据判断下周方向"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "芯片政策和行业供需需另行核实，不由纳指跌幅直接推断存储价格"
+    },
+    {
+      "sector": "光通信",
+      "bias": "watch",
+      "reason": "AI资本开支及美股科技股波动是条件变量，需看国内成交"
+    },
+    {
+      "sector": "券商宽基",
+      "bias": "watch",
+      "reason": "上证与沪深300在11月13日均收跌，下周观察风险偏好和成交额"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "mixed",
+      "reason": "地缘不确定性可能提供避险支持，美元及美债收益率偏强则可能形成压制"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "watch",
+      "reason": "地缘消息与原油供需双向作用，11月13日布伦特快照变化很小"
+    },
+    {
+      "sector": "航空",
+      "bias": "watch",
+      "reason": "美国航空故障直接影响美国航司，不能据此推断国内航空股涨跌"
+    },
+    {
+      "sector": "稀土有色",
+      "bias": "watch",
+      "reason": "中美磋商进展仍未形成已公布的新协议，关注政策与价格确认"
+    }
+  ],
+  "risks": [
+    "周末休市：市场日期为11月13日收盘，外汇日线为11月14日，不能冒充11月15日交易价格",
+    "中美贸易理事会尚未公布新协议",
+    "美国航空故障原因尚在调查",
+    "非官方Yahoo报价与交易所结算可能不同",
+    "新闻发表的精确UTC时间仅路透报道已核实；AP原文未确认分钟级时间"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://www.reuters.com/world/china/china-us-discuss-tariffs-farm-trade-first-trade-council-meeting-2026-11-14/",
+    "https://apnews.com/article/ground-stop-flights-airlines-cancellations-faa-1fbf4992f0ddaa4c463b0e4990b6e291",
+    "https://apnews.com/article/trump-xi-putin-summit-china-5fe92253ef38100bae913834a9b74d72"
+  ]
+}
