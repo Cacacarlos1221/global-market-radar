@@ -1,0 +1,172 @@
+{
+  "report_date": "2026-11-16",
+  "generated_at_utc": "2026-11-16T00:20:37.346Z",
+  "market_summary": "截至北京时间2026-11-16 08:20:05采集快照（2026-11-16T00:20:05.318279Z），六大核心资产依次为USD/CNY 6.66210（市场日期11月15日，较参考值-0.12%）、AUD/CNY 4.52210（11月16日，-0.40%）、纳斯达克25136.27（11月13日收盘，-0.91%）、标普500 7561.67（11月13日，-0.40%）、道琼斯52347.55（11月13日，+0.10%）、AUD/USD 0.67755（11月16日，-0.46%）。美股科技板块11月13日承压，但三大指数周度均上涨；美股收盘数值与美联社报道一致。上证3634.35（11月13日，-0.59%）、沪深300 4016.29（11月13日，-0.68%），市场日期一致；均为上个A股交易日，非11月16日盘中行情。美元指数103.38（11月15日，-0.03%）、布伦特近月期货95.60（11月15日，-0.25%）、黄金期货3896.50（11月15日，+0.26%），10年期美债收益率5.154%（11月13日，收益率数值相对变化+1.00%，不是基点）。外汇及部分商品为周末/周一早间不同观察时点，不能当作统一的实时成交或官方结算价格。美股科技承压可能与AI估值和公司事件担忧有关，但非已证明的单一因果。",
+  "news_digest": {
+    "overview": "11月16日盘前，海外科技估值与供应链安全政策不确定性并存；中国AI教育长期投入方向值得观察，南海准则谈判未完成带来区域风险；美国航空系统故障与英特尔诉讼反映行业运营及治理风险。上述新闻与11月13日美股收盘并非全部具有直接因果关系，尤其周末消息不得反向解释上周五价格。",
+    "items": [
+      {
+        "title": "美国航空交通管制系统故障造成连续三天大规模航班延误",
+        "summary": "路透11月15日报道，FAA周五大规模停飞事件后，周日仍有超过一万架次航班取消或延误；当局调查通信路由器问题，尚未确认根因，未发现网络攻击证据。",
+        "market_impact": "可能短期影响美国航空、旅游及机场运营预期；不能直接推断A股航空股涨跌。",
+        "importance": "medium",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "中国推进AI教育普及，产业落地与教学效果仍有争议",
+        "summary": "路透11月16日报道，中国各地正在推动中小学AI教育，目标包括提升AI素养；实施标准不一，教学收益与独立思考能力影响仍需评估。",
+        "market_impact": "教育数字化、教学软件和算力应用可能受到长期关注，但报道不是新增采购合同或上市公司业绩确认。",
+        "importance": "medium",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "东盟与中国未能完成南海行为准则谈判",
+        "summary": "路透11月15日报道，菲律宾外长称谈判文本约八成取得初步共识，但法律约束力等关键问题未解决。",
+        "market_impact": "区域地缘不确定性或影响风险偏好、航运及国防主题；未出现直接可量化的A股盈利冲击证据。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "美国及盟友签署AI供应链安全合作宣言",
+        "summary": "金融时报11月16日报道，美日澳等国推动覆盖半导体、关键矿产和能源的AI供应链安全合作，后续执行细节有待公布。",
+        "market_impact": "可能增加半导体、稀土及设备产业链政策分化；不能据此断言新出口限制已生效。",
+        "importance": "high",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "英特尔遭股东起诉，PC需求与AI投资回报引关注",
+        "summary": "路透11月15日报道，英特尔股东提起拟议集体诉讼，指控公司未充分披露PC需求和库存对营收的影响；指控尚未获得司法认定。",
+        "market_impact": "可能加剧全球芯片行业的盈利分化担忧，不能把诉讼指控视作已证实的违规事实。",
+        "importance": "medium",
+        "source_ids": [
+          "S5"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Thousands of US flights canceled, delayed for third day in a row",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/us/us-air-travel-disruptions-continue-into-third-day-2026-11-15/",
+      "verification": "Reuters article independently reviewed before A-share open; root cause still under investigation"
+    },
+    {
+      "id": "S2",
+      "title": "Inside China's drive to build an AI-native generation",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/china/inside-chinas-drive-build-an-ai-native-generation-2026-11-16/",
+      "verification": "Reuters article reviewed before A-share open"
+    },
+    {
+      "id": "S3",
+      "title": "ASEAN, China fail to conclude South China Sea code of conduct",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-15T13:38:59Z",
+      "url": "https://www.reuters.com/world/china/asean-china-fail-conclude-south-china-sea-code-conduct-2026-11-15/",
+      "verification": "Reuters article reviewed before A-share open"
+    },
+    {
+      "id": "S4",
+      "title": "US and allies sign accord to protect AI supply chains from China",
+      "publisher": "Financial Times",
+      "published_at_utc": null,
+      "url": "https://www.ft.com/content/3c2197fc-9618-4838-91e6-522ce1a96a22",
+      "verification": "Financial Times report reviewed; policy execution not yet independently confirmed"
+    },
+    {
+      "id": "S5",
+      "title": "Intel sued by shareholders following 29% stock plunge",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/intel-sued-by-shareholders-following-29-stock-plunge-2026-11-15/",
+      "verification": "Reuters article reviewed; allegations are not judicial findings"
+    },
+    {
+      "id": "S6",
+      "title": "Stocks fall but Wall Street notches a winning week after several turbulent days",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/f8edd0eeb1494d4d2584715686c5e619",
+      "verification": "AP report reviewed for US index closing values"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "截至北京时间2026-11-16约08:20盘前的条件性判断：上个交易日A股上证与沪深300同步下跌，美股纳指与标普上周五回落而道指微涨，成长与价值风险偏好分化。今日关注科技链能否获得成交量承接、券商宽基能否企稳；美国盟友AI供应链合作可能带来产业政策扰动，但尚不能断言新限制落地。南海谈判及美国利率预期增加不确定性；若科技资金持续流出则偏谨慎，若市场量能扩散则可能修复。所有判断仅使用本分析生成时可获得的盘前资料。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "watch",
+      "reason": "上证与沪深300上个交易日同步下跌，等待今日量能确认"
+    },
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "美股芯片链估值压力与国内供应链替代机会并存，国际政策执行细节待定"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "mixed",
+      "reason": "全球AI投资需求与估值及供应链政策不确定性并存"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "PC需求与库存分化，缺少直接存储报价或订单新证据"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "watch",
+      "reason": "AI基础设施长期需求值得关注，但缺少可验证的当日新增催化"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "watch",
+      "reason": "地缘风险仍在，但当前布伦特近月期货快照略跌，不能直接判定上涨"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "mixed",
+      "reason": "黄金期货小幅上行但美债收益率高位，避险和机会成本因素相反"
+    },
+    {
+      "sector": "新能源与汽车",
+      "bias": "watch",
+      "reason": "暂无足以支持一致方向的新行业数据"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "供应链政策和汇率影响复杂，未有新关税生效的核验证据"
+    }
+  ],
+  "risks": [
+    "美股及A股最近收盘日期为11月13日，不能视为11月16日盘中表现",
+    "外汇市场日期11月15日和11月16日不一致，且非银行结汇报价",
+    "新闻发表于上周五美股收盘之后者不能反向归因上周五股价",
+    "美债收益率的change_pct为收益率数值相对百分比，不是基点",
+    "英特尔诉讼为当事方指控，未获司法认定",
+    "AI供应链宣言具体执行措施、南海准则谈判与美国航空故障后续均有不确定性",
+    "预测一旦09:30前冻结，不允许事后修改引用分析SHA256；事实订正需另存"
+  ],
+  "uncertainty": "high: 海外AI产业政策、半导体估值、地缘政治和国内资金承接仍不确定。",
+  "evidence_urls": [
+    "https://www.reuters.com/world/us/us-air-travel-disruptions-continue-into-third-day-2026-11-15/",
+    "https://www.reuters.com/world/china/inside-chinas-drive-build-an-ai-native-generation-2026-11-16/",
+    "https://www.reuters.com/world/china/asean-china-fail-conclude-south-china-sea-code-conduct-2026-11-15/",
+    "https://www.ft.com/content/3c2197fc-9618-4838-91e6-522ce1a96a22",
+    "https://www.reuters.com/business/intel-sued-by-shareholders-following-29-stock-plunge-2026-11-15/",
+    "https://apnews.com/article/f8edd0eeb1494d4d2584715686c5e619"
+  ]
+}
