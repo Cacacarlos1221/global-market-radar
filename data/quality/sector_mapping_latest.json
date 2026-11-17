@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-17",
-  "generated_at_utc": "2026-11-16T18:41:29.335353+00:00",
+  "audit_date": "2026-11-18",
+  "generated_at_utc": "2026-11-17T17:06:38.529514+00:00",
   "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
@@ -11,10 +11,11 @@
     "2026-11-10",
     "2026-11-11",
     "2026-11-12",
-    "2026-11-13"
+    "2026-11-13",
+    "2026-11-17"
   ],
-  "pending_count": 10,
-  "high_priority_count": 6,
+  "pending_count": 11,
+  "high_priority_count": 7,
   "pending": [
     {
       "topic": "券商与宽基指数",
@@ -28,15 +29,17 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-17"
       ],
-      "observed_days": 8,
-      "last_observed": "2026-11-13",
+      "observed_days": 9,
+      "last_observed": "2026-11-17",
       "seen_today": false,
       "groups": [
         "券商与宽基指数"
       ],
       "biases": [
+        "negative",
         "positive",
         "watch"
       ],
@@ -71,6 +74,94 @@
       "existing_proposal": true
     },
     {
+      "topic": "光通信与数据中心",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-17"
+      ],
+      "observed_days": 5,
+      "last_observed": "2026-11-17",
+      "seen_today": false,
+      "groups": [
+        "光通信与数据中心"
+      ],
+      "biases": [
+        "mixed",
+        "positive"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「光通信与数据中心」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "出口与外贸",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-17"
+      ],
+      "observed_days": 5,
+      "last_observed": "2026-11-17",
+      "seen_today": false,
+      "groups": [
+        "出口与外贸"
+      ],
+      "biases": [
+        "mixed",
+        "positive"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「出口与外贸」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "油气开采",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-17"
+      ],
+      "observed_days": 5,
+      "last_observed": "2026-11-17",
+      "seen_today": false,
+      "groups": [
+        "油气开采"
+      ],
+      "biases": [
+        "negative",
+        "positive",
+        "watch"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「油气开采」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
       "topic": "黄金概念",
       "priority": "high",
       "status": "needs_mapping_review",
@@ -100,105 +191,22 @@
       "existing_proposal": false
     },
     {
-      "topic": "光通信与数据中心",
-      "priority": "high",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-10",
-        "2026-11-11",
-        "2026-11-12",
-        "2026-11-13"
-      ],
-      "observed_days": 4,
-      "last_observed": "2026-11-13",
-      "seen_today": false,
-      "groups": [
-        "光通信与数据中心"
-      ],
-      "biases": [
-        "mixed",
-        "positive"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「光通信与数据中心」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
-      "topic": "出口与外贸",
-      "priority": "high",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-10",
-        "2026-11-11",
-        "2026-11-12",
-        "2026-11-13"
-      ],
-      "observed_days": 4,
-      "last_observed": "2026-11-13",
-      "seen_today": false,
-      "groups": [
-        "出口与外贸"
-      ],
-      "biases": [
-        "mixed",
-        "positive"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「出口与外贸」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
-      "topic": "油气开采",
-      "priority": "high",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-10",
-        "2026-11-11",
-        "2026-11-12",
-        "2026-11-13"
-      ],
-      "observed_days": 4,
-      "last_observed": "2026-11-13",
-      "seen_today": false,
-      "groups": [
-        "油气开采"
-      ],
-      "biases": [
-        "negative",
-        "positive",
-        "watch"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「油气开采」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
       "topic": "航空与化工",
       "priority": "high",
       "status": "needs_mapping_review",
       "observed_dates": [
         "2026-11-10",
-        "2026-11-11"
+        "2026-11-11",
+        "2026-11-17"
       ],
-      "observed_days": 2,
-      "last_observed": "2026-11-11",
+      "observed_days": 3,
+      "last_observed": "2026-11-17",
       "seen_today": false,
       "groups": [
         "航空与化工"
       ],
       "biases": [
+        "mixed",
         "positive"
       ],
       "gap_reasons": [
@@ -206,6 +214,30 @@
       ],
       "candidate_indices": [],
       "user_question": "请确认「航空与化工」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "消费与内需",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-17"
+      ],
+      "observed_days": 1,
+      "last_observed": "2026-11-17",
+      "seen_today": false,
+      "groups": [
+        "消费与内需"
+      ],
+      "biases": [
+        "negative"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「消费与内需」的固定指数代码、供应商与是否仅作代理观察。",
       "user_reported_recurrent": false,
       "existing_proposal": false
     },
@@ -221,10 +253,11 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-17"
       ],
-      "observed_days": 8,
-      "last_observed": "2026-11-13",
+      "observed_days": 9,
+      "last_observed": "2026-11-17",
       "seen_today": false,
       "groups": [
         "AI服务器",
