@@ -1,0 +1,144 @@
+{
+  "report_date": "2026-11-17",
+  "generated_at_utc": "2026-11-17T08:30:29.161Z",
+  "summary": "GMR独立盘后研究：沪深300收3976.46点，跌0.0839%。上证指数收跌0.50%，市场整体偏弱但芯片产业链局部反弹。盘前10组主题按冻结口径核对；半导体negative对应同名行业板块上涨0.2953%，方向偏离。券商与宽基、AI服务器代理、油气开采、消费与内需等缺严格完整同名组合，不能把观察指标代入评分。盘后新发现集成电路制造、反转股、橡胶助剂、厨房小家电及光刻胶较强，均不倒算预测成功。",
+  "key_findings": [
+    {
+      "title": "宽基弱势与芯片局部反弹并存",
+      "finding": "沪深300跌0.0839%；半导体BK1036涨0.2953%，超额+0.3792个百分点；中芯国际涨6.5859%、北方华创涨4.0923%、兆易创新跌3.8796%，内部显著分化。",
+      "source_ids": [
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "title": "盘后新热点不计预测命中",
+      "finding": "同日K线：集成电路制造+5.8183%、反转股+4.0863%、橡胶助剂+3.3212%、厨房小家电+3.1993%、光刻胶+3.1240%；均为盘后发现，不能追溯视为盘前预测。",
+      "source_ids": []
+    },
+    {
+      "title": "代理与缺失映射隔离",
+      "finding": "液冷服务器BK1138跌1.4788%仅代理AI服务器；券商与宽基、油气开采、消费与内需等缺可用完整同名指数，不纳入严格方向评分。",
+      "source_ids": []
+    }
+  ],
+  "attributions": [
+    {
+      "sector": "券商与宽基指数",
+      "observation": "盘前negative；缺有效固定同名板块日K。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "半导体",
+      "observation": "盘前negative；半导体 +0.30%，相对沪深300+0.38个百分点；固定代表股：中芯国际+6.59%、北方华创+4.09%、兆易创新-3.88%。directional。",
+      "explanation": "新华财经午间核验芯片链反弹，上海证券报盘后确认局部走强；晶圆代工涨价叙事可能影响情绪，但不证明单一因果。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "sector": "AI服务器与算力",
+      "observation": "盘前negative；液冷服务器（代理） -1.48%，相对沪深300-1.39个百分点；固定代表股：浪潮信息-2.69%、中科曙光+1.26%、英维克-2.15%。not_scorable。",
+      "explanation": "盘后报道指出AI硬件承压；液冷服务器只是代理，不能视作完整AI服务器方向的严格验证。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sector": "存储",
+      "observation": "盘前watch；存储芯片 +0.48%，相对沪深300+0.57个百分点；固定代表股：兆易创新-3.88%、北京君正-3.04%、澜起科技-6.57%。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "光通信与数据中心",
+      "observation": "盘前mixed；缺有效固定同名板块日K。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "油气开采",
+      "observation": "盘前negative；缺有效固定同名板块日K。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "航空与化工",
+      "observation": "盘前mixed；缺有效固定同名板块日K。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "黄金概念",
+      "observation": "盘前watch；黄金概念 +0.11%，相对沪深300+0.19个百分点。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "消费与内需",
+      "observation": "盘前negative；缺有效固定同名板块日K。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "出口与外贸",
+      "observation": "盘前mixed；缺有效固定同名板块日K。not_scorable。",
+      "explanation": "暂无足够独立证据将该组涨跌归因于单一事件；当日行情与报道时点不同，保持因果不确定。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    }
+  ],
+  "new_events": [
+    {
+      "title": "芯片产业链盘中反弹",
+      "summary": "新华财经午间报道半导体及光刻机相关方向走强；这是午间观察，最终涨跌幅以GMR收盘同日K线为准。",
+      "published_at_utc": "2026-11-17T03:30:00Z",
+      "source_ids": [
+        "S3"
+      ]
+    }
+  ],
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "尾盘抄底资金进场，带动A股指数低位略有回弹",
+      "publisher": "澎湃新闻",
+      "published_at_utc": "2026-11-17T07:28:00Z",
+      "url": "https://www.thepaper.cn/newsDetail_forward_34491952",
+      "verification": "reported"
+    },
+    {
+      "id": "S2",
+      "title": "沪指震荡收跌0.5% 半导体板块局部走强",
+      "publisher": "上海证券报·中国证券网",
+      "published_at_utc": "2026-11-17T07:29:00Z",
+      "url": "https://finance.eastmoney.com/a/202611173932843326.html",
+      "verification": "reported"
+    },
+    {
+      "id": "S3",
+      "title": "午评：创业板指涨0.72% 半导体产业链集体反弹",
+      "publisher": "新华财经",
+      "published_at_utc": "2026-11-17T03:30:00Z",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261117/4496546_1.html",
+      "verification": "reported"
+    }
+  ],
+  "next_watch": [
+    "复核芯片产业链反弹是否具备持续性，关注板块内部涨跌分化。",
+    "券商与宽基需确认拆分或固定组合权重；AI服务器液冷代理不得严格评分。",
+    "出口与外贸、消费与内需需固定可复现细分指数；候选未批准不写入approved。",
+    "关注公开行情接口的同日K线有效性及GitHub Pages部署完成状态。"
+  ]
+}
