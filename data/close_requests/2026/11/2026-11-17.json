@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-17",
+  "reason": "15:55 GMR close controller: no same-day close snapshot; trigger gated collection",
+  "requested_by": "GMR",
+  "requested_at_utc": "2026-11-17T08:02:28Z"
+}
