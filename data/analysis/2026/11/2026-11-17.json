@@ -1,0 +1,159 @@
+{
+  "report_date": "2026-11-17",
+  "generated_at_utc": "2026-11-17T00:19:07.593Z",
+  "market_summary": "截至北京时间2026-11-17 08:18:45采集快照（UTC 00:18:45），六大核心资产依次为USD/CNY 6.65390（市场日期11月16日，较11月13日参考价-0.2474%，盘中观察）、AUD/CNY 4.48900（11月17日，较11月16日-0.7336%，盘中观察）、纳斯达克24509.76（11月16日收盘，-2.4925%）、标普500 7416.59（11月16日，-1.9186%）、道琼斯51608.17（11月16日，-1.4124%）、AUD/USD 0.67372（11月17日，-0.6169%，盘中观察）。三大美股指数齐跌、半导体跌幅更大，与AI估值及芯片政策风险担忧相符，但无法证明单一因果；Reuters和AP报道与三大指数收盘值交叉一致。A股上证3602.57（11月16日，-0.8744%）、沪深300 3979.80（11月16日，-0.9085%），同市场日期一致。美元指数103.586（11月16日，+0.1702%），布伦特92.13美元/桶（11月16日，-3.8710%），COMEX黄金3862.60美元/盎司（11月16日，-0.6098%），美国10年期收益率5.121%（11月16日，收益率数值相对变化-0.6403%，非基点）。行情源为Yahoo Finance及东方财富非官方接口，日线K线时间戳不等于收盘发生时刻。不同市场观察日期不应混同，部分RSS接口429限流，新闻需以独立核验来源为准。",
+  "news_digest": {
+    "overview": "11月17日A股开盘前的主要外部变量是11月16日美国科技股和芯片股下跌、AI投资与金融稳定性风险讨论、中国10月工业与消费增长放缓，以及中东供应恢复预期推动油价走低。事件发生时间、市场价格与可能传导机制分别核实，不能将同日相关性视为确定因果。",
+    "items": [
+      {
+        "title": "美股三大指数下跌，AI与芯片板块压力突出",
+        "summary": "路透与美联社11月16日报道，美股纳指、标普500和道指分别下跌约2.49%、1.92%、1.41%；市场关注英伟达即将发布的业绩、AI估值及芯片供应政策风险。",
+        "market_impact": "可能压制A股半导体、AI服务器及光通信早盘风险偏好；国内资金与政策可能令A股走势不同，不能直接外推美股跌幅。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S5"
+        ]
+      },
+      {
+        "title": "中国10月工业与零售增速不及预期",
+        "summary": "路透11月16日报道，中国10月工业产出及社会消费品零售增长放缓，国内需求疲弱与出口韧性并存。",
+        "market_impact": "消费、地产链及周期板块可能承压；政策托底预期可能升温，但不等于已有新增刺激政策落地。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "中东出口恢复与供应过剩预期推动油价下行",
+        "summary": "路透11月16日报道，随着中东原油出口恢复，市场对未来供给过剩的预期增加，国际油价下跌。",
+        "market_impact": "油气开采利润预期可能受压，航空和部分化工成本端可能受益；地缘冲突及实际采购价仍可能改变传导。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "美联储官员警示AI可能带来的金融稳定风险",
+        "summary": "路透11月16日报道，美联储理事Michael Barr讨论AI在金融市场中的网络攻击、交易趋同及复杂融资等风险；这不是新的加息决定。",
+        "market_impact": "可能强化高估值AI及金融科技公司的风险审视，但不意味着监管措施或货币政策已经改变。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Wall Street ends sharply lower on AI jitters ahead of Nvidia results, Anthropic IPO",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/sp-500-nasdaq-futures-slide-nvidia-earnings-anthropic-debut-loom-2026-11-16/",
+      "verification": "2026-11-17北京时间盘前核验报道正文或可靠摘要；市场影响为条件性分析，非确认因果"
+    },
+    {
+      "id": "S2",
+      "title": "China's economy falters as factory output, retail sales undershoot expectations",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/chinas-factory-output-retail-sales-growth-slow-october-2026-11-16/",
+      "verification": "2026-11-17北京时间盘前核验报道正文或可靠摘要；市场影响为条件性分析，非确认因果"
+    },
+    {
+      "id": "S3",
+      "title": "Oil settles lower as recovering Middle East exports bolster surplus outlook",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/energy/oil-prices-fall-expectations-coming-supply-surplus-2026-11-16/",
+      "verification": "2026-11-17北京时间盘前核验报道正文或可靠摘要；市场影响为条件性分析，非确认因果"
+    },
+    {
+      "id": "S4",
+      "title": "Fed's Barr warns on AI risks to financial system",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/world/feds-barr-warns-ai-risks-financial-system-2026-11-16/",
+      "verification": "2026-11-17北京时间盘前核验报道正文或可靠摘要；市场影响为条件性分析，非确认因果"
+    },
+    {
+      "id": "S5",
+      "title": "Stocks tumble on Wall Street as Nvidia leads another sell-off in technology companies",
+      "publisher": "Associated Press",
+      "published_at_utc": null,
+      "url": "https://apnews.com/article/35786b8f539ec95f16ae0500f71cfcc7",
+      "verification": "2026-11-17北京时间盘前核验报道正文或可靠摘要；市场影响为条件性分析，非确认因果"
+    }
+  ],
+  "a_share_bias": "negative",
+  "a_share_outlook": "截至北京时间2026-11-17约08:20的盘前条件性判断：上个A股交易日上证与沪深300均下跌，11月16日美股科技及芯片板块显著回撤，国内10月消费与工业增速放缓，短线整体偏谨慎。若开盘后科技股资金承接不足、宽基成交量萎缩，风险偏好可能进一步承压；若政策预期和国内资金改善，部分自主可控、低估值与成本受益行业可能相对抗跌。此为开盘前推演，不包含盘中/盘后信息，也不构成确定涨跌预测。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "negative",
+      "reason": "上证和沪深300上个交易日均回落，观察量能与权重支撑"
+    },
+    {
+      "sector": "半导体",
+      "bias": "negative",
+      "reason": "美股芯片板块下跌及出口政策不确定性增加风险溢价，国产替代逻辑不能消除短线波动"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "negative",
+      "reason": "海外AI资本开支回报和估值担忧增加，关注国内订单和资金承接"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "芯片风险偏好偏弱，但缺少同日国内存储价格和订单核验证据"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "mixed",
+      "reason": "海外估值压力与长期需求并存，未见足够新增业绩证据"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "negative",
+      "reason": "布伦特期货下跌约3.87%，短期油价压力明显，地缘风险仍可能反转"
+    },
+    {
+      "sector": "航空与化工",
+      "bias": "mixed",
+      "reason": "原油走低可能缓和成本，但需求与库存传导不确定"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "watch",
+      "reason": "黄金期货下跌且美元指数走强，需观察避险需求"
+    },
+    {
+      "sector": "消费与内需",
+      "bias": "negative",
+      "reason": "10月零售数据偏弱，新增刺激措施尚未核实"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "出口韧性与全球科技供应链政策不确定性并存"
+    }
+  ],
+  "risks": [
+    "美元兑人民币和澳元汇率为不同观察日期的盘中报价，不是银行结售汇价",
+    "美股、A股收盘日均为11月16日，不能将日线K线起点当作收盘时间",
+    "原始RSS部分主题HTTP 429限流，精选新闻来自独立核验报道",
+    "AI与芯片下跌的原因属于有依据的市场解释，不是已证明的单一因果",
+    "美国10年期收益率change_pct为收益率数值相对变化，不是基点",
+    "09:30前若预测冻结成功，后续只允许独立事实勘误，不得改写冻结分析SHA256"
+  ],
+  "uncertainty": "high：AI科技估值、美国政策、国内需求与油价波动对A股的传导仍不确定。",
+  "evidence_urls": [
+    "https://www.reuters.com/business/sp-500-nasdaq-futures-slide-nvidia-earnings-anthropic-debut-loom-2026-11-16/",
+    "https://www.reuters.com/world/chinas-factory-output-retail-sales-growth-slow-october-2026-11-16/",
+    "https://www.reuters.com/business/energy/oil-prices-fall-expectations-coming-supply-surplus-2026-11-16/",
+    "https://www.reuters.com/world/feds-barr-warns-ai-risks-financial-system-2026-11-16/",
+    "https://apnews.com/article/35786b8f539ec95f16ae0500f71cfcc7"
+  ]
+}
