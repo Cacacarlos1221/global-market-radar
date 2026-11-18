@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-18",
+  "reason": "GMR after-close controller: no same-day close snapshot and no running close workflow found after 15:30 Asia/Shanghai",
+  "requested_by": "GMR",
+  "request_type": "collect_same_day_close"
+}
