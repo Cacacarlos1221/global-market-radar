@@ -1,0 +1,159 @@
+{
+  "report_date": "2026-11-18",
+  "generated_at_utc": "2026-11-18T00:11:30Z",
+  "market_summary": "截至北京时间2026-11-18 08:11:13采集的不可变行情快照：USD/CNY 6.66540（11月18日盘中，较11月17日+0.0180%）；AUD/CNY 4.49070（11月18日盘中，+0.0232%）；纳斯达克24328.38（11月17日收盘，-0.7400%）；标普500 7340.53（11月17日收盘，-1.0255%）；道琼斯50759.42（11月17日收盘，-1.6446%）；AUD/USD 0.67376（11月18日盘中，+0.0050%）。六项均为ok，三大美股指数收盘值与AP报道一致。美股下跌与AI板块估值、英伟达业绩前不确定性及金融股疲弱相符，但单一因果未经证明。上证3584.58（11月17日收盘，-0.4994%）、沪深300 3976.46（11月17日收盘，-0.0839%），交易日期一致。美元指数103.598（11月17日，+0.0464%）；布伦特93.30美元/桶（11月17日，+0.9303%）；黄金3848.70美元/盎司（11月17日，-0.1116%）；美债10年期收益率5.103%（11月17日，较前值收益率水平相对变化-0.3515%，不是下降0.3515个百分点）。行情源为非官方Yahoo及东方财富接口；FX是盘中观察，K线时间戳不代表实际收盘时刻。新闻RSS仅作线索，正式研究以独立媒体报道核验。",
+  "news_digest": {
+    "overview": "截至北京时间11月18日08:11，11月17日美股延续回落，AI芯片出口限制及海外数据中心投资受到关注；中国AI技术竞争与APEC人工智能治理议题并行。已报道的市场事实、政策限制及条件性A股传导分别列示，不将同期变化误判为唯一因果。",
+    "items": [
+      {
+        "title": "美股三大指数连续承压，AI及金融板块拖累",
+        "summary": "美联社11月17日收盘报道，标普500下跌约1.03%、道指下跌1.64%、纳指下跌0.74%，AI相关股票及金融股表现疲弱，美债收益率回落、油价上涨。",
+        "market_impact": "可能压制A股科技成长和券商宽基短线风险偏好，但A股独立资金与政策因素可能导致分化。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美国先进AI芯片出口限制冲击东南亚数据中心产业链",
+        "summary": "路透11月17日报道，美国针对东南亚先进芯片出口的新增限制令马来西亚、新加坡、泰国相关数据中心和芯片供应链股票承压；具体适用范围须以正式规则为准。",
+        "market_impact": "中国半导体国产替代可能获得关注，但跨境算力供应、光模块和服务器订单亦存在不确定性，不宜单向解读为利好。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "路透调查中国机构利用美国AI模型输出训练本土模型",
+        "summary": "路透11月17日调查报道指出，部分中国机构尝试借助美国领先模型输出训练国内模型，背景是先进芯片获取限制趋严；不代表所有国内企业采用同一技术路径。",
+        "market_impact": "提示国产模型与算力生态的竞争压力和合规风险；不能据此确认新增监管处罚或公司盈利变化。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "APEC讨论AI安全与数据治理，百度高管强调投资回报",
+        "summary": "路透11月17日报道，APEC相关官员称成员讨论AI安全、负责任使用及数据支持；同日百度CEO表示AI投资需兑现利润以避免泡沫。前者为会议讨论，后者为企业高管观点。",
+        "market_impact": "AI应用、算力、数据治理行业同时存在长期需求与估值兑现压力，政策讨论不等于法规已出台。",
+        "importance": "medium",
+        "source_ids": [
+          "S4",
+          "S5"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "How major US stock indexes fared Tuesday 11/17/2026",
+      "publisher": "Associated Press",
+      "published_at_utc": "2026-11-17T21:40:00Z",
+      "url": "https://apnews.com/article/ff6caef4d9289cf7f1e6ee48a706eddc",
+      "verification": "AP 11月17日收盘报道正文核验；数据与当日行情快照交叉验证"
+    },
+    {
+      "id": "S2",
+      "title": "US AI chip curbs threaten Southeast Asia data centre boom, shares slump",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-17T04:34:00Z",
+      "url": "https://www.reuters.com/world/asia-pacific/us-ai-chip-curbs-threaten-southeast-asia-data-centre-boom-shares-tumble-2026-11-17/",
+      "verification": "路透11月17日报道正文核验，报道所述限制与市场反应不等于对所有企业直接生效"
+    },
+    {
+      "id": "S3",
+      "title": "China taps US AI models to train homegrown rivals as chip curbs bite",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-17T03:42:00Z",
+      "url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+      "verification": "路透11月17日调查报道核验，不能推断所有中国AI企业采用相同行为"
+    },
+    {
+      "id": "S4",
+      "title": "APEC focuses on safe, responsible AI use, China's ex-UN envoy says",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/technology/apec-focuses-safe-responsible-ai-use-chinas-ex-un-envoy-says-2026-11-17/",
+      "verification": "路透11月17日报道核验；共识讨论不等于正式法规落地"
+    },
+    {
+      "id": "S5",
+      "title": "Baidu CEO says AI investment must deliver profits to avoid bubble",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-17T07:18:00Z",
+      "url": "https://www.reuters.com/business/media-telecom/baidu-ceo-says-ai-investment-must-deliver-profits-avoid-bubble-2026-11-17/",
+      "verification": "路透11月17日对企业高管公开讲话的报道核验；属于观点而非确定经济事实"
+    }
+  ],
+  "a_share_bias": "negative",
+  "a_share_outlook": "截至北京时间2026-11-18 08:11的盘前条件性判断：上证综指与沪深300在11月17日收盘均回落，美股11月17日三大指数继续下跌；美国AI芯片政策对区域数据中心链条带来不确定性，整体风险偏好偏谨慎。观察A股半导体、AI服务器、券商及宽基开盘量价和资金承接；国产替代题材可能相对活跃但不代表确定上涨。不得以今日盘中表现回填此判断。",
+  "a_share_sectors": [
+    {
+      "sector": "券商与宽基指数",
+      "bias": "negative",
+      "reason": "A股两大指数上个交易日均收跌，美股金融板块亦承压；需观察量能与权重股承接"
+    },
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "海外芯片出口限制增加供应链压力，国产替代逻辑与全球风险偏好下行并存"
+    },
+    {
+      "sector": "AI服务器与算力",
+      "bias": "negative",
+      "reason": "海外AI估值及数据中心芯片供应限制可能影响短期订单预期和情绪"
+    },
+    {
+      "sector": "存储",
+      "bias": "watch",
+      "reason": "缺少可核实的当日存储现货价格和国内订单变化"
+    },
+    {
+      "sector": "光通信与数据中心",
+      "bias": "mixed",
+      "reason": "海外数据中心政策风险与AI基础设施长期需求并存"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "mixed",
+      "reason": "布伦特期货约涨0.93%可能支撑上游，但需求和地缘风险仍有反复"
+    },
+    {
+      "sector": "航空与化工",
+      "bias": "watch",
+      "reason": "油价上涨可能增加成本，实际影响依赖燃油对冲和需求"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "watch",
+      "reason": "黄金期货小幅下跌、美国收益率回落，避险与美元因素方向不一"
+    },
+    {
+      "sector": "消费与内需",
+      "bias": "watch",
+      "reason": "未核验到过去24小时足以改变国内消费基本面判断的新增政策"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "mixed",
+      "reason": "全球风险偏好下降与中国制造供应链替代机会并存"
+    }
+  ],
+  "risks": [
+    "USD/CNY、AUD/CNY、AUD/USD为11月18日盘中观察，不是银行结售汇成交价",
+    "美股与A股为11月17日收盘，不能将K线时间戳误认收盘发生时间",
+    "RSS标题未独立核实不得用于确定性新闻结论",
+    "美国芯片限制实际适用范围需以监管原文为准，行业影响属于假设",
+    "美债收益率change_pct为收益率水平的相对变化而非基点",
+    "盘前预测一经09:30前冻结，后续只记录事实勘误，不追改分析及冻结SHA256"
+  ],
+  "uncertainty": "high：AI芯片监管范围、科技股估值和国内资金承接均有不确定性；市场走势归因并非确定因果。",
+  "evidence_urls": [
+    "https://apnews.com/article/ff6caef4d9289cf7f1e6ee48a706eddc",
+    "https://www.reuters.com/world/asia-pacific/us-ai-chip-curbs-threaten-southeast-asia-data-centre-boom-shares-tumble-2026-11-17/",
+    "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+    "https://www.reuters.com/technology/apec-focuses-safe-responsible-ai-use-chinas-ex-un-envoy-says-2026-11-17/",
+    "https://www.reuters.com/business/media-telecom/baidu-ceo-says-ai-investment-must-deliver-profits-avoid-bubble-2026-11-17/"
+  ]
+}
