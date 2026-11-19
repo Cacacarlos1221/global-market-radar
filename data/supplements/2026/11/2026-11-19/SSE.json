@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "kind": "source_correction",
+  "report_date": "2026-11-19",
+  "asset_key": "SSE",
+  "collected_at_utc": "2026-11-19T00:15:37Z",
+  "base_snapshot_collected_at_utc": "2026-11-19T00:15:10.270222+00:00",
+  "source_url": "https://cn.investing.com/indices/shanghai-composite-historical-data",
+  "verified_by_urls": [
+    "https://cn.investing.com/indices/shanghai-composite-historical-data",
+    "https://stock.cngold.org/c/2026-11-18/c10888398.html"
+  ],
+  "reason": "Original SSE snapshot is stale at Nov 17 while CSI300 is Nov 18. Independent Investing.com historical and 金投网 November 18 close agree SSE 3587.83 (+0.09%) vs November 17 3584.58. Preserve original and apply separately.",
+  "quote": {
+    "category": "cn_index",
+    "change_pct": 0.0907,
+    "error": null,
+    "fallback_note": "Eastmoney not available: Remote end closed connection without response",
+    "key": "SSE",
+    "label": "上证综指",
+    "market_date": "2026-11-18",
+    "observed_at_utc": null,
+    "reference_close": 3584.58,
+    "reference_date": "2026-11-17",
+    "source": "Investing.com historical close, corroborated by 金投网",
+    "status": "ok",
+    "symbol": "000001.SS",
+    "unit": "points",
+    "value": 3587.83,
+    "value_kind": "official_daily_close",
+    "source_url": "https://cn.investing.com/indices/shanghai-composite-historical-data"
+  }
+}
