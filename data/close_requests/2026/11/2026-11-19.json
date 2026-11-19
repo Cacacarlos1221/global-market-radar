@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-19",
+  "request_type": "close_collection",
+  "reason": "15:55 GMR controller found no same-day close snapshot; trigger guarded collection",
+  "requested_by": "GMR after-close controller"
+}
