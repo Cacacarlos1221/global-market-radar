@@ -1,0 +1,100 @@
+{
+  "analysis_status": "facts_only_pending_independent_research",
+  "attributions": [
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；半导体 -0.63%，相对沪深300-0.66个百分点；没有可严格评分的明确方向结果。",
+      "sector": "半导体",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；液冷服务器（已标注代理） -2.96%，相对沪深300-2.99个百分点；没有可严格评分的明确方向结果。",
+      "sector": "AI服务器",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签watch；存储芯片 -0.53%，相对沪深300-0.55个百分点；没有可严格评分的明确方向结果。",
+      "sector": "存储芯片",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "光通信",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签watch；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "券商及宽基",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签negative；黄金概念 -1.63%，相对沪深300-1.66个百分点；冻结方向一致。",
+      "sector": "黄金概念",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签negative；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "油气开采",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签mixed；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "航空及化工",
+      "source_ids": []
+    },
+    {
+      "causal_status": "facts_only_not_researched",
+      "explanation": "仅为真实同日行情和冻结标签的机械对照；尚未进行独立新闻核实，不能认定涨跌的原因，不能将mixed/watch或代理主题事后改写为方向预测。",
+      "observation": "盘前标签watch；暂无有效同日板块指数；没有可严格评分的明确方向结果。",
+      "sector": "出口制造",
+      "source_ids": []
+    }
+  ],
+  "generated_at_utc": "2026-11-19T08:01:18.248949+00:00",
+  "key_findings": [
+    {
+      "finding": "沪深300收盘3984.84点，日涨跌+0.03%",
+      "source_ids": [],
+      "title": "当日收盘基准（源自同日行情）"
+    },
+    {
+      "finding": "冻结或预选关注9组，至少一项同日板块可观察4组，明确方向2组，严格可评分1组，其中方向一致1组。盘后新增热点不计入盘前评分，所有预测方向均以原始冻结为准。",
+      "source_ids": [],
+      "title": "盘前研判覆盖和方向评分分开统计"
+    },
+    {
+      "finding": "集成电路制造+5.00%；昨日连板_含一字+4.17%；集成电路封测+2.65%；氨纶+2.05%；昨日连板+1.87%。这些仅是当天价格观察，不能用于倒推早晨预测。",
+      "source_ids": [],
+      "title": "盘后筛选的热门板块（不计预测命中）"
+    }
+  ],
+  "new_events": [],
+  "news_sources": [],
+  "next_watch": [
+    "待GMR独立核验当日重大新闻正文、发布时间、公告与产业催化后，另行发布完整研究版。",
+    "复核盘前明确方向覆盖率与严格可评分样本数量，不把代理主题或盘后热点当作命中。",
+    "本日行情存在17条已记录质量或映射限制，逐项以原始行情异常清单为准。"
+  ],
+  "report_date": "2026-11-19",
+  "report_type": "GMR_deterministic_facts_only_fallback",
+  "schema_version": "1.1",
+  "source_close_sha256": "5aee61fa7a362c4f2b85447a24f7fbb1031e9fce6012e4ed5e4b9ca58c932833",
+  "source_forecast_sha256": "0ed2e3e2b1202b7b990a3ae9afcbc9574e2ab10c975177c99e13f20520006bb1",
+  "source_revision_used": true,
+  "summary": "GMR自动收盘事实版（非独立新闻研究，等待后续研究升级）。2026-11-19已取得当日可核验行情；沪深300收盘3984.84点，日涨跌+0.03%。盘前跟踪共9组，有至少一项同日板块指数的4组，其中明确涨跌方向2组、具备严格评分条件1组，方向一致1组。只有存在有效方向评分样本时这些数字才可用于计算命中率；未给出方向或仅有代理指数的主题不计严格命中率。以下仅逐项复述已封存的收盘K线事实，尚未核实独立新闻正文、发布时间与驱动因素，本事实版不作新闻归因或确定性因果解释。"
+}
