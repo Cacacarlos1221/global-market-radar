@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.1",
+  "report_type": "GMR_independent_research",
+  "report_date": "2026-11-19",
+  "generated_at_utc": "2026-11-19T08:29:48.770Z",
+  "source_revision_used": true,
+  "source_forecast_sha256": "0ed2e3e2b1202b7b990a3ae9afcbc9574e2ab10c975177c99e13f20520006bb1",
+  "source_close_sha256": "5aee61fa7a362c4f2b85447a24f7fbb1031e9fce6012e4ed5e4b9ca58c932833",
+  "summary": "GMR盘后独立研究：沪深300收于3984.84点，涨0.0269%；上证指数跌0.28%，深证成指跌0.71%，创业板指跌0.79%。宽基相对平稳但个股普跌，半导体制造和封测逆势走强。盘前9组主题，明确方向2组，其中严格可评分1组、方向一致1组；样本极小，不代表整体预测能力。行情采用同日收盘修订快照，新闻来源经独立核验。",
+  "key_findings": [
+    {
+      "title": "指数分化与市场宽度",
+      "finding": "沪深300上涨0.0269%，上证跌0.28%、深成指跌0.71%、创业板指跌0.79%；央广财经报道全市场超过4800股下跌，成交约1.31万亿元，不能将沪深300微涨解读为普涨。",
+      "source_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "title": "半导体产业链内部分化",
+      "finding": "同日板块行情：半导体-0.6343%（跑输沪深3000.6612个百分点），集成电路制造+4.9972%，集成电路封测+2.6488%。盘后发现的热点不倒算为晨间命中。",
+      "source_ids": [
+        "S1",
+        "S3"
+      ]
+    },
+    {
+      "title": "冻结方向严格评分",
+      "finding": "9组盘前主题、2组明确方向；黄金概念负向判断对应东方财富黄金概念BK0547同日-1.6297%，严格可评分1组、方向一致1组。油气开采无同名指数，不计分；mixed/watch与液冷服务器代理均不计分。",
+      "source_ids": []
+    },
+    {
+      "title": "盘后热门板块",
+      "finding": "集成电路制造+5.00%；昨日连板_含一字+4.17%；集成电路封测+2.65%；氨纶+2.05%；昨日连板+1.87%；集成电路制造代表股晶合集成+10.2611%、华虹宏力+8.05%，集成电路封测代表股蓝箭电子+20%、大港股份+9.9909%；均为本日有效行情观察，不构成投资建议。",
+      "source_ids": []
+    }
+  ],
+  "attributions": [
+    {
+      "sector": "半导体",
+      "observation": "盘前mixed；半导体-0.63%，相对沪深300-0.66个百分点；不计严格方向评分",
+      "explanation": "行业总体下跌，但制造与封测板块逆势上涨，反映产业链内部强弱分化；媒体报道确认活跃现象，无法据此单独确认资金流向的因果机制。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "sector": "AI服务器",
+      "observation": "盘前mixed；液冷服务器（代理）-2.96%，相对沪深300-2.99个百分点；不计严格方向评分",
+      "explanation": "液冷服务器只是AI服务器的部分产业链代理，不能用其涨跌判断完整主题方向；芯片限制和估值波动只是待验证假说。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "存储芯片",
+      "observation": "盘前watch；存储芯片-0.53%，相对沪深300-0.55个百分点；不计严格方向评分",
+      "explanation": "仅比较已核验同日行情和冻结判断；缺指数、代理或非方向标签均不评分，具体驱动因素尚存不确定性。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "光通信",
+      "observation": "盘前mixed；缺少可核验的同日板块指数；不计严格方向评分",
+      "explanation": "仅比较已核验同日行情和冻结判断；缺指数、代理或非方向标签均不评分，具体驱动因素尚存不确定性。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "券商及宽基",
+      "observation": "盘前watch；缺少可核验的同日板块指数；不计严格方向评分",
+      "explanation": "仅比较已核验同日行情和冻结判断；缺指数、代理或非方向标签均不评分，具体驱动因素尚存不确定性。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "黄金概念",
+      "observation": "盘前negative；黄金概念-1.63%，相对沪深300-1.66个百分点；严格方向一致，仅此一条组合计一个样本",
+      "explanation": "当日黄金概念指数下跌与盘前负向判断一致；利率预期是否为主要驱动缺少当日独立因果证据。",
+      "causal_status": "hypothesis",
+      "source_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "sector": "油气开采",
+      "observation": "盘前negative；缺少可核验的同日板块指数；不计严格方向评分",
+      "explanation": "仅比较已核验同日行情和冻结判断；缺指数、代理或非方向标签均不评分，具体驱动因素尚存不确定性。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "航空及化工",
+      "observation": "盘前mixed；缺少可核验的同日板块指数；不计严格方向评分",
+      "explanation": "仅比较已核验同日行情和冻结判断；缺指数、代理或非方向标签均不评分，具体驱动因素尚存不确定性。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    },
+    {
+      "sector": "出口制造",
+      "observation": "盘前watch；缺少可核验的同日板块指数；不计严格方向评分",
+      "explanation": "仅比较已核验同日行情和冻结判断；缺指数、代理或非方向标签均不评分，具体驱动因素尚存不确定性。",
+      "causal_status": "hypothesis",
+      "source_ids": []
+    }
+  ],
+  "new_events": [
+    {
+      "title": "半导体先进封装及光刻胶方向盘中活跃",
+      "summary": "新华财经午评核验光刻机、先进封装与存储芯片局部活跃，同时算力芯片和AI漫剧承压；这只是盘中市场现象，收盘涨跌仍以同日行情快照为准。",
+      "published_at_utc": "2026-11-19T03:30:00Z",
+      "source_ids": [
+        "S3"
+      ]
+    }
+  ],
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "沪指收跌0.28%，光刻胶、先进封装概念活跃",
+      "publisher": "中新经纬",
+      "published_at_utc": "2026-11-19T07:08:00Z",
+      "url": "https://finance.eastmoney.com/a/202611193935013366.html",
+      "verification": "reported"
+    },
+    {
+      "id": "S2",
+      "title": "11月19日A股收评：上证50探底回升涨0.32% 两市成交额缩至1.31万亿元",
+      "publisher": "央广财经",
+      "published_at_utc": "2026-11-19T07:21:00Z",
+      "url": "https://finance.eastmoney.com/a/202611193935011146.html",
+      "verification": "reported"
+    },
+    {
+      "id": "S3",
+      "title": "午评：三大指数延续调整 光刻胶、先进封装概念股逆势活跃",
+      "publisher": "新华财经",
+      "published_at_utc": "2026-11-19T03:30:00Z",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261119/4497538_1.html",
+      "verification": "reported"
+    }
+  ],
+  "next_watch": [
+    "核验集成电路制造与封测上涨的持续性及相对半导体行业分化，不将一天涨幅推断为长期趋势。",
+    "监测AI服务器代理液冷服务器与真正AI服务器产业链的覆盖差异，未获批准前不用于严格评分。",
+    "券商及宽基、出口制造、油气开采缺固定语义匹配指数，等待未来映射确认；已批准贵金属和稀土代理保持原口径。",
+    "多只固定代表股今日行情接口返回unavailable，后续须通过可审计修订补采，禁止补造价格。"
+  ]
+}
