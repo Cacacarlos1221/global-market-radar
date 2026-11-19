@@ -1,0 +1,163 @@
+{
+  "report_date": "2026-11-19",
+  "generated_at_utc": "2026-11-19T00:15:43Z",
+  "market_summary": "截至北京时间2026-11-19 08:15:43，仅使用当时已公开的11月18日收盘及早间汇率。USD/CNY 6.65760，较参考日线-0.1245%；AUD/CNY 4.47890，-0.3127%；美股纳指24429.88（+0.4172%）、标普500 7323.63（-0.2302%）、道指50198.17（-1.1057%），呈科技股小幅反弹而宽基承压的分化。美联社报道英伟达业绩后股价冲高回落、AI估值疑虑延续，联储会议纪要强化利率上行预期；这只是可能驱动，不能视为已证明的单一因果。11月18日A股上证综指3587.83（+0.09%）、沪深300 3983.77（+0.18%），原始上证数据滞后于11月17日，已使用独立有来源SSE补充订正而不覆盖原始快照。AUD/USD 0.671727（-0.3339%）；外汇为盘前观察值而非正式结算价。油价和黄金报价随不同合约及观察时点变化，不能简单据此推断A股当日方向。",
+  "news_digest": {
+    "overview": "过去24小时主线为美国科技与宽基分化、联储利率预期趋紧、先进AI芯片跨境限制和APEC经贸外交不确定性。市场影响均为条件性推断；峰会谈判尚未产生可确认的新协议。",
+    "items": [
+      {
+        "title": "美股标普连跌五日，纳指小涨，道指承压",
+        "summary": "美联社报道11月18日标普500跌约0.2%、道指跌约1.1%、纳指涨约0.4%；英伟达公布强劲业绩后股价反而收跌，AI产业链波动持续。",
+        "market_impact": "科技龙头强业绩未必抵消估值与资金压力，A股AI服务器、光模块和半导体可能分化；不能机械套用美股方向。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美联储纪要释放进一步加息倾向",
+        "summary": "美联社报道10月会议纪要显示近乎所有政策制定者预计12月需要提高政策利率，部分人士讨论更大幅度加息；尚非已实施决定。",
+        "market_impact": "较高利率预期可能压制成长股估值、黄金和风险偏好；美元及人民币实际走势仍需结合市场报价观察。",
+        "importance": "high",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "英伟达暂停向中国交付已获许可的Hopper AI芯片",
+        "summary": "路透11月18日报道，英伟达临时CEO表示目前不再向中国交付相关许可产品，且下一季度指引未计入此类销售；暂停原因及持续时间尚不明确。",
+        "market_impact": "对依赖海外高端算力的云服务和训练业务构成不确定性，同时可能强化国产芯片替代预期，但不等于相关A股必然上涨。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "腾讯称新芯片限制对云收入影响有限但可能拖慢模型训练",
+        "summary": "路透报道腾讯第三季度收入同比增长8%至2073亿元，低于预期；公司称云端推理收入受新限制影响有限，但下一代模型训练可能放缓。",
+        "market_impact": "区分推理需求韧性与高端训练算力供给约束；国内AI算力、软件及芯片板块的实际传导方向可能不同。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "APEC呼吁开放贸易，主要国家领导人会晤仍待结果",
+        "summary": "美联社报道中国领导人在深圳APEC峰会倡议开放贸易；美中俄领导人会晤安排受到关注，尚无可确认的三方新贸易协议。",
+        "market_impact": "外贸、稀土、半导体及风险资产可能受谈判进展影响；避免提前将预期当成政策落地。",
+        "importance": "medium",
+        "source_ids": [
+          "S5"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "A fifth straight drop for the S&P 500 drags Wall Street to its longest losing streak since June",
+      "publisher": "Associated Press",
+      "published_at_utc": "2026-11-18T21:20:00Z",
+      "url": "https://apnews.com/article/stock-markets-ai-earnings-oil-apec-shenzhen-dad5715bc91b4aba23a567a40e22b1fc",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S2",
+      "title": "Nvidia stops shipping US-approved AI chips to China",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-18T09:16:00Z",
+      "url": "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S3",
+      "title": "Tencent says new US chip curbs won't hurt cloud revenue, may slow model training",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-18T08:43:00Z",
+      "url": "https://www.reuters.com/technology/tencent-q3-revenue-growth-slows-8-misses-estimates-2026-11-18/",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S4",
+      "title": "Fed minutes: Higher interest rates needed in December as inflation worries mount",
+      "publisher": "Associated Press",
+      "published_at_utc": "2026-11-18T19:10:00Z",
+      "url": "https://apnews.com/article/9e72f3b6e3484173471cc382d6918de0",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S5",
+      "title": "Xi says Asia-Pacific needs open trade and Putin condemns sanctions as Trump arrives in China",
+      "publisher": "Associated Press",
+      "published_at_utc": "2026-11-18T13:00:00Z",
+      "url": "https://apnews.com/article/1e3b6161b31196c9716ca02ac8c7720c",
+      "verification": "reported_and_article_checked"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "北京时间08:15:43的A股盘前条件性判断：美股纳指小涨而标普与道指走弱，联储利率上行预期与中美先进AI芯片限制构成压力；国内11月18日上证和沪深300均小幅收涨，但市场内部可能分化。开盘后观察宽基量能、AI硬件资金承接、国产替代板块相对强度以及APEC后续正式公告。此为开盘前假设，不代表已经发生的11月19日行情。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "国产替代逻辑获支持，但训练芯片供给限制和海外AI估值波动压制情绪；观察成交量及分化。"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "mixed",
+      "reason": "需求仍有基础但先进芯片供应及美国科技估值不确定；观察订单和算力基础设施标的。"
+    },
+    {
+      "sector": "存储芯片",
+      "bias": "watch",
+      "reason": "AI需求与海外芯片股波动并存，缺乏明确当日独立催化。"
+    },
+    {
+      "sector": "光通信",
+      "bias": "mixed",
+      "reason": "AI基础设施需求与美股相关资产波动相互拉扯，需验证资金承接。"
+    },
+    {
+      "sector": "券商及宽基",
+      "bias": "watch",
+      "reason": "昨日宽基小幅上涨但缺乏确认性增量资金证据，观察量能。"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "negative",
+      "reason": "美联储进一步加息预期可能压制无息资产估值；地缘风险是反向变量。"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "negative",
+      "reason": "报道显示油价下跌压制美国能源股，传导至国内需考虑国内定价与汇率。"
+    },
+    {
+      "sector": "航空及化工",
+      "bias": "mixed",
+      "reason": "油价下行可能改善成本，但宏观需求及汇率可能抵消收益。"
+    },
+    {
+      "sector": "出口制造",
+      "bias": "watch",
+      "reason": "APEC开放贸易表态有积极信号，但无已落实新贸易协议，需等待正式公告。"
+    }
+  ],
+  "risks": [
+    "联储纪要显示加息倾向但尚非正式决定，利率和美元可能继续波动",
+    "美国对先进AI芯片出口及远程算力访问限制的不确定性",
+    "APEC谈判结果未确定，不能以预期替代正式政策",
+    "原始SSE 11月17日滞后，已在独立补充层按11月18日真实收盘修正；需确保HTML与文字使用有效行情",
+    "Yahoo Finance为非官方源；汇率是盘前观察值而非官方结算"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://apnews.com/article/stock-markets-ai-earnings-oil-apec-shenzhen-dad5715bc91b4aba23a567a40e22b1fc",
+    "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+    "https://www.reuters.com/technology/tencent-q3-revenue-growth-slows-8-misses-estimates-2026-11-18/",
+    "https://apnews.com/article/9e72f3b6e3484173471cc382d6918de0",
+    "https://apnews.com/article/1e3b6161b31196c9716ca02ac8c7720c",
+    "https://cn.investing.com/indices/shanghai-composite-historical-data",
+    "https://stock.cngold.org/c/2026-11-18/c10888398.html"
+  ]
+}
