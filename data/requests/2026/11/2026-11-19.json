@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-19",
+  "requested_at_utc": "2026-11-19T00:14:34Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "At 08:14 Beijing daily snapshot absent and no running Daily market data and HTML workflow; trigger bounded fact collection."
+}
