@@ -2,7 +2,7 @@
   "daily_files": 17,
   "dataset_type": "curated_history_manifest",
   "history_csv": "data/curated/history/quotes.csv",
-  "price_usable_rows": 203,
+  "price_usable_rows": 204,
   "primary_key": [
     "report_date",
     "asset_key"
@@ -28,8 +28,8 @@
     "2026-11-18",
     "2026-11-19"
   ],
-  "return_usable_rows": 197,
+  "return_usable_rows": 198,
   "schema_version": "1.0",
-  "source_corrected_rows": 3,
+  "source_corrected_rows": 4,
   "supplemented_rows": 1
 }

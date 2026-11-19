@@ -417,18 +417,17 @@
       "value_kind": "daily_bar"
     },
     {
-      "available_at_utc": "2026-11-19T00:15:10.270222+00:00",
+      "available_at_utc": "2026-11-19T00:15:37Z",
       "category": "cn_index",
-      "change_pct": -0.4994,
-      "error": "Quote dated 2026-11-17 is older than peer CN index 2026-11-18",
+      "change_pct": 0.0907,
+      "error": null,
       "fallback_note": "Eastmoney not available: Remote end closed connection without response",
       "key": "SSE",
       "label": "上证综指",
-      "market_date": "2026-11-17",
-      "observed_at_utc": "2026-11-17T01:30:00+00:00",
+      "market_date": "2026-11-18",
+      "observed_at_utc": null,
       "quality_flags": [
-        "source_status_stale",
-        "stale_vs_cn_index_peer"
+        "source_corrected"
       ],
       "raw_market_date": "2026-11-17",
       "raw_snapshot_sha256": "d2680c503d23bfbb1708d3644ec03c3a2a4fc624aaee8bd20f5bf39e2b3fd8ce",
@@ -436,18 +435,20 @@
       "raw_status": "stale",
       "raw_value": 3584.57910156,
       "raw_value_kind": "daily_close",
-      "reference_close": 3602.57006836,
-      "reference_date": "2026-11-16",
-      "revision_kind": "none",
-      "revision_record": null,
-      "source": "Yahoo Finance chart API (unofficial)",
-      "status": "stale",
+      "reference_close": 3584.58,
+      "reference_date": "2026-11-17",
+      "revision_kind": "source_correction",
+      "revision_record": "data/supplements/2026/11/2026-11-19/SSE.json",
+      "source": "Investing.com historical close, corroborated by 金投网",
+      "source_url": "https://cn.investing.com/indices/shanghai-composite-historical-data",
+      "status": "ok",
+      "supplement_collected_at_utc": "2026-11-19T00:15:37Z",
       "symbol": "000001.SS",
       "unit": "points",
-      "usable_for_price_analysis": false,
-      "usable_for_return_analysis": false,
-      "value": 3584.57910156,
-      "value_kind": "daily_close"
+      "usable_for_price_analysis": true,
+      "usable_for_return_analysis": true,
+      "value": 3587.83,
+      "value_kind": "official_daily_close"
     },
     {
       "available_at_utc": "2026-11-19T00:15:10.270222+00:00",
@@ -520,5 +521,7 @@
   "source_errors": {
     "news": []
   },
-  "supplement_sha256": {}
+  "supplement_sha256": {
+    "SSE": "b5bb778b9c943faaab593f0e53a8bf7ba49236dc8ae18197fe6ffa01400717cd"
+  }
 }
