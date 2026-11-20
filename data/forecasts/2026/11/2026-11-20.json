@@ -1,0 +1,328 @@
+{
+  "a_share_bias": "negative",
+  "a_share_outlook": "北京时间2026-11-20 08:15:32的盘前条件性判断：隔夜美股三大指数约跌2%，全球AI估值承压与美国先进制程限制共同抑制风险偏好，A股总体偏谨慎。11月19日上证下跌、沪深300微涨，提示国内结构分化。今日开盘重点观察半导体国产替代与海外算力供应链的相对表现、AI服务器和光模块量能、券商宽基资金承接；不预言确定涨跌。",
+  "a_share_sectors": [
+    {
+      "bias": "mixed",
+      "reason": "美国先进代工限制对高端芯片供应不利，国产替代关注度可能上升，但产业链技术与产能限制真实存在。",
+      "sector": "半导体"
+    },
+    {
+      "bias": "negative",
+      "reason": "隔夜美国AI硬件与数据中心相关股票承压，先进芯片获取限制增加不确定性。",
+      "sector": "AI服务器"
+    },
+    {
+      "bias": "watch",
+      "reason": "AI需求预期与海外半导体调整并存，缺少单独的当日方向性证据。",
+      "sector": "存储芯片"
+    },
+    {
+      "bias": "mixed",
+      "reason": "数据中心需求中期仍在，短期海外AI资本开支回报担忧可能影响估值。",
+      "sector": "光通信"
+    },
+    {
+      "bias": "negative",
+      "reason": "海外风险偏好走弱可能拖累开盘情绪，需用成交量及资金流向确认。",
+      "sector": "券商及宽基"
+    },
+    {
+      "bias": "negative",
+      "reason": "COMEX黄金期货相对参考日线下跌，利率预期仍有压力；地缘避险可形成反向支撑。",
+      "sector": "黄金概念"
+    },
+    {
+      "bias": "negative",
+      "reason": "布伦特期货相对参考日线下跌，油价压力可能影响上游盈利预期。",
+      "sector": "油气开采"
+    },
+    {
+      "bias": "mixed",
+      "reason": "油价下跌有利于部分成本，但宏观需求与汇率波动可能抵消。",
+      "sector": "航空及化工"
+    },
+    {
+      "bias": "mixed",
+      "reason": "阿里AI云增长验证部分需求，但资本开支、算力供给及模型变现存在风险。",
+      "sector": "云计算与AI应用"
+    }
+  ],
+  "analysis_sha256": "f1bf1b837774042dfa3acc02c839b06e811f851fc72e5e7a048372f5efe49dac",
+  "forecast_generated_at_utc": "2026-11-20T00:15:32.572Z",
+  "frozen_at_utc": "2026-11-20T00:15:40.675527+00:00",
+  "report_date": "2026-11-20",
+  "schema_version": "1.0",
+  "sector_mapping_approvals_applied": [
+    {
+      "approved_at_utc": "2026-11-05T08:55:51.477Z",
+      "approved_scope": "A股贵金属行业股票的盘前方向预测评分（不代表黄金现货或黄金产业链概念）",
+      "effective_from": "2026-11-06",
+      "key": "precious_metals",
+      "mapping_relation": "exact",
+      "topic": "贵金属"
+    },
+    {
+      "approved_at_utc": "2026-11-05T09:10:21.816Z",
+      "approved_scope": "作为稀土主题的固定、公开可得的产业链代理行情，不将稀土永磁直接表述为同名稀土行业指数；保留严格预测评分隔离",
+      "effective_from": "2026-11-06",
+      "key": "rare_earth",
+      "mapping_relation": "approved_proxy",
+      "topic": "稀土"
+    }
+  ],
+  "sector_mapping_registry_sha256": "f87580cc18614aac4e5e3a2a7457d08f6333c4bc9305740a537d815fbe5bc1c3",
+  "selection_rule": "每条盘前组合研判仅计一个评估样本，子板块及预选股不独立增加预测次数",
+  "unconfigured_sector_policy": "仅允许依原始晨报板块全名，在行业板块和概念板块中进行完全同名的确定性匹配，绝不追涨挑选近义词",
+  "watchlist": {
+    "hot_sector_limit": 5,
+    "hot_stock_limit": 2,
+    "note": "盘前固定跟踪池；索引名称采用供应商原名精确匹配。不可把相邻主题替换成被预测的板块。",
+    "schema_version": "1.0",
+    "tracks": [
+      {
+        "board_names": [
+          "半导体"
+        ],
+        "board_type": "industry",
+        "key": "semiconductor",
+        "name": "半导体",
+        "stocks": [
+          [
+            "688981",
+            "1",
+            "中芯国际"
+          ],
+          [
+            "002371",
+            "0",
+            "北方华创"
+          ],
+          [
+            "603986",
+            "1",
+            "兆易创新"
+          ]
+        ],
+        "terms": [
+          "半导体"
+        ]
+      },
+      {
+        "board_names": [
+          "AI服务器",
+          "服务器",
+          "液冷服务器",
+          "数据中心"
+        ],
+        "board_type": "concept",
+        "key": "server",
+        "name": "AI服务器",
+        "stocks": [
+          [
+            "000977",
+            "0",
+            "浪潮信息"
+          ],
+          [
+            "603019",
+            "1",
+            "中科曙光"
+          ],
+          [
+            "002837",
+            "0",
+            "英维克"
+          ]
+        ],
+        "terms": [
+          "AI服务器",
+          "服务器",
+          "算力"
+        ]
+      },
+      {
+        "board_names": [
+          "存储芯片"
+        ],
+        "board_type": "concept",
+        "key": "memory",
+        "name": "存储芯片",
+        "stocks": [
+          [
+            "603986",
+            "1",
+            "兆易创新"
+          ],
+          [
+            "300223",
+            "0",
+            "北京君正"
+          ],
+          [
+            "688008",
+            "1",
+            "澜起科技"
+          ]
+        ],
+        "terms": [
+          "存储"
+        ]
+      },
+      {
+        "board_names": [
+          "有色金属"
+        ],
+        "board_type": "industry",
+        "key": "metals",
+        "name": "有色金属",
+        "stocks": [
+          [
+            "601899",
+            "1",
+            "紫金矿业"
+          ],
+          [
+            "603993",
+            "1",
+            "洛阳钼业"
+          ],
+          [
+            "601600",
+            "1",
+            "中国铝业"
+          ]
+        ],
+        "terms": [
+          "有色金属",
+          "有色"
+        ]
+      },
+      {
+        "board_names": [],
+        "board_type": "none",
+        "key": "export",
+        "name": "出口制造",
+        "stocks": [],
+        "terms": [
+          "出口制造"
+        ]
+      },
+      {
+        "board_names": [
+          "新能源"
+        ],
+        "board_type": "concept",
+        "key": "new_energy",
+        "name": "新能源",
+        "stocks": [
+          [
+            "300750",
+            "0",
+            "宁德时代"
+          ],
+          [
+            "002594",
+            "0",
+            "比亚迪"
+          ],
+          [
+            "601012",
+            "1",
+            "隆基绿能"
+          ]
+        ],
+        "terms": [
+          "新能源"
+        ]
+      },
+      {
+        "board_names": [
+          "证券"
+        ],
+        "board_type": "industry",
+        "key": "brokerage",
+        "name": "券商",
+        "stocks": [
+          [
+            "600030",
+            "1",
+            "中信证券"
+          ],
+          [
+            "300059",
+            "0",
+            "东方财富"
+          ],
+          [
+            "601688",
+            "1",
+            "华泰证券"
+          ]
+        ],
+        "terms": [
+          "券商",
+          "证券"
+        ]
+      },
+      {
+        "board_names": [],
+        "board_type": "benchmark",
+        "key": "broad",
+        "name": "宽基指数",
+        "stocks": [],
+        "terms": [
+          "宽基指数"
+        ]
+      },
+      {
+        "board_code": "BK0732",
+        "board_name": "贵金属",
+        "board_names": [
+          "贵金属"
+        ],
+        "board_type": "industry",
+        "key": "precious_metals",
+        "mapping_relation": "exact",
+        "name": "贵金属",
+        "stocks": [],
+        "terms": [
+          "贵金属"
+        ],
+        "user_approved": true
+      },
+      {
+        "board_code": "BK0578",
+        "board_name": "稀土永磁",
+        "board_names": [
+          "稀土永磁"
+        ],
+        "board_type": "concept",
+        "key": "rare_earth",
+        "mapping_relation": "approved_proxy",
+        "name": "稀土",
+        "stocks": [
+          [
+            "600111",
+            "1",
+            "北方稀土"
+          ],
+          [
+            "000831",
+            "0",
+            "中国稀土"
+          ],
+          [
+            "600392",
+            "1",
+            "盛和资源"
+          ]
+        ],
+        "terms": [
+          "稀土"
+        ],
+        "user_approved": true
+      }
+    ]
+  }
+}
