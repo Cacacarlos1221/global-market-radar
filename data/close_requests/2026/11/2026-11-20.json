@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-20",
+  "reason": "GMR 15:55 close control: no same-day close snapshot and no active close workflow found; request after 15:30 Asia/Shanghai",
+  "requested_by": "GMR",
+  "requested_at_utc": "2026-11-20T08:00:02Z"
+}
