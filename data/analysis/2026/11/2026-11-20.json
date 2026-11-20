@@ -1,0 +1,161 @@
+{
+  "report_date": "2026-11-20",
+  "generated_at_utc": "2026-11-20T00:15:32.572Z",
+  "market_summary": "截至北京时间2026-11-20 08:15:32（快照采集北京时间08:14:44），11月19日美股纳指23879.20（-2.2541%）、标普500 7175.83（-2.0181%）、道指49097.06（-2.1935%），三大指数齐跌。路透报道Anthropic上市初期强势未能扭转AI估值及数据中心资本开支忧虑，这属于有报道支持的市场解释，不能断言单一因果。USD/CNY 6.66650（相对参考日线+0.0090%），AUD/CNY 4.44080（-1.1607%）；AUD/USD 0.666045（-0.7799%），均按各自最近观察日线及时间口径，不是银行结售汇价格。布伦特期货89.77美元/桶（-2.3709%）、COMEX黄金3613.20美元/盎司（-3.4394%）；美元指数103.924（+0.0616%），美国10年期收益率报价5.052%（较参考值5.066%下降0.014个百分点，约1.4基点，非-0.2764基点）。11月19日A股上证综指3577.62（-0.2846%）、沪深300 3984.84（+0.0269%），两者交易日期一致。上述报价来自非官方行情接口，市场日期和观测时间各不相同，数据截点不能被解释为所有资产同一时刻成交。",
+  "news_digest": {
+    "overview": "过去24小时全球市场主线是美股AI交易降温与利率压力、Anthropic上市后市场分化、美国先进芯片制造限制收紧，以及中国云计算AI需求和算力供给的矛盾。A股盘前需区分全球风险偏好与国产替代的不同传导。",
+    "items": [
+      {
+        "title": "美股三大指数齐跌，AI资本开支回报担忧加剧",
+        "summary": "路透报道11月19日美国三大股指均显著下跌，Anthropic创纪录上市未能扭转AI相关股票的疲弱，英伟达及部分数据中心企业继续承压。",
+        "market_impact": "可能压制A股AI服务器、光通信和高估值科技股风险偏好；跨市场传导并不确定，需观察开盘资金。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "台积电收紧中国客户先进芯片代工限制",
+        "summary": "路透引述知情人士称，新的美国规则生效后，台积电暂停部分中国客户16纳米及更先进工艺订单，除非取得相应美国许可；适用范围及个别许可仍需进一步核实。",
+        "market_impact": "高端AI芯片设计与训练算力供应链可能承压；国产制造替代主题可能获得关注，但工艺瓶颈不能短期消失。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "阿里巴巴AI云收入增长，但算力与资本开支压力仍在",
+        "summary": "路透报道阿里巴巴季度收入超过预期，AI云和计算业务增长较快，同时公司资本开支增加，并提示出口管制及国内算力紧缺风险。",
+        "market_impact": "云计算和AI基础设施需求有支撑，但投资回报、供给约束及电商需求疲弱可能令相关A股分化。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "美联储官员警示AI投资和财富效应可能推高通胀",
+        "summary": "路透报道芝加哥联储主席古尔斯比11月19日指出数据中心投资和财富效应可能令经济过热，美联储需要控制通胀；这不是已公布的加息决定。",
+        "market_impact": "利率更长时间维持高位或进一步上升的预期可能压制成长股估值及黄金；具体路径取决于未来通胀数据。",
+        "importance": "high",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "Anthropic上市成为AI估值和盈利能力压力测试",
+        "summary": "路透报道Anthropic股票以高于83美元发行价的价格开盘，早盘涨幅随后收窄；投资者仍在权衡模型业务增长、算力支出与未来盈利。",
+        "market_impact": "可能强化市场对AI应用变现与资本投入回报的筛选，而非对所有AI企业构成一致利空。",
+        "importance": "medium",
+        "source_ids": [
+          "S5"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Wall Street ends sharply lower as Anthropic's debut fails to revive AI fervor",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-19T09:03:08Z",
+      "url": "https://www.reuters.com/business/nasdaq-futures-jump-anthropics-record-ipo-pricing-fuels-hopes-strong-debut-2026-11-19/",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S2",
+      "title": "TSMC tightens China AI chip curbs as new US rules close manufacturing loophole, sources say",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-19T12:48:02Z",
+      "url": "https://www.reuters.com/world/china/tsmc-tightens-china-ai-chip-curbs-new-us-rules-close-manufacturing-loophole-2026-11-19/",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S3",
+      "title": "Alibaba tops revenue estimates on AI cloud growth; profit up on investment gains",
+      "publisher": "Reuters",
+      "published_at_utc": null,
+      "url": "https://www.reuters.com/business/retail-consumer/chinas-alibaba-beats-quarterly-revenue-estimates-2026-11-19/",
+      "verification": "reported_and_article_checked; exact publication timestamp not independently confirmed"
+    },
+    {
+      "id": "S4",
+      "title": "Goolsbee says the Fed's job right now is to keep AI surge from overheating the economy",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-19T18:57:00Z",
+      "url": "https://www.reuters.com/business/goolsbee-says-feds-job-right-now-is-keep-ai-surge-overheating-economy-2026-11-19/",
+      "verification": "reported_and_article_checked"
+    },
+    {
+      "id": "S5",
+      "title": "Anthropic's blockbuster debut tests Wall Street's faith in AI boom",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-19T11:08:59Z",
+      "url": "https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/",
+      "verification": "reported_and_article_checked"
+    }
+  ],
+  "a_share_bias": "negative",
+  "a_share_outlook": "北京时间2026-11-20 08:15:32的盘前条件性判断：隔夜美股三大指数约跌2%，全球AI估值承压与美国先进制程限制共同抑制风险偏好，A股总体偏谨慎。11月19日上证下跌、沪深300微涨，提示国内结构分化。今日开盘重点观察半导体国产替代与海外算力供应链的相对表现、AI服务器和光模块量能、券商宽基资金承接；不预言确定涨跌。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "美国先进代工限制对高端芯片供应不利，国产替代关注度可能上升，但产业链技术与产能限制真实存在。"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "negative",
+      "reason": "隔夜美国AI硬件与数据中心相关股票承压，先进芯片获取限制增加不确定性。"
+    },
+    {
+      "sector": "存储芯片",
+      "bias": "watch",
+      "reason": "AI需求预期与海外半导体调整并存，缺少单独的当日方向性证据。"
+    },
+    {
+      "sector": "光通信",
+      "bias": "mixed",
+      "reason": "数据中心需求中期仍在，短期海外AI资本开支回报担忧可能影响估值。"
+    },
+    {
+      "sector": "券商及宽基",
+      "bias": "negative",
+      "reason": "海外风险偏好走弱可能拖累开盘情绪，需用成交量及资金流向确认。"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "negative",
+      "reason": "COMEX黄金期货相对参考日线下跌，利率预期仍有压力；地缘避险可形成反向支撑。"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "negative",
+      "reason": "布伦特期货相对参考日线下跌，油价压力可能影响上游盈利预期。"
+    },
+    {
+      "sector": "航空及化工",
+      "bias": "mixed",
+      "reason": "油价下跌有利于部分成本，但宏观需求与汇率波动可能抵消。"
+    },
+    {
+      "sector": "云计算与AI应用",
+      "bias": "mixed",
+      "reason": "阿里AI云增长验证部分需求，但资本开支、算力供给及模型变现存在风险。"
+    }
+  ],
+  "risks": [
+    "非官方Yahoo Finance和东方财富接口报价可能延迟，外汇观察值并非银行结算价",
+    "美股AI板块急跌与Anthropic上市波动可能扩大风险资产短期波动",
+    "美国先进制程代工限制及许可政策执行范围可能变化",
+    "联储官员通胀表态不等于正式政策决定；下周通胀数据仍需验证",
+    "原始快照12项状态ok且中美指数市场日期一致；若后续发现订正，必须冻结预测不变并另记勘误"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://www.reuters.com/business/nasdaq-futures-jump-anthropics-record-ipo-pricing-fuels-hopes-strong-debut-2026-11-19/",
+    "https://www.reuters.com/world/china/tsmc-tightens-china-ai-chip-curbs-new-us-rules-close-manufacturing-loophole-2026-11-19/",
+    "https://www.reuters.com/business/retail-consumer/chinas-alibaba-beats-quarterly-revenue-estimates-2026-11-19/",
+    "https://www.reuters.com/business/goolsbee-says-feds-job-right-now-is-keep-ai-surge-overheating-economy-2026-11-19/",
+    "https://www.reuters.com/business/finance/anthropics-historic-debut-put-ais-promise-peril-wall-st-test-2026-11-19/"
+  ]
+}
