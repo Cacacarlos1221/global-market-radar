@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-20",
-  "generated_at_utc": "2026-11-19T17:28:08.132996+00:00",
+  "audit_date": "2026-11-21",
+  "generated_at_utc": "2026-11-20T16:25:47.158969+00:00",
   "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
@@ -14,10 +14,11 @@
     "2026-11-13",
     "2026-11-17",
     "2026-11-18",
-    "2026-11-19"
+    "2026-11-19",
+    "2026-11-20"
   ],
-  "pending_count": 14,
-  "high_priority_count": 7,
+  "pending_count": 15,
+  "high_priority_count": 10,
   "pending": [
     {
       "topic": "券商与宽基指数",
@@ -87,10 +88,11 @@
         "2026-11-13",
         "2026-11-17",
         "2026-11-18",
-        "2026-11-19"
+        "2026-11-19",
+        "2026-11-20"
       ],
-      "observed_days": 7,
-      "last_observed": "2026-11-19",
+      "observed_days": 8,
+      "last_observed": "2026-11-20",
       "seen_today": false,
       "groups": [
         "油气开采"
@@ -228,6 +230,57 @@
       "existing_proposal": false
     },
     {
+      "topic": "光通信",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-19",
+        "2026-11-20"
+      ],
+      "observed_days": 2,
+      "last_observed": "2026-11-20",
+      "seen_today": false,
+      "groups": [
+        "光通信"
+      ],
+      "biases": [
+        "mixed"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「光通信」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
+      "topic": "券商",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-19",
+        "2026-11-20"
+      ],
+      "observed_days": 2,
+      "last_observed": "2026-11-20",
+      "seen_today": false,
+      "groups": [
+        "券商及宽基"
+      ],
+      "biases": [
+        "negative",
+        "watch"
+      ],
+      "gap_reasons": [
+        "有候选板块名称，但没有核验通过的指数代码"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「券商」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
       "topic": "消费与内需",
       "priority": "high",
       "status": "needs_mapping_review",
@@ -254,6 +307,31 @@
       "existing_proposal": false
     },
     {
+      "topic": "航空及化工",
+      "priority": "high",
+      "status": "needs_mapping_review",
+      "observed_dates": [
+        "2026-11-19",
+        "2026-11-20"
+      ],
+      "observed_days": 2,
+      "last_observed": "2026-11-20",
+      "seen_today": false,
+      "groups": [
+        "航空及化工"
+      ],
+      "biases": [
+        "mixed"
+      ],
+      "gap_reasons": [
+        "晨报主题没有固定跟踪指数"
+      ],
+      "candidate_indices": [],
+      "user_question": "请确认「航空及化工」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_reported_recurrent": false,
+      "existing_proposal": false
+    },
+    {
       "topic": "AI服务器",
       "priority": "medium",
       "status": "pending_proxy_review",
@@ -268,10 +346,11 @@
         "2026-11-13",
         "2026-11-17",
         "2026-11-18",
-        "2026-11-19"
+        "2026-11-19",
+        "2026-11-20"
       ],
-      "observed_days": 11,
-      "last_observed": "2026-11-19",
+      "observed_days": 12,
+      "last_observed": "2026-11-20",
       "seen_today": false,
       "groups": [
         "AI服务器",
@@ -333,17 +412,17 @@
       "existing_proposal": true
     },
     {
-      "topic": "光通信",
+      "topic": "云计算与AI应用",
       "priority": "medium",
       "status": "needs_mapping_review",
       "observed_dates": [
-        "2026-11-19"
+        "2026-11-20"
       ],
       "observed_days": 1,
-      "last_observed": "2026-11-19",
+      "last_observed": "2026-11-20",
       "seen_today": false,
       "groups": [
-        "光通信"
+        "云计算与AI应用"
       ],
       "biases": [
         "mixed"
@@ -352,31 +431,7 @@
         "晨报主题没有固定跟踪指数"
       ],
       "candidate_indices": [],
-      "user_question": "请确认「光通信」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
-      "topic": "券商",
-      "priority": "medium",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-19"
-      ],
-      "observed_days": 1,
-      "last_observed": "2026-11-19",
-      "seen_today": false,
-      "groups": [
-        "券商及宽基"
-      ],
-      "biases": [
-        "watch"
-      ],
-      "gap_reasons": [
-        "有候选板块名称，但没有核验通过的指数代码"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「券商」的固定指数代码、供应商与是否仅作代理观察。",
+      "user_question": "请确认「云计算与AI应用」的固定指数代码、供应商与是否仅作代理观察。",
       "user_reported_recurrent": false,
       "existing_proposal": false
     },
@@ -425,30 +480,6 @@
       ],
       "candidate_indices": [],
       "user_question": "请确认「油气与航运」的固定指数代码、供应商与是否仅作代理观察。",
-      "user_reported_recurrent": false,
-      "existing_proposal": false
-    },
-    {
-      "topic": "航空及化工",
-      "priority": "medium",
-      "status": "needs_mapping_review",
-      "observed_dates": [
-        "2026-11-19"
-      ],
-      "observed_days": 1,
-      "last_observed": "2026-11-19",
-      "seen_today": false,
-      "groups": [
-        "航空及化工"
-      ],
-      "biases": [
-        "mixed"
-      ],
-      "gap_reasons": [
-        "晨报主题没有固定跟踪指数"
-      ],
-      "candidate_indices": [],
-      "user_question": "请确认「航空及化工」的固定指数代码、供应商与是否仅作代理观察。",
       "user_reported_recurrent": false,
       "existing_proposal": false
     }
