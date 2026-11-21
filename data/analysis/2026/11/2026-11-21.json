@@ -16,7 +16,7 @@
       },
       {
         "title": "Anthropic上市后回落，AI资本开支回报疑虑升温",
-        "summary": "路透报道Anthropic上市第二个交易日下跌约9.1%，英伟达下跌约13.8%，投资者重新评估AI投资规模、估值和现金流兑现。",
+        "summary": "路透11月20日收盘报道Anthropic上市第二个交易日下跌约9.1%，英伟达下跌约13.8%；另一路透专题提及Anthropic跌约8.5%的不同收盘口径，故以市场综述报道的口径为主，提醒来源间差异。",
         "market_impact": "AI服务器、半导体、光通信及数据中心相关资产短期估值可能承压，但不能等同产业需求已经消失。",
         "importance": "high",
         "source_ids": [
@@ -49,33 +49,33 @@
       "id": "S1",
       "title": "Wall St ends sharply lower on AI selloff, S&P 500, Dow in correction",
       "publisher": "Reuters",
-      "published_at_utc": "2026-11-20T00:00:00Z",
+      "published_at_utc": "2026-11-20T10:37:00Z",
       "url": "https://www.reuters.com/legal/transactional/wall-st-futures-slip-anthropic-debut-fails-reassure-ai-investors-2026-11-20/",
-      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+      "verification": "reported; Reuters article read and dated"
     },
     {
       "id": "S2",
       "title": "Anthropic's post-debut stumble delivers reality check for AI trade",
       "publisher": "Reuters",
-      "published_at_utc": "2026-11-20T00:00:00Z",
+      "published_at_utc": "2026-11-20T10:20:00Z",
       "url": "https://www.reuters.com/business/anthropics-post-debut-stumble-delivers-reality-check-ai-trade-2026-11-20/",
-      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+      "verification": "reported; Reuters article read and dated"
     },
     {
       "id": "S3",
       "title": "US AI chip curbs hit China tech stocks, spur self-sufficiency push",
       "publisher": "Reuters",
-      "published_at_utc": "2026-11-20T00:00:00Z",
+      "published_at_utc": "2026-11-20T08:21:00Z",
       "url": "https://www.reuters.com/business/retail-consumer/us-ai-chip-curbs-hit-china-tech-stocks-spur-self-sufficiency-push-2026-11-20/",
-      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+      "verification": "reported; Reuters article read and dated"
     },
     {
       "id": "S4",
       "title": "Indonesia's Prabowo, China's Xi discuss future South China Sea cooperation",
       "publisher": "Reuters",
-      "published_at_utc": "2026-11-20T00:00:00Z",
+      "published_at_utc": "2026-11-20T05:14:00Z",
       "url": "https://www.reuters.com/world/china/indonesias-prabowo-chinas-xi-discuss-future-south-china-sea-cooperation-2026-11-20/",
-      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+      "verification": "reported; Reuters article read and dated"
     }
   ],
   "a_share_bias": "watch",
