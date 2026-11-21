@@ -1,13 +1,13 @@
 {
-  "daily_files": 18,
+  "daily_files": 19,
   "dataset_type": "curated_history_manifest",
   "history_csv": "data/curated/history/quotes.csv",
-  "price_usable_rows": 216,
+  "price_usable_rows": 228,
   "primary_key": [
     "report_date",
     "asset_key"
   ],
-  "quote_rows": 216,
+  "quote_rows": 228,
   "raw_history_unchanged": true,
   "report_dates": [
     "2026-11-03",
@@ -27,9 +27,10 @@
     "2026-11-17",
     "2026-11-18",
     "2026-11-19",
-    "2026-11-20"
+    "2026-11-20",
+    "2026-11-21"
   ],
-  "return_usable_rows": 210,
+  "return_usable_rows": 222,
   "schema_version": "1.0",
   "source_corrected_rows": 4,
   "supplemented_rows": 1
