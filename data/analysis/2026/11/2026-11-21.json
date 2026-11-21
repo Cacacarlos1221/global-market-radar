@@ -1,0 +1,123 @@
+{
+  "report_date": "2026-11-21",
+  "generated_at_utc": "2026-11-21T00:19:38.604Z",
+  "market_summary": "截至北京时间11月21日早间08:19左右采集的行情快照：美元兑人民币USD/CNY 6.67650（较参考日线+0.1335%），澳元兑人民币AUD/CNY 4.41670（-1.3166%）；11月20日美股纳指22617.73（-5.2827%）、标普500 6910.39（-3.6991%）、道指48147.33（-1.9344%），三大指数同步重挫。路透报道显示AI估值、Anthropic上市后股价回落、英伟达及云基础设施股票下挫与通胀/美联储利率担忧共同压制风险偏好；这些是有报道支持的市场解释而非单一已证实因果。澳元兑美元AUD/USD 0.661901（-1.3972%），与澳元兑人民币下行方向一致。11月20日A股上证3533.79（-1.2251%）、沪深300 3954.57（-0.7596%），两者均为同一交易日。布伦特原油89.87（-2.294%）、黄金3539（-3.975%），10年美债收益率4.912%（相对参考收益率-2.7712%，非下降2.7712个百分点）。汇率是日内观察值，不是最终收盘；以上均为11月21日08:19采集的事实层，市场日期主要为11月20日。",
+  "news_digest": {
+    "overview": "11月20日市场主线是全球AI资产再定价与美国通胀/利率风险叠加，纳指大幅下跌；中国先进芯片供应限制带来产业链不确定性，APEC期间中国与印尼合作议题则为地区经贸提供另一条观察线索。今天是周六，以下仅作周末研究，不冒充A股盘前可评分预测。",
+    "items": [
+      {
+        "title": "美股科技股抛售扩大，标普与道指进入回调区间",
+        "summary": "据路透11月20日报道，美股三大指数收低，纳指跌5.28%，标普跌约3.70%，道指跌1.93%；标普与道指较近期高点回撤超过10%。",
+        "market_impact": "全球风险偏好走弱可能影响下周亚洲权益市场及高估值科技板块；周末消息和国内政策可改变实际开盘反应。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "Anthropic上市后回落，AI资本开支回报疑虑升温",
+        "summary": "路透报道Anthropic上市第二个交易日下跌约9.1%，英伟达下跌约13.8%，投资者重新评估AI投资规模、估值和现金流兑现。",
+        "market_impact": "AI服务器、半导体、光通信及数据中心相关资产短期估值可能承压，但不能等同产业需求已经消失。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "title": "美国AI芯片限制影响中国科技产业链",
+        "summary": "路透11月20日报道美国AI芯片限制对中国科技股和自给自足策略产生影响；具体企业受影响程度仍须逐项核实。",
+        "market_impact": "先进制程供应约束可能压制部分算力链，同时提升国产替代关注度；实际订单与盈利兑现存在不确定性。",
+        "importance": "high",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "中印尼在APEC期间讨论投资及南海合作",
+        "summary": "路透11月20日报道印尼总统普拉博沃与中国领导人在深圳APEC期间讨论投资和南海合作；印尼方面称企业达成多项合作协议，相关主权分歧并未因此消失。",
+        "market_impact": "区域贸易和基础设施合作可能改善相关行业预期，但协议执行、政治风险和企业订单仍需后续验证。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Wall St ends sharply lower on AI selloff, S&P 500, Dow in correction",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-20T00:00:00Z",
+      "url": "https://www.reuters.com/legal/transactional/wall-st-futures-slip-anthropic-debut-fails-reassure-ai-investors-2026-11-20/",
+      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+    },
+    {
+      "id": "S2",
+      "title": "Anthropic's post-debut stumble delivers reality check for AI trade",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-20T00:00:00Z",
+      "url": "https://www.reuters.com/business/anthropics-post-debut-stumble-delivers-reality-check-ai-trade-2026-11-20/",
+      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+    },
+    {
+      "id": "S3",
+      "title": "US AI chip curbs hit China tech stocks, spur self-sufficiency push",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-20T00:00:00Z",
+      "url": "https://www.reuters.com/business/retail-consumer/us-ai-chip-curbs-hit-china-tech-stocks-spur-self-sufficiency-push-2026-11-20/",
+      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+    },
+    {
+      "id": "S4",
+      "title": "Indonesia's Prabowo, China's Xi discuss future South China Sea cooperation",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-20T00:00:00Z",
+      "url": "https://www.reuters.com/world/china/indonesias-prabowo-chinas-xi-discuss-future-south-china-sea-cooperation-2026-11-20/",
+      "verification": "reported; publication date verified as 2026-11-20; exact publication time not independently established"
+    }
+  ],
+  "a_share_bias": "watch",
+  "a_share_outlook": "2026年11月21日为周六，A股休市，不生成可评分的当日盘前方向预测。下周一开盘前需结合周末新增信息重做预测；截至本次研究，海外AI风险资产大幅调整、人民币及澳元走势和国内芯片政策构成观察框架，不能据此断言下周一A股必然下跌。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体/国产算力",
+      "bias": "mixed",
+      "reason": "海外AI估值压力与中国先进芯片供应约束偏负面，国产替代逻辑可能形成结构性支撑；等待具体订单和政策证据。"
+    },
+    {
+      "sector": "AI服务器/光通信/数据中心",
+      "bias": "watch",
+      "reason": "美国AI相关股票暴跌反映估值和资本开支担忧，国内链条需求是否受影响尚待核实。"
+    },
+    {
+      "sector": "券商/宽基",
+      "bias": "watch",
+      "reason": "海外避险情绪不利于风险偏好，但A股下个交易日仍需看国内成交量和政策。"
+    },
+    {
+      "sector": "黄金/有色",
+      "bias": "watch",
+      "reason": "快照黄金日线下跌约3.975%，须核实计价、美元与利率变化，不能将避险叙事直接等同黄金必涨。"
+    },
+    {
+      "sector": "油气/航空",
+      "bias": "mixed",
+      "reason": "布伦特油价日线回落约2.294%，成本变化对油气上游和航空可能方向相反，后续需验证。"
+    }
+  ],
+  "risks": [
+    "周末休市，11月20日美股收盘与下周一A股开盘之间存在消息空窗。",
+    "AI估值、芯片出口限制及潜在政策变化的影响不确定。",
+    "美国通胀及美联储下一次利率决定仍可能改变全球资产定价。",
+    "汇率为日内观察而非官方结算，行情来自非官方公开接口。"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://www.reuters.com/legal/transactional/wall-st-futures-slip-anthropic-debut-fails-reassure-ai-investors-2026-11-20/",
+    "https://www.reuters.com/business/anthropics-post-debut-stumble-delivers-reality-check-ai-trade-2026-11-20/",
+    "https://www.reuters.com/business/retail-consumer/us-ai-chip-curbs-hit-china-tech-stocks-spur-self-sufficiency-push-2026-11-20/",
+    "https://www.reuters.com/world/china/indonesias-prabowo-chinas-xi-discuss-future-south-china-sea-cooperation-2026-11-20/"
+  ]
+}
