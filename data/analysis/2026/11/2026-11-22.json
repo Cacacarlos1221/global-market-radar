@@ -1,0 +1,127 @@
+{
+  "report_date": "2026-11-22",
+  "generated_at_utc": "2026-11-22T00:18:30Z",
+  "market_summary": "北京时间11月22日08:17:21快照：USD/CNY 6.66230（相对参考值-0.063%，11月21日外汇观察）、AUD/CNY 4.41670（-0.4633%，11月21日观察）；美股最近交易日11月20日纳斯达克22,617.73（-5.2827%）、标普500 6,910.39（-3.6991%）、道指48,147.33（-1.9344%）。AP报道AI相关股票遭大规模抛售，估值与资本开支持续性担忧可能是风险偏好下降的驱动之一，但不代表唯一因果。A股11月20日上证3,533.79（-1.2251%）、沪深300 3,954.57（-0.7596%），日期一致。布伦特最近日线92.57（相对参考值+0.6414%），黄金3515.40（-4.6154%），10年期美债收益率4.912%（变化率-2.7712%，不是下降2.7712个百分点）。AUD/USD 0.661901（-0.5586%，11月21日外汇观察）。今天周日，价格属于最近可用日线/非实时可成交报价；涨跌幅均相对各自reference_close，不能直接视为周日交易涨跌。",
+  "news_digest": {
+    "overview": "周末主线为上周五美股AI估值及资本开支风险集中释放；美国对华先进芯片出口限制的政策争论与中国自主算力需求并存；关键矿产供应链多元化和APEC科技贸易规则继续影响中期产业预期。新闻影响是条件性判断，不等于已观察到的A股反应。",
+    "items": [
+      {
+        "title": "美国科技股抛售加剧，标普500进入回调区间",
+        "summary": "美联社报道11月20日标普500下跌3.7%、纳斯达克下跌约5.3%，市场担忧AI公司估值和资本开支的可持续性。",
+        "market_impact": "对下一个A股交易日的AI服务器、光通信、半导体及宽基风险偏好构成潜在压力；市场休市，尚无周一实际反应。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美国财政部长称暂不需要进一步收紧英伟达对华芯片出口",
+        "summary": "美联社11月21日报道，美国财政部长认为现有出口限制已足够，相关许可和第三国远程算力获取仍受到审查；这并非解除既有限制。",
+        "market_impact": "国内先进算力供给仍面临不确定性，国产芯片替代有长期需求但短期项目交付与供应链也可能承压。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "西方加速钨供应链多元化",
+        "summary": "路透11月21日分析称中国占全球原生钨供应约七成，澳大利亚等地推进产能与冶炼多元化，但海外加工能力瓶颈意味着调整需要多年。",
+        "market_impact": "钨及战略矿产可能受供应安全议题关注，出口限制、海外扩产和下游成本构成相反方向的风险，不能直接推断相关A股上涨。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "新加坡总理谈APEC科技供应链分化",
+        "summary": "新加坡《商业时报》11月21日发布的视频报道中，总理黄循财谈及美国转运AI芯片限制和中美科技分化。",
+        "market_impact": "区域AI算力供应链和跨境数据中心的合规不确定性仍在；不等于新的禁令已于当天生效。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "S&P 500 sinks 3.7% and Nasdaq composite goes negative for the year as tech sell-off worsens",
+      "publisher": "Associated Press",
+      "published_at_utc": "2026-11-21T00:00:00Z",
+      "url": "https://apnews.com/article/c4c3f4878b12989347f8a930ed813dad",
+      "verification": "reported; article read, publication hour not independently confirmed"
+    },
+    {
+      "id": "S2",
+      "title": "Treasury secretary says no further restrictions are needed for Nvidia chip exports to China",
+      "publisher": "Associated Press",
+      "published_at_utc": "2026-11-21T00:00:00Z",
+      "url": "https://apnews.com/article/88142455395552afe74caec3399a648b",
+      "verification": "reported; article reviewed, publication hour not independently confirmed"
+    },
+    {
+      "id": "S3",
+      "title": "The West challenges China's critical minerals dominance with unglamorous tungsten",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-21T00:00:00Z",
+      "url": "https://www.reuters.com/commentary/reuters-open-interest/west-challenges-chinas-critical-minerals-dominance-with-unglamorous-tungsten-2026-11-21/",
+      "verification": "reported; Reuters article reviewed, exact publication hour not independently confirmed"
+    },
+    {
+      "id": "S4",
+      "title": "Trump, Xi understand Singapore’s position: PM Wong",
+      "publisher": "The Business Times Singapore",
+      "published_at_utc": "2026-11-21T12:18:49Z",
+      "url": "https://www.businesstimes.com.sg/videos/trump-xi-understand-singapore-s-position-pm-wong/6408696306112",
+      "verification": "reported; article page reviewed"
+    }
+  ],
+  "a_share_bias": "watch",
+  "a_share_outlook": "2026年11月22日为周日，A股休市，不形成当天可评分的盘前预测。下个交易日仅观察海外科技股急跌后的风险偏好传导、国产算力订单与政策、宽基成交量及人民币波动。以下行业为观察框架，必须在下一交易日开盘前使用新证据重新判断。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "美股AI估值压力与国内芯片替代需求并存；周末无法验证A股资金承接。"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "watch",
+      "reason": "美国AI资本开支可持续性受质疑，海外算力限制可能影响供应，待周一验证。"
+    },
+    {
+      "sector": "光通信",
+      "bias": "watch",
+      "reason": "AI数据中心投资预期受压，未有周一交易数据。"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "watch",
+      "reason": "黄金最近日线回落，需关注美元、利率与避险需求交互作用。"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "watch",
+      "reason": "布伦特最近日线变化与地缘风险并存，不能从单日波动确定板块方向。"
+    },
+    {
+      "sector": "券商与宽基",
+      "bias": "watch",
+      "reason": "上证和沪深300最近交易日下跌，下一交易日需成交额和市场宽度确认。"
+    }
+  ],
+  "risks": [
+    "周末休市，美股和A股行情属于11月20日最近交易日，外汇11月21日数据并非可成交即时报价。",
+    "Yahoo Finance与东方财富接口为非官方数据，需保留观测时点和参考基准。",
+    "美国AI出口管制与贸易政策变化可能迅速改变行业传导假设。",
+    "新闻来源S1-S3具体发表小时未独立核实，以日期级记录占位00:00Z，不能当作精确发布时间。"
+  ],
+  "uncertainty": "high: 周末不产生正式盘前预测；市场传导与政策落地均待下一个交易日验证。",
+  "evidence_urls": [
+    "https://apnews.com/article/c4c3f4878b12989347f8a930ed813dad",
+    "https://apnews.com/article/88142455395552afe74caec3399a648b",
+    "https://www.reuters.com/commentary/reuters-open-interest/west-challenges-chinas-critical-minerals-dominance-with-unglamorous-tungsten-2026-11-21/",
+    "https://www.businesstimes.com.sg/videos/trump-xi-understand-singapore-s-position-pm-wong/6408696306112"
+  ]
+}
