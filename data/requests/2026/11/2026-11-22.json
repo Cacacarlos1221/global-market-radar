@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-22",
+  "requested_at_utc": "2026-11-22T00:16:45Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "2026-11-22 snapshot absent and no active collection run observed; request idempotent daily collection"
+}
