@@ -1,0 +1,5 @@
+{
+  "report_date": "2026-11-23",
+  "reason": "GMR after-close controller: missing same-day close snapshot after 15:30 Asia/Shanghai; request collection subject to normal market-date gates",
+  "requested_by": "GMR"
+}
