@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-23",
+  "requested_at_utc": "2026-11-23T00:17:49Z",
+  "requested_by": "chatgpt_scheduled_orchestrator",
+  "reason": "At 08:17 Beijing no 2026-11-23 snapshot, request, or active collection workflow found; trigger idempotent daily fact collection."
+}
