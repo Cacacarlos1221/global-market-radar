@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "audit_date": "2026-11-21",
-  "generated_at_utc": "2026-11-20T17:03:04.559152+00:00",
+  "audit_date": "2026-11-24",
+  "generated_at_utc": "2026-11-23T19:31:51.670295+00:00",
   "latest_close_snapshot_present": false,
   "verified_close_days_scanned": [
     "2026-11-04",
@@ -15,7 +15,8 @@
     "2026-11-17",
     "2026-11-18",
     "2026-11-19",
-    "2026-11-20"
+    "2026-11-20",
+    "2026-11-23"
   ],
   "pending_count": 15,
   "high_priority_count": 10,
@@ -89,10 +90,11 @@
         "2026-11-17",
         "2026-11-18",
         "2026-11-19",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-23"
       ],
-      "observed_days": 8,
-      "last_observed": "2026-11-20",
+      "observed_days": 9,
+      "last_observed": "2026-11-23",
       "seen_today": false,
       "groups": [
         "油气开采"
@@ -235,10 +237,11 @@
       "status": "needs_mapping_review",
       "observed_dates": [
         "2026-11-19",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-23"
       ],
-      "observed_days": 2,
-      "last_observed": "2026-11-20",
+      "observed_days": 3,
+      "last_observed": "2026-11-23",
       "seen_today": false,
       "groups": [
         "光通信"
@@ -260,15 +263,18 @@
       "status": "needs_mapping_review",
       "observed_dates": [
         "2026-11-19",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-23"
       ],
-      "observed_days": 2,
-      "last_observed": "2026-11-20",
+      "observed_days": 3,
+      "last_observed": "2026-11-23",
       "seen_today": false,
       "groups": [
+        "券商与宽基",
         "券商及宽基"
       ],
       "biases": [
+        "mixed",
         "negative",
         "watch"
       ],
@@ -347,10 +353,11 @@
         "2026-11-17",
         "2026-11-18",
         "2026-11-19",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-23"
       ],
-      "observed_days": 12,
-      "last_observed": "2026-11-20",
+      "observed_days": 13,
+      "last_observed": "2026-11-23",
       "seen_today": false,
       "groups": [
         "AI服务器",
