@@ -1,0 +1,128 @@
+{
+  "report_date": "2026-11-23",
+  "generated_at_utc": "2026-11-23T00:18:54Z",
+  "market_summary": "北京时间11月23日08:18:31原始快照：USD/CNY 6.66230（相对11月20日参考值-0.0630%，market_date=11月22日，周末/周初日线观察）；AUD/CNY 4.42830（-0.2018%，market_date=11月22日）；美股最近交易日11月20日：纳斯达克22,617.73（-5.2827%）、标普500 6,910.39（-3.6991%）、道指48,147.33（-1.9344%），科技股抛售与AI资本开支回报疑虑相关，但不能视为唯一原因。A股11月20日上证3,533.79（-1.2251%）、沪深300 3,954.57（-0.7596%），两者交易日期一致。布伦特89.29（-3.5433%，11月22日未完成日线）、黄金3576.60（+1.7409%，11月22日未完成日线）、美债10年收益率4.912%（相对参考值-2.7712%，并非下降2.7712个百分点）。AUD/USD 0.664275（-0.2019%，market_date=11月23日08:15附近观察）。外汇及商品日线非银行可成交价格，不同市场时点不同；涨跌幅均以各自reference_close为基准。Reuters报道中国交易所宣布融资保证金比例调整、美国股指期货反弹，可能影响盘前情绪，但期货反弹不等于现货指数已经回升。",
+  "news_digest": {
+    "overview": "过去24小时主线：国内交易所宣布融资融券支持措施，可能缓解A股流动性压力；海外AI估值抛售后美股期货阶段性反弹但风险未解除；美元从高位略回落、澳元小幅波动；中美先进芯片供应链风险仍为中期不确定性。以下市场影响均为条件性判断，不把同时发生写成已证实的因果。",
+    "items": [
+      {
+        "title": "沪深北交易所公布融资交易支持措施",
+        "summary": "路透11月22日报道，三地交易所宣布将最低融资保证金比例从100%下调至80%，计划11月30日起实施，沪深市场还涉及交易费用安排；政策宣布不等于今日已经生效。",
+        "market_impact": "可能改善A股券商、宽基和高弹性板块风险偏好，但实际资金流入、成交额和杠杆扩张需要盘中及后续数据验证。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "AI科技股重挫后美股期货出现反弹",
+        "summary": "路透报道周一亚洲早盘美股股指期货反弹，而上周纳斯达克显著下跌，市场继续质疑AI数据中心高资本开支的回报与融资可持续性。",
+        "market_impact": "对A股AI服务器、光通信、半导体可能同时形成估值压力与超跌修复预期；不能将期货反弹等同于A股必涨。",
+        "importance": "high",
+        "source_ids": [
+          "S2"
+        ]
+      },
+      {
+        "title": "美元从高位略回落，市场调整美联储紧缩预期",
+        "summary": "路透报道美元从19个月高位小幅回落，交易员对美联储进一步大幅紧缩的押注有所调整；这只是当时市场定价，不是已公布的利率决议。",
+        "market_impact": "人民币、澳元、黄金及成长股估值可能受美元和利率预期影响，方向仍取决于后续收益率和风险偏好变化。",
+        "importance": "medium",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "中美芯片与AI供应链竞争持续",
+        "summary": "金融时报11月22日分析认为中美贸易休战临近2027年初到期，先进芯片设备、关键矿产和跨境AI基础设施是潜在摩擦焦点；属于风险分析，并非当天新限制已经生效。",
+        "market_impact": "国产半导体替代存在长期政策需求，但AI服务器进口部件和出口订单亦面临供应链风险，板块影响分化。",
+        "importance": "medium",
+        "source_ids": [
+          "S4"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Chinese exchanges ease margin trading requirements to aid stock markets",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-22T00:00:00Z",
+      "url": "https://www.reuters.com/world/chinese-exchanges-ease-margin-trading-requirements-aid-stock-markets-2026-11-22/",
+      "verification": "reported; Reuters report checked, exact publication hour not confirmed; date-only placeholder"
+    },
+    {
+      "id": "S2",
+      "title": "US futures bounce while Asia markets brace for AI wipeout",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-22T00:00:00Z",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-11-22/",
+      "verification": "reported; Reuters article checked; published timestamp hour not independently confirmed"
+    },
+    {
+      "id": "S3",
+      "title": "Dollar edges off 19-month high after market rout; yen softens",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-22T00:00:00Z",
+      "url": "https://www.reuters.com/world/middle-east/dollar-edges-off-19-month-high-after-market-rout-yen-softens-2026-11-22/",
+      "verification": "reported; Reuters article checked; publication hour not independently confirmed"
+    },
+    {
+      "id": "S4",
+      "title": "The chip war's next battleground",
+      "publisher": "Financial Times",
+      "published_at_utc": "2026-11-22T00:00:00Z",
+      "url": "https://www.ft.com/content/cd4ecaf3-0ded-4830-94a8-4d9c24098c07",
+      "verification": "reported analysis; FT published November 22; exact hour not confirmed"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "截至北京时间2026年11月23日08:18:54，A股尚未开盘。交易所融资政策带来潜在情绪支撑，但11月20日中美股票下跌及AI估值担忧形成反向压力，整体判定mixed。重点观察09:30后宽基成交额、券商及AI产业链资金承接、人民币汇率和期货风险偏好。不能用盘中表现倒推或改写本盘前判断。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "国产替代逻辑与海外AI估值及先进芯片限制风险并存，观察板块量价和订单证据。"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "watch",
+      "reason": "AI资本开支可持续性存疑，美股期货反弹仅为情绪信号，待观察资金承接。"
+    },
+    {
+      "sector": "光通信",
+      "bias": "mixed",
+      "reason": "海外AI基础设施投资预期受压，但长期网络建设需求尚未被单日股价证伪。"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "watch",
+      "reason": "黄金期货未完成日线走强，美元和实际利率方向可能改变传导。"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "watch",
+      "reason": "布伦特日线观察回落，地缘供应风险仍存在，需核实实际可交易价格。"
+    },
+    {
+      "sector": "券商与宽基",
+      "bias": "mixed",
+      "reason": "交易所宣布降低融资保证金比例带来政策支撑，但11月30日才实施，短期成交和杠杆变化尚未验证。"
+    }
+  ],
+  "risks": [
+    "截至08:18:54盘前，11月23日A股尚未交易；11月20日指数为上一交易日收盘，不能当作今日表现。",
+    "外汇、原油、黄金的market_date和观测时点不一致，Yahoo Finance为非官方接口，部分日线尚未完成。",
+    "融资保证金政策宣布不等于11月23日已实施，实际生效日期据报道为11月30日。",
+    "Reuters与FT来源的精确发表小时未独立确认，published_at_utc采用日期00:00Z占位，不能用于小时级时间断言。",
+    "AI供应链和利率预期变化可能使盘前条件性观点失效。"
+  ],
+  "uncertainty": "high: AI估值波动与政策支持方向相反，缺乏开盘后的实际资金流及可靠预测概率；判断仅代表08:18:54前信息。",
+  "evidence_urls": [
+    "https://www.reuters.com/world/chinese-exchanges-ease-margin-trading-requirements-aid-stock-markets-2026-11-22/",
+    "https://www.reuters.com/world/china/global-markets-global-markets-2026-11-22/",
+    "https://www.reuters.com/world/middle-east/dollar-edges-off-19-month-high-after-market-rout-yen-softens-2026-11-22/",
+    "https://www.ft.com/content/cd4ecaf3-0ded-4830-94a8-4d9c24098c07"
+  ]
+}
