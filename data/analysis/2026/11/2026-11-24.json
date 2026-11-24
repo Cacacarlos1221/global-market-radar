@@ -1,0 +1,111 @@
+{
+  "report_date": "2026-11-24",
+  "generated_at_utc": "2026-11-24T01:03:17.972Z",
+  "market_summary": "08:13:26北京时间原始快照：USD/CNY 6.65480（-0.3325%），AUD/CNY 4.41500（-0.4172%），均为11月24日观察值。11月23日美股纳指24089.56（+6.5074%）、标普7237.17（+4.7288%）、道指49595.31（+3.0074%），路透报道科技股因英伟达CEO复任而反弹。美元指数104.317（+0.4884%），布伦特87.01（-6.0063%），黄金3634.70（+3.3936%），美债十年收益率4.918%，较参考值高0.6基点。上证3538.95（+0.146%）、沪深300 3958.29（+0.0941%）为原始快照11月23日口径；上证涨幅仍需独立核验。AUD/USD 0.662427（-0.2504%），11月24日观察。各涨跌幅以快照参考价为准，商品日线非统一结算时点。",
+  "news_digest": {
+    "overview": "海外科技股急速修复，但美元及黄金同步上涨、油价下跌，风险偏好并非全面改善。",
+    "items": [
+      {
+        "title": "英伟达CEO复任带动科技股修复",
+        "summary": "路透11月23日报道黄仁勋重新出任英伟达CEO，科技股随之反弹。",
+        "market_impact": "可能改善半导体与AI基础设施情绪，治理和资本开支风险仍在。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "title": "美元走强与利率预期",
+        "summary": "路透报道美元上涨，短端美债收益率上升，交易员重新定价偏紧的货币政策。",
+        "market_impact": "成长股估值仍面临利率约束，人民币及澳元走势需分别判断。",
+        "importance": "high",
+        "source_ids": [
+          "S2",
+          "S3"
+        ]
+      },
+      {
+        "title": "能源与贵金属价格分化",
+        "summary": "路透市场综述记录油价下跌、黄金上涨。报道时点与仓库商品日线观察时点不同。",
+        "market_impact": "油气开采承压、下游成本可能改善，黄金板块存在情绪支撑。",
+        "importance": "medium",
+        "source_ids": [
+          "S2"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Huang's stunning Nvidia return sparks relief for battered AI trade",
+      "publisher": "Reuters（S3为AOL转载）",
+      "published_at_utc": "2026-11-23T20:35:00Z",
+      "url": "https://www.reuters.com/legal/transactional/huangs-stunning-nvidia-return-sparks-relief-battered-ai-trade-2026-11-23/",
+      "verification": "reported; independently retrieved report; S3 timestamp is update time"
+    },
+    {
+      "id": "S2",
+      "title": "TRADING DAY Market euphoria as Huang returns to Nvidia",
+      "publisher": "Reuters（S3为AOL转载）",
+      "published_at_utc": "2026-11-23T22:00:00Z",
+      "url": "https://www.reuters.com/commentary/reuters-open-interest/global-markets-trading-day-graphic-2026-11-23/",
+      "verification": "reported; independently retrieved report; S3 timestamp is update time"
+    },
+    {
+      "id": "S3",
+      "title": "Wall Street soars on Huang's return to Nvidia, Treasury yields rise",
+      "publisher": "Reuters（S3为AOL转载）",
+      "published_at_utc": "2026-11-23T22:25:00Z",
+      "url": "https://www.aol.com/articles/us-futures-bounce-while-asia-234419000.html",
+      "verification": "reported; independently retrieved report; S3 timestamp is update time"
+    }
+  ],
+  "a_share_bias": "positive",
+  "a_share_outlook": "基于11月24日08:13快照及隔夜公开报道，海外科技股修复对A股情绪偏积极，但美元走强和利率风险限制持续性；关注开盘资金承接，不保证指数上涨。若实际生成时间超过09:30，本意见仅作观察，不应计入盘前评分。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "positive",
+      "reason": "海外芯片股修复有利情绪，出口限制风险仍在"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "positive",
+      "reason": "海外AI交易反弹，但资本开支回报仍需验证"
+    },
+    {
+      "sector": "光通信",
+      "bias": "positive",
+      "reason": "AI基础设施情绪修复，关注成交承接"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "positive",
+      "reason": "黄金观察价上涨，注意美元与利率约束"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "negative",
+      "reason": "油价观察值下跌可能压制上游盈利预期"
+    },
+    {
+      "sector": "券商与宽基",
+      "bias": "mixed",
+      "reason": "风险偏好修复与利率压力并存"
+    }
+  ],
+  "risks": [
+    "上证涨幅参考基准需交叉核验；不据此推断今日方向。",
+    "日线时间戳不必然等于收盘时间，外汇非银行成交报价。",
+    "科技股反弹不代表AI投资风险消失。",
+    "本次补救实际生成时间以generated_at_utc为准，不回填早晨时间。"
+  ],
+  "uncertainty": "high：跨资产分化及国内资金承接存在不确定性，国内新增政策未独立核实，不作为确定事实。",
+  "evidence_urls": [
+    "https://www.reuters.com/legal/transactional/huangs-stunning-nvidia-return-sparks-relief-battered-ai-trade-2026-11-23/",
+    "https://www.reuters.com/commentary/reuters-open-interest/global-markets-trading-day-graphic-2026-11-23/",
+    "https://www.aol.com/articles/us-futures-bounce-while-asia-234419000.html"
+  ]
+}
