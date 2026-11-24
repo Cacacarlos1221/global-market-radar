@@ -233,6 +233,26 @@
       "question": "当前优先使用东方财富BK0578稀土永磁作为已批准的代理观察口径，未来若同花顺884215取数恢复再比较；无需重复向用户询问同一事项。",
       "reviewed_at": "2026-11-05",
       "approval_ref": "approved:稀土"
+    },
+    {
+      "topic": "油气开采",
+      "priority": "high",
+      "status": "pending_user_definition",
+      "first_verified_gap": "2026-11-10",
+      "reason": "历史审计九日缺口，11月24日冻结negative",
+      "candidates": [
+        {
+          "index_name": "油气开采",
+          "vendor": "同花顺行业板块",
+          "index_code": "884016",
+          "board_type": "industry",
+          "mapping_type": "exact_name_candidate",
+          "source_url": "https://q.10jqka.com.cn/thshy/detail/code/884016",
+          "verification": "vendor_name_code_partial_membership_verified; dated K-line pending",
+          "note": "首华燃气、潜能恒信等成分可见；未核验同日K线"
+        }
+      ],
+      "question": "是否批准QA通过后采用该指数？"
     }
   ]
 }
