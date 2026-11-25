@@ -14,20 +14,10 @@ if [[ ! -f "$DATA/watchlist.json" ]]; then
 fi
 .venv/bin/python -m unittest discover -s tests -v
 GMR_CONFIG="$DATA/watchlist.json" .venv/bin/python radar.py probe
-PLIST="$HOME/Library/LaunchAgents/com.gmr.intraday.plist"
-.venv/bin/python - "$PLIST" "$ROOT" "$DATA" <<'PY'
-import plistlib,sys
-from pathlib import Path
-plist,root,data=map(Path,sys.argv[1:])
-value={"Label":"com.gmr.intraday","ProgramArguments":[str(root/".venv/bin/python"),str(root/"radar.py"),"tick"],
-"WorkingDirectory":str(root),"StartInterval":60,"RunAtLoad":True,"Nice":10,"LowPriorityIO":True,
-"ProcessType":"Background","EnvironmentVariables":{"GMR_DATA_DIR":str(data),"GMR_CONFIG":str(data/"watchlist.json"),
-"OMP_NUM_THREADS":"1","OPENBLAS_NUM_THREADS":"1","VECLIB_MAXIMUM_THREADS":"1","MKL_NUM_THREADS":"1",
-"PATH":"/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"},
-"StandardOutPath":str(data/"logs/stdout.log"),"StandardErrorPath":str(data/"logs/stderr.log")}
-with plist.open("wb") as f: plistlib.dump(value,f)
-PY
-launchctl bootout "gui/$(id -u)/com.gmr.intraday" 2>/dev/null || true
-launchctl bootstrap "gui/$(id -u)" "$PLIST"
-launchctl print "gui/$(id -u)/com.gmr.intraday" | head -40 || true
-echo "Installed. Active only on verified trading days; logged-in session required."
+.venv/bin/python deploy_agents.py
+for label in com.gmr.intraday com.gmr.intraday.awake com.gmr.intraday.web com.gmr.intraday.sync; do
+  if ! launchctl print "gui/$(id -u)/$label" >/dev/null 2>&1; then
+    launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/$label.plist"
+  fi
+done
+echo "Installed per-user radar agents. The local web endpoint is http://127.0.0.1:18773/."

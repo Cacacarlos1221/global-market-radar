@@ -45,14 +45,32 @@ def atomic(path, obj):
     tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8")
     tmp.replace(path)
 
+def validate_stocks(stocks):
+    if not isinstance(stocks, list) or not 1 <= len(stocks) <= 100:
+        raise ValueError("watchlist: expected 1–100 stocks")
+    result = []
+    codes = set()
+    for stock in stocks:
+        if not isinstance(stock, dict):
+            raise ValueError("watchlist: invalid stock")
+        code, name = stock.get("code"), stock.get("name")
+        if not isinstance(code, str) or not re.fullmatch(r"[036]\d{5}", code) or code in codes:
+            raise ValueError("watchlist: expected distinct Shanghai/Shenzhen A-share codes")
+        if not isinstance(name, str) or not 1 <= len(name.strip()) <= 80:
+            raise ValueError("watchlist: invalid stock name")
+        result.append({"code": code, "name": name.strip()})
+        codes.add(code)
+    return result
+
 def load_config():
     cfg = json.loads(CONFIG.read_text(encoding="utf-8"))
-    stocks = cfg["stocks"]
-    codes = [s["code"] for s in stocks]
-    if not codes or len(codes) > 100 or len(set(codes)) != len(codes):
-        raise ValueError("watchlist: 1–100 distinct codes")
-    if any(not re.fullmatch(r"(?:[036]\d{5})", c) for c in codes):
-        raise ValueError("MVP supports Shanghai/Shenzhen A shares only")
+    cfg["stocks"] = validate_stocks(cfg["stocks"])
+    if cfg.get("remote_watchlist") is True:
+        try:
+            remote = json.loads((HOME / "remote_stocks.json").read_text(encoding="utf-8"))
+            cfg["stocks"] = validate_stocks(remote["stocks"])
+        except (OSError, ValueError, KeyError, TypeError):
+            pass
     if not 1 <= int(cfg["workers"]) <= 2:
         raise ValueError("workers must be 1 or 2")
     if cfg.get("provider", EASTMONEY) not in (EASTMONEY, SINA):
@@ -323,44 +341,6 @@ if (phase === "historical") {
     tmp.write_text(page,encoding="utf-8")
     tmp.replace(OUT/"index.html")
 
-def sync_private(cfg,t):
-    s=cfg.get("sync",{})
-    if not s.get("enabled"):
-        return
-    import shutil
-    raw=s.get("private_repo_path")
-    if not raw:
-        raise ValueError("private_repo_path required")
-    dest=Path(raw).expanduser().resolve()
-    if dest==ROOT.parent.resolve() or not (dest/".git").exists():
-        raise ValueError("sync requires a separate cloned private repository")
-    env=dict(os.environ,GIT_TERMINAL_PROMPT="0",GH_PROMPT_DISABLED="1")
-    def run(args):
-        return subprocess.check_output(args,cwd=dest,env=env,text=True,stderr=subprocess.STDOUT,timeout=15).strip()
-    remote=s.get("remote","origin")
-    branch=s.get("branch","main")
-    if run(["git","branch","--show-current"])!=branch or run(["git","status","--porcelain"]):
-        raise RuntimeError("sync clone must be on configured branch and clean")
-    url=run(["git","remote","get-url",remote])
-    if run(["git","remote","get-url","--push","--all",remote]) != url:
-        raise RuntimeError("sync remote must push to the verified fetch URL only")
-    match=re.fullmatch(r"(?:https://github\.com/|git@github\.com:)([\w.-]+/[\w.-]+?)(?:\.git)?",url)
-    if not match or run(["gh","repo","view",match.group(1),"--json","visibility","--jq",".visibility"])!="PRIVATE":
-        raise RuntimeError("refusing sync to unverified private GitHub repository")
-    run(["git","pull","--ff-only",remote,branch])
-    target=dest/"intraday"
-    target.mkdir(exist_ok=True)
-    paths=[]
-    for source in [OUT/"latest.json",*sorted((OUT/"signals").glob("*.json")),*sorted((OUT/"evaluation").glob("*.json"))]:
-        p=target/source.relative_to(OUT)
-        p.parent.mkdir(parents=True,exist_ok=True)
-        shutil.copy2(source,p)
-        paths.append(str(p.relative_to(dest)))
-    run(["git","add","--",*paths])
-    if run(["git","status","--porcelain"]):
-        run(["git","commit","-m","intraday research snapshot "+stamp(t)])
-    run(["git","push",remote,branch])
-
 def backup(conn, day):
     folder = HOME / "backups"
     folder.mkdir(exist_ok=True)
@@ -510,32 +490,27 @@ def tick():
         if path.exists() and path.stat().st_size > 1_048_576:
             path.replace(path.with_suffix(".log.1"))
     t = now()
-    if t.weekday() >= 5 or session(t) == "idle" or (HOME / "paused").exists():
-        return
-    cfg = load_config()
-    if supervise("cycle", int(cfg["cycle_timeout_seconds"])) and cfg.get("sync", {}).get("enabled"):
-        subprocess.Popen([sys.executable, __file__, "sync"], start_new_session=True,
-                         stdout=sys.stdout, stderr=sys.stderr)
+    result = "idle"
+    try:
+        if t.weekday() < 5 and session(t) != "idle" and not (HOME / "paused").exists():
+            cfg = load_config()
+            result = "ok" if supervise("cycle", int(cfg["cycle_timeout_seconds"])) else "failed"
+    except Exception:
+        result = "failed"
+        raise
+    finally:
+        atomic(HOME / "heartbeat.json", {"time": stamp(now()), "result": result})
 
-def sync_command():
-    t=now()
-    cfg=load_config()
-    if not cfg.get("sync",{}).get("enabled") or not (OUT/"latest.json").exists():
-        return
-    with (HOME/"sync.lock").open("w") as lock:
+def sync_command(force=False):
+    # LaunchAgent and manual invocations share the same lock.
+    import ops
+    HOME.mkdir(parents=True, exist_ok=True)
+    with (HOME / "sync.lock").open("a") as lock:
         try:
-            fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             return
-        last=HOME/"last_sync.json"
-        try:
-            prior=dt.datetime.fromisoformat(json.loads(last.read_text())["time"]).replace(tzinfo=TZ)
-            if (t-prior).total_seconds()<int(cfg["sync_interval_minutes"])*60:
-                return
-        except (OSError,ValueError,KeyError):
-            pass
-        sync_private(cfg,t)
-        atomic(last,{"time":stamp(t)})
+        ops.sync(force)
 
 def main():
     if len(sys.argv) == 4 and sys.argv[1] == "_worker":
@@ -545,13 +520,13 @@ def main():
         {"cycle": cycle, "history": history, "probe": probe}[sys.argv[2]]()
         return
     parser=argparse.ArgumentParser()
-    parser.add_argument("action",choices=["tick","cycle","probe","history","sync","pause","resume","status"])
+    parser.add_argument("action",choices=["tick","cycle","probe","history","sync","sync-now","pause","resume","status"])
     action=parser.parse_args().action
     if action=="tick": tick()
     elif action in ("cycle", "history", "probe"):
         if not supervise(action, int(load_config()["cycle_timeout_seconds"])):
             raise SystemExit(1)
-    elif action=="sync": sync_command()
+    elif action in ("sync", "sync-now"): sync_command(action == "sync-now")
     elif action=="pause":
         HOME.mkdir(parents=True,exist_ok=True)
         (HOME/"paused").touch()

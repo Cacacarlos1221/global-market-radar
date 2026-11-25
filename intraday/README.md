@@ -36,8 +36,32 @@ SQLite WAL at ~/GMRData/market.sqlite, unique code+timestamp, upsert. No raw bar
 
 Experimental score 0–5: positive return, above VWAP, relative volume >=1.2, giveback <=35%, positive 15m return. Score >=4 top5; one freeze per 14:30–14:34 and 14:45–14:49 window, actual generated timestamp recorded. No sector rotation, budget filters, ST/limit checks, fees or ML yet. Next session gross hypothetical open/close/MFE/MAE from subsequent bar open, not real fill; no fees/slippage/limit checks. Incomplete results missing and retried, not zero. MFE is not realized P&L. No claimed historical strategy performance.
 
-## GitHub sync (disabled by default)
-Create and clone a separate PRIVATE repository, authenticate gh CLI and git push, confirm data license. In local ~/GMRData/watchlist.json set sync.enabled=true, sync.private_repo_path to separate clone, remote and branch as appropriate. Visibility checked with gh repo view before each sync; must be PRIVATE, clean working tree, configured branch. Sync only latest.json, signals, evaluations ~every 5m after successful cycles, no raw bars or personal balances. Inspect Git status on failure, never force-push. Grant connector access separately for ChatGPT to read. Public GMR Pages not enabled; publication needs permission. No private data on main.
+## Phase 2 operations
+
+On an existing installation, generate plists without reinstalling dependencies or changing the database.
+
+```bash
+cd ~/Projects/gmr-intraday/intraday
+.venv/bin/python deploy_agents.py
+for label in com.gmr.intraday com.gmr.intraday.awake com.gmr.intraday.web com.gmr.intraday.sync; do
+  launchctl print "gui/$(id -u)/$label" >/dev/null 2>&1 ||
+    launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/$label.plist"
+done
+```
+
+The agents launch at login. The collector and sync launcher tick once per minute. The local terminal is at `http://127.0.0.1:18773/`. It reports the current service state alongside the snapshot's original date, and exposes only the radar outputs and service status. It shows a disk alert below 5 GiB free. For private HTTPS, sign in to Tailscale on the Mac and authorized clients, check existing routes with `tailscale serve status`, then use `tailscale serve --bg http://127.0.0.1:18773` on an unused Serve endpoint. Observe the printed tailnet URL. The Mac must be awake, connected and logged in.
+
+The awake agent checks the current day's confirmed exchange calendar and uses a temporary idle-sleep assertion during the 09:13–15:10 Beijing trading-day operating window. Collection stops at lunch; the assertion bridges the midday break so the computer is awake for the afternoon session. It releases after close and on pause. This cannot wake an already sleeping machine. With the owner's approval and macOS set to Beijing time, a weekday 09:13 wake can be scheduled using `sudo pmset repeat wakeorpoweron MTWRF 09:13:00`. Check `pmset -g sched` first because a repeating rule replaces an existing repeating schedule. Check assertions with `pmset -g assertions`. System wake and login are separate.
+
+## GitHub data synchronization
+
+Initialize a separate private `global-market-radar-data` repository with a README and authenticate `gh` for the current Mac user. In the local watchlist set `sync.repository` to its full owner/name. Once permission to transfer the research data is confirmed, set `sync.enabled` and `sync.data_license_confirmed` to `true`. Verify with `GMR_CONFIG="$HOME/GMRData/watchlist.json" .venv/bin/python radar.py sync-now`.
+
+The sync job checks repository visibility and commits only the latest generated JSON, system status, signals and evaluations. Ordinary session updates run every five minutes, with priority for new signals, evaluations and the closing snapshot. Upload retries back off to five minutes. The remote receipt and parent-SHA check support retries and concurrent watchlist editing. Read the most recent successful time from `~/GMRData/last_sync.json` or the private terminal. GitHub credentials stay in the authenticated CLI environment.
+
+For remote watchlist updates, set local `remote_watchlist` to `true` and edit `config/watchlist.json` in the private repository's default branch. The JSON accepts a `stocks` array with `code` and `name` pairs. The collector reloads the last validated remote list without changing the local provider, runtime parameters or sync options. Toggle `remote_watchlist` off to use the local list immediately.
+
+The GitHub Pages route `reports/intraday/index.html` reads only the manually reviewed text in `reports/intraday/approved-summary.json`. The allowed text fields are `market`, `metrics`, `candidates`, `evaluation`, `updated` and `status`. The morning pipeline preserves the homepage link when it regenerates the page.
 
 ## Acceptance
 - Offline unit tests, live probe, compare sample price/volume to broker.
