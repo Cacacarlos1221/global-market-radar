@@ -1,0 +1,24 @@
+{
+  "report_date": "2026-11-25",
+  "kind": "source_correction",
+  "collected_at_utc": "2026-11-25T00:47:23.769Z",
+  "source_url": "https://www.nampa.org/text/23073754",
+  "quote": {
+    "key": "SSE",
+    "label": "上证综指",
+    "symbol": "000001.SS",
+    "category": "cn_index",
+    "unit": "points",
+    "value": 3548.37,
+    "reference_close": 3538.94799805,
+    "reference_date": "2026-11-23",
+    "change_pct": 0.2662,
+    "market_date": "2026-11-24",
+    "observed_at_utc": null,
+    "value_kind": "daily_close",
+    "status": "ok",
+    "error": null,
+    "source": "新华社报道（NAMPA转载）",
+    "source_url": "https://www.nampa.org/text/23073754"
+  }
+}
