@@ -1,4 +1,7 @@
 import datetime as dt
+from contextlib import closing
+import json
+from unittest.mock import patch
 from pathlib import Path
 import tempfile
 import unittest
@@ -43,5 +46,43 @@ class RadarTests(unittest.TestCase):
                 conn.close()
         finally:
             radar.HOME=old
+    def test_sina_shares_auction_and_partial_coverage(self):
+        self.assertEqual(len(radar.expected_times("15:00:00", radar.SINA)), 238)
+        item = {"时间": "2026-11-25 09:31:00", "开盘": 10, "收盘": 10,
+                "最高": 10, "最低": 10, "成交量": 123, "成交额": 1230}
+        rows = radar.normalize("600000", [item], "2026-11-25 10:00:00", "x", radar.SINA)
+        self.assertEqual(rows[0][6:8], (123, 1230))
+        with tempfile.TemporaryDirectory() as tmp, patch.object(radar, "HOME", Path(tmp)):
+            with closing(radar.db()) as conn:
+                radar.save(conn, rows, radar.SINA)
+                t = dt.datetime(2026, 11, 25, 9, 34, tzinfo=radar.TZ)
+                f = radar.features(conn, {"code": "600000", "name": "X"}, t, [], "09:33:00")
+                self.assertEqual(f["status"], "incomplete")
+                self.assertAlmostEqual(f["minute_coverage"], 1/3)
+                self.assertIsNone(f["vwap"])
+
+    def test_signal_is_frozen_and_export_recoverable(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(radar, "HOME", Path(tmp)):
+            with patch.object(radar, "OUT", Path(tmp)/"output"), closing(radar.db()) as conn:
+                t = dt.datetime(2026, 11, 25, 14, 31, 20, tzinfo=radar.TZ)
+                item = {"code": "600000", "status": "ok", "score": 5}
+                radar.freeze(conn, t, [item], {})
+                path = radar.OUT/"signals"/"2026-11-25_1430.json"
+                saved = json.loads(path.read_text())
+                path.unlink()
+                radar.freeze(conn, t.replace(hour=15), [dict(item, score=1)], {})
+                self.assertEqual(json.loads(path.read_text()), saved)
+                self.assertEqual(saved["generated_at"], "2026-11-25 14:31:20")
+
+    def test_legacy_database_migration(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(radar, "HOME", Path(tmp)):
+            with closing(radar.sqlite3.connect(Path(tmp)/"market.sqlite")) as conn:
+                conn.executescript(radar.SCHEMA.replace("source TEXT NOT NULL DEFAULT 'eastmoney', ", ""))
+                conn.execute("INSERT INTO bars VALUES(?,?,?,?,?,?,?,?,?)",
+                             ("600000", "2026-11-25 09:31:00", 10, 10, 10, 10, 100, 1000, "x"))
+                conn.commit()
+            with closing(radar.db()) as conn:
+                self.assertEqual(conn.execute("SELECT source FROM bars").fetchone()[0], radar.EASTMONEY)
+
 if __name__=="__main__":
     unittest.main()
