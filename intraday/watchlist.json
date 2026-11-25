@@ -1,0 +1,68 @@
+{
+  "interval_seconds": 60,
+  "workers": 2,
+  "request_timeout_seconds": 8,
+  "cycle_timeout_seconds": 50,
+  "history_days": 5,
+  "sync_interval_minutes": 5,
+  "stocks": [
+    {
+      "code": "601138",
+      "name": "工业富联"
+    },
+    {
+      "code": "000831",
+      "name": "中国稀土"
+    },
+    {
+      "code": "002050",
+      "name": "三花智控"
+    },
+    {
+      "code": "002242",
+      "name": "九阳股份"
+    },
+    {
+      "code": "000725",
+      "name": "京东方A"
+    },
+    {
+      "code": "002235",
+      "name": "安妮股份"
+    },
+    {
+      "code": "600111",
+      "name": "北方稀土"
+    },
+    {
+      "code": "600392",
+      "name": "盛和资源"
+    },
+    {
+      "code": "601985",
+      "name": "中国核电"
+    },
+    {
+      "code": "002148",
+      "name": "北纬科技"
+    },
+    {
+      "code": "600031",
+      "name": "三一重工"
+    },
+    {
+      "code": "002259",
+      "name": "升达林业"
+    },
+    {
+      "code": "001330",
+      "name": "博纳影业"
+    }
+  ],
+  "sync": {
+    "enabled": false,
+    "private_repo_path": "",
+    "remote": "origin",
+    "branch": "main"
+  }
+}
