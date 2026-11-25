@@ -138,10 +138,22 @@ def render_all():
         a_path = ROOT / "data/analysis" / latest[:4] / latest[5:7] / (latest + ".json")
         analysis = json.loads(a_path.read_text(encoding="utf-8")) if a_path.exists() else None
         (ROOT / "index.html").write_text(
-            render_report(with_supplements(json.loads(index.read_text(encoding="utf-8"))), analysis, "reports/archive.html"),
+            with_intraday_nav(render_report(with_supplements(json.loads(index.read_text(encoding="utf-8"))),
+                                            analysis, "reports/archive.html")),
             encoding="utf-8")
     else:
-        (ROOT / "index.html").write_text(pending_home(), encoding="utf-8")
+        (ROOT / "index.html").write_text(with_intraday_nav(pending_home()), encoding="utf-8")
+
+def with_intraday_nav(page):
+    """Keep the homepage link when nightly rendering replaces index.html."""
+    panel = '<nav class="site-nav">'
+    link = '<a href="reports/intraday/index.html">盘中雷达</a>'
+    start = page.index(panel) + len(panel)
+    end = page.index("</nav>", start)
+    if link in page[start:end]:
+        return page
+    return page[:end] + link + page[end:]
+
 
 def main():
     parser = argparse.ArgumentParser()

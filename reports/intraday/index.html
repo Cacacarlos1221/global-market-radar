@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盘中雷达 · Global Market Radar</title>
+<style>
+:root{color-scheme:light;--ink:#182637;--muted:#526477;--line:#d7e0e9;--accent:#145a69;--paper:#f2f6fa}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.65 system-ui,sans-serif}
+main{max-width:68rem;margin:auto;padding:clamp(1rem,4vw,3rem)}a{color:var(--accent)}nav{display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;margin:0 0 1.5rem}
+header{padding:clamp(1.25rem,4vw,2.5rem);border-radius:1rem;background:#162c43;color:white}
+header p{color:#d5e4ee;margin:.3rem 0}.brand{letter-spacing:.12em;font-size:.875rem}h1{font-size:clamp(2rem,5vw,3rem);margin:0;line-height:1.25}
+h2{line-height:1.3;margin:0 0 .5rem;font-size:1.2rem}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0}
+section{border:1px solid var(--line);background:white;border-radius:.75rem;padding:1.25rem}section p{margin:.35rem 0}
+.muted{color:var(--muted)}dl{display:grid;grid-template-columns:max-content 1fr;gap:.35rem .75rem;margin:.5rem 0}dd{margin:0}
+footer{padding-top:1rem;color:var(--muted)}@media(max-width:42rem){.grid{grid-template-columns:1fr}}
+</style>
+<script defer src="summary.js"></script>
+</head>
+<body>
+<main>
+<nav aria-label="GMR 导航"><a href="../../index.html">最新晨报</a><a href="../close/index.html">盘后复盘</a><a href="index.html" aria-current="page">盘中雷达</a></nav>
+<header>
+<p class="brand">GLOBAL MARKET RADAR</p>
+<h1>盘中雷达</h1>
+<p>A 股自选股监控与尾盘策略研究</p>
+</header>
+<div class="grid">
+<section><h2>自选股行情监控</h2><p id="market" class="muted">暂无获准公开的行情摘要。</p></section>
+<section><h2>量化指标与评分</h2><p>关注 VWAP、相对量比、15 分钟收益率和分钟覆盖率。实验评分为 0–5 分。</p><p id="metrics" class="muted">暂无获准公开的指标结果。</p></section>
+<section><h2>尾盘候选</h2><p>策略在北京时间 14:30 和 14:45 的窗口记录候选及实际生成时间。</p><p id="candidates" class="muted">暂无公开候选记录。</p></section>
+<section><h2>历史信号与次日评估</h2><p>评估记录模拟入场后的次日开盘、收盘收益及价格区间内的有利与不利波动。</p><p id="evaluation" class="muted">暂无公开评估结果。</p></section>
+<section><h2>数据与服务状态</h2><dl><dt>摘要更新时间</dt><dd id="updated">暂无公开更新</dd><dt>采集服务</dt><dd id="status">当前状态见私人终端</dd></dl></section>
+<section><h2>私人实时终端</h2><p>在授权设备上连接同一 Tailscale 网络，再打开管理员提供的私人 HTTPS 地址。终端内可查看详细行情、完整信号和采集状态。</p></section>
+</div>
+<footer>研究结果采用分钟线模拟毛收益，未计交易费用、滑点及成交约束。仅供研究。</footer>
+</main>
+</body>
+</html>
