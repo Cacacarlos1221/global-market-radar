@@ -1,0 +1,5 @@
+{
+  "report_date": "2026-11-25",
+  "requested_at_utc": "2026-11-25T07:55:02Z",
+  "reason": "GMR after-close controller: same-day snapshot missing; no active close workflow observed"
+}
