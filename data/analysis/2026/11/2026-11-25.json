@@ -1,0 +1,102 @@
+{
+  "report_date": "2026-11-25",
+  "generated_at_utc": "2026-11-25T00:47:26.129Z",
+  "market_summary": "北京时间08:15:46快照：美元兑人民币6.65430（-0.15%），澳元兑人民币4.42130（+0.0725%）。11月24日纳指23733.54（-1.4779%）、标普7201.09（-0.4985%）、道指50018.70（+0.8537%），路透报道科技股回吐、关税预期扰动，非唯一原因。美元指数103.848（-0.4525%），布伦特88.42（-1.063%），黄金3553.30（-2.6866%），均为各自日线观察口径；美债十年4.904%，较参考值低1.4基点。上证通过新华社报道订正至11月24日3548.37（约+0.27%），沪深300同日3963.82，原快照缺少涨跌基准，不编造涨跌幅。澳元兑美元0.663438（+0.0703%）。汇率为11月25日观察，均非银行成交价。",
+  "news_digest": {
+    "overview": "海外科技股回吐与贸易政策不确定性并存，美国消费信心改善但通胀与加息预期限制风险偏好。",
+    "items": [
+      {
+        "title": "美国科技股回吐",
+        "summary": "路透报道11月24日英伟达下跌约5.9%，科技股走弱，三大指数分化。",
+        "market_impact": "A股半导体及AI产业链情绪可能承压。",
+        "importance": "high",
+        "source_ids": [
+          "S1",
+          "S2"
+        ]
+      },
+      {
+        "title": "潜在新增关税风险",
+        "summary": "路透引述知情人士称美国可能公布针对多个贸易伙伴的产业调查结果，新增关税尚非已生效政策。",
+        "market_impact": "出口及跨境供应链风险增加，具体影响取决于最终范围。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美国消费信心改善与通胀观察",
+        "summary": "路透报道11月美国消费信心达到近两年高位，市场关注即将公布的PCE。",
+        "market_impact": "需求韧性与利率压力并存，成长股估值可能受约束。",
+        "importance": "medium",
+        "source_ids": [
+          "S1"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "Nasdaq, S&P 500 slip following Monday's Nvidia-fueled rally",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-24T10:52:00Z",
+      "url": "https://www.reuters.com/business/wall-st-futures-dip-chip-stocks-cool-after-nvidia-fueled-rally-2026-11-24/",
+      "verification": "reported; originally published time; read updated closing article, exact update time not shown"
+    },
+    {
+      "id": "S2",
+      "title": "Nasdaq, S&P 500 end lower following Monday's Nvidia-fueled rally",
+      "publisher": "Reuters via MarketScreener",
+      "published_at_utc": "2026-11-24T21:01:00Z",
+      "url": "https://www.marketscreener.com/news/nasdaq-s-p-500-end-lower-following-monday-s-nvidia-fueled-rally-ce7851dbdd81f720",
+      "verification": "reported; read closing report"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "依据08:15快照与盘前公开报道，科技链可能承压，而汇率及美债收益率回落或提供部分缓冲。整体多空交织，关注宽基成交及行业资金承接。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "negative",
+      "reason": "海外芯片股回吐"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "negative",
+      "reason": "海外AI交易承压"
+    },
+    {
+      "sector": "光通信",
+      "bias": "watch",
+      "reason": "观察海外波动的实际传导"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "negative",
+      "reason": "黄金观察价下降"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "watch",
+      "reason": "原油观察下跌，结算口径需核实"
+    },
+    {
+      "sector": "券商与宽基",
+      "bias": "mixed",
+      "reason": "海外风格分化，国内资金待观察"
+    }
+  ],
+  "risks": [
+    "关税报道不代表政策已实施。",
+    "PCE及利率变化可能改变判断。",
+    "沪深300原始参考价缺失；上证订正保留原始报价和补采时间。",
+    "商品报价非统一结算时点；国内新政策未独立核实。"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://www.reuters.com/business/wall-st-futures-dip-chip-stocks-cool-after-nvidia-fueled-rally-2026-11-24/",
+    "https://www.marketscreener.com/news/nasdaq-s-p-500-end-lower-following-monday-s-nvidia-fueled-rally-ce7851dbdd81f720",
+    "https://www.nampa.org/text/23073754"
+  ]
+}
