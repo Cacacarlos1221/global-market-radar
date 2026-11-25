@@ -104,3 +104,13 @@ class OperationsTests(unittest.TestCase):
                          ["2026-11-25_1430", "2026-11-25_close"])
         self.assertEqual(ops.critical_key(self.t.replace(hour=15, minute=11), payload),
                          ["2026-11-25_1430", "2026-11-25_final"])
+
+    def test_dashboard_uses_snapshot_and_escapes_stock_names(self):
+        radar.atomic(self.out / "latest.json", {"phase":"historical", "stocks":[
+            {"name":"<script>stock</script>","code":"600000","status":"ok","price":10,"change_pct":2.5}]})
+        with patch.object(radar, "now", return_value=self.t.replace(hour=16)):
+            page = ops.dashboard().decode()
+        self.assertIn("历史验收快照", page)
+        self.assertIn("&lt;script&gt;stock&lt;/script&gt;", page)
+        self.assertIn("+2.50%", page)
+        self.assertIn("/radar.css", page)

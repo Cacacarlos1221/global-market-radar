@@ -3,7 +3,6 @@ import argparse
 import base64
 import datetime as dt
 import hashlib
-import html
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import os
@@ -14,6 +13,7 @@ import time
 from urllib.parse import quote, urlsplit
 
 import radar
+import web_view
 
 RECORD = re.compile(r"\d{4}-\d{2}-\d{2}_(?:1430|1445)\.json")
 REPO = re.compile(r"[\w.-]+/global-market-radar-data", re.ASCII)
@@ -86,30 +86,9 @@ def record_files(kind):
 
 def dashboard():
     state = status(radar.now())
-    display = LABELS[state["state"]]
-    if state["snapshot_phase"] == "historical":
-        display += " · 当前表格为历史验收快照"
-    elif state["state"] == "closed" and state["snapshot_time"]:
-        display += " · 当前表格为最近一次快照"
-    if state["low_disk"]:
-        display += " · 磁盘可用空间低于 5 GiB"
-    details = [f'<p role="status"><strong>{html.escape(display)}</strong></p>',
-               '<p><a href="/status.json">系统状态</a> · <a href="/latest.json">行情 JSON</a></p>']
-    for kind, label in (("signals", "尾盘信号"), ("evaluation", "次日评估")):
-        links = "".join(f'<li><a href="/{kind}/{p.name}">{p.stem}</a></li>' for p in record_files(kind)[:20])
-        details.append(f"<section><h2>{label}</h2>" + (f"<ul>{links}</ul>" if links else "<p>暂无记录。</p>") + "</section>")
-    page = radar.OUT / "index.html"
-    if page.is_file():
-        source = page.read_text()
-    else:
-        source = '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="60"><h1>GMR 自选股雷达</h1><p>等待首个行情快照。</p></html>'
-    source = re.sub(r'<p id="freshness".*?</script>', "", source, count=1, flags=re.S)
-    banner = details.pop(0)
-    if "</h1>" in source:
-        source = source.replace("</h1>", "</h1>" + banner, 1)
-    else:
-        source = banner + source
-    return source.replace("</html>", "".join(details) + "</html>").encode()
+    archives = [(kind, label, record_files(kind)[:20])
+                for kind, label in (("signals", "尾盘信号"), ("evaluation", "次日评估"))]
+    return web_view.render(cached(radar.OUT / "latest.json"), state, LABELS[state["state"]], archives)
 
 
 class WebHandler(BaseHTTPRequestHandler):
@@ -131,6 +110,9 @@ class WebHandler(BaseHTTPRequestHandler):
         mime = "application/json"
         if path in ("/", "/index.html"):
             content, mime = dashboard(), "text/html; charset=utf-8"
+        elif path == "/radar.css":
+            css = radar.ROOT.parent / "reports" / "intraday" / "radar.css"
+            content, mime = css.read_bytes(), "text/css; charset=utf-8"
         elif path == "/status.json":
             content = json.dumps(status(radar.now()), ensure_ascii=False).encode()
         else:
