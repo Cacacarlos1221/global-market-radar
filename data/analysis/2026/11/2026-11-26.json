@@ -1,0 +1,180 @@
+{
+  "report_date": "2026-11-26",
+  "generated_at_utc": "2026-11-26T00:37:02.298Z",
+  "market_summary": "北京时间11月26日08:36:15采集，原始与curated有效行情一致。美元兑人民币6.65930（-0.0750%，市场日期11月25日，观察时间北京时间26日06:52），澳元兑人民币4.40650（-0.2625%，同一观察时点）。11月25日纳指23585.80（-0.6225%）、标普500 7182.78（-0.2543%）、道指50182.95（+0.3284%），与路透收盘涨跌及美联社点位一致；盘中抛售后收窄跌幅，不能等同全面转强。美元指数103.696（-0.1098%），布伦特90.64（-0.8315%），黄金3602.10（+1.1286%），均为快照各自日线/观察口径，非统一结算价；10年美债收益率4.848%，较参考值4.904%下降5.6基点。11月25日上证3476.47（-2.0263%）、沪深300 3898.24（-1.6545%），同市场交易日一致。海外利率下降与风险资产承压并存，可能反映避险需求，而非已确认的政策转向；澳洲通胀上行亦不足以保证澳元升值。澳元兑美元0.663394（-0.0007%，11月26日北京时间08:35:46观察），汇率涨跌均相对各自参考价而非同一时刻横截面。",
+  "news_digest": {
+    "overview": "过去24小时的核心矛盾是通胀粘性与贸易摩擦叠加，引发全球风险资产重新定价，AI资产在早盘急跌后出现承接，但没有消除估值和资本开支风险。美国债券收益率反而回落，说明增长忧虑和避险需求也在影响定价；澳洲通胀偏强对降息预期形成约束。中国科技投资仍有中期资金线索，但短期股市下跌与长期融资趋势必须分开理解。",
+    "items": [
+      {
+        "title": "美国提出针对多个贸易伙伴的新关税方案",
+        "summary": "路透11月25日报道，美国政府提出针对14个贸易伙伴的新关税方案，全球股市随之承压。美股早盘大幅下探后在感恩节假期前收窄跌幅，纳指仍收跌、道指收涨，显示投资者对政策风险和估值的反应存在明显分化。新方案不能直接视为所有税率已经生效。",
+        "market_impact": "关税预期可能通过出口订单、企业利润率与供应链调整压低外贸及制造板块估值；若最终范围缩窄或执行推迟，风险溢价可能回落。需观察政策文本而非只根据股价归因。",
+        "importance": "high",
+        "source_ids": [
+          "S1"
+        ]
+      },
+      {
+        "title": "美国10月PCE显示通胀仍高于目标",
+        "summary": "美国经济分析局25日公布10月PCE物价指数同比3.8%、核心同比3.3%，两者环比均增长0.3%；名义消费支出环比增长0.3%，实际消费近乎持平。收入增长并不必然转化为真实消费扩张，价格压力与增长放缓迹象并存。",
+        "market_impact": "高通胀约束政策宽松空间，但避险买盘仍可能压低长债收益率。对成长股而言，折现率下降与盈利预期走弱可能互相抵消；不能把债息回落简单解释为降息临近。",
+        "importance": "high",
+        "source_ids": [
+          "S2",
+          "S1"
+        ]
+      },
+      {
+        "title": "AI资产剧烈波动，尾盘承接未消除融资疑虑",
+        "summary": "路透报道，25日AI相关股票早盘重挫后显著修复，Alphabet收跌约2.1%，Broadcom由盘中下跌转为近乎持平，部分AI企业股价回升。报道将市场波动与基础设施投入成本、债务压力以及低位买盘联系起来，行业表现不是一致下跌。",
+        "market_impact": "算力硬件、存储与光模块可能面临海外估值传导，但尾盘修复也为超跌反弹提供条件。国内需通过订单、成交量和相对宽基强弱判断，不能以单一海外股票代替产业景气。",
+        "importance": "high",
+        "source_ids": [
+          "S3"
+        ]
+      },
+      {
+        "title": "澳洲10月通胀升温，降息预期受到约束",
+        "summary": "路透援引澳洲统计数据称，10月整体CPI同比升至4.9%，截尾均值核心通胀同比3.8%，高于此前3.6%；月度物价增幅为0.5%。报道同时指出劳动力市场偏弱，交易员仍预期下一次利率调整可能向下，但降息时间预期后移。",
+        "market_impact": "偏高通胀可通过利差预期支撑澳元，但就业、全球需求和贸易风险构成反向压力。对澳元兑人民币应结合人民币表现判断，不能由澳洲利率预期直接推出双边汇率上涨。",
+        "importance": "high",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "先进芯片出口限制进一步涉及跨境算力",
+        "summary": "路透25日梳理美国先进芯片出口规则，指出近期规则调整将部分东南亚转运风险及向中国总部企业提供大量算力的境外数据中心纳入更严格的监管范围，同时部分面向中国的芯片仍需逐案取得许可。该报道是规则解释，并非当日全面禁止所有出口的新公告。",
+        "market_impact": "进口算力供应与交付周期存在风险，可能推动自主芯片和设备替代的关注度，但供给约束亦会影响模型训练及应用成本；国产替代主题不等于所有公司盈利同步改善。",
+        "importance": "high",
+        "source_ids": [
+          "S5"
+        ]
+      },
+      {
+        "title": "中国科技与基础设施获长期私募资金关注",
+        "summary": "据路透援引全球私募资本协会统计，2026年前三季度新兴市场私募资本投资同比增长19%至1432亿美元，其中流向中国的资金达到643亿美元。科技、AI、机器人及基础设施为相关投资方向。这是累计私人资本统计，不是当日A股资金净流入。",
+        "market_impact": "长期融资意愿有助于创新产业和基础设施投资，但非上市股权投资的期限与二级市场不同，不能用来否定短期估值压力。关注国内产业订单及后续融资落地。",
+        "importance": "medium",
+        "source_ids": [
+          "S6"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S1",
+      "title": "World stocks tumble as Trump tariffs rattle markets, AI rally fades",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-25T01:50:00Z",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-11-25/",
+      "verification": "reported; read updated closing report; timestamp is original publication"
+    },
+    {
+      "id": "S2",
+      "title": "Personal Income and Outlays, October 2026",
+      "publisher": "US Bureau of Economic Analysis",
+      "published_at_utc": "2026-11-25T13:30:00Z",
+      "url": "https://bea.gov/news/2026/personal-income-and-outlays-october-2026",
+      "verification": "official release"
+    },
+    {
+      "id": "S3",
+      "title": "AI stock rout deepens but damage is limited by afternoon bounce",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-25T12:17:00Z",
+      "url": "https://www.reuters.com/business/ai-stocks-slide-fears-over-infrastructure-buildout-costs-2026-11-25/",
+      "verification": "reported; read updated closing report; timestamp is original publication"
+    },
+    {
+      "id": "S4",
+      "title": "Australian inflation heats up in October, core hits two-year high",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-25T02:21:00Z",
+      "url": "https://www.reuters.com/world/asia-pacific/australian-inflation-heats-up-october-core-hits-two-year-high-2026-11-25/",
+      "verification": "reported; read article"
+    },
+    {
+      "id": "S5",
+      "title": "How China got access to Nvidia's AI chips despite rules to stop them",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-25T19:37:20Z",
+      "url": "https://www.reuters.com/world/china/how-china-got-access-nvidias-ai-chips-despite-rules-stop-them-2026-11-25/",
+      "verification": "reported; read article"
+    },
+    {
+      "id": "S6",
+      "title": "Private capital investment in emerging markets jumps 19% on China tech, infrastructure",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-25T10:50:00Z",
+      "url": "https://www.reuters.com/markets/europe/private-capital-investment-emerging-markets-jumps-19-china-tech-infrastructure-2026-11-25/",
+      "verification": "reported; read article"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "截至本次盘前研究，昨日上证与沪深300均下跌，海外纳指、标普继续收低，但美股尾盘承接及美债收益率回落缓和了部分外部压力。国内超跌修复有条件出现，却不能抵消贸易政策、芯片供应与盈利预期的不确定性，总体判断多空交织、短期偏谨慎。若开盘低开后宽基企稳、科技与券商成交同步改善，修复可信度提高；若高开但科技股相对宽基走弱、成交不足，则警惕冲高回落。若指数继续低开且下跌行业扩散，优先观察防御板块相对收益而非假设普遍反弹。重点跟踪开盘后30至60分钟成交额、宽基与科技板块相对强弱、人民币及亚洲市场表现，不使用任何11月26日开盘后信息。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "海外芯片估值下调和跨境算力限制可能压制风险偏好；国产设备、材料及自主计算需求存在长期替代逻辑。只有相对宽基企稳且成交承接改善，才支持短线修复。"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "watch",
+      "reason": "美国AI基础设施融资成本及回报疑虑影响高估值硬件交易，尾盘修复意味着不宜机械追空。关注国内新增订单、算力交付与早盘板块成交，验证修复能否延续。"
+    },
+    {
+      "sector": "光通信",
+      "bias": "mixed",
+      "reason": "海外数据中心资本开支风险可能影响光模块需求预期，同时全球网络升级并未因单日跌幅而消失。观察海外客户订单以及国内板块能否逆转相对宽基弱势。"
+    },
+    {
+      "sector": "存储芯片",
+      "bias": "watch",
+      "reason": "AI硬件波动可能传导至存储估值，但目前缺少新增现货报价或订单变化的直接证据。需要以产业价格与实际成交验证，暂不对行业日内涨跌作单边判断。"
+    },
+    {
+      "sector": "券商与宽基",
+      "bias": "mixed",
+      "reason": "昨日两大A股指数下跌提供超跌修复条件，但关税预期和高通胀抑制风险偏好。若券商成交与指数同步回升可作为情绪修复信号，缩量高开则需要警惕。"
+    },
+    {
+      "sector": "黄金概念",
+      "bias": "positive",
+      "reason": "快照黄金走强且美债收益率回落，对黄金相关资产构成潜在支持；但美国通胀偏高使政策路径仍不确定。国内金矿股还受汇率和经营成本影响，不能简单按金价映射。"
+    },
+    {
+      "sector": "油气开采",
+      "bias": "negative",
+      "reason": "布伦特日线观察下行，贸易不确定性可能压低全球需求预期，短期不利上游盈利情绪。若地缘供应扰动导致原油逆转，负面判断需要重新检验。"
+    },
+    {
+      "sector": "出口与外贸",
+      "bias": "negative",
+      "reason": "新关税方案可能推升贸易合规成本、调整海外订单和利润率预期；影响仍取决于覆盖产品、实施日期及企业海外产能。观察出口链相对表现，不将提议当作正式生效。"
+    },
+    {
+      "sector": "航空与化工",
+      "bias": "mixed",
+      "reason": "油价回落可能改善燃油和部分原材料成本，但全球需求走弱及汇率波动也会影响收入、进口成本和终端售价。需区分各子行业成本结构及价格传导能力。"
+    }
+  ],
+  "risks": [
+    "关税方案尚须核实正式文本、适用国家和具体生效日期，避免把报道中的提议当成已实施政策。",
+    "美国感恩节假期附近流动性可能偏低，美股尾盘反弹的代表性有限；国内开盘后需重新观察量能。",
+    "快照的两个人民币交叉汇率市场日期为11月25日，观察时间为26日06:52；AUD/USD为26日08:35观察，不能直接用非同步报价推算套利或银行成交价。",
+    "PCE偏高、美债收益率下行与澳洲通胀反弹并存，全球利率及美元方向可能反复。",
+    "国内新增政策未取得足够可核实证据，不将假设的刺激政策写入基准情景。"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://www.reuters.com/world/china/global-markets-global-markets-2026-11-25/",
+    "https://bea.gov/news/2026/personal-income-and-outlays-october-2026",
+    "https://www.reuters.com/business/ai-stocks-slide-fears-over-infrastructure-buildout-costs-2026-11-25/",
+    "https://www.reuters.com/world/asia-pacific/australian-inflation-heats-up-october-core-hits-two-year-high-2026-11-25/",
+    "https://www.reuters.com/world/china/how-china-got-access-nvidias-ai-chips-despite-rules-stop-them-2026-11-25/",
+    "https://www.reuters.com/markets/europe/private-capital-investment-emerging-markets-jumps-19-china-tech-infrastructure-2026-11-25/"
+  ]
+}
