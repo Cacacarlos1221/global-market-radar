@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-27",
+  "requested_at_utc": "2026-11-27T00:37:00Z",
+  "requested_by": "chatgpt_manual_orchestrator",
+  "reason": "08:25 scheduled controller failed to invoke tools; no daily snapshot or active collection found"
+}
