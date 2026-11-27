@@ -1,0 +1,196 @@
+{
+  "report_date": "2026-11-27",
+  "generated_at_utc": "2026-11-27T00:38:26Z",
+  "market_summary": "北京时间11月27日08:38:10采集，美元兑人民币6.65110（-0.1936%，08:24观察）、澳元兑人民币4.41920（+0.0574%，08:36观察）。美国11月26日感恩节休市，纳指23585.80（-0.6225%）、标普500 7182.78（-0.2543%）、道指50182.95（+0.3284%）均为11月25日收盘，不代表新一轮美股涨跌；亚洲市场26日部分修复，但关税及AI融资风险未消退。美元指数103.777（+0.1032%，11月26日），与人民币双边汇率变化不矛盾；澳元表现还受全球风险偏好影响。黄金日线观察3595.80（+1.6969%），美债10年收益率最新可用11月25日4.848%，较参考日低5.6基点。布伦特快照91.81（-2.9595%）与路透报道26日结算上涨方向和数值明显不一致，可能涉及合约、时间或源数据差异，暂不以该报价确认油价结算方向，保留原始记录待独立核查。11月26日上证3476.88（+0.0118%）、沪深300 3900.55（+0.0593%），同为东方财富日线，接近平收但不意味着市场全面修复。澳元兑美元0.663438（+0.0978%，08:37观察）。各汇率相对各自参考值，非同步可成交报价。",
+  "news_digest": {
+    "overview": "感恩节让美国股票市场暂时停止交易，但此前由贸易政策、通胀与AI投资回报引发的估值压力仍在。26日亚洲市场出现修复，国内宽基却在盘中反弹后接近平收，显示风险偏好恢复不均衡。新一代通信网政策提供了可独立跟踪的国内产业催化，稀土出口政策和能源供应风险则说明贸易、通胀及产业链安全仍需分别定价，不能把海外休市当作风险消失。",
+    "items": [
+      {
+        "title": "感恩节休市，亚洲市场修复仍受低流动性约束",
+        "summary": "路透26日报道，亚洲股市在此前美股由盘中低点回升后出现反弹，日本和韩国主要指数早间走强，但本月累计跌幅仍然较大。美国26日因感恩节休市，股指期货的盘中修复不构成新的现货收盘信号。",
+        "market_impact": "外围情绪暂时缓和有助于A股超跌修复，但假期流动性较薄，反弹力度需要国内成交及市场宽度确认。若科技板块无法跟随宽基，不能据期货反弹认定风险偏好已经反转。",
+        "importance": "high",
+        "source_ids": [
+          "S8"
+        ]
+      },
+      {
+        "title": "关税方案仍待落地，中美稀土政策出现缓冲",
+        "summary": "路透26日分析美国新关税提案对供应链的影响，涉及多个主要贸易伙伴。新增税率并非简单叠加此前所有税率；报道同时提到中国本周延长了对美稀土出口管制的暂停措施，显示双方仍保留缓和空间。",
+        "market_impact": "出口制造的订单与利润率仍面临政策不确定性；稀土则同时受到供应链安全价值和短期限制缓和的影响。应关注正式税率、适用范围和实施时间，而非将提案或暂停措施直接等同于新一轮全面贸易冲突。",
+        "importance": "high",
+        "source_ids": [
+          "S3",
+          "S8"
+        ]
+      },
+      {
+        "title": "美国通胀压力与避险需求共同影响美元",
+        "summary": "路透26日汇市报道指出，美国近期核心通胀和增长数据强化市场对12月加息的预期，但前一交易日债券收益率下行反映风险资产调整期间的避险需求。感恩节使汇市波动的代表性有所减弱。",
+        "market_impact": "偏紧利率预期可能抑制高估值成长资产，但长债避险买盘可阶段性抵消折现率压力。人民币与澳元还受本国因素影响，观察美元、收益率与亚洲资产是否形成一致方向，避免单变量推导汇率。",
+        "importance": "high",
+        "source_ids": [
+          "S2",
+          "S8"
+        ]
+      },
+      {
+        "title": "英伟达评级进入下调观察，AI融资链风险持续",
+        "summary": "路透经海峡时报转载的报道显示，标普全球评级25日将英伟达列入可能降级观察，涉及管理层和董事会监督问题。公司现有评级仍为AA，观察名单并不等于已经降级；相关报道亦指出AI企业间的投资融资关系带来的风险敞口。",
+        "market_impact": "若融资成本上升或客户削减资本开支，服务器、存储和光通信估值可能承压；反之实际订单增长可以形成抵消。需观察信用风险、客户资本开支以及国内硬件成交，不宜把治理问题直接等同于芯片需求崩塌。",
+        "importance": "high",
+        "source_ids": [
+          "S4"
+        ]
+      },
+      {
+        "title": "国内发布新一代通信网建设实施方案",
+        "summary": "11月26日中央网信办发布三部门联合印发的实施方案，提出2030年建设新一代通信网络，在重点区域推广5G-A、万兆光网并适时建设6G网络，涉及卫星互联网与融合基础设施。国内通信设备股26日已有相对强势表现。",
+        "market_impact": "网络设备、光纤光缆及光通信等方向获得中期建设线索，但政策目标不等于立即释放订单，且已有交易反映。关注运营商资本开支、招标节奏、实际受益业务及高开后的成交承接。",
+        "importance": "high",
+        "source_ids": [
+          "S5",
+          "S7"
+        ]
+      },
+      {
+        "title": "中东能源供应风险升温，油价口径需核查",
+        "summary": "路透26日报道，胡塞武装与伊朗方面分别声称发生针对炼化设施和海上运输的事件，市场担忧能源供应中断；报道的布伦特结算上涨与本日Yahoo快照下跌不一致。有关事件与损害范围仍有不确定性，周末OPEC+会议也将影响预期。",
+        "market_impact": "供给扰动若持续，可能增加油气风险溢价及运输、化工成本，同时强化通胀压力；若供应恢复，溢价可能消退。鉴于现有油价口径冲突，暂不据快照或单条报道确定A股油气方向。",
+        "importance": "high",
+        "source_ids": [
+          "S6"
+        ]
+      }
+    ]
+  },
+  "news_sources": [
+    {
+      "id": "S2",
+      "title": "Dollar rally pauses for Thanksgiving",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-26T01:44:00Z",
+      "url": "https://www.reuters.com/world/africa/dollar-steady-sliding-yields-temper-safe-haven-bid-2026-11-26/",
+      "verification": "read updated report"
+    },
+    {
+      "id": "S3",
+      "title": "Trump's new tariffs aim to prise global trade from China's grip",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-26T07:03:00Z",
+      "url": "https://www.reuters.com/world/china/trumps-new-tariffs-aim-prise-global-trade-chinas-grip-2026-11-26/",
+      "verification": "read article"
+    },
+    {
+      "id": "S4",
+      "title": "S&P puts Nvidia on downgrade watch over governance concerns",
+      "publisher": "Reuters / The Straits Times",
+      "published_at_utc": "2026-11-25T22:55:00Z",
+      "url": "https://www.straitstimes.com/business/sp-warns-nvidias-board-may-be-compromised-puts-chipmakers-rating-on-downgrade-watch",
+      "verification": "read syndicated report; published 26 Nov 06:55 SGT"
+    },
+    {
+      "id": "S5",
+      "title": "《新一代通信网建设实施方案》印发",
+      "publisher": "中央网信办 / 工信微报",
+      "published_at_utc": "2026-11-26T11:57:00Z",
+      "url": "https://www.cac.gov.cn/2026-11/26/c_1797453575920530.htm",
+      "verification": "official publication"
+    },
+    {
+      "id": "S6",
+      "title": "Brent settles higher as mine strikes, refinery attack stoke Middle East supply concerns",
+      "publisher": "Reuters",
+      "published_at_utc": "2026-11-26T03:08:00Z",
+      "url": "https://www.reuters.com/business/energy/oil-rises-supply-concerns-iran-claims-mine-strikes-ships-2026-11-26/",
+      "verification": "read updated settlement report; original publication time"
+    },
+    {
+      "id": "S7",
+      "title": "陸股收盤／上證創16個月盤中新低後收平半導體跌2%、通訊設備逆勢上漲",
+      "publisher": "優分析 / 鉅亨網",
+      "published_at_utc": "2026-11-26T10:01:00Z",
+      "url": "https://news.cnyes.com/news/id/6673045",
+      "verification": "read closing report"
+    },
+    {
+      "id": "S8",
+      "title": "Asia shares bounce, AI and tariffs lurk in background",
+      "publisher": "Reuters / Investing.com",
+      "published_at_utc": "2026-11-26T00:34:00Z",
+      "url": "https://www.investing.com/news/stock-market-news/asia-shares-bounce-ai-and-tariffs-lurk-in-background-5051871",
+      "verification": "read syndicated report"
+    }
+  ],
+  "a_share_bias": "mixed",
+  "a_share_outlook": "整体判断多空交织、谨慎观察修复，尚无充分证据支持全面转强。11月26日宽基接近平收，盘中反弹后回落，半导体和新能源承压，通信设备相对强势；海外美国休市使最新现货信号缺失，而贸易、AI信用风险及紧利率预期仍在。国内通信网建设政策为结构性机会提供依据，但不能替代全市场资金回流。若今日高开后成交放大、宽基和券商同步走强、下跌家数收敛，可提高修复判断；若高开后半导体及新能源继续弱于宽基、量能不足，则警惕冲高回落；低开后若成交承接及行业扩散改善，可观察超跌修复。重点验证开盘30至60分钟成交额、市场宽度、通信板块相对强弱、人民币表现及亚洲市场，不使用当日开盘后信息。",
+  "a_share_sectors": [
+    {
+      "sector": "半导体",
+      "bias": "mixed",
+      "reason": "海外AI治理和融资风险压制估值，昨日国内半导体也明显弱于宽基；国内通信网升级可能形成部分芯片需求。需观察成交承接和订单线索，不能将政策利好外推到所有芯片公司。"
+    },
+    {
+      "sector": "AI服务器",
+      "bias": "watch",
+      "reason": "海外评级观察与资本开支回报疑虑可能传导服务器估值，国内云网融合有中期需求支撑。以真实算力订单、交付及板块相对表现确认修复，警惕缩量反弹。"
+    },
+    {
+      "sector": "存储芯片",
+      "bias": "watch",
+      "reason": "AI硬件融资风险可能影响存储需求预期，但尚未取得新的现货价格或订单证据。观察价格、库存和服务器需求，而不是依据英伟达单日涨跌直接判断。"
+    },
+    {
+      "sector": "稀土",
+      "bias": "mixed",
+      "reason": "对美出口管制暂停延长可缓和供应中断忧虑，但也可能降低短线稀缺性溢价，战略需求仍在。需结合稀土价格、出口许可执行与成交强度验证，避免追逐单一消息。"
+    },
+    {
+      "sector": "有色金属",
+      "bias": "mixed",
+      "reason": "黄金快照走强，但工业金属仍受贸易与需求预期约束，两者驱动不同。矿企收益亦取决于产品结构和成本，观察分品种报价，不将黄金方向映射至全部有色。"
+    },
+    {
+      "sector": "出口制造",
+      "bias": "negative",
+      "reason": "美国新关税提议可能增加部分出口企业的合规与利润压力，但最终范围和实施时间尚待确定，且海外产能布局不同。若谈判缓和或行业相对走强，应调整判断。"
+    },
+    {
+      "sector": "新能源",
+      "bias": "mixed",
+      "reason": "昨日新能源车相关板块承压，贸易风险影响海外订单预期；国内需求及电网、通信建设的部分配套机会仍需公司层面验证。观察龙头企稳和板块成交是否改善。"
+    },
+    {
+      "sector": "券商",
+      "bias": "watch",
+      "reason": "昨日指数盘中反弹后回落，尚未确认全市场风险偏好修复。若今日券商成交扩大且宽基同步走强，可作为资金回流信号；单独拉升而市场宽度不改善则谨慎。"
+    },
+    {
+      "sector": "宽基指数",
+      "bias": "mixed",
+      "reason": "上证和沪深300昨日均接近平收，美股休市缺少新收盘指引。关注上涨家数、成交额及核心行业是否共振；若指数走强但多数个股回落，修复仍可能较窄。"
+    },
+    {
+      "sector": "光通信",
+      "bias": "positive",
+      "reason": "三部门通信网方案明确万兆光网及融合网络建设方向，为设备和光通信提供中期需求线索。昨日已有相关板块表现，今日需观察招标预期和放量承接，警惕利好兑现后的回吐。"
+    }
+  ],
+  "risks": [
+    "感恩节休市令美股最新收盘仍为11月25日，期货和现货不可混淆，假期成交也可能放大波动。",
+    "美国关税仍为提议，关注正式政策文本、执行日期及贸易伙伴回应；稀土限制暂停不等于永久取消。",
+    "布伦特原始报价与媒体结算价方向冲突，待确认合约及观测时点，不将其当作确定的油价驱动。",
+    "通信网政策属于建设规划，关注招标、实际资本开支和兑现节奏，防止把长期目标当短期业绩。",
+    "三个汇率观察时点不一致，且报价为参考价非银行成交价；国内开盘后需检验市场宽度和成交量。"
+  ],
+  "uncertainty": "high",
+  "evidence_urls": [
+    "https://www.reuters.com/world/africa/dollar-steady-sliding-yields-temper-safe-haven-bid-2026-11-26/",
+    "https://www.reuters.com/world/china/trumps-new-tariffs-aim-prise-global-trade-chinas-grip-2026-11-26/",
+    "https://www.straitstimes.com/business/sp-warns-nvidias-board-may-be-compromised-puts-chipmakers-rating-on-downgrade-watch",
+    "https://www.cac.gov.cn/2026-11/26/c_1797453575920530.htm",
+    "https://www.reuters.com/business/energy/oil-rises-supply-concerns-iran-claims-mine-strikes-ships-2026-11-26/",
+    "https://news.cnyes.com/news/id/6673045",
+    "https://www.investing.com/news/stock-market-news/asia-shares-bounce-ai-and-tariffs-lurk-in-background-5051871"
+  ]
+}
