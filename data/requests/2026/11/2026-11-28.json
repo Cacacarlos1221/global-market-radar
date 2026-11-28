@@ -1,0 +1,6 @@
+{
+  "report_date": "2026-11-28",
+  "requested_at_utc": "2026-11-28T00:52:27Z",
+  "requested_by": "chatgpt_morning_audit",
+  "reason": "Today's snapshot and analysis absent; workflow status unavailable; idempotent collection guard requested"
+}
